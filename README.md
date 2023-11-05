@@ -1,2 +1,2 @@
 # Math
-Problem sets, lecture notes, etx
+Problem sets, lecture notes, etc. 
