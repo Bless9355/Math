@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{wasysym}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\INT{{\mathcal{O}}}
+\def\contradiction{{\lightning}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{{
+    \noindent
+    \setcounter{problemcnt}{{#1}}
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\begin{document}
+\new{Proposition} The following are equivalent:
+\begin{enumerate}
+    \item (Division Algorithm) For any $\alpha, \beta \in \INT_K$ 
+    there exists a unique integer $q, \gamma$
+    that satisfies $\alpha = q\beta + \gamma$
+    \item (Approximation) For any $\theta \in K$,
+    there exists a K-integer $\kappa \in \INT_K$
+    that satisfies $|N(\theta - \kappa)| < 1$
+\end{enumerate}
+
+\Proof ($2 \Leftarrow 1$) The idea is to 
+approximate the field element $\alpha / \beta$. 
+Let $\theta$ be this fraction, and obtain 
+$\kappa$ accordingly. By the precision of 
+the approximation:
+
+\[
+    |N(\alpha/\beta - \kappa)| < 1
+\]
+
+With some manipulation:
+
+\[
+    |N(\alpha-\kappa\beta)/N(\beta)| < 1
+\]
+
+Which in turn, yields:
+
+\[
+    |N(\alpha - \kappa\beta)| < |N(\beta)|
+\]
+
+$(\alpha - \kappa\beta)$ is in $\INT_K$. Call it 
+$\gamma$. By the definition of $\gamma$, 
+we also have:
+
+\[
+    \alpha = \kappa\beta + \gamma
+\]
+
+as desired. 
+\checkmark
+
+($2 \Rightarrow 1$) The idea is to multiply by 
+some integer c to guarantee $c\theta$ is in 
+the ring of integers.  
+\qed
+
+\end{document}
