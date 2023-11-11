@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1699130111 "c:/Users/danie/Math/Math/Algebraic NT/Pset8.tex" "Pset8.pdf" "Pset8" 1699130113 0
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1686957473 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+["pdflatex"] 1699153123 "c:/Users/danie/Math/Math/Algebraic NT/Pset8/Pset8.tex" "Pset8.pdf" "Pset8" 1699153124 0
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1699145993 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/danie/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1684366872 23178960 7a62a4051f881eb048e4cd8fd7974f1d ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233955448 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233955454 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -26,9 +26,10 @@
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/base/article.cls" 1669847796 20144 d5ecf0a5140c8d8d8b72cbe86e320eff ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/base/size10.clo" 1669847796 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680182075 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
-  "Pset8.aux" 1699130112 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
-  "Pset8.tex" 1699130109 7745 430c6624c8ebf268899fc40ee1a205ac ""
-  "c:/Users/danie/Math/Math/Algebraic NT/Pset8.tex" 1699130109 7745 430c6624c8ebf268899fc40ee1a205ac ""
+  "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1667242266 7392 f19cdc68ae9f1190dbd54eee6d29fb7c ""
+  "Pset8.aux" 1699153124 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
+  "Pset8.tex" 1699153120 9053 54711da8f286ab6e628a1a8602154614 ""
+  "c:/Users/danie/Math/Math/Algebraic NT/Pset8/Pset8.tex" 1699153120 9053 54711da8f286ab6e628a1a8602154614 ""
   (generated)
   "Pset8.aux"
   "Pset8.log"

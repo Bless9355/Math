@@ -1,0 +1,402 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{{
+    \noindent
+    \setcounter{problemcnt}{{#1}}
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\begin{document}
+
+\begin{center}
+    \LARGE
+    Approximating the cosine function
+
+    \normalsize
+    Daniel Son
+\end{center}
+
+\new{Problem}
+Find the average error of the following approximation
+in the range $x \in [0, 2\pi]$:
+
+Given an integer $N$, theta $n < N$ is defined as:
+
+\[
+    \th_n := 2\pi\frac{n}{N}
+\]
+
+We approximate the function $cos(x)$ by taking 
+the largest $\th_n$ that is less than $x$. 
+
+\new{Lemma}
+\[
+    \sum_{n=0}^{N-1}cos(2\th_n) = 0
+    \hspace{5mm}
+    \sum_{n=0}^{N-1}sin(2\th_n) = 0
+\]
+\Proof
+The idea is to apply the Euler's formula 
+and consider the sum as a geometric series. 
+Write:
+
+\[
+    \sum_{n=0}^{N-1}cos(2\th_n)
+    =
+    \sum_{n=0}^{N-1}
+    \frac
+    {
+        e^{2i\th_n}+
+        e^{-2i\th_n}
+    }
+    {2}
+     =
+    \sum_{n=0}^{N-1}
+    \frac
+    {
+        e^{n(2i\th_1)}+
+        e^{n (-2i\th_1)}
+    }
+    {2}
+\]
+
+The sum can be computed as two seperate 
+geometric series. We obtain:
+
+\[
+     \sum_{n=0}^{N-1}cos(2\th_n)
+    =
+    \frac{1}{2}
+    \left[
+        \sum_{n = 0}^{N}e^{n(2i\th_1)}
+        +
+        \sum_{n = 0}^{N}e^{n(-2i\th_1)}
+    \right]
+\]
+\[
+    = 
+    \frac{1}{2}
+    \left[
+        \frac{1-e^{N2i\th_1}}{1-e^{2i\th_1}}
+        +
+        \frac{1-e^{-N2i\th_1}}{1-e^{-2i\th_1}}
+    \right]
+\]
+
+Note that $N2i\th_1 = 4i\pi$. Thus, 
+$e^{N2i\th_1} = 1$
+Furthermore, the numerators of the fractions
+reduce to zero. This concludes the proof of the first 
+equation. Repeat a similar process for the 
+second equation.  
+
+
+\[
+    \sum_{n=0}^{N-1}sin(2\th_n)
+    =
+    \sum_{n=0}^{N-1}
+    \frac
+    {
+        e^{2i\th_n}-
+        e^{-2i\th_n}
+    }
+    {2i}
+     =
+    \sum_{n=0}^{N-1}
+    \frac
+    {
+        e^{n(2i\th_1)}-
+        e^{n (-2i\th_1)}
+    }
+    {2i}
+\]
+
+The sum can be computed as two seperate 
+geometric series. We obtain:
+
+\[
+     \sum_{n=0}^{N-1}sin(2\th_n)
+    =
+    \frac{1}{2i}
+    \left[
+        \sum_{n = 0}^{N}e^{n(2i\th_1)}
+        -
+        \sum_{n = 0}^{N}e^{n(-2i\th_1)}
+    \right]
+\]
+\[
+    = 
+    \frac{1}{2i}
+    \left[
+        \frac{1-e^{N2i\th_1}}{1-e^{2i\th_1}}
+        -
+        \frac{1-e^{-N2i\th_1}}{1-e^{-2i\th_1}}
+    \right]
+\]
+
+And again, both fractions are zero. 
+\qed
+
+\new{Solution}
+The idea to compute the approximation is to 
+cut the function into $N$ regions, each of length
+$\th_1$. 
+
+Define the following integral:
+
+\[
+    I_n := \int_{\th_n}^{\th_{n+1}}[cos(x)-cos(\th_n)]^2dx
+\]
+
+Through some algebra, we reduce the integrand as:
+
+\[
+    cos^2(x)-2cos(\th_n)cos(x)+cos^2(\th_n)
+    \] \[
+    =
+    \frac{1+cos(2x)}{2}
+    -2cos(\th_n)cos(x)
+    +\frac{1+cos(2\th_n)}{2}
+\]
+
+Integrate over the range 
+$x \in [\th_n, \th]$. This results 
+in three integrals. 
+
+\[
+    I_n = 
+    \int_{\th_n}^{\th_{n+1}}
+    \frac{1+cos(2x)}{2}dx
+    -2cos(\th_n)
+    \int_{\th_n}^{\th_{n+1}}
+    cos(x)dx
+    +
+    \int_{\th_n}^{\th_{n+1}}
+    \frac{1+cos(2\th_n)}{2}dx
+\]
+
+Label them as:
+\[
+    I_n := A_n-2B_n+C_n
+\]
+
+Adding up all the $I_n$'s, we get:
+\[
+     I = \sum_{n = 0}^{N-1} (A_n-2B_n+C_n)
+     = \sum_{n = 0}^{N-1} A_n 
+     -2\sum_{n = 0}^{N-1} B_n 
+     +\sum_{n = 0}^{N-1} C_n 
+\]
+
+Evaluate each integrals. Start with $A$:
+\[
+    A_n = 
+    \frac{1}{2}
+    [x+sin(2x)/2]_{\th_n}^{\th_{n+1}}
+    =
+    \frac{1}{2}
+    [\th_1+sin(2\th_{n+1})/2-sin(2\th_{n})/2]
+\]
+\[
+    \sum_{n = 0}^{N-1} A_n = 
+    \frac{N\th_1}{2}+sin(2\th_{N})/2-sin(0)/2
+    =\pi
+\]
+
+For $C_n$, notice that the integrand is constant:
+\[
+    C_n = \th_1\left[
+    \frac{1+cos(2\th_n)}{2}
+    \right]
+\]
+\[
+    \sum_{n = 0}^{N-1}C_n = 
+    \frac{\th_1}{2}\sum_{n = 0}^{N-1}
+    \left[
+        1+cos(2\th_n)
+    \right]
+\]
+And notice that the latter term vanishes 
+by the lemma. Thus:
+\[
+    \sum_{n = 0}^{N-1}C_n =  N\th_1/2 = \pi
+\]
+
+B is tricky. Before we proceed, compute the 
+following sum:
+
+\newpage
+
+\[
+    cos(\th_n)sin(\th_{n+1}) = 
+    \frac{e^{\th_1ni}+e^{-\th_1ni}}{2}
+    \frac{e^{\th_1(n+1)i}-e^{-\th_1(n+1)i}}{2i}
+\] \[
+    =
+    \frac{e^{\th_1(2n+1)i}
+        +e^{\th_1i}
+        -e^{-\th_1i}
+        -e^{-\th_1(2n+1)i}
+    }
+    {4i}
+\]
+\[
+    =
+    \frac{e^{\th_1(2n+1)i}
+        -e^{-\th_1(2n+1)i}
+    }
+    {4i}
+    +
+    \frac{e^{\th_1i}
+        -e^{-\th_1i}}
+        {2\cdot 2i}
+\]
+\[
+    =
+    \frac{e^{\th_1(2n+1)i}
+        -e^{-\th_1(2n+1)i}
+    }
+    {4i}
+    +
+    \frac{sin(\th_1)}
+        {2}
+\]
+
+Applying sums:
+\[
+    \sum_{n = 0}^{N-1}
+ cos(\th_n)sin(\th_{n+1})
+  = \sum_{n = 0}^{N-1}
+\left(
+\frac{e^{\th_1(2n+1)i}
+        -e^{-\th_1(2n+1)i}
+    }
+    {4i}
+\right)
++\frac{Nsin(\th_1)}{2}
+\]
+
+\[
+    =
+    \frac{1}{4i}
+    \left[
+    e^{\th_1i}
+    \sum_{n = 0}^{N-1}
+    e^{2\th_1ni}
+    -
+    e^{-\th_1i}
+    \sum_{n = 0}^{N-1}
+    e^{-2\th_1ni}
+    \right]
++\frac{Nsin(\th_1)}{2}
+\]
+
+\[
+    =
+    \frac{1}{4i}
+    \left[
+    e^{\th_1i}
+    \frac{1-e^{2\th_1Ni}}
+    {1-e^{2\th_1i}}
+    -
+    e^{-\th_1i}
+    \frac{1-e^{-2\th_1Ni}}
+    {1-e^{-2\th_1i}}
+    \right]
++\frac{Nsin(\th_1)}{2}
+\]
+
+\[
+    =\frac{Nsin(\th_1)}{2}
+\]
+
+Now, compute $B_n$ and its sum:
+\[
+    B_n = 
+    cos(\th_n)
+    \int_{\th_n}^{\th_{n+1}}
+    cos(x)dx
+    =cos(\th_n)\left[
+        sin(x)
+    \right]_{\th_n}^{\th_{n+1}}
+\]
+\[
+    =cos(\th_n)sin(\th_{n+1})
+    -cos(\th_n)sin(\th_{n})
+    \]\[
+    =cos(\th_n)sin(\th_{n+1})
+    -sin(2\th_n)/2
+\]
+
+\[
+    \sum_{n = 0}^{N-1}B_n =
+     \sum_{n = 0}^{N-1}cos(\th_n)sin(\th_{n+1})
+    -\sum_{n = 0}^{N-1}sin(2\th_n)/2
+\]
+
+By the lemma and our established result above:
+\[
+    \sum_{n = 0}^{N-1}B_n = 
+    \frac{Nsin(\th_1)}{2}
+\]
+
+Finally, compute $I$:
+\[
+     I 
+     = \sum_{n = 0}^{N-1} A_n 
+     -2\sum_{n = 0}^{N-1} B_n 
+     +\sum_{n = 0}^{N-1} C_n 
+\]
+\[
+    =\pi-2\frac{Nsin(\th_1)}{2}+\pi = 2\pi - Nsin(\th_1)
+\]
+To compute the average error over the 
+region $x \in [0, 2\pi]$, divide $I$ by 
+$2\pi$. The average error is thus:
+
+\[
+    1-\frac{Nsin(\th_1)}{2\pi} = 1-\frac{sin(\th_1)}{\th_1}
+\]
+
+As a sanity check, we observe 
+that as $N\rightarrow\infty$, 
+$\th_1\rightarrow 0$ and the error 
+also goes to zero, for $sin(\th_1)\rightarrow \th_1$
+\qed
+\end{document}
+
