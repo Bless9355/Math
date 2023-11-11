@@ -25,11 +25,12 @@
 }
 }
 
-\newcommand{\nProblem}[1]{{
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
     \noindent
-    \setcounter{problemcnt}{{#1}}
+    \setcounter{problemcnt}{#1}
     \arabic{problemcnt}. 
-}
+    \stepcounter{problemcnt}  
 }
 
 \newcommand{\Proof}{{
