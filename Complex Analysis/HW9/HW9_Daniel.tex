@@ -1,0 +1,321 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wasysym}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\RR{{\mathbb{R}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{{
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\begin{document}
+
+
+%Uniform Continuity
+\Problem
+Define:
+\[
+    f_n(x) := 
+    \frac{n}{1+nx^2}
+\]
+
+Prove that $f_n$ is uniformly continuous. 
+
+Is the family of function
+$\mathcal{F}:=\{f_n(x)|n\in \ZZ_{pos}\}$ equicontinuous?
+
+\new{Proposition} $\frac{x}{1+nx^2}$ is bounded. 
+
+\Proof
+First, consider the function in the range 
+$x \in \RR \setminus [-1, 1]$. Within the range, 
+we have $|x| > 1$ and hence $x^2 > 1$. Write:
+
+\[
+    |\frac{x}{1+nx^2}| < |\frac{x}{nx^2}| = |\frac{1}{nx}| < 1
+\]
+Now, consider the range $x \in [-1, 1]$. Write:
+
+\[
+    |\frac{x}{1+nx^2}| < |\frac{x}{1}| < 1
+\]
+
+This shows that our function is bounded for $x\in \RR$
+\qed
+
+\new{Claim} $f_n(x)$ is uniformly continuous. 
+Given any $\epsilon > 0$, we wish to obtain a $\delta_{max}$ where
+for any $\delta$ such that $|\delta| < \delta_{max}$ satisfies:
+
+\[
+    |f_n(x)-f_n(x+\delta)| < \epsilon
+\]
+Or equivalently
+\[
+  |\frac{n}{1+nx^2} -\frac{n}{1+n(x+\delta)^2}| <\epsilon 
+\]
+Notice:
+\[
+  |\frac{n}{1+nx^2} -\frac{n}{1+n(x+\delta)^2}| <
+|\frac{n}{1+nx^2} -\frac{n}{1+n(x+\delta_{max})^2}| 
+\]
+It suffices to construct $\delta_{max}$ that satisfies:
+
+\[
+    |\frac{n}{1+nx^2} -\frac{n}{1+n(x+\delta_{max})^2}| 
+    < \epsilon
+\]
+
+Through some algebra:
+\[
+    |\frac{
+    n 
+    \left[
+    1+n(x+\delta_{max})^2 - (1+nx^2) 
+    \right]
+    }
+    {(1+nx^2)(1+n(x+\delta_{max})^2)}|
+     < \epsilon
+\]
+\[
+    |\frac{
+    n 
+    \left[
+    2nx\delta_{max} + n\delta_{max}^2
+    \right]
+    }
+    {(1+nx^2)(1+n(x+\delta_{max})^2)}|
+     < \epsilon
+\]
+\[
+    |\frac{
+    n^2\delta_{max}
+    \left[
+    2x + \delta_{max}
+    \right]
+    }
+    {(1+nx^2)(1+n(x+\delta_{max})^2)}|
+     < \epsilon
+\]
+
+Set $\delta_{max} < 1$. Also, notice that the 
+terms in the denominators are both greater than 1. 
+We construct a $\delta_{max}$ that satisfies a stronger 
+condition:
+
+\[
+    |\frac{
+        n^2\delta_{max}(2x+1)
+    }
+    {1+nx^2}|
+    <\epsilon
+    \textOr
+    |\delta_{max}||n^2||
+    \frac{2x}{1+nx^2}+
+    \frac{1}{1+nx^2}|
+    < \epsilon
+\]
+
+It is easy to see that the function $\frac{1}{1+nx^2}$
+is bounded. The denominator is always greater than 1, 
+so the function is bounded by 1. We have shown that the second
+summand is bounded for any real $x$. Again, we construct 
+a stronger $\delta_{max}$ that satisfies:
+
+\[
+    |\delta_{max}|B<\epsilon
+\]
+
+Where $B$ is the maximum bound of the other terms. 
+If $B < 0$, the statement is a tauology. Otherwise, 
+set $\delta = \epsilon /(2B)$. This concludes the proof. 
+\qed 
+
+\new{Claim} The family $\mathcal{F}$ is not equicontinuous
+
+\Proof  We claim that equicontinuity is 
+violated at $x = 0$. Notice that $f_n(0) = n$.
+Assume for a contradiction, that $\mathcal{F}$
+is equicontinuous at $x = 0$. For $\epsilon = 1$, 
+it must be possible to obtain a $\delta_{max}$ 
+where for all $\delta$ such that
+$|\delta| < \delta_{max}$, $\delta$ satisfies:
+\[
+    |f_n(0) - f_n(\delta)| < 1 
+    \textOr
+    |n - f_n(\delta)| < 1
+\]
+So 
+\[
+    |f_n(\delta)| > n-1
+\]
+$\delta \neq 0$ by assumption, so as $n \rightarrow \infty$, 
+$|f_n(\delta)| \rightarrow 1$. This is a contradiction. 
+\qed
+
+\newpage
+%PW convergence of spike
+\Problem
+Define:
+\[
+    f_n(x) := 
+    \begin{cases}
+        1-nx & (x \in (0, 1/n)) \\ 
+        0 & (\textrm{Otherwise})
+    \end{cases}
+\]
+Show that the limit of this function exists and 
+find the limit. 
+
+\new{Solution}
+Consider the function: 
+\[
+    f(x) := 
+    \begin{cases}
+        1 & (x = 0) \\ 
+        0 & (x \neq 0)
+    \end{cases}
+\]
+We claim that $f_n$ converges to $f$ pointwise. We must show
+that for any $x_0 \in \RR$, the following equality holds:
+
+\[
+    \lim_{n \rightarrow \infty}
+    f_n(x_0) = f(x_0)
+\]
+
+If $x_0 \leq 0$, the problem becomes trivial. If the inequality
+is strict, $f_n(x_0) = 0$
+regardless of the value of $n$. Also computing the value 
+of $f_n(0)$, we notice that the value is identically $1$, 
+regardless of the value of $n$. 
+
+It remains to demonstrate the equality for $x_0 > 0$. 
+Recall that $\lim_{n\rightarrow \infty} 1/n = 0$. Hence, it 
+is possible to obtain a sufficiently large integer $N$ such that 
+for any $n > N$, we have $1/n < x_0$. By the construction of 
+$f_n(x)$, $f_n(x_0) = 0$ for any $n > N$. This concludes the proof. 
+\qed 
+
+
+\newpage
+%PW convergence of spike
+\Problem
+Define:
+\[
+    f_n(x) := 
+    \begin{cases}
+        1-nx & (x \in (0, 1/n)) \\ 
+        0 & (\textrm{Otherwise})
+    \end{cases}
+\]
+
+and,
+\[
+    \mathcal{F}:= \{f_n(x)|n \in \ZZ_{pos}\}
+\]
+
+Is the family $\mathcal{F}$ normal?
+
+\new{Claim}
+No, $\mathcal{F}$ is not normal. 
+
+\Proof
+Assume for a contradiction, that indeed the family is normal. 
+Then, the entire family $\mathcal{F}$ must have some subsequence
+of functions that converge uniformly. Let the sequence of functions 
+$\{f_{m_1}, f_{m_2}, f_{m_3}, \dots \}$ be such a sequence of functions.
+
+For the value $\epsilon = 1/4$, we extract some integer $N$ such that 
+for any $n > N$, the function achieves:
+
+\[
+    |f_{m_n}(x)-f(x)| < 1/4
+\]
+
+For any real value $x$. $f(x)$ is some imaginary function 
+that the subsequence uniformly converges to. Extract another 
+arbitrary integer $k > N$ that satisfies the same condition. 
+Adding the two inequalities, we obtain:
+
+\[
+    |f_{m_n}(x)-f(x)| + |f_{m_k}(x)-f(x)| < 1/2
+\]
+
+Which implies, by the triangle inequality:
+
+\[
+    |f_{m_n}(x) - f_{m_k}(x)| < 1/2
+\]
+
+And this is for any values of $n, k > N$. 
+We explicitly construct a value $x_0$ that violates 
+this inequality. 
+
+Take any integer $n$ greater than $N$. Obtain 
+$k$ such that $m_k > 2m_n$. This is possible because 
+$m$ is a strictly increasing sequence of integers. 
+Set $x_0 = 1/m_k$. Write:
+
+\[
+|f_{m_n}(x_0) - f_{m_k}(x_0)| = |f_{m_n}(1/m_k)-f_{m_k}(1/m_k)|
+\]
+Notice that the latter summand vanishes. Also the fraction 
+$1/m_k$ is between zero and $1/m_n$. We proceed to write:
+\[
+    |f_{m_n}(x_0) - f_{m_k}(x_0)| = |1-m_n/m_k| > 1/2
+\]
+
+by construction. But then again, this whole absolute value 
+must be less than $1/2$, which is a contradiction. \qed
+
+
+\end{document}
