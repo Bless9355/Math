@@ -55,6 +55,14 @@
     }
 }
 
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
 \begin{document}
 \begin{center}
 \LARGE
@@ -641,5 +649,160 @@ or radius divided by the length. This is:
 \[
     \epsilon = 10cm/2m = 5\%
 \]
+
+
+\Problem
+A circuit is presented below. The switch is remained closed 
+for a few seconds. At $t = 0$, the switch is opened. Plot 
+the voltage at point A, B as a function of time. 
+\begin{center}
+\includegraphics[width = .5\linewidth]{Q6_setup.png}
+\end{center}
+
+\new{Solution}
+Here is the plot:
+\begin{center}
+\includegraphics[width = .5\linewidth]{Q6_plot.png}
+\end{center}
+
+And here comes the reasoning. 
+A few seconds is enough to bring the current to an 
+equilibrium state. Thus, the solenoid can be ignored. 
+It becomes trivial to observe, that at time $t = 0$, 
+$V_A = V_B = 0$. By Ohm's law, compute the current 
+through the solenoid at equilibrium. 
+
+\[
+    V_0 = I_0\cdot R_{eff} \textAnd
+    I_0 = 15V/50\Omega = .2A
+\]
+
+Now, we consider the current after the switch has been open. 
+Combining Kirhihoff's loop rule along with Faraday's law, write:
+
+\newcommand{\Ohm}{\Omega}
+
+\[
+    \EMF - I(200\Ohm) = 0
+\]
+Furthermore:
+\[
+    -\frac{d\Phi}{dt} = -L\frac{dI}{dt} = 200\Ohm I  
+\]
+And thus:
+\[
+    \frac{1}{I} \frac{dI}{dt} = -\frac{200\Ohm}{L}
+\]
+The left side is the logarithmic derivative. We have previously 
+deduced an initial condition, $I(0) = .2A$. Ergo:
+
+\[
+    I(t) = .2e^{-200\Ohm t/L} \textrm{Amps}
+\]
+
+It is easy to deduce $V_A, V_B$ via Ohm's law:
+
+\[
+    V_A = 50I(t) \textrm{Volts}
+\]
+\[
+    V_B = -150I(t) \textrm{Volts}
+\]
+
+And the plot illustrates this result. 
+
+
+
+\newpage
+
+\Problem
+An RL circuit is presented. 
+The inductance of the solenoid is 
+$.5mH$ and the resistance is $.1\Omega$. 
+The power supply provides a potential difference of $12V$. 
+Assuming the power supply has no internal resistance, compute the 
+time $t_1$ when the current reaches $90\%$ of its full capacity. 
+Also, compute the energy stored in the solenoid at $t = t_1$. 
+
+\new{Utility} 
+\[
+    (1-e^{-x}) = .9
+\]
+
+has a solution at $x = ln(10)$
+
+\Proof
+Follow the algebra:
+\[
+    e^{-x} = .1
+\]
+\[
+    e^{x} = 10
+\]
+\[
+    x = ln(10)
+\]
+\qed
+
+\new{Solution}
+We know that the current is given as a function of time as:
+
+\[
+    I(t) = 
+    \frac{V_0}{R}
+    (1 - e^{-t/\tau})
+\]
+
+where $\tau = L/R$. After a sufficient amount of time, the current 
+reaches $I_{eq} = V_0/R$. We wish to compute the time $t_1$ where 
+the current is $90\%$ of this value. Write:
+
+\[
+    I(t_1) = 
+     \frac{V_0}{R}
+    (1 - e^{-t_1/\tau}) = 
+    \frac{V_0}{R} (.9)
+\]
+
+By the utility equation that we had solved above, we deduce:
+
+\[
+    t_1/\tau = ln(10)
+    \textAnd 
+    t_1 = ln(10) \tau = ln(10) L/R
+\]
+
+After some computation:
+\[
+    t_1 \approxeq .115 s
+\]
+
+To compute the energy, recall the formula:
+\[
+    E(t) = \frac{1}{2} LI(t)^2
+\]
+
+Compute:
+
+\[
+    I(t_1) = .9V_0/R = 1080A
+\]
+
+Ergo:
+\[
+    \boxed{
+    E(t_1) = \frac{1}{2}
+    (.5mH)(1080A)^2
+    \approxeq
+    292J
+    }
+\]
+
+
+
+
+
+
+
 
 \end{document}
