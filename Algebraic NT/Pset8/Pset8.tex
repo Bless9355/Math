@@ -2,8 +2,12 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 \usepackage{amssymb}
+<<<<<<< HEAD
 \usepackage{wasysym}
 
+=======
+\usepackage{verbatim}
+>>>>>>> a1ba160d34201051ff0c5fe07785e3dec0dfa7dd
 
 \newcommand{\new}[1]{
     \vspace{2mm}
@@ -31,11 +35,12 @@
 }
 }
 
-\newcommand{\nProblem}[1]{{
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
     \noindent
     \setcounter{problemcnt}{#1}
     \arabic{problemcnt}. 
-}
+    \stepcounter{problemcnt}  
 }
 
 \newcommand{\Proof}{{
@@ -184,6 +189,7 @@ result by $-d$. Obtain:
     1 = -kae+[a^2f^2-b^2e^2]+d(b^2f^2)
 \]
 
+<<<<<<< HEAD
 \[
     1+b^2e^2-a^2f^2 = d(b^2f^2-k^2)
 \]
@@ -247,6 +253,63 @@ divide any of the terms in the LHS. Thus, $2$ is an irreducible that
 is not a prime. This concludes the proof. 
 
 \qed
+=======
+\Problem
+Show that $Q(\sqrt{-d})$ is not a UFD
+where $d = 2, 3(mod 4)$ and 
+$d = 0(mod 5)$, $d$ squarefree. 
+
+\new{Solution}
+
+\begin{comment}
+First, we establish that $\sqrt{-d}$
+is an irreducible, regarless of the 
+value of d. AFC, some ring element 
+$\alpha = a + b\sqrt{-d}$ divides $\sqrt{d}$ 
+where $\alpha \neq 0$ and $\alpha \neq \pm 
+\sqrt{d}$. 
+%units are a bit funky...
+
+Write:
+
+\[
+    N(\alpha) | N(\sqrt{-d})
+\]
+\[
+    (a^2-b^2d)|d
+\]
+So we infer $gcd(a^2-b^2d, d) = d$. 
+$gcd(a^2-b^2d, d) = gcd(a^2, d) = d$,
+so $d|a^2$. Since d is squarefree, 
+by unique factorization in the integers, 
+we get $d|a$. Write $a = d\bar(a)$. 
+
+\end{comment}
+
+For utility, we will show that 
+$\sqrt{-5n}|(a+b\sqrt{-5n})$ iff 
+$5n|a$.  
+
+Start with the forward direction. 
+Write $d = -5n$. Since d is squarefree, 
+n is also a squarefree integer. 
+$\sqrt{-5n}|(a+b\sqrt{-5n})$ implies
+$\sqrt{-5n}|a$. Again, write $a$ in terms 
+of multiples of $\xi$. 
+\[
+    a = \sqrt{-5n}\xi
+\]
+
+Multiply by the algebraic conjugate both side.
+\[
+    a^2 = \sqrt{-5n}-(\sqrt{-5n})(\xi)(\bar{\xi}) = 5nN(\xi)
+\]
+
+Looking at the equation in the ring $\mathbb{Z}$,
+we conclude that $5n|a^2$ and thus $5n|a$, for $5n$ is squarefree. 
+
+Move on to the backwards 
+>>>>>>> a1ba160d34201051ff0c5fe07785e3dec0dfa7dd
 
 \newpage
 \Problem
