@@ -56,6 +56,14 @@
     }
 }
 
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
 \begin{document}
 
 
@@ -316,6 +324,257 @@ $1/m_k$ is between zero and $1/m_n$. We proceed to write:
 
 by construction. But then again, this whole absolute value 
 must be less than $1/2$, which is a contradiction. \qed
+
+\newpage
+
+%The first integral problem
+\Problem
+Solve the integral:
+\[
+    \int_{-\infty}^{\infty}\frac{x^2}{x^4+x^2+1}dx
+\]
+
+\new{Solution}
+Define the integand as a complex function. That is:
+
+\[
+    f(z):=\frac{z^2}{z^4+z^2+1}
+\]
+
+We look at the semicircular contour with radius $R$
+that is centered at the origin. The contour occupies the 
+first and the second quadrant. Call the contour $\gamma$. 
+
+The circular part of the contour vanishes as $R \rightarrow \infty$. 
+Write:
+
+\[
+    \left|\oint_{\gamma_c}f\right|
+    =\left|\int_{\theta = 0}^{\pi}
+    \frac{R^2e^{2i\theta}}{R^4e^{4i\theta}+R^2e^{2i\theta}+1}
+    Rie^{i\theta}d\theta
+    \right|
+    <2\pi/R
+\]
+
+and as $R\rightarrow \infty$, clearly the integral converges to 
+zero. 
+
+The problem reduces down to identifying the poles of the function 
+$f$. We must identify all the zeros of the denominator. Notice:
+
+\[
+    (x^2-1)(x^4+x^2+1) = (x^6-1)
+\]
+
+Ergo, the zeros of the denominators are the four complex roots
+of $z^6 - 1$. The two real roots $z = \pm 1$ can be excluded 
+by computing $f(1) = 3, f(-1) = 3$. In the contour $\gamma$, 
+the two poles are:
+
+\[
+    z_0 = e^{i\pi/3} \textAnd z_1 = e^{2i\pi/3}
+\]
+
+Both poles are of order 1. To compute the residue, apply 
+L'Hopital's rule. For any of the poles $p \in {z_0, z_1}$, 
+
+\[
+    Res_f(p) = \lim_{z\rightarrow p} 
+    \frac{(z-p)z^2}{z^4+z^2+1}
+\]
+By taking derivatives in both the numerator and the denominator:
+
+\[
+    \lim_{z\rightarrow p} 
+    \frac{(z-p)z^2}{z^4+z^2+1}
+=
+\lim_{z\rightarrow p} 
+    \frac{3z^2-2zp}{4z^3+2z}
+=
+\frac{3p-2p}{4p^2+2}
+=\frac{1}{4p+2p^{-1}}
+\]
+
+Plugging in the appropriate values of $p$, we write:
+
+\[
+    Res_f(e^{i\pi/3}) = 
+    \frac{1}
+    {
+       4e^{i\pi/3}+2e^{-i\pi/3} 
+    }
+    =
+    \frac{1}
+    {
+        2+2\sqrt{3}i
+        +1-\sqrt{3}i
+    }
+    =\frac{1}
+    {
+        3+\sqrt{3}i
+    }
+    =\frac{3-\sqrt{3}i}{12}
+    \]\[
+  Res_f(e^{2i\pi/3}) = 
+    \frac{1}
+    {
+       4e^{2i\pi/3}+2e^{-2i\pi/3} 
+    }
+    =
+    \frac{1}
+    {
+        -2+2\sqrt{3}i
+        -1-\sqrt{3}i
+    }
+    =
+    \frac{1}
+    {
+        -3+\sqrt{3}i
+    }
+    =
+    \frac{-3-\sqrt{3}i}
+    {
+        12
+    }
+\]
+
+By the residue theorem, we evaluate the contour integral:
+
+\[
+    \oint_{\gamma}f = 2\pi i [Res_f(z_0)+Res_f(z_1)]
+     = 2\pi i \frac{-2\sqrt{3}i}{12} = 
+     \frac{\pi}{\sqrt{3}}
+\]
+\newpage
+
+Finally we conclude 
+\[
+    \boxed{
+        \int_{-\infty}^{\infty}
+        \frac{x^2}{x^4+x^2+1} = 
+        \frac{\pi} {\sqrt{3}}
+    }
+\]
+
+\newpage
+\Problem
+Solve the integral:
+\[
+    I:=
+    \int_{0}^{2\pi}
+    \frac{1}{a+bsin(\theta)} d\theta
+\]
+
+\new{Solution}
+First, consider when the integral is valid. The integrand 
+must be finite, that is, the numerator must be nonzero. 
+The magnitude of the function $bsin(\theta)$ must not be greater 
+than $a$. Otherwise, the numerator will hit zero at some point, 
+and the integral will be invalid. From now on, assume $|b|<|a|$. 
+
+Also, if $b = 0$, the integral becomes trivial. $I = 2\pi/a$ 
+given that $a$ is nonzero. 
+
+Recall Euler's formula:
+\[
+    sin(\theta) = \frac{e^{i\theta}+e^{-i\theta}}{2i}
+\]
+
+Now manipuate the integral:
+
+\[
+    I = 
+ \int_{0}^{2\pi}
+ \frac{2i}{2ia+2ibsin(\theta)} d\theta
+=
+ \int_{0}^{2\pi}
+ \frac{2i}{2ia+b(e^{i\theta}+e^{-i\theta})} d\theta
+\]
+\[
+    I = \frac{2}{b}
+ \int_{0}^{2\pi}
+ \frac{ie^{i\theta}}
+ {e^{2i\theta}+2iae^{i\theta}/b+1}d\theta
+\]
+
+Let $\zeta := e^{i\theta}$. $\zeta$ forms 
+a unit circle in the range $\theta\in[0, 2\pi]$. 
+Rewrite the integral as:
+
+\[
+    I = \frac{2}{b}
+    \oint_{\zeta \in C}
+    \frac{d\zeta}
+    {\zeta^2+2ik\zeta+1}
+\]
+
+Where $k:=a/b$ and $C$ is the unit circle. 
+By the quadratic formula, the integrand has poles at:
+
+\[
+    \zeta = -ik\pm \sqrt{-k^2+1}
+\]
+
+$k^2 > 1$ since $|a/b| >1$. $\zeta$ is purely imaginary. 
+Note that one of the poles necessarily fall into the circle 
+and that the other does not. The pole $p$ that falls into 
+the unit circle is:
+
+\[
+    p= -ik+\sqrt{-k^2+1}
+\]
+
+Denote the integrand of the contour function f. 
+\[
+    f(z) = 
+    \frac{1}{z^2+2ikz+1}
+\]
+
+Compute the residue at $p$. The pole is a simple pole. 
+
+\[
+    Res_f(p) = 
+    \lim_{z\rightarrow p}
+    \frac{z-p}
+    {z^2+2ikz+1}
+    =
+      \lim_{z\rightarrow p}
+    \frac{1}{2z+2ik}
+\]
+\[
+    =
+    \frac{1}{2}
+    \frac{1}{-ik+\sqrt{-k^2+1}+ik}
+    =
+    \frac{1}{2}
+    \frac{1}{\sqrt{1-k^2}}
+\]
+
+By the residue theorem:
+
+\[
+    I = \frac{2}{b}2\pi i [Res_f(p)] = 
+    \frac{2\pi}{b\sqrt{k^2-1}}
+    =\pm\frac{2\pi}{\sqrt{a^2-b^2}}
+\]
+
+The $\pm$ sign depends on the sign of $b$. As 
+inserting $b$ into the square root, we must seperate 
+its sign. 
+
+We conclude, for $|b|> |a|$
+
+\[
+    \boxed{
+        I = 
+        \begin{cases}
+            \frac{2\pi}{\sqrt{a^2-b^2}} & (b>0)\\
+            -\frac{2\pi}{\sqrt{a^2-b^2}} & (b<0)\\
+        \end{cases}
+    }
+\]  
+
 
 
 \end{document}
