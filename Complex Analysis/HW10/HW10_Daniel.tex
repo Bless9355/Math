@@ -1,0 +1,272 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wasysym}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\RR{{\mathbb{R}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{{
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Exp}{
+    {
+        \textrm{Exp}
+    }
+}
+
+\begin{document}
+
+\Problem
+Find a functional equation for the following function:
+
+\[
+    G(s) := \int_{0}^{\infty}\Exp[-x^2]x^{s-1}dx
+\]
+
+\new{Solution}
+We first observe the following derivative:
+
+\[
+    \frac{d}{dx}e^{-x^2} = -2xe^{-x^2}
+\]
+
+Hence:
+
+\[
+    \int xe^{-x^2}dx = -\frac{e^{-x^2}}{2} + C
+\]
+
+With this indefinite integral in mind, we integrate G 
+by parts. Apply the following substitutions:
+
+\[
+    u = x^{s-2} \textAnd du = (s-2)x^{s-3}
+\]
+\[
+    dv = x\Exp[-x^2]dx \textAnd 
+    v = -\frac{\Exp[-x^2]}{2}
+\]
+
+Integrate $G$:
+\[
+    G(s) = uv \bigg|_{x = 0}^\infty - \int_{x = 0}^{\infty}vdu
+\]
+\[
+    = \left[
+        -\frac{x^{s-2}\Exp[-x^2]}{2}
+    \right]_0^\infty
+    -\int_0^\infty \left(
+        -\frac{(s-2)\Exp[-x^2]x^{s-3}}{2}
+    \right)dx
+\]
+\[
+    = \left[
+        -\frac{x^{s-2}\Exp[-x^2]}{2}
+    \right]_0^\infty
+    +
+    \frac{(s-2)}{2}
+    \int_0^\infty 
+    \left(
+        \Exp[-x^2]x^{s-3}
+    \right)dx
+\]
+
+For the sake of convergence of the first summand,
+we assume $s\geq2$. As for $s = 2$, we evaluate:
+
+\[
+    G(2) = \int_0^{\infty}xe^{-x^2}dx = -\frac{e^{-x^2}}{2}\bigg|_0^\infty
+    = 1
+\]
+
+As for $s > 2$, we compute the equality obtained by the by parts
+integration. Notice that the first summand converges to zero. 
+Hence:
+
+\[
+    G(s) = \frac{s-2}{2}G(s-2)
+\]
+\qed
+
+\newpage
+
+\Problem
+Find an analytic continuation of the function:
+
+\[
+    H(x) = 1 + z^2 + z^4 + z^6 + \cdots+ z^{2n} + \cdots
+\]
+
+For which value is the continuation undefined? 
+What is the value of the continuation at $z = 2$?
+
+\new{Solution}
+The natural response after observing the function is 
+to consider the geometric series. We define the 
+continuation to be $\bar{H}(z)$. Write:
+
+\[
+    \bar{H}(z) = \frac{1}{1-z^2}
+\]
+
+Clearly, for values where $|z^2| < 1$, $H$ and $\bar{H}$ agrees. 
+It is possible to obtain a sequence that accumulate on some point 
+in the unit circle that is not the center. For example, consider:
+
+\[
+    z_n := \frac{1}{2}e^{\pi i / n}
+\]
+
+The series of points converge to $1/2$, and $H, \bar{H}$ agrees 
+for any point $z_n$.
+
+Upon inspection, we notice that $\bar{H}(z)$ is defined everywhere 
+other than $z = \pm 1$. Other then at these two poles, 
+$\bar{H}$ is holomorphic, for $z^2-1$ is holomorphic and the 
+reciprocal of a holomorphic function must be holomorphic as long 
+as the function is defined. 
+\qed
+
+
+\newpage
+\Problem
+For which value of $s$ is the following 
+integral defined?
+
+\[
+    L(s):= 
+    \int_{0}^\infty \frac{x^s }{x^2+1}dx
+\]
+
+\new{Claim}
+$L(s)$ is defined for $s \in (0, 1)$
+
+\Proof
+It is trivial to notice that the integrand blows up at $x = 0$ 
+when $s$ is negative. We only consider positive $s$. Divide 
+the integral into two intervals. 
+
+\[
+    \int_{0}^\infty \frac{x^s }{x^2+1}dx
+    = \int_{0}^1+\int_1^\infty
+\]
+
+In the first interval, the integrand takes some finite 
+value, regardless of the value of $s$, as long as it is positive. 
+Thus, we focus on the latter summand. Notice:
+
+\[
+    0<
+    \int_{1}^\infty \frac{x^s }{x^2+1}dx \leq
+    \int_{1}^\infty \frac{x^s }{x^2}dx
+    =
+    \int_{1}^\infty  x^{s-2}dx
+\]
+
+For $s < 1$, $s-2 < -1$ hence:
+
+\[
+    \int_{1}^\infty  x^{s-2}dx
+    = \frac{x^{s-1}}{s-1}\bigg|_{x = 1}^\infty = \frac{1}{1-s}
+\]
+
+Thus, the integral is bounded between zero and some positive value. 
+For the integrand is always positive in the interval $(1, \infty)$,
+the integral monotonically increases as the upper bound is sent 
+to infinity. Bounded monotone sequences must converge, and hence 
+we conclude the the integral converges for $s<1$. 
+
+It remains to show that the integral diverges for $s\geq 1$. 
+Consider the following inequality:
+
+\[
+    0<
+    \int_{1}^\infty \frac{x^s }{2x^2}dx \leq
+    \int_{1}^\infty \frac{x^s }{x^2+1}dx
+\]
+
+Assume $s \geq 1$. We evaluate the left integral:
+
+\[
+    \int_{1}^\infty \frac{x^s }{2x^2}dx =
+    \int_{1}^\infty \frac{x^{s-2}}{2}dx
+\]
+
+If $s = 1$, the following integral equals to:
+
+\[
+    ln(x)/2\bigg|_1^\infty
+\]
+
+which diverges. If $s > 1$, then:
+
+\[
+    \frac{x^{s-1}}{2(s-1)}\bigg|_1^\infty
+\]
+
+which also diverges. We have verified that 
+the integral diverges to infinity for $s \geq 1$. \qed
+
+
+
+
+
+
+
+\end{document}
