@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.5.17)  14 NOV 2023 17:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.5.17)  24 NOV 2023 08:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -218,74 +218,30 @@ File: Q2_setup.png Graphic file (type png)
 <use Q2_setup.png>
 Package pdftex.def Info: Q2_setup.png  used on input line 212.
 (pdftex.def)             Requested size: 241.49895pt x 167.99844pt.
- [3 <./Q2_setup.png>]
-
-LaTeX Warning: Command \c invalid in math mode on input line 299.
-
-
-c:/Users/danie/Math/Math/Physics/Pset9/Pset9.tex:300: LaTeX Error: Bad math environment delimiter.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.300 \]
-        
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-c:/Users/danie/Math/Math/Physics/Pset9/Pset9.tex:300: Missing } inserted.
-<inserted text> 
-                }
-l.300 \]
-        
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-c:/Users/danie/Math/Math/Physics/Pset9/Pset9.tex:300: Missing $ inserted.
-<inserted text> 
-                $
-l.300 \]
-        
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-c:/Users/danie/Math/Math/Physics/Pset9/Pset9.tex:300: Display math should end with $$.
-<to be read again> 
-                   \endgroup 
-l.300 \]
-        
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-c:/Users/danie/Math/Math/Physics/Pset9/Pset9.tex:300: Too many }'s.
-<argument> \leavevmode \setbox \z@ \hbox {\]}
-                                             \ifdim \ht \z@ =1ex\accent 24 \...
-l.300 \]
-        
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-[4] (Pset9.aux) ) 
+ [3 <./Q2_setup.png>] [4] [5] [6] [7]
+<Q6_setup.png, id=43, 426.84468pt x 310.91156pt>
+File: Q6_setup.png Graphic file (type png)
+<use Q6_setup.png>
+Package pdftex.def Info: Q6_setup.png  used on input line 659.
+(pdftex.def)             Requested size: 172.5pt x 125.64807pt.
+<Q6_plot.png, id=44, 515.67656pt x 319.94531pt>
+File: Q6_plot.png Graphic file (type png)
+<use Q6_plot.png>
+Package pdftex.def Info: Q6_plot.png  used on input line 665.
+(pdftex.def)             Requested size: 172.5pt x 107.02245pt.
+ [8 <./Q6_setup.png>] [9 <./Q6_plot.png>] [10] (Pset9.aux) ) 
 Here is how much of TeX's memory you used:
- 4110 strings out of 476331
- 68017 string characters out of 5787765
- 1856660 words of memory out of 5000000
- 24538 multiletter control sequences out of 15000+600000
- 514891 words of font info for 43 fonts, out of 8000000 for 9000
+ 4130 strings out of 476331
+ 68301 string characters out of 5787765
+ 1861660 words of memory out of 5000000
+ 24555 multiletter control sequences out of 15000+600000
+ 515226 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  67i,6n,77p,320b,183s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Pset9.pdf (4 pages, 302871 bytes).
+ <C:\Users\danie\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Pset9.pdf (10 pages, 415955 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 111 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
