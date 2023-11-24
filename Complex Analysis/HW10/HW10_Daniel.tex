@@ -264,9 +264,238 @@ which also diverges. We have verified that
 the integral diverges to infinity for $s \geq 1$. \qed
 
 
+\newpage
 
+\Problem
+i) Define:
+\[
+    \zeta_{alt}(s) = \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n^s}
+\]
+Prove that for $Re(s) > 1$, this series converges
 
+\new{Solution}
+It suffices to show the absolute convergence 
+of the sequence. We show the convergence of the 
+following sequence.
 
+\[
+    \sum_{n = 1}^\infty \bigg|
+        \frac{1}{n^s}
+    \bigg|
+    \textOr
+    \sum_{n = 1}^\infty \bigg|
+        {n^{-s}}
+    \bigg|
+    =
+    \sum_{n = 1}^\infty \bigg|
+        {e^{-sln(n)}}
+    \bigg|
+    =
+    \sum_{n = 1}^\infty 
+        {e^{-Re(s)ln(n)}}
+    =
+    \sum_{n = 1}^\infty
+        n^{-Re(s)}
+\]
+Which, in fact equals to:
 
+\[
+    \sum_{n = 1}^\infty 
+        \frac{1}{n^{Re(s)}}
+\]
+
+This series is known to converge 
+by the p-series test, for 
+it is given that $Re(s) > 1$. \qed
+
+\vspace{5mm}
+
+ii) Prove:
+\[
+    \zeta_{alt}(s) = \zeta(s) - (2/2^s)\zeta(s)
+\]
+
+\new{Solution}
+
+Denote the nth partial sum of 
+$\zeta(s), \zeta_{alt}(s)$ as 
+$P_n(s), P'_n(s)$. That is:
+
+\[
+    P_n(s) := 
+    \sum_{k = 1}^{n} \frac{1}{k^s}
+    \textAnd
+    P'_n(s) := 
+    \sum_{k = 1}^{n} \frac{(-1)^k}{k^s}
+\]
+
+$\zeta(s)$ converges absolutely for 
+$Re(s) > 1$. Thus, as $n \rightarrow \infty$,
+$P_n(s) \rightarrow \zeta(s)$ and 
+$P'_n(s) \rightarrow \zeta_{alt}(s)$. 
+
+For finite $n$, notice the following equality:
+
+\[
+    P_{2n}(s) - \frac{2}{2^s}P_n(s) = 
+    1 + \frac{1}{2^s} + \frac{1}{3^s} + \dots + \frac{1}{(2n)^s}
+\]
+
+\[
+    -\frac{2}{2^s} - \frac{2}{4^s} - \cdots - \frac{2}{(2n)^s}
+\]
+
+\[
+    = 1 - \frac{1}{2^s} + \frac{1}{3^s}
+    \cdots -\frac{1}{(2n)^s}
+    =
+    P'_{2n}(s)
+\]
+
+Set $n \rightarrow \infty$. The equality 
+converts to:
+\[
+    \zeta(s)-\frac{2}{2^s}\zeta(s)= \zeta_{alt}(s)
+\]
+\qed 
+
+\newpage
+Evaluate the integral:
+
+\[
+    I := \int_0^\infty \frac{x^4}{x^8+1}
+\]
+
+\new{Solution}
+We take a semicircular toy contour centered 
+at the origin with an angle of $\pi/4$, 
+radius of $R \rightarrow \infty$. 
+Call the contour $\gamma$. 
+
+First show that the circular region of 
+the contour converges to zero as 
+$R \rightarrow \infty$. Call 
+the circular region $\gamma_c$. Notice:
+
+\[
+    \bigg|
+        \int_{\gamma_c}
+        \frac{z^4}{z^8+1} dz
+    \bigg|
+    \leq
+    \int_{\gamma_c}
+    \frac{|z^4|}{R^8|(z/R)^8+1/R^8|}R\frac{dz}{R}
+\]
+\[
+    =\frac{1}{R^3}
+    \int_{\gamma_c} \frac{|dz/R|}{|(z/R)^8+1/R^8|}
+\]
+
+Now substitute:
+
+\[
+    z/R = e^{i\theta}
+    \textAnd 
+    dz/dR = ie^{i\theta}d\theta
+\]
+
+The circular contour is bounded by:
+
+\[
+    \frac{1}{R^3}
+    \int_{\theta = 0}^{\pi}
+    \frac{d\theta}{|e^{8i\theta}+1/R^8|}
+\]
+
+And for sufficiently large $R$, we can bound 
+this integral by:
+
+\[
+    \frac{\pi}{R^3(1-1/R^8)}
+\]
+
+As $R\rightarrow \infty$, the bound converges 
+to zero. By the squeeze limit theorem, we conclude 
+that the circular region of the integral converges to zero. 
+
+By the residue theorem:
+
+\[
+    \int_{-R}^{R}\frac{x^4}{1+x^8}dx + \int_{\gamma_c}\frac{z^4}{1+z^8}dz = 2\pi i \sum_{k = 0}^n Res(z_k)
+\]
+where $z_k$ denotes the poles. 
+
+Notice that the integrand is even 
+in the reals. As $R\rightarrow \infty$, 
+write:
+
+\[
+    \int_0^\infty \frac{x^4}{1+x^8}dx = \pi i \sum_{k = 0}^n Res(z_k)
+\]
+
+It remains to compute the residues in 
+the selected toy contour. The poles 
+are the 8th roots of unity that lies 
+on the first and the first and 
+second quadrant. They all have a 
+modulus of 1, and an argument 
+of $\frac{1+2k}{8}\pi$ for $k = 0, 1, 2, 3$. 
+
+The order of each pole is one. denote the pole 
+as $z_k$. Compute the residue as follows:
+
+\[
+    Res(z_k) = 
+    \lim_{z\rightarrow z_k}
+    \frac{z^4(z-z_k)}{1+z^8}
+    =^H
+\lim_{z\rightarrow z_k}
+    \frac{5z^4-4z^3z_k}{8z^7}
+    = \frac{z_k^4}{8z_k^7}
+    = \frac{1}{8z_k^3}
+\]
+
+Add up the residues:
+\[
+    \sum_{k = 0}^{3}Res(z_k)
+     =
+     \frac{1}{8}
+     [z_0^{-3}+z_1^{-3}+z_2^{-3}+z_3^{-3}]
+\]
+
+\[
+    = \frac{1}{8}
+    [e^{-3\pi i/8}+ e^{-9\pi i/8}+ e^{-15\pi i/8}+ e^{-21\pi i/8}]
+\]
+And through some geometry:
+\[
+    = \frac{1}{4}(sin(\pi/8)-cos(\pi/8))i
+\]
+
+We must compute $(sin(\pi/8)-cos(\pi/8))$. 
+Square it:
+
+\[
+    (sin(\pi/8)-cos(\pi/8))^2 = 
+    1-2sin(\pi/8)cos(\pi/8)
+\]
+\[
+    = 1- sin(\pi/4) = 1- 1/\sqrt{2}
+\]
+
+The value of $cos$ is greater than $sin$. Thus:
+\[
+    (sin(\pi/8)-cos(\pi/8)) = -\sqrt{1- 1/\sqrt{2}}
+\]
+
+Finally, we write:
+
+\[
+    I = \pi i \sum_{k = 0}^{3}Res(z_k)
+    =\frac{ \pi i^2}{4} (-\sqrt{1- 1/\sqrt{2}})
+    = \frac{\pi}{4} \sqrt{1- 1/\sqrt{2}}
+\]
+
+\qed
 
 \end{document}
