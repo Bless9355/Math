@@ -498,4 +498,124 @@ Finally, we write:
 
 \qed
 
+\newpage
+
+\Problem
+Prove:
+
+\[
+    |\Gamma(1/2+it)| = \sqrt{\frac{2\pi}
+    {e^{\pi t}+e^{-\pi t}}
+    }
+\]
+\new{Proposition}
+The complex conjugate of the gamma function 
+is the value of the gamma function evaluated 
+at the conjugate of the argument. That is:
+\[
+   \overline{\Gamma(z)} = \Gamma(\bar{z})  
+\]
+\Proof
+We expand the gamma function back to its definiton. 
+
+\[
+    \overline{
+        \Gamma(z)
+    }
+    = \overline{
+        \int_{x = 0}^\infty
+        x^{z-1}e^xdx
+    }
+    = \int_{x = 0}^\infty
+    \overline{x^{z-1}}e^x dx
+\]
+Rewrite the base of $x$ as 
+a base of $e$. 
+\[
+   = \int_0^\infty 
+   \overline{
+    e^{ln(x)(z-1)}
+   } 
+   e^x dx
+\]
+Observe that $ln(x)$ is always a 
+real value. The conjugate of an exponent
+is the exponent of the conjugate of 
+its argument. Hence:
+
+\[
+    = 
+    \int_0^\infty
+    e^{ln(x)(\bar{z}-1)}e^x dx
+    = 
+    \int_0^\infty
+    x^{\bar{z}-1}e^x dx
+    =
+    \Gamma(\bar{z})
+\]
+\qed
+
+\new{Solution}
+We are given the reflection formula:
+\[
+    \Gamma(s)\Gamma(1-s)
+    =\frac{\pi}{sin(\pi s)}
+\]
+Plug in $s = 1/2 + it$. Write:
+
+\[
+    \Gamma(1/2+it)\Gamma(1/2-it)
+    =\frac{\pi}{sin(\pi (1/2 + it))}
+\]
+
+With a litte manipulation, we rewrite 
+the LHS. 
+
+\[
+    LHS = \Gamma(1/2+it)\Gamma(
+        \overline{
+            1/2+it
+        }
+    )
+    =\Gamma(1/2+it)\overline{
+        \Gamma(1/2+it)
+    }
+\]
+\[
+    = |\Gamma(1/2+it)|^2
+\]
+
+Rewrite the RHS using the basic 
+trig identity and Euler's formula:
+
+\[
+    RHS = \frac{\pi}
+    {cos(\pi it)}
+    = \pi 
+    \frac{2}{e^{i^2\pi t}+e^{-i^2\pi t}}
+    = \frac{2\pi}{e^{\pi t}+e^{-\pi t}}
+\]
+\newpage
+
+$LHS = RHS$ converts to:
+
+\[
+    |\Gamma(1/2+it)|^2 
+    =
+\frac{2\pi}{e^{\pi t}+e^{-\pi t}}
+\]
+
+Finally:
+
+\[
+    |\Gamma(1/2+it)|
+    =
+\sqrt{
+    \frac{2\pi}{e^{\pi t}+e^{-\pi t}}
+}
+\]
+\qed
+
+
+
 \end{document}
