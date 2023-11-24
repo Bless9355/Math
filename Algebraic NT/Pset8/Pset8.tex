@@ -2,7 +2,12 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 \usepackage{amssymb}
+<<<<<<< HEAD
+\usepackage{wasysym}
+
+=======
 \usepackage{verbatim}
+>>>>>>> a1ba160d34201051ff0c5fe07785e3dec0dfa7dd
 
 \newcommand{\new}[1]{
     \vspace{2mm}
@@ -12,6 +17,11 @@
 }
 
 \def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
 
 
 \newcounter{problemcnt}
@@ -43,7 +53,7 @@
 
 \begin{document}
 
-\Problem
+\nProblem{2}
 Let K be a number field,
 and let $I$ be an ideal in $\calO_k$. 
 If $\alpha \in I$, prove that 
@@ -106,80 +116,144 @@ is exactly the desired product P.
 \qed
 
 
-\Problem
-Show in $\mathbb{Z}[\sqrt{-5}]$ that 
-$\sqrt{-5}|(a+b\sqrt{-5})$ iff $5|a$. 
-Deduce that $\sqrt{-5}$ is prime in 
-$\mathbb{Z}[\sqrt{-5}]$. Hence, conclude 
-that the element 5 factors uniquely in this 
-ring, even if the ring is not a UFD. 
+\nProblem{5}
+Prove that if $d$ is an integer that satisfies:
+\begin{enumerate}
+    \item $d \equiv 2, 3 (mod4)$
+    \item $5|d$
+\end{enumerate}
+then $\ZZ[d]$ is not a UFD.  
 
-\Proof
-($\Leftarrow$) If $5|a$, there exists some 
-element $\xi \in \mathbb{Z}[\sqrt{-5}]$
-that satisfies $a = 5\xi$. Thus, 
-$a = -\sqrt{-5}\cdot (\sqrt{-5}\xi)$. 
+\new{Proposition}
+We first show that for any ring element 
+$\alpha := a+b\sqrt{d}$, $\sqrt{d}|\alpha$ if and only if 
+$d|a$. 
+
+($\Rightarrow$) If $d|a$, there exists some 
+element $\xi \in \mathbb{Z}[\sqrt{d}]$
+that satisfies $a = d\xi$. Thus, 
+$a = -\sqrt{d}\cdot (\sqrt{d}\xi)$. 
 
 Write:
 \[
-    a + b\sqrt{-5} = 
-    \sqrt{-5}
-    (-\xi\sqrt{-5} + b)
+    a + b\sqrt{d} = 
+    \sqrt{d}
+    (\xi\sqrt{d} + b)
 \]
 which concludes this side of the proof. 
 
-($\Rightarrow$) 
-$\sqrt{-5}|(a+b\sqrt{-5})$ implies
-$\sqrt{-5}|a$. Again, write $a$ in terms 
+($\Leftarrow$) 
+$\sqrt{d}|(a+b\sqrt{d})$ implies
+$\sqrt{d}|a$ in the ring $\mathbb{Z}[\sqrt{d}]$. Again, write $a$ in terms 
 of multiples of $\xi$. 
 \[
-    a = \sqrt{-5}\xi
+    a = \sqrt{d}\xi
 \]
 
 Multiply by the algebraic conjugate both side.
 \[
-    a^2 = \sqrt{-5}-(\sqrt{-5})(\xi)(\bar{\xi}) = 5N(\xi)
+    a^2 = \sqrt{d}(-\sqrt{d})(\xi)(\bar{\xi}) = -dN(\xi)
 \]
 
 Looking at the equation in the ring $\mathbb{Z}$,
-we conclude that $5|a^2$ and thus $5|a$, for 5 is prime. 
+we conclude that $d|a^2$ and thus $d|a$, for d is squarefree. 
 
-Take any two elements $\alpha, \beta$ in 
-the ring $\mathbb{Z}[\sqrt{-5}]$. Assume 
-that the product is divisible by 
-$\sqrt{-5}$. Write:
+\Proof
+We claim that $\sqrt{d}$ must be a unit. Assume for a contradiction,
+that there is a pair of nonunit elements, $\alpha, \beta$ that 
+multiply to become $\sqrt{d}$. Taking the norm:
 
 \[
-    \alpha := a + b\sqrt{-5},
-    \beta := c + d\sqrt{-5}
+    -d = N(\alpha \beta) = N(\alpha) N(\beta)
+\]
+
+For $\alpha, \beta$ are non-units, they must both have an absolute 
+norm greater than 1. Write:
+
+\[
+    \alpha := a + b\sqrt{d}, \beta := e+f\sqrt{d}
 \]
 \[
-    \alpha\beta = (a + b\sqrt{-5})
-    (c + d\sqrt{-5})
+    N(\alpha)\cdot N(\beta) = (a^2-db^2)(e^2-df^2)
 \]
 \[
-    = ac-5bd+\sqrt{-5}(ad+bc)
+    -d = a^2e^2-d[a^2f^2-b^2e^2]-d^2(b^2f^2)
 \]
 
-The real part of the product must be 
-divisible by 5, by the proposition that 
-we have proven. $5|(ac-5bd)$ so 
-$5|ac$. WLOG, $5|a$. Again, by the proposition,
-$\sqrt{-5}|\alpha$ as desired. 
+$a, b, e, f$ are all integers. Take $(mod \_ d)$ both sides. We obtain $d|ae$
 
-Move on to factorize 5. $5 = -(\sqrt{-5})^2$. 
-Any irreducible factorization of 5 must 
-include two associates of $\sqrt{-5}$. 
-Assume we have another factorization that 
-has more irreducibles other than these 
-two associates. After cancellation, 
-we are left with a set of irreducibles 
-that multiply up to a unit, which is 
-impossible for all irreducibles are nonunits. 
-We conclude that the factorization is unique 
-up to associates. 
+Denote $k:= ae/d$, an integer. Now, divide both sides of the previous 
+result by $-d$. Obtain:
 
+\[
+    1 = -kae+[a^2f^2-b^2e^2]+d(b^2f^2)
+\]
 
+<<<<<<< HEAD
+\[
+    1+b^2e^2-a^2f^2 = d(b^2f^2-k^2)
+\]
+
+From the equation, we deduce $d|(1+b^2e^2-a^2f^2)$. Thus, 
+$d|(e+b^2e^3-a^2f^2e)$. Recall that $d|ae$. 
+$d|(e(1+b^2e^2))$. The greatest common divisor of the two 
+factors must be one, that is, $gcd(e, 1+b^2e^2) = 1$. It follows 
+that either $d|e$ or $d|(1+b^2e^2)$. 
+
+If $d|e$, then $\sqrt{d}|\beta$ by propsition. We can write:
+
+\[
+    \sqrt{d} = \alpha (\beta/\sqrt{d})\sqrt{d}
+\]
+
+And by cancellation:
+\[
+    1 = \alpha (\beta/\sqrt{d})
+\]
+
+So $\alpha$ must be a unit, hence a contraciction. 
+
+Try the other case, when $d|(1+b^2e^2)$. $gcd(d, e) = 1$ for this case, 
+and since $d|ae$, $d|a$ necessarily. Again, by the logic used in the previous 
+case, $\sqrt{d}$ must divide $\alpha$ and by cancellation. We end up with 
+$\beta$ unit, a contradiction. \contradiction 
+
+We have demonstrated that $\sqrt{d}$ is irreducible\checkmark
+
+%%Assuming that you have proved sqrt d irreducible...
+
+If $d \equiv 2$, then $2|d$. Also, $5|d$ so $d$ is a composite integer. 
+We come up with two decomposition for $d$ in the ring $\ZZ[\sqrt{d}]$:
+
+\[
+    \sqrt{d}\sqrt{d} = 2\cdot(d/2)
+\]
+
+We claim that $\sqrt{d}$ is not prime, though it is irreducible. 
+If $\sqrt{d}$ is prime, it must divide one of $2$ or $d/2$. However, 
+by our proposition, the division must also hold in the ring $\ZZ$, which 
+is not the case. We have found an irreducible that is not prime, 
+and this shows that $\ZZ[\sqrt{d}]$ is not a UFD. 
+
+We may use a similar claim for $d\equiv 3(mod\_4)$. Since $5|d$, 
+unless $d = -5$, $d$ is composite. We repeat the same argument above, 
+replacing 2 by 5. That is, $d = 5*(d/5)$. 
+
+Finally, it remains to show that $\ZZ[-5]$ is not a UFD. Consider 
+the following:
+
+\[
+    (1+\sqrt{-5})(1-\sqrt{-5}) = 2\cdot 3    
+\]
+
+$2, 3$ are prime, since their norms are $4, 9$ respectively. For either 
+of them to have a nonunit divisor, there must exist some ring element that 
+has a norm of $2$ or $3$, which is not possible. $2$ clearly doesn't 
+divide any of the terms in the LHS. Thus, $2$ is an irreducible that 
+is not a prime. This concludes the proof. 
+
+\qed
+=======
 \Problem
 Show that $Q(\sqrt{-d})$ is not a UFD
 where $d = 2, 3(mod 4)$ and 
@@ -235,6 +309,7 @@ Looking at the equation in the ring $\mathbb{Z}$,
 we conclude that $5n|a^2$ and thus $5n|a$, for $5n$ is squarefree. 
 
 Move on to the backwards 
+>>>>>>> a1ba160d34201051ff0c5fe07785e3dec0dfa7dd
 
 \newpage
 \Problem
@@ -371,6 +446,81 @@ distinct. By the proposition established, $I$
 is a proper Ideal. Thus $<2>$ is a prime ideal 
 that is not maximal. $R$ is not a dedekind domain. 
 \qed
+
+
+
+\Problem
+Show in $\mathbb{Z}[\sqrt{-5}]$ that 
+$\sqrt{-5}|(a+b\sqrt{-5})$ iff $5|a$. 
+Deduce that $\sqrt{-5}$ is prime in 
+$\mathbb{Z}[\sqrt{-5}]$. Hence, conclude 
+that the element 5 factors uniquely in this 
+ring, even if the ring is not a UFD. 
+
+\Proof
+($\Leftarrow$) If $5|a$, there exists some 
+element $\xi \in \mathbb{Z}[\sqrt{-5}]$
+that satisfies $a = 5\xi$. Thus, 
+$a = -\sqrt{-5}\cdot (\sqrt{-5}\xi)$. 
+
+Write:
+\[
+    a + b\sqrt{-5} = 
+    \sqrt{-5}
+    (-\xi\sqrt{-5} + b)
+\]
+which concludes this side of the proof. 
+
+($\Rightarrow$) 
+$\sqrt{-5}|(a+b\sqrt{-5})$ implies
+$\sqrt{-5}|a$. Again, write $a$ in terms 
+of multiples of $\xi$. 
+\[
+    a = \sqrt{-5}\xi
+\]
+
+Multiply by the algebraic conjugate both side.
+\[
+    a^2 = \sqrt{-5}-(\sqrt{-5})(\xi)(\bar{\xi}) = 5N(\xi)
+\]
+
+Looking at the equation in the ring $\mathbb{Z}$,
+we conclude that $5|a^2$ and thus $5|a$, for 5 is prime. 
+
+Take any two elements $\alpha, \beta$ in 
+the ring $\mathbb{Z}[\sqrt{-5}]$. Assume 
+that the product is divisible by 
+$\sqrt{-5}$. Write:
+
+\[
+    \alpha := a + b\sqrt{-5},
+    \beta := c + d\sqrt{-5}
+\]
+\[
+    \alpha\beta = (a + b\sqrt{-5})
+    (c + d\sqrt{-5})
+\]
+\[
+    = ac-5bd+\sqrt{-5}(ad+bc)
+\]
+
+The real part of the product must be 
+divisible by 5, by the proposition that 
+we have proven. $5|(ac-5bd)$ so 
+$5|ac$. WLOG, $5|a$. Again, by the proposition,
+$\sqrt{-5}|\alpha$ as desired. 
+
+Move on to factorize 5. $5 = -(\sqrt{-5})^2$. 
+Any irreducible factorization of 5 must 
+include two associates of $\sqrt{-5}$. 
+Assume we have another factorization that 
+has more irreducibles other than these 
+two associates. After cancellation, 
+we are left with a set of irreducibles 
+that multiply up to a unit, which is 
+impossible for all irreducibles are nonunits. 
+We conclude that the factorization is unique 
+up to associates. 
 
 
 %============

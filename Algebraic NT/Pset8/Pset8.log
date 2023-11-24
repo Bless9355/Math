@@ -1,15 +1,16 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.5.17)  11 NOV 2023 09:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  11 NOV 2023 11:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/danie/Math/Math/Algebraic NT/Pset8/Pset8.tex"
-(c:/Users/danie/Math/Math/Algebraic NT/Pset8/Pset8.tex
-LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-03-30> (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+**"c:/Users/danie/OneDrive/바탕 화면/New folder/Math/Algebraic NT/Pset8/Pset8.tex"
+(c:/Users/danie/OneDrive/바탕 화면/New folder/Math/Algebraic NT/Pset8/Pset8.tex
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-08-29>
+(C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count185
 \c@section=\count186
@@ -24,7 +25,7 @@ File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 \bibindent=\dimen140
 ) (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks16
+\@emptytoks=\toks17
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
@@ -32,67 +33,123 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ) (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks17
-\thm@bodyfont=\toks18
-\thm@headfont=\toks19
-\thm@notefont=\toks20
-\thm@headpunct=\toks21
+\thm@style=\toks18
+\thm@bodyfont=\toks19
+\thm@headfont=\toks20
+\thm@notefont=\toks21
+\thm@headpunct=\toks22
 \thm@preskip=\skip50
 \thm@postskip=\skip51
 \thm@headsep=\skip52
-\dth@everypar=\toks22
+\dth@everypar=\toks23
 ) (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-) (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
+)
+
+c:/Users/danie/OneDrive/바탕 화면/New folder/Math/Algebraic NT/Pset8/Pset8.tex:5: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 <
+     <<<<<< HEAD
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+(C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/wasysym\wasysym.sty
+Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
+\symwasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
+)
+Overfull \hbox (58.72072pt too wide) in paragraph at lines 5--7
+[]\OT1/cmr/m/n/10 <<<<<<< HEAD                                                                                                                                                         
+ []
+
+
+c:/Users/danie/OneDrive/바탕 화면/New folder/Math/Algebraic NT/Pset8/Pset8.tex:8: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 =
+     ======
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+(C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
 Package: verbatim 2022-07-02 v1.5u LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks23
-\verbatim@line=\toks24
+\every@verbatim=\toks24
+\verbatim@line=\toks25
 \verbatim@in@stream=\read2
 )
+Overfull \hbox (7.7783pt too wide) in paragraph at lines 8--11
+[]\OT1/cmr/m/n/10 =======                         >>>>>>> a1ba160d34201051ff0c5fe07785e3dec0dfa7dd 
+ []
+
 \c@problemcnt=\count193
- (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
+(C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count194
 \l__pdf_internal_box=\box51
 ) (Pset8.aux)
 \openout1 = `Pset8.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
  (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
  (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 58.
+ (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/wasysym\uwasy.fd
+File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
+)
+Overfull \vbox (367.62871pt too high) has occurred while \output is active []
 
-{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3] [4] (Pset8.aux) ) 
+ [1
+
+{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+Overfull \hbox (10.9174pt too wide) in paragraph at lines 311--313
+[]\OT1/cmr/m/n/10 Move on to the back-wards >>>>>>> a1ba160d34201051ff0c5fe07785e3dec0dfa7dd 
+ []
+
+[2] [3] [4] [5] (Pset8.aux)
+ ***********
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-08-29>
+ ***********
+ ) 
 Here is how much of TeX's memory you used:
- 1135 strings out of 476331
- 17694 string characters out of 5787765
- 1859660 words of memory out of 5000000
- 21625 multiletter control sequences out of 15000+600000
- 514294 words of font info for 41 fonts, out of 8000000 for 9000
+ 1367 strings out of 475248
+ 20297 string characters out of 5757813
+ 1936785 words of memory out of 5000000
+ 22932 multiletter control sequences out of 15000+600000
+ 560734 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,8n,38p,191b,107s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Pset8.pdf (4 pages, 104438 bytes).
+ 35i,8n,50p,257b,107s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\danie\AppData\Local\MiKTeX\fonts/pk/ljfour/public/wasy/dpi600\wasy10.pk><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Pset8.pdf (5 pages, 122599 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
+ 68 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
