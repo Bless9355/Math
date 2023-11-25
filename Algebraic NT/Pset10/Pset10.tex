@@ -1,0 +1,801 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+    \stepcounter{problemcnt}  
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    \hspace{5mm}
+    \textrm{or}
+    \hspace{5mm}
+}
+
+\newcommand{\textAnd}{
+    \hspace{5mm}
+    \textrm{and}
+    \hspace{5mm}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+%Article specific commands for ANT
+\newcommand{\<}{{{
+    \langle
+}}}
+
+
+\def\>{{{
+    \rangle
+}}}
+
+\def\ZZ{{\mathbb{Z}}}
+
+\newcommand{\ringInt}{
+    {\mathcal{O}}
+}
+
+\newcommand{\pideal}{
+    {{\mathfrak{p}}}
+}
+
+
+\newcommand{\qideal}{
+    {{\mathfrak{q}}}
+}
+
+\begin{document}
+\Problem
+Prove that $I := \<2, 1+\sqrt{-5}\>$ is not principal in the ring 
+$\ZZ[\sqrt{-5}]$
+
+\Proof
+First, we claim that $\{2, 1+\sqrt{-5}\}$ is indeed an 
+integral base of ideal $I$. Take any element from ideal $I$ and 
+write:
+
+\[
+    2(a+b\sqrt{-5})+(1+\sqrt{-5})(c+d\sqrt{-5})
+\]
+\[
+    = 2a + 2b\sqrt{-5}+
+    c-5d+(c+d)\sqrt{-5}
+\]
+\[
+    = (1+\sqrt{-5})(2b+c+d)-2b-c-d+2a+c-5d
+\]
+\[
+    = (1+\sqrt{-5})(2b+c+d)+2a-2b-6d
+\]
+\[
+    = (1+\sqrt{-5})(2b+c+d)+2(a-b-3d)
+\]
+
+where $a, b, c, d$ are integers. We have successfully expressed 
+an arbitrary element in $I$ as a $\ZZ$-combination of the base. 
+
+Indeed the combination is unique. Assume for a contradiction
+that two $\ZZ$ combinations of the base are equal to each other.
+Write, for some integers $a, \bar{a}, b, \bar{b}$:
+\[
+   a +(1+\sqrt{-5})b = \bar{a}+(1+\sqrt{-5})\bar{b} 
+\]
+Comparing the coefficients of $\sqrt{-5}$, we realize 
+$b = \bar{b}$ and hence $a = \bar{a}$ which contradicts our 
+assumption that the two combinations are distinct. \contradiction
+
+Now that we have obtained the $\ZZ$ basis of $I$, it is possible 
+to compute the norm of $I$. Recall:
+
+\[
+    N(I) = 
+    \sqrt{
+        \bigg|
+    \frac{\Delta[a_1, a_2, \dots, a_n]}{\Delta}
+    }
+    \bigg|
+    \]
+
+where $\Delta$ denotes the discriminant of the ring, and $\Delta[a_1, a_2, \dots, a_n]$
+denotes the discriminant of the $\ZZ$-basis of $I$. 
+
+Write:
+
+\[
+    \Delta = \bigg|\twobytwoDet(1, \sqrt{-5}, 1, -\sqrt{-5})^2\bigg|
+    = |(2\sqrt{-5})^2| = 20
+\]
+
+Moreover:
+
+\[
+    \Delta[I] = \bigg|
+    \twobytwoDet(2, 1+\sqrt{-5}, 2, 1-\sqrt{-5})^2
+    \bigg|
+    =|(4\sqrt{-5})^2| = 80
+\]
+
+Thus:
+
+\[
+    N(I) = \sqrt{80/20} = 2
+\]
+
+Assume for a contradiction that $I$ is a principal ideal. The 
+generator of $I$ must have the same element-wise norm as 
+the norm of $I$. However, all nonzero elements of the ring $\ZZ[\sqrt{-5}]$ 
+has a norm greator than 5: it is impossible for an 
+element to have a norm of $N(I) = 2$. We reach a contradiction 
+and conclude that $I$ is not principal. \qed
+
+\newpage
+
+\Problem
+In the ring $\ZZ[\sqrt{-5}]$, ideal $I$ is defined as 
+$I := \<7, 3+\sqrt{-5}\>$. Show that $I$ is not principal 
+but $I^2$ is principal. Conclude that $I$ has an order of 2 
+in the class group. 
+
+\Proof
+In fact, $I^2 = \ZZ[\sqrt{-5}]$. To see this, consider 
+the following lines of ideal algebra:
+
+\[
+    I^2 = \<7, 3+\sqrt{-5}\>^2
+\]
+\[
+    = \<49, 9-5+6\sqrt{-5}, 21+7\sqrt{-5}\>
+\]
+\[
+  = \<49, 4+6\sqrt{-5}, 21+7\sqrt{-5}\>
+\]
+\[
+    = \<49, 4+\sqrt{-5}, 17+\sqrt{-5}\>
+\]
+\[
+    =\<49, -108, 17+\sqrt{-5}\>
+\]
+\[
+    =\<49, -10, 17+\sqrt{-5}\>
+\]
+\[
+    =\<-1, -10, 17+\sqrt{-5}\> = \<-1\> = \ZZ[\sqrt{-5}]
+\]
+
+So $I^2 = \ZZ[\sqrt{-5}]$ as desired \checkmark
+
+Move on to show that ideal $I$ is not principal. 
+Like the previous problem, we will find the $\ZZ$ basis for 
+$I$, and compute the norm of $I$. We purport that 
+the $\ZZ$-basis of $I$ is $\{7, 3+\sqrt{-5}\}$. 
+
+It is evident that:
+
+\[
+    Span_{\ZZ}\{7, 3+\sqrt{-5}\} \subseteq I
+\]
+
+We wish to show the inclusion the other way, i.e:
+
+\[
+    I \subseteq Span_{\ZZ}\{7, 3+\sqrt{-5}\} 
+\]
+
+Take any element $\alpha \in I$. Express it as:
+
+\[
+    \alpha := (a+\sqrt{-5})7 + (\bar{a}+\bar{b}\sqrt{-5})(3+\sqrt{-5})
+\]
+
+where $a, \bar{a}, b, \bar{b} \in \ZZ$. We wish to 
+show that it is possible to express $\alpha$ as a $\ZZ$-combination 
+of our claimed basis set, $\{7, 3+\sqrt{-5}\}$.
+
+We subtract the integer component that is multiplied 
+to each of the basis element. In other words, 
+we show that $\alpha -7a - (3+\sqrt{-5})\bar{a}$ can 
+be represented as a $\ZZ$-combination of the basis.
+
+Consider:
+\[
+\alpha -7a - (3+\sqrt{-5})\bar{a}
+=7b{\sqrt{-5}}-5\bar{b}+3\sqrt{-5}\bar{b}
+\]
+\[
+    = 7b(-3)-5\bar{b}+3(-3)\bar{b}
+    +7b(3+\sqrt{-5})+3\bar{b}(3+\sqrt{-5})
+\]
+\[
+    =(-3b-2\bar{b})7+(7b+3\bar{b})(3+\sqrt{-5})
+\]
+
+So indeed $\alpha$ can be expressed as a $\ZZ$ combination of 
+our basis. Uniqueness follows trivially from comparing the coefficients. 
+
+For the ring $\ZZ[\sqrt{-5}]$, we had shown that the discriminant is 20. 
+Compute the discriminant of $I$:
+
+\[
+    \Delta[I] = Abs\bigg(\twobytwoDet(7, 3+\sqrt{-5}, 7, 3-\sqrt{-5})^2\bigg)
+    = |(14\sqrt{-5})^2| = 980
+\]
+
+The norm of $I$ is:
+
+\[
+    N(I) = \sqrt{980/20} = 7
+\]
+
+We search for a element in the ring $\ZZ[\sqrt{-5}]$ that has 
+a norm of $7$. Write:
+
+\[
+    N(\beta) = n^2+5m^2 = 7
+\]
+
+Where $\beta:=n+\sqrt{-5}m$ for some integer $n, m$. 
+Take mod 5. $n^2 \equiv 2 (mod\_5)$ but 2 is not a 
+quadratic residue of 5. Hence, there is no solution for the 
+equation, and no element that has a norm of 7 exists. 
+
+Ergo, $I$ is non-principal. \qed
+
+\Problem
+Let $I$ be an ideal of a dedekind domain $D$. Assume 
+that there exists some $\alpha \in I$ such that 
+$N(I) = |N(\alpha)|$. Prove that $I = \<\alpha\>$. 
+
+\Proof
+We know that there exists an ideal $I'$ in $D$ that 
+satisfies:
+
+\[
+    II' = \<\alpha\>
+\]
+
+for the ideal classes form a group, and $\alpha \in I$. 
+Norms of ideals are multiplicative. Thus:
+
+\[
+    N(I)N(I') = N(\<\alpha\>) = |N(\alpha)|
+\]
+
+We know that the value of $N(I)$. By cancellation:
+
+\[
+    N(I') = 1
+\]
+
+Recall the definition of ideal norms. The norm of an ideal 
+is the size of the factor ring created by the entire ring 
+moded out by the ideal. For this case:
+
+\[
+    |D/I'| = 1
+\]
+
+And thus:
+\[
+    I' = D
+\]
+
+Ergo:
+
+\[
+    II' = ID = I = \<\alpha\>
+\]
+
+as desired. 
+
+\qed
+
+\newpage
+\Problem
+We know that for any prime ideal 
+$\pideal \subsetneq \ringInt_K$, it is true that 
+$\pideal \cap \ZZ = \<p\>$ for some prime number $p$. 
+We say the ideal $\pideal$ lies over $p$. Moreover, 
+it is possible to write:
+
+\[
+    \ringInt_K\<p\> = \pideal_1^{e_1} 
+    \pideal_2 ^ {e_2}
+    \cdots
+    \pideal_t ^{e_t}
+\]
+
+The exponents of the ideals, $e_i$ or also denoted as 
+$e(\pideal_i|p)$, is called the ramification index of 
+the prime ideal $pideal_i$ over $p$. Moreover, 
+we observe that $N(\pideal_i) = p^f_ki$. $f_i$ is 
+called to be the relative degree of the ideal $\pideal_i$ 
+over $p$. Prove:
+
+\[
+    \sum_{i = 1}^t e_i f_i = n
+\]
+
+where $n:= [K:\mathbb{Q}]$
+
+\Proof
+
+The equation is almost an immediate consequence of applying 
+the norm both sides of the factorization of the ideal 
+$\<p\>$ in the ring $\ringInt_K$. Write:
+
+\[
+    N(\ringInt_K\<p\>) = N(\pideal_1^{e_1} 
+    \pideal_2 ^ {e_2}
+    \cdots
+    \pideal_t ^{e_t})
+\]
+
+By the multiplicative property of ideal norms, along with the 
+fact that the norm of a principal ideal equals to the norm 
+of the generator, we deduce:
+
+\[
+    |N(p)| = N(\pideal_1^{e_1})
+    N(\pideal_2^{e_2}) \cdots 
+    N(\pideal_t^{e_t})
+\]
+
+And moreover:
+\[
+    p^n = N(\pideal_1^{e_1})
+    N(\pideal_2)^{e_2} \cdots 
+    N(\pideal_t)^{e_t}
+    =p^{e_1 f_1}p^{e_2 f_2} \cdots p^{e_t f_t}
+\]
+
+Comparing the powers, we reach the result. 
+
+\[
+    n = \sum_{i = 1}^{t} e_if_i
+\]
+
+\qed
+
+
+\newpage
+
+\Problem
+Let $p$ be an odd prime in $\ZZ$. Let $K = \mathbb{Q}$ 
+be a quadratic field. 
+
+\begin{enumerate}[i]
+    \item If $p|d$, prove that:
+    \[
+        \<p\>\ringInt_K = \pideal^2
+    \]
+    for some prime ideal $p$. 
+\end{enumerate}
+
+
+\Proof
+    We claim that $\pideal := \<p, \sqrt{d}\>$ works. 
+Consider:
+
+\[
+    \<p, \sqrt{d}\>^2 = \<p^2, p\sqrt{d}, d\>
+\]
+
+$d$ is squarefree and $p|d$. We deduce $gcd(p, d/p) = 1$. 
+By Bezout's identity, it is possible to obtain a 
+$\ZZ$ combination of $p, d/p$ that results in $1$. That is, 
+we obtain some $a, b \in \ZZ$ that satisfies:
+
+\[
+    ap+bd/p = 1
+\]
+
+Multiplying by $p$ both sides:
+
+\[
+    ap^2+bd = p
+\]
+
+This equation shows that 
+\[
+    p \in \<p^2, p\sqrt{d}, d\> \textAnd \<p\> \subseteq \<p^2, p\sqrt{d}, d\>
+\]
+
+Also, take any element from $\<p\>$. Write, for arbitrary integer $n, m$:
+
+\[
+    p(n+m\sqrt{d}) = pn + pm\sqrt{d} 
+    = (ap^2+bd)n+pm\sqrt{d}
+\]
+\[
+    = anp^2+bnd+mp\sqrt{d} \in \<p^2, p\sqrt{d}, d\>
+\]
+
+Thus, $\<p\> \subseteq \<p^2, p\sqrt{d}, d\>$ and the two ideals are equivalent. 
+
+To show that the chosen candidate is indeed prime, take the norm. 
+Write:
+
+\[
+    N(\<p, \sqrt{d}\>^2) = N(\<p\>) = p^2
+\]
+
+Thus:
+\[
+    N(\<p, \sqrt{d}\>)^2 = p^2
+\]
+
+It must be:
+\[
+    N(\<p, \sqrt{d}\>) = p
+\]
+
+An ideal with a prime norm must be prime. This concludes the proof. 
+\qed
+
+\newpage
+\begin{enumerate}[ii]
+    \item If $p \nmid d$ and $d$ is square mod $p$, prove that:
+        \[
+            \<p\>\ringInt_K = \pideal_1\pideal_2
+        \]
+    where the two ideals are distinct. 
+\end{enumerate}
+
+\Proof
+Let $d \equiv r^2 (mod\_p)$ for some integer $0\leq r< p$. 
+We first conjure two ideals that multiply up to $\<p\>$. Then, 
+we will show that the two ideals are distinct. Consider:
+
+\[
+    \<p, \sqrt{d}-r\>\<p, \sqrt{d}+r\>
+    =\<p^2, d-r^2, p\sqrt{d}-pr, p\sqrt{d}+pr\>
+\]
+\[
+    =\<p^2, 2pr, d-r^2, p\sqrt{d}-pr\>
+\]
+
+$p$ is an odd prime, and $0\leq r< p$ so $gcd(p, 2r)= 1$ 
+and by Bezout's identity we obtain two integers $a, b$ that 
+satisfies:
+\[
+    ap+2br = 1 \textAnd ap^2+2bpr = p
+\]
+
+By this equality, we notice that:
+\[
+    p \in \<p^2, 2pr, d-r^2, p\sqrt{d}-pr\>
+    \textAnd
+    \<p\> \subseteq \<p^2, 2pr, d-r^2, p\sqrt{d}-pr\>
+\]
+
+Moreover, take any element from the principal ideal generated by $p$.
+Call the element $p\alpha$.  
+Write:
+
+\[
+    p\alpha  = a\alpha p^2 + 2b\alpha pr  \in \<p^2, 2pr, d-r^2, p\sqrt{d}-pr\>
+\]
+
+Thus:
+\[
+    \<p\> = \<p, \sqrt{d}-r\>\<p, \sqrt{d}+r\>
+\]
+
+It remains to show that two ideals are prime and distinct. First, 
+show that the two ideals are distinct. Assume for the sake of contradiction, 
+that two ideals are identical. It follows that 
+\[
+    \sqrt{d}+r \in \<p, \sqrt{d}-r\>
+\]
+and hence:
+\[
+    \<p, \sqrt{d}-r\> = \<p, \sqrt{d}+r, \sqrt{d}-r\>
+    =\<p, 2r, \sqrt{d}-r\> = \<1\>
+\]
+The last equality follows by the Bezout's identity. As a consequence:
+\[
+    \<p\> = \<1\> \textAnd N(\<p\>) = N(\ringInt_K) \textAnd p^2 = 1
+\]
+Which is a contradiction \contradiction 
+
+Finally, show that both of the ideals are proper. As a result, 
+we conclude that both of the ideals have a prime norm of $p$ 
+and thus both ideals are prime. Assume for a contradiction that 
+one of the ideal, say $\<p, \sqrt{d}-r\>$ is the entire ring. 
+
+It must be:
+\[
+    \<p\>  = \<p, \sqrt{d}+r\>
+\]
+
+And hence:
+\[
+    \sqrt{d}+r \in \<p\>
+\]
+
+There must be some element $\alpha$ in the ring $\ringInt_K$ that satisfies:
+\[
+    p\alpha = \sqrt{d}+r
+\]
+and thus, in the field of quotients:
+\[
+    \alpha = \frac{\sqrt{d}+r}{p}
+\]
+and in the field, the multiplicative inverse is unique. Nonetheless, 
+this element is not in the ring itself. We reach a contradiction. 
+The same argument goes for the other ideal. 
+
+\qed
+
+\newpage
+
+\Problem 
+Prove that if $p \nmid d$, and $d$ is not a squre mod p, then 
+$\<p\>\ringInt_K$ is a prime ideal in $\ringInt_K$
+
+\new{Proposition} For any element $\alpha \in \ringInt_K$, 
+assuming the conditions on $d$, $p|\alpha$ if and only if 
+$p|N(\alpha)$
+
+\Proof 
+Start with the foward direction. Write, for 
+some element $\beta \in \ringInt_K$:
+
+\[
+    \alpha = p\beta \textAnd N(\alpha) = p^2N(\beta)
+\]
+
+Hence $p|N(\alpha)$. 
+
+For the opposite direction, assume $p|N(\alpha)$ but 
+$p \nmid \alpha$ in the ring $\ringInt_K$. Write $\alpha$ 
+in the form of $a+b\sqrt{d}$. Either $p\nmid a$ or $p \nmid b$. 
+Also, from $p|N(\alpha)$, deduce:
+
+\[
+    a^2-db^2 \equiv 0 (mod\_p) 
+    \textOr a^2 = db^2 (mod\_p)
+\]
+If $p|b$, then $p|a$ and $p|\alpha$ in the ring of integers. 
+Hence assume $p\nmid b$. There must exist a modular inverse of 
+$b$ in mod p. Thus:
+
+\[
+    d = (ab^{-1})^2 (mod\_p)
+\]
+
+However, the condition of $d$ is that it is not a square mod 
+p. We reach a contradiction, and therefore, $p|\alpha$. \qed
+
+
+\new{Solution}
+Assume for a contradiction that $\<p\>\ringInt_K$ is not prime. 
+We obtain some elements 
+$\alpha, \beta, \gamma \in \ringInt_K$ that satisfies:
+\[
+    \gamma p = \alpha \beta
+\]
+where $p\nmid \alpha, \beta$ in the ring $\ringInt_K$. 
+Taking the norm both sides:
+
+\[
+    N(\gamma)p^2 = N(\alpha)N(\beta)
+\]
+and thus $p|N(\alpha)$ or $p|N(\beta)$ necessarily. However, 
+by proposition, this implies $p|\alpha$ or $p|\beta$, which is 
+a contradiction. \qed
+
+\newpage
+\new{
+    Book 5.15
+}
+In $\ZZ[\sqrt{-29}]$:
+\[
+    30 = 2\cdot3\cdot5 = (1+\sqrt{-29})(1-\sqrt{-29})
+\]
+
+i) Show $\<30\> \subseteq \<2, 1+\sqrt{-29}\>$
+
+\Proof 
+Trivially we observe that $1+\sqrt{-29}$ and $-1+\sqrt{-29}$ is 
+in the ideal. The negation of the product, 30, must also be in 
+the ideal. Moreover, $\<30\>$ must be included in $\<2, 1+\sqrt{-29}\>$. 
+\qed 
+
+\vspace{5mm}
+ii) Verify $\pideal_1 := \<2, 1+\sqrt{-29}\>$ has a norm 
+of 2 and thus is prime. 
+
+\Proof 
+We claim that the $\ZZ$-basis of the ideal $\pideal_1$ is 
+$\{2, 1+\sqrt{-29}\}$. The $\ZZ$-span of the set must be 
+included in $\pideal_1$. Take any element from the 
+ideal and show that it is in the $\ZZ$-span of the basis. 
+
+\[
+    2(a+b\sqrt{-29})+(1+\sqrt{-29})(c+d\sqrt{-29})
+\]
+
+Subtract the $\ZZ$-multiples, i.e. $2a, (1+\sqrt{-29})c$. 
+It suffices to show that the following term can be 
+expressed as a $\ZZ$ combination of the basis:
+
+\[
+    2b\sqrt{-29}-29d+d\sqrt{-29}
+    =-29d +(2b+d)\sqrt{-29}
+\]
+\[
+    = -30d-2b+(2b+d)(\sqrt{-29}+1)
+\]
+\[
+    = (-15d-b)2+(2b+d)(\sqrt{-29}+1)
+\]
+And indeed the claimed set spans $\pideal_1$. Uniqueness 
+follows from comparing the coeffiecients.
+
+We compute the discriminant of the basis for $I$ and the whole ring:
+
+\[
+    \Delta = Abs(\twobytwoDet(1, \sqrt{-29}, 1, -\sqrt{-29})^2)
+    =|(2\sqrt{-29})^2| = 116
+\]
+\[
+    \Delta[I] = \twobytwoDet(2, 1+\sqrt{-29}, 2, 1-\sqrt{-29})
+    =|(4\sqrt{-29})^2| = 4\cdot116
+\]
+
+The norm of $I$ is therefore:
+\[
+    N(I) = \sqrt{4\cdot116/116} = 2
+\]
+and $\pideal_1$ is prime. 
+\qed 
+\vspace{5mm}
+
+iii) Check $1-\sqrt{-29} \in \pideal_1$ and deduce 
+$\<30\> \subseteq p_1^2$
+
+\Proof 
+$2-(1+\sqrt{-29}) = 1-\sqrt{-29}$ so it must be in $\pideal_1$. 
+Consqeuently, $(1-\sqrt{-29})(1+\sqrt{-29})\in \pideal_1^2$
+which is equivalent to $30 \in \pideal_1^2$. We conlude 
+$\<30\> \in \pideal_1^2$ \qed
+
+\newpage
+
+iv) Factorize the ideal $\<30\>$ into prime ideals. 
+
+\Proof First note:
+
+\[
+    \<30\> = \<2\>\<3\>\<5\>
+\]
+In problem 5-i, we have proved that an ideal $\<p\>$ can 
+be factored as $\<p, \sqrt{d}\>^2$ in a quadratic field 
+$\mathbb{Q}$ where $p\nmid d$ and $p$ is an odd prime, 
+$d$ square mod p.
+Hence:
+
+\[
+    \<3\> = \<3, \sqrt{-29} +1\>\<3, \sqrt{-29} -1\>
+    \textAnd
+    \<5\> = \<5, \sqrt{-29}+1\>\<5, \sqrt{-29}-1\>
+\]
+
+Also observe:
+\[
+    \<2, 1+\sqrt{-29}\>  \<2, 1-\sqrt{-29}\>= 
+    \<4, 30, 2+2\sqrt{-29}, 2-2\sqrt{-29}\>
+\]
+\[
+    =\<2, 4, 2+2\sqrt{-29}, 2-2\sqrt{-29}\>
+    =\<2\>
+\]
+
+We have shown previously that 
+$N(\<2, 1+\sqrt{-29}\>) = 2$ so the norm of the 
+other ideal must also be 2, in order for the two norms 
+to multiply up to $N(\<2\>) = 4$. In fact, the two ideals 
+are equal to eqch other. 
+
+We write the prime factorization of the ideal $\<30\>$:
+
+\[
+    \<30\> = 
+\<2, 1+\sqrt{-29}\>^2
+\<3, \sqrt{-29} +1\>\<3, \sqrt{-29} -1\>
+ \<5, \sqrt{-29}+1\>\<5, \sqrt{-29}-1\>
+\]
+
+The connection between the prime factorization and 
+the 2-3-5 factorization is evident. By some many lines 
+of algebra, it can be deduced that:
+
+\[
+    \<1+\sqrt{-29}\> = \<2, 1+\sqrt{-29}\>
+    \<3, \sqrt{-29}+1\>\<5, \sqrt{-5}+1\>
+\]
+
+And also:
+\[
+    \<1-\sqrt{-29}\> = \<2, 1+\sqrt{-29}\>
+    \<3, \sqrt{-29}-1\>\<5, \sqrt{-5}-1\>
+\]
+
+{
+\color{blue}
+\small trust me...
+}
+
+These results relate to the factorization:
+
+\[
+    \<30\> = \<1+\sqrt{-29}\>\<1-\sqrt{-29}\>
+\]
+\qed
+
+
+
+
+\end{document}
