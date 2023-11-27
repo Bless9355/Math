@@ -486,6 +486,101 @@ the infinite product of the results. If any of the columns
 has a divergent infinite product, we define the doubly product 
 to also diverge. 
 
+\newpage
+c) Does there exist a bounded sequence 
+$\{b_{mn}\}$ such that each $b_{mn} \neq -1$ 
+and:
+\[
+    \prod_{m = 1}^\infty 
+    \left[
+        \prod_{n = 1}^\infty 
+        (1+ b_{mn})
+    \right]
+    \neq 
+    \prod_{n = 1}^\infty 
+    \left[
+        \prod_{m = 1}^\infty 
+        (1+b_{mn})
+    \right]
+\]
+
+Either prove no such sequence exists, or find one where 
+the two products are not equal. 
+
+\new{Solution} 
+There exists a sequence where the left product is undefined 
+but the right product converges to zero. Consider the following 
+sequence:
+
+\[
+    b_{mn} = \frac{(-1)^m}{(m + 1)^2}
+\]
+
+Note that $b_{mn}$ is independent with regards to $n$. Hence 
+the product 
+
+\[
+    \prod_{n = 1}^\infty (1+b_{mn})
+\]
+
+diverges for even $m$. Each term is constantly greater than 1. 
+By the definition of nested infinite products in part b), we conclude 
+that the left product is undefined. 
+
+However, the right product converges to zero. It suffices to show:
+
+\[
+    0 < \prod_{m = 1}^\infty (1 + b_{mn}) < 1
+\]
+
+Before proving the inequality, we first demonstrate that the 
+product indeed converges. Recall(from the textbook) that 
+if the infinite sum $\sum^\infty a_k$ converges absolutely, then so does 
+$\prod^\infty (1+a_k)$. To show convergence of the infinite product, 
+we show the convergence of the following sum:
+
+\[
+    \sum_{m = 1}^\infty \frac{1}{(m+1)^2}
+\]
+
+This sum converges by the p-series test. $p = 2 > 1$ so the 
+sequence converges, and hence the product converges too. 
+Evidently, the product is greater than zero. 
+
+It remains to indeed show that the infinite product converges to 
+a value less than 1. Now that the convergence of the product is 
+guaranteed, we group the product into pairs. That is:
+
+
+\newcommand{\term}[1]{{
+    \left(
+        1 + \frac{1}{#1}
+    \right)
+}
+}
+
+\newcommand{\nterm}[1]{{
+    \left(
+        1 - \frac{1}{#1}
+    \right)
+}
+}
+\[
+    \prod^\infty_{m = 1}\left(1 + \frac{(-1)^m}{m + 1}\right)
+    =
+    \nterm{2} \term{3} \nterm{4} \term{5} \cdots
+\]
+\[
+    = 
+    \prod^\infty_{m = 1}\nterm{2m - 1}\term{2m}
+    \leq 
+    \prod^\infty_{m = 1}\nterm{2m - 1}\term{2m - 1}
+    = 
+    \prod^\infty_{m = 1}\nterm{(2m-1)^2} < 1
+\]
+
+We conclude that the nested product on the right converges to zero. 
+\qed
 
 
 
