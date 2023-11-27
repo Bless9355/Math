@@ -1,0 +1,492 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wasysym}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\newcommand{\deriv}[1]{{
+    \frac{d}{d{#1}}
+}
+}
+
+\newcommand{\parderiv}[1]{{
+    \frac{\partial}{\partial{#1}}
+}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\RR{{\mathbb{R}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{{
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Exp}{
+    {
+        \textrm{Exp}
+    }
+}
+
+\begin{document}
+
+\begin{center}
+\LARGE
+Midterm II-part I
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize
+
+\Problem
+Prove or disprove: there is an entire analytic function with real part 
+$x-xy$. If there is such an analytic function, find all such functions. 
+Also, find the series expansion of the function of $z$ around the origin. 
+
+\new{Solution}
+Let function $f(z) = f(x + iy)$ be such a function that satisfies 
+the condition. 
+Analytic functions are necessarily holomorphic and vice versa. Hence, 
+it is possible to apply the Cauchy-Riemann Equations in this context. 
+Define:
+
+\[
+    u:=Re(f(x+iy))
+    \textAnd 
+    v := Im(f(x+iy))
+\]
+
+It is given that $u = x-xy$. We compute:
+
+\[
+    u_x = 1-y \textAnd u_y = -x 
+\]
+
+By the Cauchy-Riemann Equations, we deduce:
+
+\[
+    u_x = v_y \textAnd u_y = -v_x 
+\]
+\[
+    v_x = -u_y = x \textAnd v_y = u_x = 1-y
+\]
+
+The function $v(x, y)$ must be expressed as the following:
+
+\[
+    v(x, y) = x^2/2 + C(y) = y-y^2/2 + D(x)
+\]
+
+Where $C, D$ are functions that map real values to real values that 
+depend solely on $y$ and $x$ respectively. The two expressions of 
+$v(x, y)$ must equate each other. Write:
+
+\[
+    C(y) - y + y^2/2 = D(x)-x^2/2
+\]
+
+Recognize that the LHS is independent of $x$ and the RHS independent of $y$. 
+Thus, we conclude that both expressions equal to a constant, say $C$. 
+
+\[
+    D(x) = x^2/2 + C \textAnd 
+    v(x, y) = x^2/2 + y - y^2/2 + C
+\]
+
+Compute the complex derivative of $f$ by differentiating it over 
+the real axis. The holomorphicity of $f$ guarantees that the derivative 
+is unique. Write:
+
+\[
+    \deriv{z}f(z) = 
+    \parderiv{x}u(x, y) + \parderiv{x}v(x, y) i
+\]
+
+\[
+    = (1-y)+xi = 1-iz
+\]
+
+Taking the antiderivative, we conclude, for some complex constant $C'$, 
+
+\[
+    f(z) = z-iz^2/2+C'
+\]
+
+The real part of $f$ does not contain a constant. Hence, we narrow 
+down $C' = Ci$ where $C$ is a real value. 
+
+We have shown that a function 
+$f$ that satisfies $Re(f) = x-xy$ must be in the form of:
+
+\[
+    f(x) = Ci + z-iz^2/2\hspace{5mm} (C \in \mathbb{R})
+\]
+
+Indeed all such functions must be holomorphic, for $f$ is 
+a complex polynomial of order two. Moreover, by some algebra, 
+we notice that such functions always have a real part $x-xy$. 
+We conclude that the functions of the form above are all the 
+analytic entire 
+functions that have a real part of $x - xy$. The function 
+is already written as its series expansion about the origin. 
+
+\qed
+
+\newpage
+\Problem Compute four integrals. 
+
+
+i) Compute:
+
+\[
+    I := \int_{-\infty}^\infty 
+    \frac{dx}{cosh(x)}
+     = \int_{-\infty}^{\infty}
+    \frac{2dx}{e^x+e^{-x}}
+\]
+
+\new{Soultion}
+The integrand is an even function. Hence we write:
+\[
+    I = 4\int_0^\infty \frac{dx}{e^x+e^{-x}}
+    \textAnd 
+    I/4 = \int_{-\infty}^\infty \frac{e^xdx}{e^{2x}+1}
+\]
+Apply the u-subsitution, $u = e^x$:
+
+\[
+    I/4 = \int^\infty_{-\infty}
+    \frac{du}{u^2+1}
+    =arctan(u)\bigg|^\infty_{-\infty}
+    =\pi
+\]
+Hence:
+
+\[
+    I = 4\pi
+\]
+
+\qed
+\newpage
+ii) Let $\zeta$ be any real number and $a > 0$. Evaluate:
+
+\[
+    I:=
+    \int_{-\infty}^\infty 
+    \frac{e^{-2\pi \zeta x}}
+    {x^2 + a^2}
+    dx
+\]
+
+\new{Solution}
+Define a holomorphic function $f(z)$ as follows:
+
+\[
+    f(z) = \frac{e^{-2\pi \zeta z}}{z^2 - a^2}
+\]
+
+The numerator and the denominator are known to be holomorphic. Thus 
+the function is holomorphic everywhere other than the poles which are 
+located at $z = \pm a$. Draw a semicircular contour centered 
+at the origin that occupies quadrant I and IV. Call this 
+contour $\gamma$, and denote the radius as $R$. 
+
+Take the contour integral of $f(z)$ over $\gamma$. Let the 
+straight segment of the contour be called $S$, and the circular 
+region $C$. 
+
+We claim that the integral over the circular region vanishes. That is, a
+as $R \rightarrow \infty$, $
+    \oint_C f = 0
+    $
+
+    Notice:
+\[
+    \bigg|
+    \oint_C f
+    \bigg|
+    = \bigg|
+    \int_{z \in C} 
+    \frac{e^{-2\pi \zeta z}}{z^2+a^2}
+    dz
+    \bigg|
+    \leq 
+    \int_{z \in C} 
+    \frac{max|e^{-2\pi \zeta z}|}
+    {R^2 - a^2}dz
+\]
+
+Note that the modulus of an exponent is the exponent 
+of the modulus of the argument. That is:
+
+\[
+    |e^{-z}| = e^{Re(-2\pi \zeta z)}
+\]
+
+And for $z \in C$, the quality is bounded under 1. 
+Thus:
+\[
+ \bigg|
+    \oint_C f
+    \bigg|
+    \leq 
+    \frac{
+    2\pi R
+    }
+    {R^2 - a^2}
+\]
+And the upper bound converges to zero as $R$ approaches infinity. 
+This shows that the circular region converges to zero. 
+\checkmark 
+
+By the residue theorem:
+
+\[
+    \oint_C f + \oint_S f = 2\pi i Res_f(a)
+\]
+
+The first summand of the LHS vanishes. The second summand can 
+be computed with some algebra. We write:
+
+\[
+\oint_S f = 
+    \int_{x = -\infty}^{\infty}
+    \frac{
+        e^{-2\pi \zeta i x} \cdot (-i)dx
+    }{ 
+        (xi)^2 - a^2
+    }
+    = 
+    i \int_{x = -\infty}^{\infty}
+    \frac{e^{-2\pi \zeta i x} dx} 
+    {x^2 + a^2}dx
+    = iI
+\]
+
+The residue can be computed with ease:
+
+\[
+    Res_f(a) = 
+    \lim_{z\rightarrow a} 
+    \frac{e^{-2\pi \zeta z}(z-a)}{z^2-a^2}
+    =
+    \lim_{z\rightarrow a} 
+    \frac{e^{-2 \pi \zeta z}}{z+a}
+    =\frac{e^{-2 \pi \zeta a}}{2a}
+\]
+
+Combining the results, we write:
+
+\[
+    iI = 2\pi i \frac{e^{-2 \pi \zeta a}}{2a}
+    \textOr
+    \boxed{
+        I = \frac{\pi e^{-2 \pi \zeta a}}{a}
+    }
+\]
+\newpage
+
+iii) Compute:
+
+\[
+    \frac{I}{2\pi i} = \frac{1}{2\pi i}
+    \oint_{|z| = 2} \frac{zdz}{z^2 - 1}
+\]
+
+\new{Solution} The function 
+\[
+    f(z) = \frac{z}{z^2-1}
+\]
+is holomorphic outisde the two poles $z = \pm 1$. By the residue 
+theorem, the integral $I$ equals to the sum of the residues 
+multiplied by $2\pi i$. Our answer is the following sum:
+
+\[
+    Res_f(1)+ Res_f(-1)
+\]
+
+Write:
+\[
+    Res_f(1) = \lim_{z \rightarrow 1} 
+    \frac{z(z - 1)}{z^2 - 1}
+    = z/(z+1)\bigg|_{z = 1} = 1/2
+\]
+\[
+    Res_f(-1) = \lim_{z \rightarrow -1} 
+    \frac{z(z + 1)}{z^2 - 1}
+    = z/(z-1)\bigg|_{z = -1} = 1/2
+\]
+
+Thus:
+\[
+    \boxed{
+    \frac{I}{2\pi i} = 1
+    }
+\]
+
+
+
+
+\newpage
+
+iv) Compute:
+\[
+    I:=
+    \int_0^\infty {
+        \frac{x^{-1/2}}
+        {x+1}
+        dx
+    }
+\]
+\new{Solution}
+We use two identities about the beta function. Recall
+the definiton:
+\[
+    B(n, m) := \int_0^1 x^n(1-x)^mdx
+\]
+
+And the two identities:
+
+\[
+    B(n, m) = \frac{\Gamma(n)\Gamma(m)}{\Gamma(n+m)}
+    \textAnd 
+    B(n, m) = \int_0^\infty 
+    \frac{u^{\alpha - 1}}{(1+u)^{\alpha + \beta}} du
+\]
+
+By the seond condition, the integral simplies to:
+
+\[
+    I = B(1/2, 1/2)
+\]
+
+And by the first identity:
+
+\[
+    B(1/2, 1/2) = \Gamma(1/2)^2/\Gamma(1) = \pi
+\]
+
+We conclude:
+\[
+    I = \pi
+\]
+
+\qed
+
+\newpage
+
+\Problem Consider the following infinite products:
+
+\[
+    I_1(a) := \prod_{n = 1}^\infty (1+a_n)
+    \textAnd 
+    I_2(b) := \prod_{m = 1}^\infty 
+    \prod_{n = 1}^\infty(1 + b_{mn})
+\]
+
+a) State the definition of convergence of $I_1(a)$. 
+Give an example of a product that converges to 
+a finite, nonzero number, and an example that diverges. 
+
+\new{Definition} 
+We define the partial product $S_N$ as follows:
+
+\[
+    S_N := \sum_{n = 1}^N (1+a_n)
+\]
+If the partial product converges as $N \rightarrow \infty$, 
+then the infinite product $I_1(a)$ is defined to converge. 
+
+Consider the case where $a_n = 0$ identically. Trivially, 
+$S_N = 1$ regardless of $N$. The infinite series converges 
+to 1. 
+
+Now, let $a_n = 1/n$. By induction, it is possible to 
+show $S_N = N + 1$. For the base case, $S_1 = 1 + a_1 = 2$. 
+For the inductive case:
+
+\[
+    S_{N+1} = \prod^{N+1}_{n=1}(1+\frac{1}{n})
+    =\frac{N+2}{N+1} S_{N} = N+2
+\]
+which proves the claim. Ergo, $S_{N+1}$ diverges to infinity. 
+
+\vspace{5mm}
+b) State the definition for the convergence of the infinite product 
+$I_2(b)$.
+
+\new{Definition}
+It would be nice if the nested products all converge. That is:
+$I_1(b_k)$ converges for any $k$. The sequence $b_k$ denotes the 
+sequence:
+
+\[
+    b_{k1}, b_{k2}, b_{k3}, \dots, b_{kn}, \dots
+\]
+
+Given that $I_1(b_k)$ converges for any $k$, we define $I_2(b)$ 
+to converge if $I_1(I_1(b_k) - 1)$ converges. In words, if each 
+column of $b$ converges, we write out all the products associated 
+with column. Subtract 1 from each of the results, and take 
+the infinite product of the results. If any of the columns 
+has a divergent infinite product, we define the doubly product 
+to also diverge. 
+
+
+
+
+\end{document}
