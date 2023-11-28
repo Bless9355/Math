@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{wasysym}
+\usepackage{xcolor}
 
 
 \newcommand{\new}[1]{
@@ -204,7 +205,7 @@ The integrand is an even function. Hence we write:
 \[
     I = 4\int_0^\infty \frac{dx}{e^x+e^{-x}}
     \textAnd 
-    I/4 = \int_{-\infty}^\infty \frac{e^xdx}{e^{2x}+1}
+    I/4 = \int_{0}^\infty \frac{e^xdx}{e^{2x}+1}
 \]
 Apply the u-subsitution, $u = e^x$:
 
@@ -405,7 +406,7 @@ And the two identities:
     B(n, m) = \frac{\Gamma(n)\Gamma(m)}{\Gamma(n+m)}
     \textAnd 
     B(n, m) = \int_0^\infty 
-    \frac{u^{\alpha - 1}}{(1+u)^{\alpha + \beta}} du
+    \frac{u^{n - 1}}{(1+u)^{n+m}} du
 \]
 
 By the seond condition, the integral simplies to:
@@ -479,12 +480,12 @@ sequence:
 \]
 
 Given that $I_1(b_k)$ converges for any $k$, we define $I_2(b)$ 
-to converge if $I_1(I_1(b_k) - 1)$ converges. In words, if each 
-column of $b$ converges, we write out all the products associated 
-with column. Subtract 1 from each of the results, and take 
-the infinite product of the results. If any of the columns 
-has a divergent infinite product, we define the doubly product 
-to also diverge. 
+to converge if \[I_1(I_1(b_k) - 1)\] converges. In words, if each 
+row of $b + 1$ converges, we write out all the products associated 
+with row. Then, take 
+the infinite product of the results. If any of the rows 
+has a divergent infinite product, we define that the 
+double product is undefined. 
 
 \newpage
 c) Does there exist a bounded sequence 
@@ -582,6 +583,147 @@ guaranteed, we group the product into pairs. That is:
 We conclude that the nested product on the right converges to zero. 
 \qed
 
+\newpage
 
+\Problem 
+
+Let $X_1, X_2$ be Cauchy distributions with parameter $a, b > 0$. 
+Assuming that the two random variables are independent, prove that 
+the sum, that is $X:=X_1+X_2$, is also a Cauchy distribution. 
+Also, compute the parameter of $X$
+
+\new{Solution}
+The parameter of $X$ is $a + b$. It suffices to prove to following:
+
+\[
+    \int_{x = -\infty}^{\infty}
+    \left( 
+        \frac{1}{\pi a} 
+        \right)
+\left( 
+        \frac{1}{\pi b} 
+        \right)
+        \frac{1}{1+(x/a)^2}
+        \frac{1}{1+((x-t)/b)^2}dx
+        =
+        \frac{1}{\pi (a+b)}
+        \frac{1}{1 + [t/(a+b)]^2}
+\]
+
+Take out the constants from the LHS and rewrite the integral as:
+
+\[
+    \frac{1}{\pi^2 a b}
+    \int_{x = -\infty}^{\infty}
+        \frac{1}{1+(x/a)^2}
+        \frac{1}{1+((x-t)/b)^2}dx
+\]
+
+If the integrand is considered as a complex valued function, 
+we notice that the function is memomorphic and has four poles at 
+\[
+    z = \pm ai, t \pm bi \]
+
+We take a semicircular contour centered at the origin with radius $R$.
+The contour sits on the first and the second quadrant.  
+The function vanishes in the order of $1/z^4$, hence the circular 
+region of the integral vanishes. (a rigorous justification is 
+added as an appendix). 
+Denote the integrand as $f(z)$.
+By the residue theorem we write:
+
+\[
+    \oint f(z)dz = 2\pi i(Res_f(ai) + Res_f(t + bi))
+\]
+
+Also, rewrite the integrand as:
+
+\[
+    \frac{1}
+    {
+        (z/a + i)(z/a - i)
+        [(z-t)/b + i][(z-t)/b - i]
+    }
+\]
+
+We infer the residues at $z = ai, t + bi$ with ease. 
+Simply remove the terms that vanish at the poles. Ergo:
+
+\[
+    Res(ai) = 
+    \frac{1}
+    {2i[(ai - t)/b + i][(ai - t)/b - i]}
+\]
+\[
+    Res(t + bi)= 
+    \frac{1}
+    {2i [(t + bi)/a + i][(t + bi)/a - i]}
+\]
+
+And with multiple lines of algebra, we conclude:
+
+\[
+    2\pi i (Res(ai)+Res(t + bi))
+    = \frac{\pi
+    \frac{ab}{a+b}
+    }
+    {1+\frac{t^2}{(a+b)^2}}
+\]
+\color{blue}
+
+please trust me...
+\color{black}
+\newpage
+
+Combining the results, we conclude:
+\[
+    \frac{1}{\pi^2 a b}
+    \int_{x = -\infty}^{\infty}
+        \frac{1}{1+(x/a)^2}
+        \frac{1}{1+((x-t)/b)^2}dx
+    =  
+    \frac{1}{\pi^2 ab}
+    2\pi i (Res(ai)+Res(t + bi))\]\[
+    = \frac{1}{\pi^2 ab}\frac{\pi
+    \frac{ab}{a+b}
+    }
+    {1+\frac{t^2}{(a+b)^2}}
+    =\frac{1}{\pi (a+b)}
+    \frac{1}{1+ \frac{t^2}{(a+b)^2}}
+\]
+
+\qed 
+
+\new{Appendix} The circular region of the integral indeed vanishes. 
+
+\Proof
+Consider the same complex function:
+\[
+    f(z):=
+        \frac{1}{1+(z/a)^2}
+        \frac{1}{1+((z-t)/b)^2}
+    \] 
+
+    Let $C$ denote the circular region of the 
+    semicircular contour centered at the origin. 
+    Say $C$ has a radius of $R$. We notice:
+
+\[
+    max_{z \in C}|f(x)| = 
+    \frac{1}{(R/a)^2 - 1}\frac{1}{(R-t)^2/b^2-1}
+\]
+
+
+Also:
+
+\[
+    \bigg|\oint_{z\in C} f(z)dz \bigg|
+    \leq 2\pi R \cdot max_{z \in C}|f(x)| \]\[
+    = \frac{2\pi R}{((R/a)^2 - 1)((R-t)^2/b^2-1)}
+\]
+
+As $R \rightarrow \infty$, this value converges to zero. 
+Hence, the circular region of the integral vanishes. 
+\qed
 
 \end{document}
