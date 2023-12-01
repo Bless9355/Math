@@ -1,0 +1,303 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\def\Ohm{{\Omega}}
+
+
+\newcommand{\hx}{\hat{x}}
+
+
+\newcommand{\hy}{\hat{y}}
+
+
+\newcommand{\hz}{\hat{z}}
+
+
+\newcommand{\deriv}[1]{{
+    \frac{d}{d{#1}}
+}
+}
+
+\newcommand{\parderiv}[1]{{
+    \frac{\partial}{\partial{#1}}
+}
+}
+
+
+
+
+\begin{document}
+
+\new{P\&M 9.26}
+An electromagnetic field in free space is described 
+by the following two equations:
+
+\[
+    \vec{E} = \hy E_0 \sin(kx + \omega t)
+\]
+\[
+    \vec{B} = -\hz (E_0/c) \sin(kx + \omega t)
+\]
+
+i) Show that the field satisfies the Maxwell's equations 
+
+\new{Solution}
+It is easy to observe that the divergence of both field 
+equals to zero. The $\hy$ component of the electric field 
+has no $y$ dependance and the $\hz$ component of the 
+magnetic field has no $z$ dependance. 
+
+It suffices to verify the relationship regarding the divergence. 
+
+With some computation, we deduce:
+
+\[
+    \Delta \times \vec{E} 
+    = 
+    \hz E_0 k \cos(kx+ \omega t)
+\]
+\[
+    \Delta \times \vec{B}
+    =
+    \hy E_0(k/c) \cos(kx + \omega t)
+\]
+
+\[
+    \parderiv{t} \vec{E}
+    = 
+    \omega E_0 \cos(kx + \omega t)
+\]
+
+\[
+    \parderiv{t} \vec{B}
+    =
+    -\omega (E_0/c) \cos(kx + \omega t)
+\]
+
+Recall the Faraday's Law and Ampere's Law in differential form:
+
+\[
+    \Delta \times \vec{E} 
+    = 
+    - \parderiv{t} \vec{B}
+    \textAnd
+    \Delta \times \vec{B}
+    =
+    \frac{1}{c^2}\parderiv{t} \vec{E}
+\]
+
+With cancellation of the cosine terms, the two equations convert to:
+
+\[
+    E_0 k = \frac{E_0 \omega}{c}
+    \textAnd
+    \frac{E_0k}{c} = 
+    \frac{\omega E_0}{c^2}
+\]
+
+With more cancellation, both equations imply:
+
+\[
+    \boxed{
+    c = \frac{\omega}{k}
+    }
+\]
+
+
+\vspace{5mm}
+ii) Suppose $\omega = 10^{10}s^{-1}$ and $E_0 = 1kV/m$
+. Compute the energy density of the field per cubic meter 
+and the rate of energy transfer per square meter. 
+
+\new{Solution}
+The energy density of an electromagnetic field is 
+given as:
+
+\[
+    \frac{E^2\epsilon_0}{2} + \frac{ B^2}{2\mu_0}
+\]
+
+Where $E$ and $B$ denotes the magnitude of the electric 
+and magnetic field. 
+
+The field is given as:
+
+\[
+    \vec{E} = \hy E_0 \sin(kx + \omega t)
+\]
+\[
+    \vec{B} = -\hz (E_0/c) \sin(kx + \omega t)
+\]
+
+The energy density at a point can thus be computed by:
+
+\[
+    \frac{
+\epsilon_0
+E_0^2 \sin^2(kx + \omega t)
+    }
+    {2}
+    + 
+    \frac{ 
+(E_0/c)^2 \sin^2(kx + \omega t)
+    }
+    {2\mu_0}
+\]
+
+For sufficiently large enough range of time and space, 
+the square of the sine term averges out to $1/2$. 
+The following relationship between $\mu_0, \epsilon_0, c$ 
+comes handy:
+
+\[
+    \mu_0\epsilon_0 = 1/c^2
+\]
+
+The average energy density is:
+
+\[
+    \frac{E_0^2\epsilon_0}{4}
+    +
+    \frac{1}{c^2\mu_0}
+    \frac{E_0^2}{4}
+    =
+    \boxed{
+    \frac{E_0^2 \epsilon_0} {2}
+    \approxeq 
+    4.4 \cdot 10^{-6} J/m^3
+    }
+\]
+
+To compute the power flow, it is useful to 
+use the method of Poynting vectors. The 
+Poynting vector is a vector field defined as:
+
+\[
+    \vec{S} = 
+    \frac{\vec{E} \times \vec{B}}
+    {\mu_0}
+\]
+
+Thus:
+\[
+    \vec{S} = \hy E_0 \sin(kx + \omega t) \times 
+    -\hz (E_0/c) \sin(kx + \omega t)
+    /\mu_0
+\]
+\[
+    = -\hx E_0^2/(c^2\mu_0) \sin^2(kx + \omega t)
+\]
+
+Take a large surface perpendicular to $\hx$. 
+The power transfer along a surface can be computing 
+by computing the surface integral of the Poyinting 
+vector. 
+Given that the area is sufficiently large enough, 
+the average charge density will equal to the average 
+of the magnitude of the Poynting vectors. 
+
+We write the average power density as:
+
+\[
+    \boxed{
+    \bigg|\parderiv{t}U\bigg| = \frac{\epsilon_0 E_0^2}{2c}
+\approxeq 1300 J/(m^2s)
+    }
+\]
+
+\newpage
+
+\new{P\&M 9.27}
+A sinusodial wave reflects at the surface of a medium which 
+absorbs the half of the energy of the incident wave. 
+Compute VSWR(Voltage Standing Wave Ratio) of the standing 
+EM wave created by the reflection. 
+
+\new{Solution}
+From the Poynting vector equation, we observe that the magnitude 
+of energy is proportional to the product of the magnitude of 
+the electric and magnetic field. The magnetic field is a constant 
+multiple of the electric field for traveling waves in free space. 
+Hence, we conclude that the energy of a traveling wave is proportional 
+to the square amplitude of the electric field. 
+
+If the medium absorbs half the energy of the incident wave, the 
+reflection will have an amplitude reduced by a factor of $1/\sqrt{2}$. 
+VSWR, by definition, is the maximum amplitude of the standing wave 
+divided by the minimum amplitude. The standing wave reaches its 
+maximum amplitude when the incident and the reflection interacts 
+constructively. Minimum amplitude is achieved when the two waves 
+cancel each other out. Thus, we write:
+
+\[
+    \boxed{
+    VSWR = \frac{(1+1/\sqrt{2})E}{(1-1/\sqrt{2})E}
+    = \frac{(\sqrt{2}+1)^2}{2-1} \approxeq 5.83
+    }
+\]
+
+
+
+\end{document}
