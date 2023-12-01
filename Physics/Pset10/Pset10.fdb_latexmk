@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1701316253 "c:/Users/danie/Math/Math/Physics/Pset10/Pset10.tex" "Pset10.pdf" "Pset10" 1701316256 0
+["pdflatex"] 1701435668 "c:/Users/danie/Math/Math/Physics/Pset10/Pset10.tex" "Pset10.pdf" "Pset10" 1701435671 0
   "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1699712555 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/danie/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1684363272 23178960 7a62a4051f881eb048e4cd8fd7974f1d ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -51,13 +51,13 @@
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665063979 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665063979 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680178475 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
-  "Pset10.aux" 1701316256 33 06c322e1d88c4778ac780ba5e7d05c77 "pdflatex"
-  "Pset10.tex" 1701316251 14486 8e8b8be7dab2cd04a5f0a08447ccc7be ""
+  "Pset10.aux" 1701435671 33 caafbda2f246531a72f60df9bc4c0d5b "pdflatex"
+  "Pset10.tex" 1701435661 19246 c72c71565e9c73366ed0dbe22c378b16 ""
   "Q1_setup.png" 1701132203 161868 33a9d3a7eec84c30fd724cd7189fa5b5 ""
   "Q3_setup.png" 1701132203 22673 fc13dc5e0b4784be79b6038021e8105e ""
   "Q923-1.png" 1701316152 466429 ffa3310f39935c422faaa1af75c802a5 ""
   "Q923-2.png" 1701316164 505148 22d30ef3f6a0d3e50be0ec73284f8747 ""
-  "c:/Users/danie/Math/Math/Physics/Pset10/Pset10.tex" 1701316251 14486 8e8b8be7dab2cd04a5f0a08447ccc7be ""
+  "c:/Users/danie/Math/Math/Physics/Pset10/Pset10.tex" 1701435661 19246 c72c71565e9c73366ed0dbe22c378b16 ""
   (generated)
   "Pset10.aux"
   "Pset10.log"
