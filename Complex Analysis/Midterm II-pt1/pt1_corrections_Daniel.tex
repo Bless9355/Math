@@ -1,0 +1,281 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{xcolor}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\newcommand{\deriv}[1]{{
+    \frac{d}{d{#1}}
+}
+}
+
+\newcommand{\parderiv}[1]{{
+    \frac{\partial}{\partial{#1}}
+}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\RR{{\mathbb{R}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{{
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Exp}{
+    {
+        \textrm{Exp}
+    }
+}
+
+\begin{document}
+
+\begin{center}
+\LARGE
+Part I Corrections
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize
+
+ii) Let $\zeta$ be any real number and $a > 0$. Evaluate:
+
+\[
+    I(\zeta):=
+    \int_{-\infty}^\infty 
+    \frac{e^{-2\pi \zeta x}}
+    {x^2 + a^2}
+    dx
+\]
+
+\new{Solution}
+
+If $\zeta < 0$, then apply the 
+substitution $x \rightarrow -x$. 
+
+The integral converts to:
+
+\[
+    I(\zeta)=
+    \int_{\infty}^{-\infty} 
+    \frac{e^{-2\pi (-\zeta) x}}
+    {(-x)^2 + a^2}
+    (-dx)
+    =
+    \int_{-\infty}^{\infty} 
+    \frac{e^{-2\pi (-\zeta) x}}
+    {x^2 + a^2}
+    dx
+    =I(-\zeta)
+\]
+So the kernel is an even function 
+with respect to $\zeta$. 
+
+Define a holomorphic function $f(z)$ as follows:
+
+\[
+    f(z) = \frac{e^{-2\pi \zeta z}}{z^2 - a^2}
+\]
+
+The numerator and the denominator are known to be holomorphic. Thus 
+the function is holomorphic everywhere other than the poles which are 
+located at $z = \pm a$. Draw a semicircular contour centered 
+at the origin that occupies quadrant I and IV. Call this 
+contour $\gamma$, and denote the radius as $R$. 
+
+Take the contour integral of $f(z)$ over $\gamma$. Let the 
+straight segment of the contour be called $S$, and the circular 
+region $C$. 
+
+We claim that the integral over the circular region vanishes. That is, a
+as $R \rightarrow \infty$, $
+    \oint_C f = 0
+    $
+
+    Notice:
+\[
+    \bigg|
+    \oint_C f
+    \bigg|
+    = \bigg|
+    \int_{z \in C} 
+    \frac{e^{-2\pi \zeta z}}{z^2+a^2}
+    dz
+    \bigg|
+    \leq 
+    \int_{z \in C} 
+    \frac{max|e^{-2\pi \zeta z}|}
+    {R^2 - a^2}dz
+\]
+
+Note that the modulus of an exponent is the exponent 
+of the modulus of the argument. That is:
+
+\[
+    |e^{-z}| = e^{Re(-2\pi \zeta z)}
+\]
+
+And for $z \in C$, the quality is bounded under 1. 
+Thus:
+\[
+ \bigg|
+    \oint_C f
+    \bigg|
+    \leq 
+    \frac{
+    2\pi R
+    }
+    {R^2 - a^2}
+\]
+And the upper bound converges to zero as $R$ approaches infinity. 
+This shows that the circular region converges to zero. 
+\checkmark 
+
+By the residue theorem:
+
+\[
+    \oint_C f + \oint_S f = 2\pi i Res_f(a)
+\]
+
+The first summand of the LHS vanishes. The second summand can 
+be computed with some algebra. We write:
+
+\[
+\oint_S f = 
+    \int_{x = -\infty}^{\infty}
+    \frac{
+        e^{-2\pi \zeta i x} \cdot (-i)dx
+    }{ 
+        (xi)^2 - a^2
+    }
+    = 
+    i \int_{x = -\infty}^{\infty}
+    \frac{e^{-2\pi \zeta i x} dx} 
+    {x^2 + a^2}dx
+    = iI
+\]
+
+The residue can be computed with ease:
+
+\[
+    Res_f(a) = 
+    \lim_{z\rightarrow a} 
+    \frac{e^{-2\pi \zeta z}(z-a)}{z^2-a^2}
+    =
+    \lim_{z\rightarrow a} 
+    \frac{e^{-2 \pi \zeta z}}{z+a}
+    =\frac{e^{-2 \pi \zeta a}}{2a}
+\]
+
+Combining the results, we write, for $\zeta > 0$:
+
+\[
+    iI(\zeta) = 2\pi i \frac{e^{-2 \pi \zeta a}}{2a}
+    \textOr        I(\zeta) = \frac{\pi e^{-2 \pi \zeta a}}{a}
+\]
+
+Finally, for any real value $\zeta$, we 
+conclude:
+
+\[
+    \boxed{
+   I(\zeta) = \frac{\pi e^{-2 \pi |\zeta| a}}{a}  
+    }
+\]
+
+\newpage
+\vspace{5mm}
+\new{Q3}
+Consider the following infinite products:
+
+\[
+    I_1(a) := \prod_{n = 1}^\infty (1+a_n)
+    \textAnd 
+    I_2(b) := \prod_{m = 1}^\infty 
+    \prod_{n = 1}^\infty(1 + b_{mn})
+\]
+b) State the definition for the convergence of the infinite product 
+$I_2(b)$.
+
+\new{Definiton} 
+Define a double partial product $S_{ab}$ 
+as follows:
+
+\[
+    S_{ab} = \prod_{m = 1}^a 
+    \prod_{n = 1}^b(1 + b_{mn})
+\]
+
+We claim that if the limit of 
+the partial product converges regardless 
+of the relative growth of a, b, then 
+the infinite product converges. That is:
+
+\[
+    \lim_{a, b\rightarrow \infty} 
+    S_{ab} = L
+\]
+
+for some $L \in \mathbb{R}$. \qed 
+
+
+\newpage 
+
+
+
+\end{document}
