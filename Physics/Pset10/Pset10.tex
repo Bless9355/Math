@@ -65,6 +65,16 @@
 
 \def\Ohm{{\Omega}}
 
+\newcommand{\deriv}[1]{{
+    \frac{d}{d{#1}}
+}
+}
+
+\newcommand{\parderiv}[1]{{
+    \frac{\partial}{\partial{#1}}
+}
+}
+
 \begin{document}
 \begin{center}
 \LARGE
@@ -491,6 +501,197 @@ Ergo:
     }
 \]  
 
+\newpage
+
+
+\newcommand{\hx}{\hat{x}}
+
+\newcommand{\hy}{\hat{y}}
+
+\newcommand{\hz}{\hat{z}}
+
+\newcommand{\hi}{\hat{i}}
+
+\newcommand{\hj}{\hat{j}}
+
+\new{P\&M 9.18}
+
+Find the appropriate magnetic field 
+for the given electric field below:
+
+\[
+    \vec{E} = 
+    E_0(\hx+\hy)sin[2\pi/\lambda(z+ct)]
+    \textAnd
+    E_0 = 20V/m
+\]
+
+\new{Solution}
+We tilt the x and y axis around the 
+z axis. Consider the following change of axis 
+from $(\hx, \hy, \hz) \mapsto 
+(\hi, \hj, \hz)$:
+
+\[
+    \hi := \frac{\hx + \hy}{sqrt{2}}
+    \textAnd
+    \hj := \frac{\hy - \hx}{sqrt{2}}
+    \textAnd
+    \hz := \hz
+\]
+
+With some algebra, it is not hard 
+to verify that $\hi \times \hj = \hz$. 
+
+The electric field reduces to:
+
+
+\[
+    \vec{E} = 
+    \sqrt{2} E_0 \hi sin[2\pi/\lambda(z+ct)]
+\]
+
+The magnetic field must be in the form of:
+
+\[
+    \vec{B} = 
+    B_0 \hj sin[2\pi/\lambda(z+ct)]
+\]
+
+To compute the relation between $E_0$ and $B_0$, 
+we invoke the differential version of 
+Faraday's law, written formally as:
+
+\[
+    \Delta \times \vec{E} = -\parderiv{t}\vec{B}
+\]
+
+Plugging in the appropriate values:
+
+\[
+    -\hj \sqrt{2} E_0 \frac{2\pi}{\lambda}
+    cos[(2\pi / \lambda) (z+ct)]
+    = 
+    -\hj\frac{2\pi}{\lambda} c B_0 cos[(2\pi / \lambda) (z+ct)]
+\]
+
+And by cancellation:
+
+\[
+    c B_0 = \sqrt{2} E_0 \textOr 
+    B_0 = \frac{\sqrt{2}}{c} E_0
+\]
+
+Substituting back to the original axis system, 
+we obtain:
+
+\[
+    \boxed{
+    \vec{B}
+    = \frac{E_0}{c}(\hx+\hy)sin[2\pi/\lambda(z+ct)]
+    }
+    \]
+
+Additionaly:
+
+\[
+    \boxed{
+    \frac{E_0}{c} \approxeq 
+    6.67 \cdot 10^{-8} T
+    }
+\]
+
+\qed
+
+\newpage
+
+\new{P\&M 9.23}
+
+An electromagnetic field is 
+given as follows:
+
+\[
+    \vec{E} = 
+    E_0 \hz \cos(kx)\cos(ky)\cos(\omega t)
+\]
+\[
+    \vec{B} = 
+    B_0 (\hx \cos(kx)\sin(ky)
+    -\hy \sin(kx) \cos(ky)) \sin(\omega t)
+\]
+
+The relationship between $E_0, B_0$ is 
+given as
+$E_0 = \sqrt{2}cB_0$ and $\omega = \sqrt{2}ck$.
+Show that this electormagnetic field 
+satisfies the Maxwell's equations. 
+Also, describe how this field looks 
+like inside a box where 
+$x, y \in [-\pi/2k, \pi/2k], z \in \mathbb{R}$. 
+
+\new{Solution}
+
+Upon inspection, we observe that 
+the divergence of both the electric 
+and magnetic field is zero everywhere. 
+The electric field only has a $\hz$ component, 
+but the component has no $z$ dependance. 
+As for the magnetic field, the partial derivatives 
+related to the $x, y$ component cancel out 
+each other. 
+
+The divergence is a little complicated. 
+But through many lines of algebra
+(which I have included as a snapshot 
+at the end of the problem),
+
+we can make the following relationship 
+between $E_0, B_0$ from the Maxwell equations. 
+As long as the following equalities hold, 
+so does the Maxwell's equations. 
+
+\[
+    kE_0 = \omega B_0 
+    \textAnd 
+    B_0 = \frac{
+        \mu_0 \epsilon_0 \omega E_0
+    }
+    {2k}
+    = \frac{\omega E_0}{2kc^2}
+\]
+
+Recall $E_0 = \sqrt{2}cB_0$ and $\omega = \sqrt{2}ck$. 
+By plugging in, we notice that 
+the two conditions above reduce into an identity. 
+
+Begin with the analysis on how the 
+electric field looks like. Cutting 
+the box by some plane perpendicular 
+to the $z$ axis, we notice that 
+the field magnitudes increase as 
+we move to the center of the box. 
+The direction is parallel or opposite 
+to the $z$ axis. Also, the maximum 
+magnitude, which is achieved at the 
+intersection of the cut and the $z-axis$, 
+oscillates in time. 
+
+The magnetic field has no $z$ dependence. 
+Looking at the same cut from the previous analysis, 
+we note that the vector has some form 
+of swirl around the center axis. At $x = 0$
+and $y = 0$ 
+the vector is zero. Also, all vectors 
+oscilate in time.  
+\qed 
+\newpage
+\new{Appendix} 
+Messy lines of algebra
+
+\includegraphics[width = \linewidth]{Q923-1.png}
+
+\includegraphics[width = \linewidth]{Q923-2.png}
+\newpage
 
 
 \end{document}
