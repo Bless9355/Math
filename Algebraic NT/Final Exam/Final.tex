@@ -1,0 +1,683 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{verbatim}
+\usepackage{enumerate}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\ZZ{{\mathbb{Z}}}
+\def\_{{\hspace{1mm}}}
+
+\def\contradiction{{\lightning}}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+    \stepcounter{problemcnt}  
+}
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    \hspace{5mm}
+    \textrm{or}
+    \hspace{5mm}
+}
+
+\newcommand{\textAnd}{
+    \hspace{5mm}
+    \textrm{and}
+    \hspace{5mm}
+}
+
+\newcommand{\textWhere}{
+    \hspace{5mm}
+    \textrm{where}
+    \hspace{5mm}
+}
+
+\newcommand{\polymod}{
+    \hspace{3mm}
+    \textrm{poly mod}
+}
+
+
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+%Article specific commands for ANT
+\newcommand{\<}{{{
+    \langle
+}}}
+
+
+\def\>{{{
+    \rangle
+}}}
+
+\def\ZZ{{\mathbb{Z}}}
+
+\newcommand{\ringInt}{
+    {\mathcal{O}}
+}
+
+\newcommand{\pideal}{
+    {{\mathfrak{p}}}
+}
+
+
+\newcommand{\qideal}{
+    {{\mathfrak{q}}}
+}
+\def\QQ{\mathbb{Q}}
+
+\begin{document}
+\Problem 
+Let $K = \QQ(\sqrt{3}, \sqrt{7})$. Find the degree of the extension 
+$K/\QQ$. That is, compute $[K:\QQ]$. 
+
+\new{Solution} 
+Start with finding the primitive element of the field $K$. The primitive 
+element theorem dictates that any number field must have a primitive 
+element. We claim that the primitive element is $\sqrt{7}+\sqrt{3}$. 
+We wish to show $\QQ(\sqrt{3}, \sqrt{7}) = \QQ(\sqrt{3} + \sqrt{7})$. 
+It suffices to show that each of the generators are included in 
+the other field. We prove the following to relations:
+
+\[
+    \sqrt{7}+\sqrt{3} \in \QQ(\sqrt{7}, \sqrt{3})
+    \textAnd 
+    \sqrt{7}, \sqrt{3} \in \QQ(\sqrt{7}+\sqrt{3})
+\]
+
+The first statement follows trivially from the additive closure 
+of the field $\QQ(\sqrt{7}, \sqrt{3})$. For the second statement, 
+exploit the existance of multiplicative inverses. We know 
+that the following element exists in $\QQ(\sqrt{7}+\sqrt{3})$. 
+
+\[
+    4\cdot(\sqrt{7}+\sqrt{3})^{-1}
+    = \frac{4}{\sqrt{7}+\sqrt{3}}
+    = \frac{4(\sqrt{7}-\sqrt{3})}{(\sqrt{7}+\sqrt{3}) (\sqrt{7}-\sqrt{3})}
+    = \sqrt{7} - \sqrt{3}
+\]
+
+We have obtained that the sum and difference of $\sqrt{3}, \sqrt{7}$ 
+are both in the field $\QQ(\sqrt{7}, \sqrt{3})$. Thus, 
+
+\[
+    \frac{(\sqrt{7} + \sqrt{3})+(\sqrt{7} - \sqrt{3})}{2} 
+    = \sqrt{7}
+    \in \QQ(\sqrt{7}, \sqrt{3})
+\]
+\[
+    \sqrt{7} - (\sqrt{7} - \sqrt{3}) = \sqrt{3} \in \QQ(\sqrt{7}, \sqrt{3})
+\]
+
+\newcommand{\The}{{\theta}}
+
+Thus, $K = \QQ(\sqrt{7}+ \sqrt{3})$. The degreee of the extension 
+$K/\QQ$ equals to the minimum polynomial of the generator. In search 
+for a minimum polynomil, we first observe some relations around 
+the generator. 
+For convinience, let $\The := \sqrt{7} + \sqrt{3}$. We have shown 
+above that:
+
+\[
+    4/\The = \sqrt{7}-\sqrt{3} = \The - 2\sqrt{3}
+\]
+
+\[
+    \The - 4/\The = 2\sqrt{3} 
+    \textAnd 
+    (\The - 4/\The)^2 = 12
+\]
+\[
+    \The^2-8+16/\The^2 = 6
+\]
+\[
+    \The^4 -20\The^2 + 16 = 0
+\]
+
+We purport that the polynomial $\The^4 -20\The^2 + 16 $ 
+is irrecucible in $\ZZ$. Apply the mod 5 test to show that the 
+equation has no linear factors. Assuming the polynomial has 
+at least one lienar factor, the following must hold:
+
+\[
+    \The^4 + 1 \equiv 0 \mod 5
+    \textOr 
+    \The^4 \equiv -1 \mod 5
+\]
+
+With some basic arithmetic, we verify that $-1$ is not a 
+quintic residue of $5$. Hence there are no linear factors. 
+
+For the quintic polynomial has no lienar factors, it must 
+factor into two quadratic polynomials assuming it is reducible. 
+We write:
+
+\[
+    (\The^2+ a\The + b)(\The^2 -a\The + c) =   \The^4 -20\The^2 + 16
+\]
+
+where $a, b, c \in \ZZ$
+
+The coefficient of $\The$ of the two linear factors must differ by 
+a factor of $-1$ for their product to have no terms of $\The^3$. 
+Furthermore, comparing the coefficient of $\The$, we observe 
+$ac -ab = a(c-b)= 0$. Either $a = 0$ or $c-b = 0$. If $a = 0$, 
+applying the substitution $x := \The^2$, we write:
+
+\[
+    (x+b)(x+c) = x^2-20x+16
+\]
+
+By the quadratic formula, $b = 10 \pm \sqrt{84}$. But then, 
+$b \not\in \ZZ$. This is a contradiction. 
+
+We revert to the only alternative $c-b = 0$ or $c = b$. 
+\[
+  (\The^2+ a\The + b)(\The^2 -a\The + b)
+  =
+  (\The^2+ b + a\The) (\The^2+ b - a\The)  
+  = (\The^2 + b)^2 - a^2\The ^2
+  = \The^4 -20\The^2 + 16
+\]
+
+So $b^2 = 16$ and $b = \pm 4$. $2b - a^2 = -20$ so 
+either $8-a^2 = -20$ or $-8 - a^2 = -20$. $a^2$ must 
+either be 28 or 12. In both cases, $a$ is not an integer. 
+The polynomial must be irreducible. 
+
+Thus:
+\[
+    [K:Q] = 4
+\]
+\qed
+
+\newpage 
+
+
+%---------Q3-----------
+\Problem 
+Find all integer solutions to the equation 
+$x^2+13 = y^3$.
+
+\new{Solution}
+We begin with some divisibility relations of $x, y$ in $\ZZ$. 
+$13 \nmid x$ and $y$ must be odd. To show $13 \nmid x$, assume 
+$13 | x$. From $x^2+13 = y^3$, we observe that $13$ divides the 
+LHS so it must also divide the RHS, hence $13|y$. However, $13$ 
+divides the LHS exactly once while it divides the RHS thrice. 
+We reach a contradiction and conclude $13 \nmid x$. 
+
+It is possible to show $y$ odd in a similar manner. Assume $y$ 
+to be even. $x$ must be odd. 
+\[y^3 \equiv 0 \mod 4\]
+ but 
+ \[
+    x^2 + 13 \equiv 1 \textOr 2 \mod 4
+ \]
+so
+\[
+    x^2+13 \not\equiv y^3 \mod 4
+\]
+and $y$ must be odd. 
+
+Factor the equation in the ring of integers of the field $\QQ(\sqrt{-13})$. 
+\[
+    (x-\sqrt{-13})(x+\sqrt{-13}) = y^3
+\]
+Passing up to the ideals:
+\[
+    \<x-\sqrt{-13}\>\<x+\sqrt{-13}\> = \<y\>^3
+\]
+
+The two ideals are coprime. Assume for a contradiction that 
+some prime ideal $\pideal$ divides both ideals. Division implies 
+inclusion, so we write:
+
+\[
+    \<x-\sqrt{-13}\>, \<x+\sqrt{-13}\> \subseteq \pideal
+    \textAnd 
+    x \pm \sqrt{-13} \in \pideal
+\]
+
+Thus:
+\[
+    2x, 2\sqrt{-13} \in \pideal
+\]
+By strong closure of ideals, we deduce that 
+$-2\sqrt{-13}^2 = 26$ is an element of $\pideal$. Since 
+$13 \nmid x$,
+
+\[
+    \gcd(2x, 26) = 2 \textAnd 
+    (2x)s+26t = 2
+\]
+where the latter equation obtained from Bezouts identity. 
+$s, t$ are integers. We write $2 \in \pideal$. 
+
+Moreover, $\pideal | \<y\>^3$ and thus $\pideal | \<y\>$ 
+and $y \in \pideal$. We have shown previously that $y$ is 
+odd. Thus, $y - 2v = 1$ for some integer $v$. This implies 
+$1 \in \pideal$ and $\pideal = \ringInt_K$, a contradiction. 
+\contradiction
+
+Ideals factor uniquely into prime ideals in any Dedekind Domain. 
+Recall the equation:
+\[
+    \<x-\sqrt{-13}\>\<x+\sqrt{-13}\> = \<y\>^3
+\]
+Where the two ideals on the left are coprime. It must be:
+
+\[
+    \<x-\sqrt{-13}\> = I^3
+\]
+for some ideal $I$. In light of the class group, the left ideal 
+is principal so it belongs to the principal ideal group. $I^3$ must 
+also belong to the principal class. We know that the class number of 
+$\QQ(\sqrt{-13})$ is 2. If $I$ is not in the principal class, so will 
+$I^3$ not be in the principal class. Hence, $I$ must be principal. 
+
+$-13 \equiv 3 \mod 4$ so the integers of this field are in the form 
+of $a+b\sqrt{-13}$ for integers $a,b$. The generator must $I$ must 
+also be an integer in the field $\QQ(\sqrt{-13})$. Write:
+
+\[
+    \<x-\sqrt{-13}\> = \<a+b\sqrt{-13}\>^3 
+    = \<(a+b\sqrt{-13})^3\>
+\]
+
+The generators of a principal ideal must differ by a factor 
+of a unit. We know that the only units of an imaginary quadriatic 
+field is $\pm1$. So:
+
+\[
+    x-\sqrt{-13} = \pm (a+b\sqrt{-13})^3
+    = \pm\bigg([a^3-39ab^2] + \sqrt{-13} [3a^2b -13b^2]\bigg)
+\]
+
+Comparing the coefficient of $\sqrt{-13}$:
+\[
+    3a^2-13b^3 = \pm 1
+\]
+
+$b$ divides the LHS so it must divide the RHS. Thus, $b = \pm 1$. 
+Plugging, in, we obtain $3a^2-13 = \pm1$ or $3a^2 = 13\pm1$. The only 
+integer solutions to the equation are $a = \pm2$. Comparing the integer 
+coefficient of the generator equation:
+
+\[
+    x = \pm (a^3-39ab^2) = \pm a (a^2-39) = \pm 70
+\]
+
+Each of $x =\pm70$ both yield $y = 17$. There exists no other solution. 
+
+\[
+\boxed{(x, y) = (\pm70, 17)}
+\]
+
+%--------Q4-----------
+\Problem
+Prove that if a prime number $p$ is totally ramified in a field 
+$K$ and not ramified in the field $L$, then $K \cap L = \QQ$. 
+
+\Proof 
+Note that the field $M := K \cap L$ is a field extension of $\QQ$. 
+Take any two elements $a, b \in M$. $a - b \in K, L$ for $K, L$ are 
+both fields. $a-b \in K \cap L = M$. The multiplicative closure 
+and existance of inverses
+can be shown in a similar fashion. $\QQ \subseteq K$ and 
+$\QQ \subseteq L$ so $\QQ \in L$. 
+
+For $p$ is unramified in the extension $L$, it cannot be 
+ramified in the smaller field $M$. We conclude that in the 
+ring $\ringInt_M$, $\<p\>\ZZ$ is a prime ideal. 
+
+Write out the inertial degree of prime p
+over the ideal $\pideal \in \ringInt_K$. By the multiplicativity 
+of the inertial degree: 
+
+
+Note that $\pideal \cap \ringInt_M$ is a prime ideal, for 
+the intersect of a prime ideal in a smaller ring is also 
+a prime ideal. If the intersect is not a prime ideal, 
+two elements outside the prime ideal will multiply to 
+be included in the prime ideal, and the same two elements 
+will contradict the primeness of the larger ideal, leading 
+to a contradiction. 
+
+Also, $\pideal|\pideal^n$ so $\pideal|\<p\>\ZZ$ meaning $p \in \pideal$. 
+Thus, $\<p\>\ZZ \subseteq \pideal$, and $\<p\>\ZZ \subseteq \ringInt_M$. Hence, 
+$\<p\>\ZZ \subseteq \pideal \cap \ringInt_M$. Inclusion implies division 
+for ideals in Dedikind domains, so $\<p\>\ZZ|\pideal \cap \ringInt_M$. 
+The latter ideal is assumed to be prime, and we have previously shown 
+that the principal ideal generated by $p$ is prime in the ring $\ringInt_M$. 
+The two ideals must equal to each other, or in symbols:
+
+\[
+    \pideal \cap \ringInt_M = \<p\>\ZZ
+\]
+
+Since $p$ is unramified in $M$, we write:
+
+\[
+    f( \pideal \cap \ringInt_M|p) = 1
+    \textOr
+    [\ringInt_M/p\ZZ : \ZZ/p\ZZ] = 1
+\]
+
+It must be $\ringInt_M = \ZZ$ which in turn implies 
+$M = \QQ$. \qed
+
+\Problem 
+Let $K := \QQ(\theta)$ where $\theta$ is a root of the polynomial 
+$t^3 + t + 1$. 
+
+i) Prove that $\ringInt_K = \ZZ[\theta]$. 
+We claim that the set $\{1, \theta, \theta^2\}$ is an integral basis 
+of the field $K$. Theorem 2.17 of the book states that if the 
+discriminant of a field is squarefree, the $\QQ$ basis of $K$ 
+must be an integral basis of $\ringInt_K$. We know that the set 
+$\{1, \theta, \theta^2\}$ is a $\QQ$ basis of the field $K$. Also, 
+from HW4, we have derived a formula for discirminants of cubic fields. 
+
+The discriminant of the power basis in the field $\QQ(\theta)$ where $\theta$ where 
+$\theta$ is a root of $t^3+at+b$ is:
+
+\[
+    \Delta [1, \theta, \theta^2] = -4a^3 - 27b
+\]
+
+So for the field $K$, the discriminant is:
+
+\[
+    \Delta[1, \theta, \theta^2] = -4-27 = -31
+\]
+
+And this value is squarefree. By theorem 2.17, we conclude that 
+the power set is indeed a integral basis. The $\ZZ$ span of the 
+set  $\{1, \theta, \theta^2\}$ is the set $\ZZ[\theta]$. Thus, 
+$\ringInt_K = \ZZ[\theta]$. \qed
+
+ii) provide all the possible decomposition of the principal 
+ideal generated by p. 
+
+\new{Solution} The integers of $K$ are elements of $\ZZ[\theta]$. 
+Theorem 10.1 of the textbook dictates exactly how the prime ideal 
+$\<p\>$ must decompose. Say that minimum polynomial of $\theta$, which 
+is $t^3+t+1$, factorize into some product of irreducible $\ZZ_p$ polynomials. 
+Write:
+\[
+    t^3+t+1 = \prod_{i = 1}^{n} f_i(t)^{e_i}
+\]
+where $n \leq 3$ and all $f_i(t) \in \ZZ_p[t]$ are irreducible. 
+Then we know that the factorization of $\<p\>$ is given as:
+
+\[
+    \<p\> = \prod_{i = 1}^{n} \pideal_i^{e_i}
+\textWhere \pideal_i = \<p, f_i(i)\>
+\]
+
+We observe that $t^2 + t + 1$ is irreducible in $\ZZ_2$.
+This can be easily shown by the mod 2 test. The cubic 
+has no linear factors, and hence is irrecucible.  
+Also, $t^2+t+1 = (t^2+t+2)(t-1)$ in $\ZZ_3$, and the 
+factors are all irredicible. Irreducibility of 
+each terms can also easily be computed by the mod 3 test. 
+
+By Theroem 10.1, write:
+
+\[
+    \<2\> \textrm{   Prime}
+    \textAnd 
+    \<3\> = \<3, \theta - 1\>\<3, \theta^2 + \theta + 2\>
+\]
+
+These two examples show that ideal $\<p\>$
+can either be a prime ideal or factor into two distinct prime ideals. 
+The distinctness also comes from Theorem 10.1. 
+
+It can be easily demonstrated that $\<p\>$ cannot be decomposed into a 
+square of some prime ideal. Assume for a contradiction:
+
+\[
+    \pideal^2 = \<p\>
+\]
+
+Then by taking the norm both sides:
+
+\[
+    N(\pideal^2) = N(\<p\>) = p^3
+\]
+since $[K:Q] = 3$. Let $v$ denote $N(\pideal)$. We obtain $v^2 = p^3$ 
+for integer $v$. $p$ is prime and no integer solutions exists, hence a 
+contradiction. \contradiction
+
+We assume that $\<p\>$ can decompose into some three distinct 
+prime ideals. 
+
+Consider the case that $\<p\>$ decomposes 
+into $\pideal_1^2\pideal$. By Theorem 10.1, $t^3+t+1$ must factorize 
+in the form of $(t-a)^2(t-b)$ over $\ZZ_p$. 
+Write:
+
+\[
+    (t-a)^2(t-b) = t^3 +t+1 \polymod p
+\]
+
+\[
+    x^3-(2a+b)x+a^2+2ab-a^2b = t^3 + t + 1 \polymod p 
+\]
+Comparing coefficients:
+\[
+    2a + b = 0 \textAnd a^2+2ab=1 \textAnd -a^2b = -1 \mod p
+\]
+So $b=-2a$ and $a^2 - 4a^2 = 1$ or $-3a^2 = 1$ or $(-3)a^2 = 1$. 
+$a^2b = 1$ and $\ZZ_p$ is a field so the mutiplicative inverse of 
+$a^2$ must be unique. $b = -3$ and $a = -b2^{-1} = 3(p+1)/2$. It 
+is safe to assume $p$ odd, for we have already ruled out the 
+case $p = 2$. 
+
+Plugging in $a = 3(p+1)/2$, $b = -3$ to $a^b$ yields $p = 31$. 
+We conclude:
+
+\[
+    (t-17)^2(t+3) = t^3+t+1 \polymod 31
+\]
+
+Thus:
+
+\[
+    \<31\> = \<31, \theta +17\>^2\<31, \theta -3\>
+\]
+
+It is impossible for $\<p\>$ to completely ramify in $K$. If so, again 
+by Thm 10.1, we obtain:
+
+\[
+    (t-n)^3 = t^3+t+1 \polymod p 
+\]
+
+And by comparing coefficients, $3n = 0$, $3n^2=1$, $n^3 = 1$ mod p. 
+$(3n)n = (0)n = 1$ so $0 = 1$ mod p, and we reach a contradiction. 
+
+To summarize, all possible decomposition of $\<p\>$ in K are:
+
+\[
+\<p\> = \pideal \textOr \pideal_1 \pideal_2 
+ \textOr \pideal^2_1\pideal_2 \textOr \pideal_1\pideal_2\pideal_3
+\]
+
+\qed
+
+\Problem 
+Let $K$ be any number field and $\ringInt_K$ be the ring of integers. 
+Prove the following:
+
+i) If $\pi$ is irreducible in $\ringInt_K$ and $\<\pi\>$ is not 
+a prime ideal, then $\<\pi\>$ is not contained in any prime ideal.
+
+\Proof
+Assume for a contradiction, that $\pi$ is irreducible and $\<\pi\>$ 
+is not prime but there exists a prime principal ideal $\<a\>$ that includes  
+$\<\pi\>$. Inclusion implies division for ideals in a Dedekind domain. Hence:
+
+\[
+    \<a\>|\<\pi\> \textAnd \<\pi\> = I\<a\>
+\]
+for some ideal $I$. Passing the equation up to the class group:
+
+\[
+    [\<\pi\>] = [I][\<a\>] \textAnd [I] = [\<1\>]
+\]
+
+So $I$ must be principal. Let $I := \<b\>$. We have 
+$\<\pi\> = \<b\>\<a\> = \<ba\>$. The generators of the same 
+principal ideal must differ by a unit. For some unit $\mu$:
+
+\[
+    \pi = \mu ab 
+\]
+And we are given that $\pi$ is irreducible. Necessarily, 
+$a$ or $b$ must be a unit. If $a$ is a unit, $\<a\>$ will not 
+be a proper principal ideal. If $b$ is a unit, $\<pi\> = \<a\>$ 
+and $\<\pi\>$ will be prime. \contradiction \qed
+
+ii) Suppose $h_k = 2$. $\pi$ is irreducible in $\ringInt_K$ and 
+$\<\pi\>$ is not a prime ideal. Prove that $\<p\>$ decomposes 
+into two not necessarily distinct ideals. 
+
+\Proof Decompose the ideal $\<\pi\>$ into a product of prime ideals. 
+
+\[
+    \<\pi\> = \prod_{i = 1}^{t}\pideal_i^{e_i}
+\]
+By part i), we deduce that none of $\pideal_i$ can be principal. 
+All of the prime ideals are in the same class group; the non-principal 
+group. However, the product of all the prime ideals up to multiplicity, 
+form a principal ideal. Relabeling the factors, write:
+
+\[
+    \<\pi\> = \prod_{i = 1}^t \pideal_i \qideal_i = \prod_{i = 1}^t\<\alpha_i\>
+    = 
+    \bigg\langle
+    \prod_{i = 1}^t\alpha_i
+    \bigg\rangle
+\]
+where $\pideal_i\qideal_i = \<\alpha_i\>$. For $\pi$ is irreducible, 
+without loss of generality, $\alpha_1$ is an associate of $\pi$, 
+and all other $\alpha_i$'s are units. For $i > 1$, by assumption, $\pideal_i\qideal_i = \<\alpha_i\> = 
+\ringInt_K$. This implies $\pideal|\ringInt_K$, a contradiction. 
+Thus, the product simplifies to the first pair of which $\alpha_1$ is an 
+associate of $\pi$. In symbols:
+
+\[
+    \<\pi\> = \pideal \qideal
+\]
+
+\qed
+
+\new{Remark} It follows that two ideals $\pideal, \qideal$ 
+are both non-principal. 
+
+iii) Prove that if $h_k = 2$, then the factorization 
+of any element has the same number of irreducibles. 
+
+\Proof 
+
+Assume for a contradiction that there exists 
+some element that has two factorizations that have different 
+number of irreducibles associated with itself. Let $\alpha$ 
+be an element in $\ringInt_K$ be such an element with minimum 
+number of irreducibles in its shortest factorization. Write:
+
+\[
+    \alpha = \beta_1 \beta_2 \cdots \beta_n = 
+    \gamma_1 \gamma _2 \cdots \gamma_m
+\]
+where the beta-factorization is the shortest factorization 
+(meaning least irreducible factors) of $\alpha$, so $n<m$.  
+None of the beta-gamma pairs can be associates. Ohterwise, 
+by cancellation, we obtain an element with a shorter minimal
+factorization. 
+
+Passing the equation to ideals:
+
+\[
+    \<\alpha\> = \<\beta_1\>\<\beta_2\> \cdots \<\beta_n\> 
+    =
+    \<\gamma_1\>\<\gamma_2\> \cdots \<\gamma_m\>
+\]
+We claim that none of the principal ideals generated by 
+betas or gammas are prime. Assume for a contradiction, WLOG, that 
+$\<\beta_1\>$ was prime. Ideals factor uniquely, so WLOG 
+$\<\beta_1\>|\<\gamma_1\>$. If $\<\gamma_1\>$ is not prime, we 
+reach a contradiction from part i). So $\<\gamma_1\>$ is prime 
+and it must be equal to $\<\beta_1\>$. This implies that 
+the generators must differ by a factor of associates, but previously 
+we assumed that none of the beta-gamma pairs are associates. \contradiction 
+
+From part ii) we know that each principal ideal generated by 
+an irreducible must factor into two prime ideals if it is not prime. 
+The beta-ideal multiples decomposes into $2n$ prime ideals while 
+the gamma-ideal multiples decompose into $2m$ prime ideals. Ideal 
+factorization is unique, so it must be $2n = 2m$, but $n < m$. \contradiction 
+
+So the number of irreducibles in a factorization is invariant. 
+\qed
+
+\color{blue}
+neat!
+
+\end{document}
