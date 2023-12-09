@@ -247,6 +247,15 @@ Thus:
 \newpage 
 
 
+\Problem 
+Prove that the class number of $\QQ(\sqrt{-13})$ is 2. 
+
+\new{Solution} 
+I have decided to write this proof in hand due to 
+the excessive amount of simple arithmetic. Proof 
+attatched at the end of the solutions. 
+\newpage
+
 %---------Q3-----------
 \Problem 
 Find all integer solutions to the equation 
@@ -679,5 +688,38 @@ So the number of irreducibles in a factorization is invariant.
 
 \color{blue}
 neat!
+
+\color{black}
+
+\newpage
+
+\new{Bonus} Let ideal $I$ be any ideal in the ring of integers 
+of $K := \QQ(\sqrt{d})$. Prove that if $N(I)|d$, then $I^2$ is principal. 
+
+\Proof 
+It suffices to prove for all prime ideals $\pideal$. The reason is 
+it is possible to decompose $I$ into a product of prime ideals. 
+Since $d$ is squarefree, so is $N(I)$. We write:
+
+\[
+    I = \prod_{i = 1}^t \pideal_n
+\]
+Note that each prime ideal can have maximum multiplicity of 1. 
+If a prime ideal divided $I$ more than once, the norm of the prime ideal 
+will divide $I$ more than twice. $N(\pideal)$ is a power of some prime, 
+so $N(I)$ will not be squarefree, leading to a contradiction. 
+
+Focus on a prime ideal $\pideal$ which satisfies $N(\pideal)|d$. 
+The norm must be some prime $p$ that divides $d$. Recall that 
+the norm of an ideal is also an element of the ideal (Theorem 5.14-b). Thus, 
+$p \in \pideal$ an $\<p\> \subseteq \pideal$ and $\pideal | \<p\>$. 
+
+In a quadratic field, we know the prime decomposition of the principal 
+ideal $\<p\>$. For the case where $p|d$, $\<p\> = \<p, \sqrt{d}\>^2$. 
+It must be the case that $\pideal = \<p, \sqrt{d}\>$. Then, $\pideal^2 = \<p\>$, 
+which concludes the proof. 
+\qed
+
+
 
 \end{document}

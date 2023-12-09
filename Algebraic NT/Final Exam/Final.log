@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  9 DEC 2023 15:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  9 DEC 2023 17:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -189,11 +189,11 @@ LaTeX Font Info:    Trying to load font information for U+wasy on input line 124
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 ) [1
 
-{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 286.
+{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2] [3]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 295.
  (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [3] [4] [5] [6] [7] [8] (Final.aux)
+) [4] [5] [6] [7] [8] [9] [10] (Final.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
@@ -208,9 +208,9 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  56i,6n,65p,301b,120s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\danie\AppData\Local\MiKTeX\fonts/pk/ljfour/public/wasy/dpi600\wasy10.pk><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Final.pdf (8 pages, 147564 bytes).
+Output written on Final.pdf (10 pages, 151319 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
