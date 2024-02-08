@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW2
+
+\Large
+Daniel Son
+\end{center}
+
+
+%do 1, 2, 4, 7, 8, 9
+
+\new{Question 1}
+For each of the subsets of property a, b, count the number of four
+ digit numbers whose digits are either 1, 2, 3, 4, 5. 
+
+ \begin{enumerate}[a)]
+    \item The digits are distinct 
+    \item The number is even
+\end {enumerate}
+
+\begin{proof}
+    Start off with counting the digits that need not satisfy both 
+    a or b. By principle of multiplication, we count $5^4 = 625$. 
+    
+    Now we count the digits that satisfy only condition a. Again, 
+    by principle of multiplication, $5\cdot4\cdot3\cdot2 = 120$. 
+
+    For the digits that only satisfy condition b, we start with choosing 
+    the last digit. If the last digit is even, the whole number is even. 
+    There are two even numbers within the set $\{1, 2, 3, 4, 5\}$. So, 
+    by principle of multiplication, we count $2\cdot5\cdot5\cdot5 = 250$.
+    
+    Finally, for the digits that satisfy both of the conditions, 
+    we again count from the last digit. By principle of multiplication, 
+    the answer is $2\cdot4\cdot3\cdot2 = 48$. 
+    
+\end{proof}
+
+\new{Question 2} 
+How many orderings are there for a deck of cards if all the cards 
+in the same suite are together?
+
+\new{Solution}
+ First, ignore the order of the cards 
+but only consider the ordering of the suites. There are four possible suites, 
+so there are $4! = 24$ ways of ordering. For each suite, there are 
+13 cards. The 13 cards can be arranged each in $13!$ ways. Thus, by 
+principle of multiplication, there are a total of $\boxed{4!(13!)^4}$ ways of 
+ordering. \hfill \qed
+
+
+\new{Question 4} 
+How many distinct positive divisors does the each of the following numbers have:
+$3^4\cdot5^2\cdot7^6\cdot11, 620, 10^{10}$
+
+\new{Proposition} 
+Let n be a positive integer. By the Fundamental Theorem of Arithmetic, 
+it is possible to write $n$ as:
+
+\[
+    n = \prod_{i = 0}^{k} {p_i}^{a_i}
+\]
+where $p_i$'s are prime and $a_i$'s are positive integers. The number 
+of positive divisiors of $n$ is
+
+\[
+    \prod_{i = 0}^{k} (a_i + 1)
+\]
+
+\begin{proof}
+    The divisors of $n$ must involve only the prime numbers 
+    $\{p_1, ..., p_n\}$. The power of the prime $p_i$ can range 
+    from $a_i + 1$. Then, we proceed with the principle of multiplication 
+    to obtain the answer.
+\end{proof}
+
+\new{Solution} 
+In light of the proposition, the question boils down to finding 
+the prime factorization of the three numbers, which is given as follows. 
+
+\[
+    3^4\cdot5^2\cdot7^6\cdot11,\hspace{3mm} 2^2\cdot5\cdot31, \hspace{3mm} 2^{10}\cdot5^{10}
+\]
+The number of their divisors are $5\m3\m7\m2 = 210$,  $3\m2\m2 = 12$,  $11\m11 = 121$. \qed
+
+\new{Question 7} In how many ways can four men and eight women be 
+seated around a round table if there are two women between consecutive 
+men around the table?
+
+\new{Solution} 
+Take any three consecutive seats of the table. We observe that there 
+must be a men sitting in one of the three tables. Otherwise, there 
+will be a pair of two consecutive men where there is only one women 
+in between the men. Moreover, there can be exactly one men sitting 
+on one of these three seats. 
+
+Designate one of the three seats to be a seat for men. Such a choice 
+will fix the seats where the men must sit. Afterwards, we count 
+the number of ways to permute the four men and eight women, which 
+equals $4!\m8!$. 
+
+By principle of multiplication, we deduce that the total possible 
+seatings are $\boxed{3\m4!\m8!}$.
+
+\hfill \qed
+
+\new{Question 8} How many ways can six women and six men could 
+be seated if men and women are to sit in alternate seats?
+
+\new{Solution} 
+Apply the reasoning that we used for the previous problem. 
+From two consecutive seats, choose one seat for the men, which 
+decides all the seats where the men should sit. Multiply by the 
+permutations for men and women. We conclude that the number of 
+total possible sittings are $\boxed{2\m (6!)^2}$. \hfill \qed
+
+\normalsize
+\end{document}
