@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage[shortlabels]{enumitem}
+\usepackage{xcolor}
 
 \newcommand{\new}[1]{
     \vspace{2mm}
@@ -91,19 +92,19 @@ For each of the subsets of property a, b, count the number of four
 
 \begin{proof}
     Start off with counting the digits that need not satisfy both 
-    a or b. By principle of multiplication, we count $5^4 = 625$. 
+    a or b. By principle of multiplication, we count $5^4 = \boxed{625}$. 
     
     Now we count the digits that satisfy only condition a. Again, 
-    by principle of multiplication, $5\cdot4\cdot3\cdot2 = 120$. 
+    by principle of multiplication, $5\cdot4\cdot3\cdot2 = \boxed{120}$. 
 
     For the digits that only satisfy condition b, we start with choosing 
     the last digit. If the last digit is even, the whole number is even. 
     There are two even numbers within the set $\{1, 2, 3, 4, 5\}$. So, 
-    by principle of multiplication, we count $2\cdot5\cdot5\cdot5 = 250$.
+    by principle of multiplication, we count $2\cdot5\cdot5\cdot5 = \boxed{250}$.
     
     Finally, for the digits that satisfy both of the conditions, 
     we again count from the last digit. By principle of multiplication, 
-    the answer is $2\cdot4\cdot3\cdot2 = 48$. 
+    the answer is $2\cdot4\cdot3\cdot2 = \boxed{48}$. 
     
 \end{proof}
 
@@ -134,9 +135,9 @@ it is possible to write $n$ as:
 where $p_i$'s are prime and $a_i$'s are positive integers. The number 
 of positive divisiors of $n$ is
 
-\[
+\begin{equation} \label{eq:numdiv}
     \prod_{i = 0}^{k} (a_i + 1)
-\]
+\end{equation}
 
 \begin{proof}
     The divisors of $n$ must involve only the prime numbers 
@@ -152,7 +153,7 @@ the prime factorization of the three numbers, which is given as follows.
 \[
     3^4\cdot5^2\cdot7^6\cdot11,\hspace{3mm} 2^2\cdot5\cdot31, \hspace{3mm} 2^{10}\cdot5^{10}
 \]
-The number of their divisors are $5\m3\m7\m2 = 210$,  $3\m2\m2 = 12$,  $11\m11 = 121$. \qed
+The number of their divisors are $5\m3\m7\m2 = \boxed{210}$,  $3\m2\m2 = \boxed{12}$,  $11\m11 = \boxed{121}$. \qed
 
 \new{Question 7} In how many ways can four men and eight women be 
 seated around a round table if there are two women between consecutive 
@@ -171,7 +172,12 @@ the number of ways to permute the four men and eight women, which
 equals $4!\m8!$. 
 
 By principle of multiplication, we deduce that the total possible 
-seatings are $\boxed{3\m4!\m8!}$.
+seatings are $3\m4!\m8!$.
+
+\color{red}
+We have overcounted each arrangements 12 times, for there are 12 possible rotations for each sitting. 
+Thus, the answer is $\boxed{3\m4!\m8!/12 = 3!\m8!}$
+\color{black}
 
 \hfill \qed
 
@@ -183,7 +189,265 @@ Apply the reasoning that we used for the previous problem.
 From two consecutive seats, choose one seat for the men, which 
 decides all the seats where the men should sit. Multiply by the 
 permutations for men and women. We conclude that the number of 
-total possible sittings are $\boxed{2\m (6!)^2}$. \hfill \qed
+total possible sittings are $2\m (6!)^2$. 
 
-\normalsize
+\color{red}
+We have overcounted each arrangements 12 times, for there are 12 possible rotations for each sitting. 
+Thus, the answer is $\boxed{2\m (6!)^2/12 = 5!\m6!}$
+\color{black}
+
+\hfill \qed
+
+\new{Question 9} 
+In how many ways can 15 people be seated at a round table 
+if B refuses to sit next to A? What if B only refuses to sit 
+on A's right?
+
+\new{Solution} 
+We partion all possible sittings $P$ into three parts $P_1, P_2, P_3$. 
+Let $P_1$ refer to all the sittings where A and B do 
+not sit next to each other. Let $P_2$ be the sittings 
+where A sits to the left of B and $P_3$ be the sittings 
+where B sits to the left of A. The question boils down 
+to computing the size of $P_1$ and $P_1 \cup P_3$. 
+
+First observe that there is a one-to-one correspondence 
+between $P_3$ and $P_1$. By switching the seats of A and 
+B, it is possble to obtain a sitting in $P_3$ from a sitting 
+in $P_1$ and vice versa. It is trivial to see that $|P| = 14!$. Divide the linear 
+permutation of the 15 people by 15 to account for rotations. 
+
+Compute the size of the part $P_3$. Fix the position of A
+to ignore rotations. 
+B must sit on the left of A, hence the position of B is fixed. 
+The size of $P_3$ is the number of ways to permute the remaining 
+13 people, and hence $|P_3| = 13!$. Also, by our previous observation, 
+$|P_2| = |P_3| = 13!$. 
+
+By the addtion principle, 
+\[
+    |P| = |P_1| + |P_2| + |P_3| \textOr 
+    14! = |P_1| + 2\m 13!
+\]
+and thus 
+\color{red}
+\[
+    |P_1| = 12\m13!
+\]
+\color{black}
+
+so we have computed the sizes of all partitions. 
+
+Finally, we write the sizes of the two partitions of our interest.
+\color{red} 
+\[
+    \boxed{
+    |P_1| = 12\m 13!
+    }
+    \textAnd
+    \boxed{
+    |P_1 \cup P_3| = |P_1| + |P_3| = 13\m 13!
+    }
+\]
+\color{black}
+
+\hfill \qed
+
+
+\new{Additional Problem 1}
+I computed ten permutations and got nine correct. I would give 
+myself a 90/100. I confused the permutation with a combination for 
+some reason and divided by an extra factor of two. Other than that, 
+the math was correct. 
+
+Also the following code will compute $P(n, k)$ in python. 
+\begin{verbatim}
+def P(n, k):
+     ans = 1
+     mtp = n
+     for i in range(k):
+             ans = ans * mtp;
+             mtp = mtp - 1;
+     return ans
+\end{verbatim}
+
+
+\new{Additional Problem 2}
+How many positive divisors of 2310 have themselves a maximum of 
+four positive divisors?
+
+\new{Solution}
+A key observation is that 2310 factors into a product of five distint 
+prime numbers. 
+\[
+    2310 = 2\m3\m5\m7\m11 
+\]
+Any divisor of 2310 will have some subset of these five numbers 
+without multiplicity. Also, notice that if the number has less than 
+two prime numbers in its factorization, it will have less than 
+four divisors. This is by the proposition presented in Question 4
+\eqref{eq:numdiv}. So we count the number of ways to choose zero, one, 
+or two prime numbers among the five prime numbers. 
+
+\[
+    \binom{5}{0} + \binom{5}{1}
+    + \binom{5}{2} = 1 + 5 + 10 = \boxed{16}
+\]
+So there are 16 such divisors. \hfill \qed
+
+\new{Additional Problem 3}
+Mother Bear’s pizzeria offers 3 sizes of pizza,
+5 protein toppings, and 5 vegetable toppings. In how many ways can I
+order a pizza with up to 3 protein toppings and any number of vegetable
+toppings?
+
+\new{Solution}
+Apply the principle of multiplication. Choose the size, 
+then choose the protein toppings, then the vegetable toppings. 
+There are three ways to choose the size of the pizza. As for 
+the protein toppings we want to compute the ways to choose three 
+or less toppings out of five. This can be computed by adding some 
+binomial coefficients. 
+\[
+    \binom{5}{0} + \binom{5}{1} + \binom{5}{2} + \binom{5}{3} = 
+    1 + 5 + 10 + 10 = 26
+\]
+As for the vegetable toppings, encode the choice of toppings to 
+a binary string. For example, if we choose to add the first and 
+the third topping, the corresponding string would be 10100. It is 
+not hard to see a one-to-one correspondence between the binary 
+string and the choice of toppings. There are $2^5 = 32$ binary 
+strings of length five. 
+
+So by the principle of multiplication, we write our solution. 
+\[
+    3\m26\m32 = \boxed{2496}
+\]
+And there are a total 2496 ways to choose the pizza. 
+
+\new{Additional Problem 4}
+I got everything correct! 100/100. 
+Also the following code will compute $\binom{n}{k}$ in python. 
+\begin{verbatim}
+def C(n, k):
+    return P(n, k) / P(k, k)
+\end{verbatim}
+
+\new{Question 10}
+A committee of five people is to be chosen from a club that boasts a membership 
+of 10 men and 12 women. How many ways can the committee be formed if it is 
+to contain at least two women? How many ways if, in addition, one particular 
+man and one particular woman who are members of the club refuse to serve 
+together on the committee?
+
+\new{Solution}
+\color{red}
+From all possible choice of a 5 person comittee, we will 
+subtract the partion with zero or one women. This will 
+yield all ways to choose a five person comittee including at 
+least two women. 
+
+\[
+    \binom{22}{5} - \binom{10}{5} - \binom{10}{4}\binom{12}{1}
+    = \boxed{23562}
+\]
+
+
+To solve the second problem, we partition the choice of all five 
+person committees into the choice that includes both the women and men 
+of the problematic pair, and the ones that does not include both 
+of the two. For the second part, the problematic women or the men 
+can be included, but not both. In fact, it is easy to compute the size 
+of the first part. We induct the two people into the comittee, then 
+choose additional three people. 
+
+The problem converts to counting the number of 3-person 
+comittees chosen from 11 women and 9 men, where the comittee 
+must include at least one women. Again, we count by the principle 
+of subtraction. 
+\[
+    \binom{20}{3} - \binom{9}{3} = 1056
+\]
+
+To obtain the size of the second part, subtract the first part 
+from the whole set. 
+
+\[
+    23562 - 1056 = \boxed{22506}
+\]
+
+So there are 23562 ways to choose the committee without the restriction 
+of the problematic pair, and 22506 when the pair of man and women refuses 
+to sit in the committee together. 
+\color{black}
+\hfill \qed
+
+\new{Question 14}
+A classroom has two rows of eight seats each. There are 14 students, 5 of whom 
+always sit in the front row and 4 of whom always sit in the back row. In how 
+many ways can the students be seated? 
+
+\new{Solution} 
+Seat the students sequentially in the following order. First, seat 
+the five students who must sit in the front row. Then, seat the 
+four students who must sit in the back row. Finally, seat the rest 
+of the five students in any of the remaining seven seats. By the 
+principle of multiplication, we count the number of possible seatings. 
+\color{red}
+Note that we must count using permutations for each table!
+\color{black}
+
+\color{red}
+\[
+    P(8, 5) \m P(8, 4) \m P(7, 5) = \boxed{8449792000}
+\]
+\color{black}
+So there are 8449792000 possible seatings. 
+\hfill \qed
+
+\new{Question 15}
+At a party there are 15 men and 20 women. 
+(a) How many ways are there to form 15 couples consisting of one man and 
+one woman? 
+(b) How many ways are there to form 10 couples consisting of one man and 
+one woman? 
+
+\new{Solution} For part (a), we notice that all men must necessarily 
+have a partner. We iterate starting from the first man and let 
+each man to decide his partner. There are $\boxed{P(20, 15) = 20274183401472000}$ matchings possible. 
+
+For part (b), start with obtaining the list of 10 men who have a partner. 
+There are $\binom{15}{10}$ ways to make such a choice. Using the same reasoning 
+for part (a), there must be $P(20, 10)$ ways to assign a partner to the 
+selected 10 men. By the principle of multiplication, the total number 
+of couplings are as follows.
+
+\[
+    \boxed{\binom{15}{10} \m P(20, 10) = 2013339046118400}
+\]
+\hfill \qed
+
+\new{Question 21}
+How many permutations are there of the letters of the word ADDRESSES? How 
+many 8-permutations are there of these nine letters?
+
+\new{Solution}
+Decompose the string ADDRESSES into a multiset. 
+\[
+    \{A\m 1, D\m 2, E\m 2, R\m 1, S \m 3\}
+\]
+The permutation of this multiset is given by the following multinomial. 
+\[
+    \boxed{\binom{9}{3, 2, 2, 1, 1} = 
+    \binom{9}{3} \binom{6}{2} \binom{4}{2} \binom{2}{1}=
+    15120}
+\]
+
+Consider a 8-permutation of this multiset. Notice that the one 
+element that is not used in the permutation is uniquely determined 
+by teh permutation. Indeed, the number of 8-permutation equals 
+to the number of permutations of the set. There are $\boxed{15120}$ 8-permutations. 
+
+\hfill \qed
+
 \end{document}
