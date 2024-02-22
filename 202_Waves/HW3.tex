@@ -1,0 +1,396 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 202 HW3
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize
+
+\new{Q1}
+Identify the faulty labeling from the power 
+resonance curve. 
+
+\new{Solution}
+
+The peak of the curve occurs 
+at $f = 22.5Hz$ so 
+$\omega_res \approxeq 172kHz$. The FWHM of the 
+curve is about $\gamma  = 2\pi \cdot 500Hz
+\approxeq 3kHz $. We claim that the 
+wrong label is the inductance, and hence 
+the correct label is 
+$(R, L, C) = (30mH, 1nF, 100 \Omega)$. 
+
+Assuming the purported label is correct, 
+we compute the theoretical resonant frequency 
+and $\gamma$. 
+
+\[
+    \gamma_{th} = R/L = 3.3kHz
+\]
+\[
+    \omega_{th} = 1/\sqrt{RC} = 180kHz
+\]
+
+Which is close enough to the experimental 
+value. \hfill \qed 
+
+
+\new{Q2}
+A resistor, inductor, and conductor 
+is connected in parallel. Assuming 
+that the a varying input current is 
+entering the circuit in the rate of 
+$I(t)  = I_0 \cos(\omega t)$, 
+
+a) What is the resonant frequency?
+
+b) What is the FWHM of the power resonance curve?
+
+c) Define $Q:= \omega_0/FWHM$. What is the 
+relationship between the Q-factors 
+of the parallel and series circuit?
+
+\new{Solution}
+
+We start off with writing the complexified 
+voltage across each component. 
+
+\[
+    \tilde{I}_{in} = \sum I = 
+    \tilde{V}_{in} \left( 
+        \frac{1}{R} +
+        \frac{1}{i\omega L} +
+        i\omega C
+    \right)
+\]
+
+Thus 
+\[
+    \tilde{V}_{in} = \tilde{I}_{in} / \left( 
+        \frac{1}{R} +
+        \frac{1}{i\omega L} +
+        i\omega C
+    \right)
+\]
+
+a)
+
+Resonance occurs when  the complex impedences 
+cancel out. That is 
+\[
+    \omega C = 1/(\omega L)
+    \textOr 
+    \omega ^2 = \frac{1}{LC}
+    \textOr 
+    \boxed{
+    \omega_0  = \frac{1}{\sqrt{LC}
+    }
+    }
+\]
+
+Recovering the real value for $V_{in}$
+\[
+    V_{in}(t) = \frac{
+        I_0 \cos(\omega t + \phi )
+    }{
+        \sqrt{
+        1/R^2 + (\omega C - 1/(\omega L))^2
+        }
+    }
+\]
+we can write an expression for $P(t)$.
+\[
+    P(t) = V_{in}(t)^2/R = 
+\frac{
+        I_0^2 \cos^2(\omega t + \phi )
+    }{
+        R(
+        1/R^2 + (\omega C - 1/(\omega L))^2
+        )
+    }
+\]
+
+The time average of the squared cosine 
+function is $1/2$. Thus 
+
+\[
+     \<P(t)\> = 
+\frac{
+        I_0^2 
+    }{
+        2R(
+        1/R^2 + (\omega C - 1/(\omega L))^2
+        )
+    }
+\]
+
+Ignoring the constants, we recognize that 
+the FWHM occurs when 
+\[
+    1/R^2 = (\omega C - 1/(\omega L))^2
+\]
+
+Multiply both sides by $L^2 \omega^2$
+
+\[
+    \omega^2 /\gamma ^2 = 
+(\omega^2 LC - 1)^2
+\textAnd 
+\pm \omega/\gamma = 
+\omega^2 LC - 1
+\]
+
+Call the solutions to the two equations 
+as $\omega_1$ and $\omega_2$.
+
+\[
+\omega_1/\gamma = 
+\omega_1^2 LC - 1
+\textAnd
+-\omega_2/\gamma = 
+\omega_2^2 LC - 1
+\]
+
+Subtracting the bottom equation from the top 
+\[
+    (\omega_1 +\omega_2)/\gamma = 
+    (\omega_1^2-\omega_2^2)LC
+    \textOr 
+    (\omega_1-\omega_2) = \frac{1}{\gamma LC}
+    = \boxed{\omega_0^2/\gamma}
+\]
+
+c)
+We compute the Q-factor for the parallel circuit.
+\[
+    Q_{par} = \omega_0 / {\omega_0^2/\gamma}
+     = \gamma / \omega_0
+\]
+We also know the Q-factor for series circuits. 
+\[
+    Q_{ser} = \omega_0/\gamma 
+\]
+Thus 
+\[
+    \boxed{Q_{ser} = 1/Q_{par}}
+\]
+
+\new{Q3 Reduced Mass}
+Two masses are connected to each 
+other with a string with constant 
+$k$.
+
+a) Write down the equation of Newton's II 
+law for the two masses. Write the matrix 
+form of the equation. 
+
+\new{Solution}
+We write the two equations.
+\[
+    m_1\ddot{x_1} = -k(x_1-x_2) 
+    \textAnd 
+    m_2\ddot{x_2} = -k(x_2 - x_1)
+\]
+We wish to obtain a homogeneous system.
+
+\[
+    m_1\ddot{x_1} +k(x_1-x_2) =0
+    \textAnd 
+    m_2\ddot{x_2} +k(x_2 - x_1)=0
+\]
+
+We guess the solutions to be in the form 
+of $\tilde{x}_1 = Ae^{i\omega t}, \tilde{x}_2 = Be^{i\omega t}$.
+Plugging in and cancelling the exponential term, we write 
+
+\[
+    -\omega^2 m_1 A + kA - kB = 0 
+    \textAnd 
+     -\omega^2 m_2 B + kB - kA = 0 
+\]
+
+In matrix form
+\[
+    \twobytwoMat(
+        -\omega^2 m_1 + k, 
+        -k, 
+        -k, 
+        -\omega ^2 m_2 + k
+    )
+    \twobyoneMat(A, B)
+    = 
+    \twobyoneMat(0, 0)
+\]
+
+b) Determine the normal modes of the system 
+
+\new{Solution}
+
+The normal modes occur when the 
+determinant of the coefficient matrix equals zero. That is 
+\[
+     \twobytwoDet(
+        -\omega^2 m_1 + k, 
+        -k, 
+        -k, 
+        -\omega ^2 m_2 + k
+    )
+    = 
+    (k - \omega^2 m_1)(k - \omega^2 m_2) - k^2 = 0
+\]
+\[
+    \omega^4 m_1 m_2 - k(m_1 + m_2)\omega^2 = 0
+    \textOr 
+    \omega^2 (\omega^2m_1 m_2 - km_1 - km_2) = 0
+\]
+
+The solutions to this equation are 
+\[
+\boxed{
+    \omega = 0 \textOr 
+    \sqrt{\frac{
+        k(m_1 + m_2)
+    }{m_1m_2}}
+    = \sqrt{k/\mu}
+}
+\]
+
+c) Determine the eigenvector which corresponds to each normal mode frequency. For the vibrational mode, how does the ratio of the two masses’ ranges of motion relate to their respective
+masses?
+
+\new{Solution}
+Write the coefficient matrix for the 
+two possible cases of $\omega$. If 
+the frequency is zero and nonzero, the 
+coefficient matricies are respectively
+\[
+    \twobytwoMat(k, -k, -k, k)
+    \textAnd 
+    \twobytwoMat(k - m_1 k /\mu, -k, 
+    -k, k - m_2 k / \mu)
+    = 
+    -\twobytwoMat(
+        m_1 k /m_2, k, 
+        k, m_2 k /m_1
+    )
+\]
+
+Upon inspection, the eigenvectors 
+that correspond to each of the matricies are 
+\[
+    \twobyoneMat(1, 1) \textAnd \twobyoneMat(m_2/m_1, -1)
+\]
+
+The former mode is the stationary mode 
+and the latter mode is the vibrational mode. 
+For the vibrational mode, if the mass of the 
+two bodies are comparable to each other, the 
+amplitude of their oscilations will also be 
+comparable. Nonetheless, if one of the bodies 
+are much heavier, the oscillation amplitude of 
+the lighter mass will be larger than the 
+lighter mass. Also, the phase of the two 
+oscillations will differ by $\pi$. 
+
+\hfill \qed
+
+
+\end{document}
