@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{xcolor}
 
 \newcommand{\new}[1]{
     \vspace{2mm}
@@ -392,5 +393,181 @@ oscillations will differ by $\pi$.
 
 \hfill \qed
 
+
+\new{Q4}
+a) Derive the differential equations that governs 
+the evolution of the coupled LC oscillator. 
+
+\new{Solution}
+Call the current that goes to the leftmost and the rightmost 
+part of the circuit $I_1, I_2$, and the current through 
+the center $I_C$. We mark all currents to point from bottom to top. 
+By the juction rule, we deduce 
+\[
+    I_1 + I_2 + I_C = 0
+\]
+Integrating over time, and assuming there is no input voltage 
+\[
+    Q_1 + Q_2 + Q_C = 0
+\]
+
+Also, the voltage difference across all the circuit elements 
+must be the same. Hence 
+\[
+    L_1\ddot{Q_1} + Q_1/C_1 = 
+    L_2\ddot{Q_2} + Q_2/C_2 = 
+    Q_C/C_C
+\]
+Substituting $Q_C = -(Q_1+Q_2)$, we obtain 
+\[
+    L_1\ddot{Q_1} + Q_1/C_1 = -(Q_1+Q_2)/C_C
+\textAnd
+    L_2\ddot{Q_2} + Q_2/C_2 = -(Q_1+Q_2)/C_C
+\]
+
+The inductance of each component relates to the mass 
+and the reciprocal of the capacity relates to the 
+spring constant. Formally:
+
+\[
+    \boxed{
+        (L_1, L_2) \leftrightarrow (m_1, m_2), 
+        (1/C_1, 1/C_2, 1/C_C) \leftrightarrow (k_1, k_2,\kappa)
+    }
+\]
+
+Complexify $Q_1, Q_2$ and try the solutions 
+$\tilde{Q}_1 = Ae^{i\omega t}, \tilde{Q}_2 = Be^{i\omega t}$. 
+Dividing by the exponential terms, we obtain
+
+\[
+    -L_1 \omega^2 A + A/C_1 + (A + B)/C_C = 0
+\]
+\[
+    -L_2 \omega^2 B + B/C_2 + (A + B)/C_C = 0
+\]
+
+Divide by inductance and write in matrix form
+\[
+    \twobytwoMat(
+        -\omega^2 + 1/(L_1C_1) + 1/(L_1C_C), 1/(L_1C_C) ,
+         1/{(L_2C_C)}, {-\omega^2 + 1/(L_2C_2) + 1/(L_2C_C)})
+    \twobyoneMat(A, B)
+    =
+    \twobyoneMat(0, 0)
+\]
+
+b) Assuming $L_1 = L_2 = L, C_1 = C_2 = C_C$, compute 
+the two resonant frequencies.
+
+\new{Solution 1} Using matricies
+
+Plug in the conditions to the matrix formula
+\[
+    \twobytwoMat(
+        -\omega^2 + 2/(LC), 1/(LC) ,
+         1/LC, {-\omega^2 + 2/(LC)})
+    \twobyoneMat(A, B)
+    =
+    \twobyoneMat(0, 0)
+\]
+The normal modes occur when the determinant of 
+the coefficient matrix equals zero. That is 
+
+\[
+    (-\omega^2+ 2/(LC))^2 = (1/(LC))^2
+\]
+\[
+    -\omega^2= (-2\pm1)/LC 
+    \textOr
+    \boxed{
+    \omega = \sqrt{(2\pm 1)/(LC)} = \sqrt{1/(LC)}, \sqrt{3/(LC)}
+    }
+\]
+
+We now compute the modes. Plug in the resonant frequency to 
+the coefficient matrix and find the eigenvectors. 
+
+If $\omega = \sqrt{1/(LC)}$, the coefficient matrix is 
+
+\[
+    1/(LC) \twobytwoMat(1, 1, 1, 1)
+\]
+
+and the corresponding eigenvector is $(A, B) = (1, -1)$. 
+
+If $\omega = \sqrt{3/(LC)}$, the coefficient matrix is 
+
+\[
+    1/(LC) \twobytwoMat(-1, 1, 1, -1)
+\]
+
+and the corresponding eigenvector is $(A, B) = (1, 1)$. 
+
+We conclude that the two modes are 
+\[
+    \boxed{
+    (\omega, Q_1, Q_2) = (1/\sqrt{LC}, A\cos(\omega t), -A\cos(\omega t))
+    }
+\]
+\[
+    \boxed{
+    (\omega, Q_1, Q_2) = (\sqrt{3/LC}, A\cos(\omega t), A\cos(\omega t))
+    }
+    \]
+
+\color{red}
+The $I_2$ in this solution is defined to be opposite to that of 
+defined in the problemset!
+\color{black}
+
+\new{Solution 2} 3x3 matricies
+
+Let $Q_1, Q_2, Q_C$ be three unknowns. Instead of applying the 
+restraint that their sum must be zero, we claim that the specific 
+solution $Q_1 = Ae^{i\omega t}, Q_2 = B e^{i\omega t}, Q_3 = 
+C e^{i\omega t}$ works. In matrix form, the equation simplifies to
+
+\[
+    \begin{bmatrix}
+        i \omega &i\omega& i\omega \\
+        -\omega^2 L_1+ 1/C_1&0& -1/C_C\\
+        0&-\omega^2L_2+1/C_2&-1/C_C
+    \end{bmatrix}
+    \begin{bmatrix}
+        A\\B\\C
+    \end{bmatrix}
+    =
+\begin{bmatrix}
+        0\\0\\0
+    \end{bmatrix}
+\]
+
+
+And assuming all the inductance and the capacitance is identical
+
+\[
+    \begin{bmatrix}
+        i \omega &i\omega& i\omega \\
+        -\omega^2L+ 1/C&0& -1/C\\
+        0&-\omega^2L+1/C&-1/C
+    \end{bmatrix}
+    \begin{bmatrix}
+        A\\B\\C
+    \end{bmatrix}
+    =
+\begin{bmatrix}
+        0\\0\\0
+    \end{bmatrix}
+\]
+
+The determinant of the coefficient matrix turns out to be
+
+\[
+    i\omega(\omega^2L-1/C)(\omega^2 L -3/C)
+\]
+This value equals zero when $\boxed{\omega = 1/\sqrt{LC}, \sqrt{3/(LC)}}$
+
+The normal modes can be derived equally as from the previous solution. 
 
 \end{document}
