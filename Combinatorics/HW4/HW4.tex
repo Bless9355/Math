@@ -145,6 +145,7 @@ many of these relations are reflexive? Symmetric? Antisymmetric? Reflexive
 and symmetric? Reflexive and anti-symmetric?
 
 \new{Solution}
+
 We distinguish any ordered pairs of two integers into distinct 
 and nondistinct pairs. The former refers to the pairs 
 which have distinct entries. That is $(a, b)$ where $a \neq b$. 
@@ -159,10 +160,13 @@ the relation. For a relation to be reflexive, it must include
 all the nondistinct pairs. For a relation to be antisymmetric 
 it must not include any of the nondistinct pairs. 
 
+
 From the observations made above, we construct relations that satisfy 
 the given conditions. If the relation is defined from the cannonical 
 set $[n]$ to $[n]$, there exists n nondistinct pairs and $\binom{n}{2}$
 couples of distinct pairs. 
+
+It is trivial that there exists $\boxed{2^{n^2}}$ relations overall. 
 
 To construct all the symmetric relations, we either choose or leave 
 each nondistinct pair or a distinct couple of pairs. There 
@@ -215,4 +219,189 @@ the proof. \hfill \qed
 c R d, aRe, e R f, f R d$. Verify that R is the cover relation of a partially ordered 
 set, and determine all the linear extensions of this partial order. 
 
+\new{Solution}
+Drawing a Hasse diagram, we identify that element $a$ 
+is maximum and $d$ the minimum. All elements are connected
+either upwards or downwards of $a$ and $d$. By transitivity, 
+we infer all the orders, and set $xRx$ for all $x \in X$. 
+
+As for the number of all linear extensions, we 
+will count all the linear arrangement of the elements. 
+Arrange the elements from the smallest to largest
+The position of $d, a$ are fixed to be in the beginning 
+and in the end of the queue. Any arrangement 
+where $c$ comes before $b$ and $f$ comes before $e$ 
+will work. Observe that by reseving the positions of 
+$b, c$, a linear order is created. There are $\boxed{\binom{4}{2} = 6}$ 
+ways to do this. 
+
+
+\new{Sec4.6Q50}
+Consider the partially ordered set of subsets of the set $X = \{a, b, c\}$ of 
+three elements. How many linear extensions are there? 
+
+\new{Solution}
+
+Again, refer to the Hasse diagram from the book. We fix the 
+entire set and the emptyset to be the maximum and the minimum of the linear 
+order. Considering arranging the 8 subsets in a line, we have 
+deduced the necessary position of the two elements. 
+
+The nonempty proper subsets occupy the six remaining slots. 
+We first determine the order of the three elements $\{a\}, \{b\}, \{c\}$. 
+Afterwards, we insert the subsets with two elements in between to 
+come up with a valid ordering. Notice that from the permutation 
+$(a, b, c)$ (abusing notation so that $a = \{a\}$ and so on), the 
+subsets $\{a, b\}, \{a, c\}$ must come before $\{a\}$. The set $\{b, c\}$
+can either come before $\{b\}$ or $\{a\}$. For the former case, 
+the three subsets of size 2 can be arranged in any of the six possible 
+orderings amongst them. For the latter case,  $\{a, b\}, \{a, c\}$ 
+has two possible arrangements. By the principle of addition and 
+multiplication, we deduce that the total number of linear extensions 
+are 
+\[
+    6\m(2+6) = \boxed{48}
+\]
+
+\new{Sec5.7q3}
+Compute the first few diagonal sums of the Pascal's triangle. 
+Determine the relationship between them. 
+
+\new{Solution}
+
+The nth diagonal can be considely written as the following sum. 
+\[
+    a_n := \sum_{i = 0} ^ {n-i\geq i} 
+    \binom{n - i}{i}
+\]
+Where $n  = 0, 1, 2, ...$. 
+
+The following python code generates the diagonal sum. 
+
+\begin{verbatim}
+def P(n, k):
+    ans = 1
+    for i in range(k):
+        ans = ans * (n-i)
+    return ans
+
+def C(n, k):
+    return P(n, k)/P(k, k)
+
+def nthDiag(N):
+    i = 0
+    ans = 0
+    while (N - i >= i):
+        ans = ans + C(N - i, i)
+        i = i + 1
+        
+    return ans
+\end{verbatim}
+
+According to python, the first few of the sums are
+\[
+    1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+\]
+
+and we recognize that this is the fibbonacci sqeuence. 
+That is, denoting the nth diagnoal sum $a_n$, 
+\[
+    a_{n+2} = a_{n+1}+a_{n}
+\]
+
+%prove if time allows
+
+\new{Sec5.7q4}
+Expand the following two products by the binomial theorem. 
+
+
+\newcommand{\term}[2]{
+    x^{#1}y^{#2}
+}
+
+
+\new{Solution}
+
+\[
+    (x + y)^5 = 
+    \sum_{i = 0}^{i = 5} \binom{5}{i} \term{i}{5 - i}
+    = y^5 + 5 x y^4 + 10 x^2 y^3 + 10 x^3 y^2 + 5 x^4 y + x^5
+\]
+
+\[
+    (x + y)^6 = 
+    \sum_{i = 0}^{i = 6} \binom{6}{i} \term{i}{6 - i}
+    = y^6 + 6 x y^5 + 15 x^2 y^4 + 20 x^3 y^3 + 15 x^4 y^2 + 6 x^5 y + x^6
+\]
+
+\new{Sec5.7q7}
+Prove that the weighted sum of the binomials by the geometric 
+series is in the form of $(r+1)^k$. 
+
+\new{Solution}
+We start with considering a specific sum. Write 
+\[
+    \sum_{i = 0}^{i = n} \binom{n}{i} 2^i 
+    = 
+    \sum_{i = 0}^{i = n} \binom{n}{i} 2^i 1^{n - i} 
+\]
+By plugging in $(x, y) = (2, 1)$ to the binomial theorem, 
+we recognize that the sum is exactly $3^n$. 
+\[
+    \sum_{i = 0}^{i = n} \binom{n}{i} x^iy^{n-i} = (x+y)^n
+    \textAnd 
+    \sum_{i = 0}^{i = n} \binom{n}{i} 2^i 1^{n - i} = (2+1)^n = 3^n
+\]
+
+Likewise, for the sum 
+\[
+    \sum_{i = 0}^{i = n} \binom{n}{i} r^i 
+\]
+plug in $(x, y) = (r, 1)$ to show that the sum is $(r + 1)^n$
+\hfill \qed
+
+\new{Sec5.7q9}
+Evaluate the sum 
+\[
+    \sum_{i = 0}^{i = n} (-1)^i\binom{n}{i} 10^k
+\]
+\new{Solution}
+The sum equals 
+\[
+    \sum_{i = 0}^{i = n} \binom{n}{i} (-10)^k 1^{n - k}
+    = (-10 + 1)^n = \boxed{(-9)^n}
+\]
+
+
+\new{Sec5.7q15}
+Prove the equality for every integer $n > 1$. 
+
+\[
+    \binom{n}{1} - 2\binom{n}{2} + \cdots + (-1)^{n-1} n \binom{n}{n} = 0  
+\]
+
+\proof 
+We prove the identity by differentiating the binomial identity. 
+For any positive integer $n$, 
+\[
+    (1-x)^n = 
+    \sum_{i = 0}^{i = n} \binom{n}{i} (-x)^i
+    = 1 + \sum_{i = 1}^{i = n} \binom{n}{i} {-x}^i
+\]
+
+Take the derivative with respect to $x$ both sides. 
+\[
+    \frac{d}{dx}(1-x)^{n}
+     =  \sum_{i = 1}^{i = n} \binom{n}{i} (-1)^i \frac{d}{dx}{x}^{i}
+\]
+
+\[
+    n(1-x)^{n-1} = \sum_{i = 1}^{i = n} \binom{n}{i} (-1)^i i{x}^{i - 1}
+\]
+Set $x = 1$ and multiply $-1$ both sides. 
+\[
+    0\m(-1) = \sum_{i = 1}^{i = n}(-1)^{i + 1} i \binom{n}{i} 
+    =     \binom{n}{1} - 2\binom{n}{2} + \cdots + (-1)^{n-1} n \binom{n}{n} 
+\]
+\hfill \qed
 \end{document}
