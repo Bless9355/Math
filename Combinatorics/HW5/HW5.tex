@@ -1,0 +1,286 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\newcommand{\Pt}[1]{
+    $P_{#1}$
+}
+
+\newcommand{\Szpt}[1]{
+    $|P_{#1}|$
+}
+
+\newcommand{\bbinom}[2]{
+    \bigg(\binom{#1}{#2}\bigg)
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW5
+
+\Large
+Daniel Son
+\end{center}
+
+Section 2.7: 42, 50, 54
+
+Section 5.7: 27, 29, 36
+
+
+\new{Sec2.7Q42} 
+Determine the number of ways to distribute 10 orange drinks, 1 lemon drink, 
+and 1 lime drink to four thirsty students so that each student gets at least one 
+drink, and the lemon and lime drinks go to different students.
+
+\new{Solution}
+Apply the principle of multiplication. Give out the lemon 
+and the lime juice to two distinct students. Then, give out 
+two orange juices to the two student who has not yet received 
+any juice. Then, distribute the eight orange juices by random. 
+
+\[
+    P(4, 2) \bbinom{4}{8} = 4\m3 \binom{11}{3} = \boxed{1980}
+\]
+
+\new{Sec2.7Q50}
+In how many ways can five identical rooks be placed on the squares of an 8-by-8 
+board so that four of them form the corners of a rectangle with sides parallel to 
+the sides of the board? 
+
+\new{Solution}
+Choosing two rows and two columns determine the position 
+of the four rooks that form a rectangle. Choose the last 
+rook from any of the $64-4 = 60$ positions. We count the answer 
+as follows. 
+\[
+    \binom{8}{2} ^2\m60 = \boxed{47040}
+\]
+
+\new{Sec2.7Q54}
+Determine the number of towers of the form $\emptyset \subseteq A \subseteq B \subseteq [n]$. 
+
+\new{Solution} 
+Notice that each tower correspond to a unique partition of the 
+cannonical set $[n]$, that is $A, B\setminus A, [n] \setminus B$. 
+Calling these parts $X, Y, Z$ respectively, we notice that 
+$(A, B) = (X, X\cup Y)$. We have demonstrated an injective mapping 
+from the tower to the partition, and from partition to the tower. Hence, 
+the mapping is bijective. 
+
+The number of ways to partition $[n]$ to three parts is $3^n$. Thus, 
+there are $\boxed{3^n}$ towers. We list out all the towers for $n = 2$. 
+
+\[
+    (A, B) = 
+    (\emptyset, \emptyset),
+    (\emptyset, \{1\}),
+    (\emptyset, \{2\}),
+(\emptyset, \{1, 2\}),
+    (\{1\} ,  \{1, 2\}),
+    (\{1\},  \{1\} ),
+(\{2\},  \{2\} ),
+(\{2\},  \{1, 2\} ),
+(\{1, 2\},  \{1, 2\} )
+\]
+
+\new{Sec5.7Q27} 
+Give a combinatorial proof of the identity 
+\[
+  n(n+1) 2^{n - 2} = \sum_{k = 1}^{n}k^2\binom{n}{k}
+\]
+
+\new{Solution}
+Consider the following scenario. A toy shop has $n$ different 
+toys. John plans to buy some set of the toys for his children 
+Amy and Bob. After John has bought $k \leq n$ toys from the shop, 
+he takes it home where Amy and Bob choose to play with one of the toys 
+each. We assume Amy and Bob to behave nicely, meaning that even if they 
+choose the same toy, they will not fight each other. 
+
+If John brings $k$ toys from home, there are $k^2$ scenarios 
+where Amy and Bob chooses a single toy. John brings $k$ toys from 
+a total of $n$ toys from the shop. Hence, the total configuration 
+of the toys at the end of the day is 
+\[
+    \sum_{k = 1}^n k^2 \binom{n}{k}
+\]
+
+Suppose Charles, the owner of the toy shop, computes the total possible 
+arrangement of the toys. The first possible scenario is that Amy and 
+Bob both choose the same toy. The chosen toy must be taken by John, 
+and all the remaining $n - 1$ toys can be taken home or stay in the shop. 
+There are 
+\[
+    n\m2^{n - 1}
+\]
+such cases. 
+
+The alternate scenario is when the two children choose different 
+toys. By a similar argument there are 
+\[
+    P(n, 2) 2^{n - 2}
+\]
+such cases. 
+
+Adding up the size of the two parts, we obtain 
+\[
+      n\m2^{n - 1} +   P(n, 2) 2^{n - 2}
+      = (2n + n(n - 1))2^{n - 2} = n(n + 1)2^{n-2}
+\]
+For we have double counted all the possible toy arrangements, 
+the combinatorial sum must equal to the term that we have obtained. 
+\[
+  n(n+1) 2^{n - 2} = \sum_{k = 1}^{n}k^2\binom{n}{k}
+\]
+\hfill \qed
+
+\new{Sec5.7Q29} 
+Find and prove a formula for 
+\[
+    \sum_{\substack{r, s, t \geq 0\\r + s + t = n}}
+    \binom{m_1}{r} \binom{m_2}{s} \binom{m_3}{t}
+\]
+
+\new{Solution}
+Use a similar argument used for Vandermonde Convolutions. From 
+a set of 
+$m_1 + m_2 + m_3$ elements, imagine choosing a total of $n$ 
+elements. Partitioning the orignal set into three sets of 
+size $m_1, m_2, m_3$, we observe that the total ways 
+to choose $n$ element from the original set is to count 
+the number of ways to choose $r, s, t$ elements from the 
+respective parts, such that the scripts range under 
+the condition $r + s + t = n$. 
+
+On the other hand, it is trivial that there are $\binom{m_1+m_2+m_3}{n}$
+ways to choose a subset of size $n$ from the original set. For 
+we have counted the same quantity twice, we establish the 
+following identity. 
+
+\[
+    \sum_{\substack{r, s, t \geq 0\\r + s + t = n}}
+    \binom{m_1}{r} \binom{m_2}{s} \binom{m_3}{t}
+    =
+\binom{m_1+m_2+m_3}{n}
+\]
+\hfill \qed
+
+\new{Sec5.7Q36} 
+Prove the Vandermonde Convolutions using the Binomail Theorem. 
+
+\new{Solution}
+We start with the identity 
+\[
+    (1+x)^{m_1}(1+x)^{m_2} = (1+x)^{m_1+m_2}
+\]
+Foil both sides using the Binomial Theorem. 
+\[
+    \bigg(\sum_{k = 0}^{m_1} \binom{m_1}{k} x^k\bigg)
+    \bigg(\sum_{j = 0}^{m_2} \binom{m_2}{j} x^j\bigg)
+    = 
+    \sum_{l = 0}^{m_1 + m_2} \binom{m_1 + m_2}{l} x^l
+\]
+Focus on the coefficient of $x^l$ for some fixed $l$. 
+For the term $x^k$, the corresponding multiple must be $x^{l - k}$. 
+The coefficients of $x^l$ must be equal for both sides. Hence, 
+\[
+    \sum_{
+        \substack{
+            k + j = l \\
+            0 \leq k \leq m_1 \\ 
+            0 \leq j \leq m_2
+        }
+    }
+        \binom{m_1}{k}
+        \binom{m_2}{j}
+    = \binom{m_1 + m_2}{l}
+\]
+
+Note that the binomial term vanishes if the bottom term is less 
+than equal to zero. That is $\binom{a}{b} = 0$ for any $b \leq 0$. 
+Rewrite the LHS. 
+
+\[
+    \sum_{
+        k = 0
+    }
+    ^{l}
+        \binom{m_1}{k}
+        \binom{m_2}{l - k}
+    = 
+\binom{m_1 + m_2}{l}
+\]
+\hfill \qed
+
+\end{document}
