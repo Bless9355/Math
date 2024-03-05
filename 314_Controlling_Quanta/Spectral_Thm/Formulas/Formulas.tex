@@ -7,6 +7,15 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+
+
 \newcommand{\new}[1]{
     \vspace{2mm}
     \noindent
@@ -73,6 +82,7 @@
 
 
 
+
 \newcommand{\halfFigure}[1]{
 \begin{center}
 \includegraphics[width = .5\linewidth]{{#1}}
@@ -111,15 +121,6 @@
         \end{vmatrix}
     }
 }
-
-\usepackage{mathtools}
-\DeclarePairedDelimiter\bra{\langle}{\rvert}
-\DeclarePairedDelimiter\ket{\lvert}{\rangle}
-\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
-
-
-
-
 \begin{document}
 \begin{center}
 \LARGE
@@ -135,8 +136,10 @@ The singlet state is defined as follows.
 
 \[
     \frac{1}{\sqrt{2}}
-    (\ket{\upharpoonleft\downharpoonright})
+    (\ket{z_+}\ket{z_-} - \ket{z_-} \ket{z_+})
 \]
+
+
 
 \end{document}
 
