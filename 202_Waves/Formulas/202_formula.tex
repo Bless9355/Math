@@ -64,10 +64,24 @@
     }
 }
 
+\newcommand{\textThen}{
+    {
+        \hspace{5mm}
+        \textrm{then}
+        \hspace{5mm}
+    }
+}
+
 
 \newcommand{\Ixp}{
     {
         \textrm{Ixp}
+    }
+}
+
+\newcommand{\partialderiv}[2]{
+    {
+        \frac{\partial #1}{\partial #2}
     }
 }
 
@@ -175,6 +189,28 @@ arrive at:
 \[
     k \mapsto T/a
 \]
+
+\new{Dispersion Relation}
+The differential equation of the masses in the center 
+oscillators provide a closed form equation for 
+the angular frequency in terms of the wave number $k$. 
+\[
+    \omega(k) = 2\omega_0 \sin(k a/2)
+\]
+where a is the distance between the masses. 
+
+\new{Dispersion Relation 2}
+The dispersion relation defines the wave number $k$. 
+\[
+    \partialderiv{^2 \psi}{t^2} = 
+    c^2
+    \partialderiv{^2 \psi}{x^2}
+    \textThen
+    \omega^2 = c^2 k^2
+\]
+And $c$ is called the phase velocity of the wave. 
+The wave number depends on the frequency of the wave, which is 
+not necessarily the normal mode frequency
 
 \normalsize 
 

@@ -130,7 +130,7 @@ PHYS 314 Formula Sheet
 Daniel Son
 \end{center}
 
-\new{Singlet States}
+\new{Singlet States and Superposition}
 
 The singlet state is defined as follows.
 
@@ -139,7 +139,133 @@ The singlet state is defined as follows.
     (\ket{z_+}\ket{z_-} - \ket{z_-} \ket{z_+})
 \]
 
+Computing the probability outcomes of the singlet state 
+into all the possible output states, we determine that 
+the particle never collapses to the up-up or down-down state. 
+This means that the spin of one particle decides the spin of the other. 
+This is called \textit{Superposition}. 
+
+\new{Raising and Lowering Operators}
+The raising and the lowering operators are conventionally 
+defined on the \textbf{z-axis}. The operator bumps up 
+the state by one. Here is the definition along with an example. 
+
+\[
+    \hat{S}_+ := \hat{S}_x + i\hat{S}_y
+    \textAnd 
+    \hat{S}_- := \hat{S}_x - i\hat{S}_y
+\]
+
+\[
+    \hat{S}_+ \ket{s, j} = 
+    \sqrt{s(s + 1) - j(j + 1)}
+    \ket{s, j + 1}
+\]
+
+Also, spin operators are Hermitian, so $\hat{S_+}^\dag = \hat{S_-}^\dag$
+
+\new{Product of spins to Product of Raising/Lowering Ops}
+The sum of the square of all the spin operators of each direction 
+is a natural operator with importance. It is possible to 
+express this operator, which is dependant on all three axes, into 
+a sum of three products that involve only the z-axis operators. 
+The tensor product of vectors/operators behave nicely. In light of 
+this fact with the definition of the raising/lowering operator, we 
+conclude 
+\[
+    2\hat{S_{1x}}\hat{S_{2x}}+
+    2\hat{S_{1y}}\hat{S_{2y}} + 
+    2\hat{S_{1z}}\hat{S_{2z}} = 
+    \hat{S}_{1+}\hat{S}_{2-} + \hat{S}_{1-}\hat{S}_{2+} + 2\hat{S_{1z}}\hat{S_{2z}} 
+\]
+
+\new{Applications}
+It is possible to express a higher order spin, say spin-3/2, as a 
+tensor product of two lower spins, spin-1 and spin-1/2. The idea 
+is to take the lowest and the highest value of the spin states, 
+and to apply the total momentum operator $\hat{J}^2 := (\hat{J}_1 + \hat{J}_2)^2$.
+The operator $\hat{J_1}\hat{J_2}$ can be expressed entirely in terms 
+of the z-axis operators. It might be tempting to simply apply each 
+of the operators separately, but the base states are eigenvectors 
+of $\hat{J_i}^2$.  
+\[
+    \hat{J_1}\hat{J_2} =     2\hat{J_{1x}}\hat{J_{2x}}+
+    2\hat{J_{1y}}\hat{J_{2y}} + 
+    2\hat{J_{1z}}\hat{J_{2z}} 
+\]
+
+Refer to Townsend Appendix B for details. In conclusion, this 
+equation will show that the tensor product of the states spin-1/2 
+and spin-1 will yield all the states in spin-3/2 and spin-1/2. 
+
+Also, for entangled states, the raising and the lowering operator is 
+defined as follows. 
+\[
+    \hat{S}_+ := \hat{S}_{1+}\cdot 1_2 + 1_1\cdot \hat{S}_{2+} 
+    \textAnd 
+    \hat{S}_- := \hat{S}_{1-}\cdot 1_2 + 1_1\cdot\hat{S}_{2-}
+\]
+Where $S$ is defined to be the entangled spin of two particles. 
+For an intuitive justification, consider the rotation generator. 
+The sum of the two operators are the terms that survive as $d\theta \rightarrow 0$. 
+
+\new{Types of Operators and their properties}
+We have the spin operator $\hat{S} := \hat{S}_x + \hat{S}_y + \hat{S}_z$. 
+The nice property is that the magnitude of the combined spin $\hat{S}^2$ 
+commutes with individual axis spin. That is:
+
+\[
+    [\hat{S}^2, \hat{S}_i] = 0
+\]
+
+We can take the tensor prouct of two entangled particles. That is 
+\[ \hat{S}_1 \cdot \hat{S}_2 :=
+\hat{S}_{1x}\hat{S}_{2x}+
+    \hat{S}_{1y}\hat{S}_{2y} + 
+    \hat{S}_{1z}\hat{S}_{2z}
+\]
+\halfFigure{TownSend_5_27.png}
+Note that any state is a eigenvector of $\hat{S}^2$. 
+Refer to Tonwsend CH5 for more information. 
+
+\new{Hyperfine energy structure of the Hydrogen Atom}
+A hydrogen atom can be considered as as a system of two 
+spin-1/2 particles, proton and the electron. The Hamiltonian 
+of the system is defined as $\hat{H} = \frac{2A}{\hbar^2}\hat{S}_1\cdot \hat{S}_2$. 
+With some computation, we recognize that there are two energy 
+eigenvalues and four energy eigenvectors. 
+
+\[
+    \hat{H} = 
+    \begin{bmatrix}
+        A/2 & 0 & 0 & 0 \\
+        0 & -A/2& A & 0 \\
+        0 & A & -A/2& 0 \\
+        0 & 0 & 0 &A/2
+    \end{bmatrix}
+\]
 
 
+
+
+The higher energy eigenvalue is $A/2$, and the 
+corresponding states are the two product states (top/bottom) and 
+the entangled state which has the same signs. In symbols, 
+
+\[
+    \lambda = \frac{A}{2} \textAnd \ket{\psi} = \ket{z_+}\ket{z_+}, 
+    \ket{z_-}\ket{z_-}, 
+    \frac{1}{\sqrt{2}}(\ket{z+}\ket{z-} + \ket{z_-}\ket{z_+})
+\]
+
+The lower energy eigenvalue is $-3A/2$, and the 
+corresponding state is the singlet state. In symbols, 
+
+
+\[
+    \lambda = -\frac{3A}{2} \textAnd \ket{\psi} = 
+    \frac{1}{\sqrt{2}}(-\ket{z+}\ket{z-} + \ket{z_-}\ket{z_+})
+\]
+Remember that $\frac{2}{\hbar^2}S_1S_2$ has the eigenvalue of $1/2, -3/2$.  
 \end{document}
 

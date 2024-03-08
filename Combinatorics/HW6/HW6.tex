@@ -1,0 +1,352 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW6
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize 
+
+\new{Sec5.7q48} Use Theorem 5.6.1 to show that, if m and n are positive integers, then a partially 
+ordered set of mn + 1 elements has a chain of size m + 1 or an antichain of size 
+n+1. 
+
+\new{Solution} 
+We proceed with a constructive proof. 
+Consider poset $S$ and an ordering $(S, \leq)$. 
+Among all the antichain covers of $S$, let $P$ be the minimal 
+antichain cover. That is, any antichain cover of $S$ involves 
+at least $|P|$ antichains. By Mirski's theorem, we know 
+that the largest chain in the poset $|S|$ must have a length 
+of $|P|$. 
+
+If $|P| > m$, $|P| \geq m + 1$ and the longest chain has 
+more than $m + 1$ elements. We consider the case where 
+$|P| \leq m$. In the cover $P$, there must exist a antichain 
+larger than
+\[
+    \bigg\lceil 
+    \frac{mn + 1}{|P|}
+    \bigg\rceil
+    \geq 
+    \bigg\lceil 
+    \frac{mn + 1}{m}
+    \bigg\rceil
+    = n + 1
+\]
+. This is by the pigeonhole principle. 
+So there exists some antichain that has a size greater than 
+$n + 1$. 
+
+We have shown that the longest chain must be longer than $m + 1$
+or the largest antichain must be larger than $n + 1$. From the largest 
+chain/antichain, exclude elements to obtain the desired size $n+1$
+or $m +1$.  \hfill \qed
+
+
+\new{Sec5.7q49} 
+Use the result of the previous exercise to show that a sequence of mn + 1 real 
+numbers either contains an increasing subsequence of m + 1 numbers or a decreasing subsequence of n + 1 number. 
+
+\new{Solution}
+Let the sequence of real numbers be deonted as 
+\[
+    a_1, a_2, \dots, a_{nm + 1}
+\]
+We define a set of tuples as follows. 
+\[
+    S := \{(a_i, i)| 0 \leq i \leq nm + 1\}
+\]
+Also, define a partial ordering on $S$. 
+For $s_i = (a_i, i), s_j = (a_j, j) \in S$, $s_i \leq s_j$ if and only if 
+\[
+    a_i \leq a_j \textAnd i \leq j
+\]
+
+Invoke the result from problem 48. There must either be 
+a chain in $S$ that has length of $m + 1$ or antichain of 
+length $n + 1$. We consider each case. Write out the chain 
+as 
+\[
+    (a_{p1}, p1) \leq (a_{p2}, p2) \leq \cdots \leq (a_{p(m+1)}, p(m+1))
+\]
+
+By the definition of the partial order, we deduce 
+\[
+    a_{p1} \leq a_{p2} \leq \cdots \leq a_{p(m+1)}
+\]
+and we have obtained an increasing subsequence of length $m + 1$. 
+
+If such a chain does not exist, there must exist an antichain 
+of length $n + 1$. Write out the elements in increasing index
+
+\[
+    (a_{q1}, q1) , (a_{q2}, q2) , \cdots , (a_{q(n+1)}, q(n+1))
+\]
+\[
+    \textAnd 
+    q1 \leq q2 \leq \cdots \leq q(n+1)
+\]
+If $a_{qi} \leq a_{q(i + 1)}$, then $(a_{qi}, qi) \leq (a_{q(i + 1)}, q(i + 1))$. 
+Such result will contradict that all antichain elements are incomparable. 
+For all $i < n + 1$,  $a_{qi} > a_{q(i + 1)}$. We have constructed
+a decreasing subsequence. 
+
+\[
+    a_{q1} > a_{q2} > \cdots > a_{q(n + 1)}
+\]
+\hfill \qed
+
+
+\new{Sec5.7q50} 
+Consider the poset $([12], |)$. 
+
+a) Determine the longest chain 
+and the partion of $[12]$ into the smallest number of antichains. 
+
+Motivated by the proof of Mirski's theorem, we proceed by eliminating 
+the minimal elements. Denote $min(X)$ to be the minimal elements 
+of the set $X$. Also, define $S_0 = min([12]), P_0 = [12] \setminus S_0$. 
+Recursively define:
+\[
+    S_i = min(S_{i - 1}) 
+    \textAnd 
+    P_i = P_{i - 1} \setminus S_i 
+\]
+
+\begin{align*}
+    S_0 = \{1\} & & P_0 = \{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12\}\\
+    S_1 = \{2, 3, 5, 7, 11\} & & P_1 = \{4, 6, 8, 9, 10, 12\} \\ 
+    S_2 = \{4, 6, 9, 10\} & & P_2 = \{8, 12\}\\
+    S_3 = \{8, 12\}
+\end{align*}
+
+So the longest chain is $\{1, 2, 4, 8\}$ and the minimal antichain 
+cover is $\{S_i\}_{i \leq 3}$ \hfil\qed
+
+b) Determine the longest antichain 
+and the partion of $[12]$ into the smallest number of chains. 
+
+Upon inspection, it seems like that the longest antichain is 
+$\{4,6,7,9,10,11\}$. We can also find a minimal chain cover 
+$\{S_i\}_{i \leq 6}$. $S_i$ is defined as follows. 
+\[
+\begin{split}
+    S_1 := \{1, 2, 4, 8\}\\
+    S_2 := \{3, 6, 12\}, S_3 := \{5, 10\}\\
+    S_4 := \{7\}, S_5 := \{9\}, S_6 := \{11\}
+\end{split}
+\]
+
+By the generalized version of the pigeonhole principle, a 
+subset of $X$ that has a size greater than $6$ must include 
+two elements in the same chain. Thus, indeed the assumed 
+maximum antichain is verifed to be maximum. By Dilworth's 
+theorem, the cover we have obtained is the minimum chain cover. 
+
+\new{Sec5.7q24}
+\fullFigure{Fig24.png}
+
+\new{a}
+Let condition $P_i$ be the condition that the rook in column 
+$i$ to be in the forbidden position. There is only one forbidden 
+position for each column. Define $A_i$ be the set of arrangements 
+that satisfy condition $P_i$ and where the six rooks don't attack 
+each other. With ease, for all $i \leq 6$
+\[
+    |A_i| = 5!
+\] 
+
+To compute the intersect of the two sets, we start with some 
+specific cases. 
+\[
+    |A_1\cap A_2| = 0 \textAnd 
+    |A_1 \cap A_3| = 4!
+\]
+For the three pairs, $A_1\cap A_2$, $A_3\cap A_4$, $A_5\cap A_6$, 
+the intersects are empty. For all the other twelve pairs, the 
+size of the set is $4!$. 
+
+For the intersect of three parts, the only nonzero cases 
+are when each rook is chosen for every column. For each set 
+$\{P_1, P_2\}, \{P_3, P_4\}, \{P_5, P_6\}$, make a choice between the two. 
+There are a total 8 choices, and the size of each intersect is 
+$3!$. In specific, 
+\[
+    |A_1 \cap A_3 \cap A_5| = 3!
+\]
+
+The intersect of more than four parts will always be zero. 
+If more than four conditions are met, two of the rooks will be 
+next to each other. 
+
+Apply the inclusion-exclusion principle to compute the number 
+of allowed permutations. 
+
+\[
+    |\cap_{n \leq 6} \bar{A}_n|
+    = 
+    6! - 
+    \sum_{n\leq 6}|A_n|
+    + \sum_{n, m \leq 6} |A_n \cap A_m|
+    - \sum_{n, m, k \leq 6} |A_n \cap A_m \cap A_k| 
+\]
+    \[=
+    6! - 6\m5! + 12\m4! - 8 \m 3! 
+    = 288 - 48 = \boxed{240}
+\]
+
+\new{b} Define the condition $P_i$ to be the condition where 
+the rooks in column $2i-1, 2i$ to be in the forbidden position. 
+Let the three parts that correspond to $P_i$ be $A_i$ ($0 \leq i 
+\leq 3$). Notice, 
+
+\[
+    |A_1| = |A_2| = |A_3| = 2 \m 4! 
+\]
+Also, the intersects are 
+\[
+    |A_1 \cap A_2| =  |A_2 \cap A_3| =  |A_1 \cap A_3|
+    = 4 \m 2!
+\]
+and 
+\[
+    |A_1 \cap A_2 \cap A_3| = 8
+\]
+
+Apply the inclusion-exclusion principle. 
+
+\[
+\begin{split}
+    |\bar{A}_1 \cap \bar{A}_2\cap \bar{A}_3| \\
+    =|S| -(|A_1| + |A_2| + |A_3|) 
+    +  |A_1 \cap A_2| +  |A_2 \cap A_3| + |A_1 \cap A_3|
+    - |A_1 \cap A_2 \cap A_3|
+    = \\
+    6! - 3\m2\m4! + 3\m4\m2! - 8
+    = 720 - 144 + 24 - 8 \\ = \boxed{592}
+\end{split}
+\]
+
+\end{document}

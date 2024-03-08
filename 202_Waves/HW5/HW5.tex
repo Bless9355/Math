@@ -1,0 +1,497 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 202 HW5
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize 
+
+\new{Question 3} Closed-open ended oscillators 
+Consider $N$ masses attatched by a string of constant $k$, 
+each separated by a distance $a$ apart. One side of the 
+string is attatched to a wall, and the other end is free. 
+What are the normal modes of this system?
+
+\noindent
+a) What are the boundary conditions?
+
+Add two imaginary masses at the wall and at the end of mass $N$. 
+Label their displacements to be $x_0, x_{N+1}$. The boundary conditions 
+are as follows.
+
+\[
+    \boxed{
+    x_0(t) = 0 \textAnd x_{N+1}(t) = x_{N}
+    }
+\]
+
+\noindent
+b) Find the normal mode frequencies. 
+
+We know that the solutions are in the form of 
+\[
+    x_n(t) = 
+    \tilde{B} {
+        \Ixp{(\omega t + k a n )}
+    }
+    +
+    \tilde{C} {
+        \Ixp{(\omega t - k a n)}
+    }
+\]
+
+Enforce $x_0(t) = 0$, which converts to 
+\[
+    x_0(t) = \Ixp{
+        \omega t
+    }
+    (\tilde{B} + \tilde{C}) = 0 
+    \textAnd \tilde{C} = -\tilde{B}
+\]. $x_N(t) - x_{N-1}(t) = 0$ for any $t$. This converts to 
+\[
+    x_N(t) - x_{N-1}(t) = 
+    \tilde{B}\Ixp{(\omega t + kaN)}(
+        \Ixp{ka} - 1
+    )
+    +
+    \tilde{C}\Ixp{(\omega t - kaN)}(
+        \Ixp{-ka} + 1
+    )
+\]
+\[
+    = \tilde{B} \left(
+        2i\Ixp{(\omega t + kaN + ka/2)} \sin(ka/2) 
+        - 2i\Ixp{(\omega t - kaN - ka/2)} \sin(-ka/2) 
+    \right)
+\]
+\[
+    = 2i\tilde{B} \sin(ka/2) 
+    \left(
+        \Ixp{(\omega t + kaN + ka/2)}
+        + \Ixp{(\omega t - kaN - ka/2)}
+    \right)
+\]
+\[
+    = 4i \tilde{B} \sin(ka/2) \cos(kaN + ka/2) \Ixp{\omega t} = 0
+\]
+
+If the summand inside the cosine function is in the form of 
+$\frac{2m - 1}{2} \pi$, the entire function vanishes, and the 
+boundary condition is satisfied. Note that $m = {1, 2, 3, ...}$.  Thus, 
+
+\[
+    \frac{2m - 1}{2} \pi = 
+    \frac{ka(2N + 1)}{2}
+\]
+
+Depending on the value of $m$, the value of $k$ varies. Relabel 
+$k$ as $k_m$. 
+\[
+    k_m = \frac{2m - 1}{(2N + 1)a}\pi
+\]
+
+We have previously derived the frequency dependant on $k_m$. 
+
+\[
+    \boxed{
+    \omega = 2\omega_0 \sin(k_m a/2) = 2\omega_0 \sin \left[
+        \frac{m - 1/2}{N + 1/2} \frac{\pi}{2}
+    \right]
+    }
+\]
+
+
+\newpage
+
+\new{Question 4} Driven system of N masses
+
+A system of N masses is connected with strings. One end of the system 
+is driven with a displacement of $A\cos(\omega_d t)$. Each of the masses 
+are distance $a$ apart. 
+
+\noindent
+a) Imagine two imaginary masses at the left of mass zero and right of mass 
+n. What boundary conditions can be enforced on these two masses?
+
+Mass zero can be the driver, and mass $N+1$ can be a phantom mass 
+that trails the movement of the $N$ th mass. Quantituatively, 
+
+\[
+    x_0(t) = A\cos(\omega_d t)
+    \textAnd 
+    x_{N+1}(t) = x_{N}(t)
+\]
+
+\noindent 
+b) Find the displacements of each of the masses. 
+
+Complexifying the displacements, we know that the 
+solutions must be in the form of 
+
+\[
+    \tilde{x}_n(t) = 
+    \tilde{B}\Ixp{(\omega t + k z_n)} +
+    \tilde{C}\Ixp{(\omega t - k z_n)}
+\]. 
+We define $z_n$ to be zero on the right $a/2$ position of 
+the Nth mass. Algebraically, $z_n$ can be expressed as 
+\[
+    z_n = \frac{2n - 2N - 1}{2}
+\]
+
+Enforce the boundary condition on the $N+1$th mass. 
+
+\[
+    \tilde{x}_{N + 1}(t) - \tilde{x}_{N}(t) = 0 
+    \textOr 
+     \tilde{B}\Ixp{(\omega t + k z_{N + 1})} +
+    \tilde{C}\Ixp{(\omega t - k z_{N + 1})}
+    -
+ \tilde{B}\Ixp{(\omega t + k z_N )} -
+    \tilde{C}\Ixp{(\omega t - k z_N)}
+    = 0
+\]
+Divide by $\Ixp{\omega t}$ both sides and collect 
+$\tilde{B}, \tilde{C}$
+\[
+    \tilde{B} (\Ixp{kz_{N + 1}} - \Ixp{kz_{N}})
+    + \tilde{C}(
+        \Ixp{(-kz_{N + 1})}
+    - \Ixp{(-kz_N)}
+    )
+    = 0
+\]
+By our placement of the origin, $z_N = -ka/2, z_{N+1} = ka/2$. 
+Apply Euler's formula to obtain 
+
+\[
+   \tilde{B}\sin(ka/2) + \tilde{C}\sin(-ka/2) = 0 
+   \textOr 
+   (\tilde{B} - \tilde{C}) \sin(ka/2) = 0
+\]
+
+If $\sin(ka/2) = 0$, then all the masses will be stationary. Thus, 
+we conclude $\tilde{B} = \tilde{C}$. Returning to our expression of 
+the displcaement, we collect $\tilde{B}\Ixp{\omega t}$ to write 
+\[
+    \boxed{
+    \tilde{x}_n(t) = \tilde{B}\Ixp{\omega t} (\Ixp{kz_n} + \Ixp{(-kz_n)})
+    = \tilde{D} \Ixp{\omega t}\cos(kz_n)
+    }
+\]
+
+c) Show that the amplitude diverges if the oscillator 
+is driven at a normal mode frequency. 
+
+Now, we know that $\tilde{x_0} = A\Ixp{\omega t}$. Plugging $n = 0$
+to our general solution, 
+
+\[
+    \tilde{x}_0(t) = \tilde{D}\Ixp{\omega t} \cos(kz_0)
+    = \tilde{D}\Ixp{\omega t} \cos(k\frac{- 2N - 1}{2}a) = 
+    A\Ixp{\omega t}
+\]
+
+The complex amplitude $\tilde{D}$ can be expressed in terms of $A$. 
+
+\[
+    \tilde{D} = A / \cos(ka \frac{2N + 1}{2})
+\]
+
+The wavenumber $k$ is dependant on the drive frequency by the dispersion 
+relation. 
+
+\[
+    \omega_d = 2\omega_0 \sin(ka / 2)
+    \textOr 
+    k = 
+    \frac{2}{a}
+    \sin^{-1}\left(
+        \frac{\omega_d}{2\omega_0}
+    \right)
+\]
+
+Thus, 
+\[
+    \tilde{D} = A / \cos\left(
+        (2N + 1)\sin^{-1}\left(\frac{\omega_d}{2\omega_0}
+        \right)
+    \right)
+\]
+
+From Q3, we know the ratio $\omega_d / 2\omega_0$ 
+for the normal modes. 
+
+\[
+    \frac{\omega_d}{2\omega_0} = \sin \left[
+        \frac{2m - 1}{2N + 1}
+        \frac{\pi}{2}
+    \right]
+    \textAnd 
+    \sin^{-1} \left(
+        \frac{\omega_d}{2\omega_0}
+    \right)
+    = 
+    \frac{2m - 1} {2N + 1}\frac{\pi}{2}
+\]
+
+At the normal mode frequency, our amplitude simplifies to 
+\[
+    \tilde{D} = A / \cos\left(
+        (2N + 1)
+\frac{2m - 1} {2N + 1}\frac{\pi}{2}
+    \right)
+    = A/\cos\left(
+        (2m - 1)\frac{\pi}{2}
+    \right) = A/0 = \pm\infty
+\]
+And the amplitude diverges. \hfill \qed
+
+d) Write out a closed form expression for $x_1(t)$ where there is 
+only one mass. 
+
+We define an angle for convinience. 
+
+\[
+   \theta := ka/2 
+\]
+
+Write the dispersion relation and our amplitude $\tilde{D}$ 
+in terms of $\theta$.
+\[
+    \frac{\omega_d}{2\omega_0} = \sin(\theta)
+    \textAnd 
+    \tilde{D} = A/\cos((2N+1)\theta) = A/\cos(3\theta)
+\]
+The displacement $x_1$ is 
+\[
+    x_1(t) = \tilde{D}\Ixp{\omega t} \cos(k z_1)
+    = \tilde{D}\Ixp{\omega t} \cos (\theta (2n - 2N - 1))
+    = \tilde{D}\Ixp{\omega t} \cos(\theta)
+\]
+Plugging in our expression for $\tilde{D}$, 
+\[
+    x_1(t) = A \frac{\cos(\theta)}{\cos(3\theta)}\Ixp{\omega t}
+\]
+
+We pull out an interesting trig identity
+\[
+    \frac{\cos(\theta)}{\cos(3\theta)}
+    = \frac{1}{1- 4sin^2(\theta)}
+\]
+The derivation can be completed by using Euler's formula. 
+We know $\sin(\theta) = \omega_d / 2\omega_0$. Thus 
+\[
+    \frac{1}{1-4\sin^2(\theta)} = \frac{1}{1-\omega^2_d/\omega^2_0}
+    = \frac{\omega^2_0}{\omega^2_0 - \omega^2_d}
+\]
+Finally, 
+\[
+    \boxed{
+    x_1(t) = 
+\frac{\omega^2_0}{\omega^2_0 - \omega^2_d} A \Ixp{\omega t}
+    }
+\]
+
+\new{Q5} Rod of atoms 
+
+
+a) Consider an oscillator comprised of n masses where both ends are 
+free. Compute the lowest normal mode frequency, and plot it using mathematica. 
+
+We reuse our results from Q4. Use the same coordinate system to 
+define the equilibrium positon $z_n$. Enforcing the right boundary 
+condition, we have 
+\[
+    \tilde{x}_n(t) = \tilde{D} \Ixp{\omega t} \cos (kz_n)
+\]
+The left boundary condition would be that the imaginary mass 0 
+shadows the motion of the real mass 1. In symbols, $x_0(t) = x_1(t)$. 
+With some messy lines of algebra, this translates to
+\[
+    \cos(kaN + ka/2) = \cos(kan - ka/2)
+\]
+Or substituting $ka/2 \mapsto \theta$, we can write 
+\[
+    \cos(kaN + \theta) = \cos(kaN - \theta)
+\]
+We reason that $\cos(kaN - x)$ must be an even function. Hence, 
+$kaN = m\pi$ for any integer $m$. Thus 
+\[
+    k = \frac{m\pi} {aN}
+\]
+And now, plug this into the dispersion relation. 
+\[
+    \frac{\omega_m}{\omega_0} = 2\sin\left(
+        \frac{ka}{2}
+    \right)
+    = 2\sin \left(
+        \frac{m\pi}{2N}
+    \right)
+\]
+We are interested in the lowest frequency, $m = 1$. 
+\[
+     \frac{\omega_1}{\omega_0} 
+    = 2\sin \left(
+        \frac{\pi}{2N}
+    \right)
+\]
+Plotting this into mathematica, we get the following result. 
+\halfFigure{lowestFreq.png}
+
+b) Approximate the frequency as $N \rightarrow \infty$
+
+The sin function can be approximated as the identity around the origin. 
+
+\[
+    \boxed{
+     \frac{\omega_1}{\omega_0} 
+    = 2\sin \left(
+        \frac{\pi}{2N}
+    \right)
+    \approxeq 
+    2\frac{\pi}{2N}
+    = 
+    \frac{\pi}{N}
+    }
+\]
+
+c) Plot the relative displacements of the masses for 
+$N = 3, 6, 20$. 
+
+\fullFigure{Q5_1.png}
+\halfFigure{Q5_2.png}
+
+d) Plot the three lowest normal mode frequencies for 
+$N = 3, 6, 20$. Do they agree with Morin 2-84?
+
+\fullFigure{Morin2-84.png}
+So morin claims that the normal mode frequencies 
+have a linear relationship with the wavenumber $k$. 
+We can confirm that this relationship holds for large 
+$N$. 
+\fullFigure{Q5_3}
+
+The green dots indicate that for $N = 20$, the relationship 
+between the wavenumber and the frequency is linear. 
+
+
+\end{document}
