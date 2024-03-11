@@ -73,9 +73,9 @@
 }
 
 
-\newcommand{\Ixp}{
+\newcommand{\Ixp}[1]{
     {
-        \textrm{Ixp}
+        e^{#1}
     }
 }
 
@@ -137,11 +137,171 @@ PHYS 202 Formula Sheet
 Daniel Son
 \end{center}
 
+\new{Simple Harmonic Oscillators}
+Consider a mass attatched to a spring. Let 
+$x(t)$ be the function of displacement of the mass 
+from the equilibrium position. Suppose that the 
+spring constant is $k$. By Newton's 2nd Law,
+
+\[
+    m\ddot{x} = -kx
+    \textOr 
+    \ddot{x} = -\frac k m x
+\]
+
+Where $\dot{x} := \frac{d}{dt}x$
+
+The following function solves the equation. 
+
+\[
+    x(t) = Re(\tilde{A}\Ixp{i\omega_0 t})
+    = A\cos(\omega_0 t + \phi)
+\]
+
+$A, \omega_0$ is referred as the amplitude and 
+the natural frequency of the oscillator. Also, 
+
+\[
+    A = \sqrt\frac{2E}k 
+    \textAnd
+    \omega_0 = \sqrt\frac k m
+\]
+
+\new{Phase Conventions}
+Velocity leads Displacement by a phase of $\pi/2$. 
+Acceleration leads Velocity by a phase of $\pi/2$
+
+Say $V \sim \cos(\omega t)$ and $I \sim \cos(\omega t + \phi)$
+for some positive phase $\phi \leq \pi$. The current leads 
+the voltage and the voltage trails the current. 
+
+\new{Simple RLC}
+Consider a circuit where R, L, C is connected in 
+parallel. Let the current be $I$. By the loop rule, 
+\[
+    -\frac q C - R I - L \dot{I} = 0
+    \textOr
+    \frac q C + R \dot{q} + L \ddot{q} = 0 
+\]
+Rewrite this in the follwoing form. 
+\[
+    \ddot{q} + \frac R L \dot{q} + \frac q {LC} = 0
+\]
+Compare this with the equation for damped driven oscillators.  
+\[
+    \ddot{x} + \frac b m \dot{x} + \frac k m x = 0
+\]
+So the following isomorphism holds
+\[
+    x \mapsto q \textThen
+    (m, b, k) \mapsto (L, R, 1/C)
+\]
+
+In a parallel circuit, the current through each 
+circuit component is identical. By the complexified 
+Ohms Law $\tilde V = Z \tilde I$. Recall the 
+impedences. 
+
+\[
+    Z_R = R\textAnd Z_C = \frac{1}{i\omega C}\textAnd Z_L = i\omega L
+\]
+
+Thus, the voltage of the resistor leads the voltage on 
+the capacitor by phase $\pi/2$. Likewise, the voltage 
+on the resistor trails the voltage on the Inductor by $\pi/2$.
+
+\new{Circuit Filters and Loglog plot}
+Using inductors and capacitors, it is possible to filter 
+out signals of high or low frequency. Consider the behavior 
+of circuit elemnts in high and low frequency. 
+
+\[
+    \lim_{\omega \rightarrow 0} Z_L = 
+    \lim_{\omega \rightarrow 0} i\omega L = 0
+    \textAnd
+    \lim_{\omega \rightarrow \infty} Z_L = 
+    \lim_{\omega \rightarrow \infty} i\omega L = \infty
+\]
+\[
+    \lim_{\omega \rightarrow 0} Z_C = 
+    \lim_{\omega \rightarrow 0} \frac 1{i\omega C} = \infty
+    \textAnd
+    \lim_{\omega \rightarrow \infty} Z_C = 
+    \lim_{\omega \rightarrow \infty} \frac 1{i\omega C} = 0
+\]
+
+The inductor will block signals of high frequency 
+but allow the passage of signals of low frequency. 
+Hence, inductors act as a \textbf{low-pass} filter. On the 
+other hand, capacitors block signals of low frequency 
+and allow the passage of high frequency signals. 
+Hence, capacitors act as a \textbf{high-pass} filter. 
+
+
+\new{Corner frequency vs Resonant frequency} 
+For an RLC circuit, it is possible to tune the frequency 
+such that the combined impedence reach zero. This 
+frequency is called the resonant frequency. 
+For a circuit involving one R, L, C, the resonant frequency 
+is computed by the following formula. 
+
+\[
+    \omega_r = \frac 1 {\sqrt{LC}}
+\]
+
+For and RL or an RC circuit, the imaginary part of the 
+impedence cannot reach zero. It is possible to defnine 
+a corner frequency where the circuit behavior changes 
+drastically. It is the freqnecy where $Im(Z_L) = R$ 
+or $Im(Z_C) = R$. In other words, 
+
+\[
+    \omega_c = {\frac 1 {RC}}
+    \textOr 
+    {\frac R L}
+\]
+
+\new{Dimensions of C and L}
+\[
+    [L] = H = \Omega \cdot s 
+    \textAnd 
+    [C] = \frac s \Omega
+\]
+
+\new{Power Resonance Curve}
+For an RLC circuit, it is possible to plot 
+the relationship between the angular frequency 
+of the imput voltave and the power lost 
+through the resistor. This curve is 
+called the Power Resonance curve. 
+\fullFigure{PowerResonance.png}
+
+$P \sim V^2$. 
+The Full-Width-Half-Maximum refers to the 
+width of the curve at the half maximum point. 
+The FWHM of the Power Resonance Curve is 
+exactly $\gamma = R/L$, the damping factor. 
+Be careful of the factor of $2\pi$ when 
+the x-axis is set as frequency (Hz). 
+
+Also, use the dimension $[\omega] = rad/s$
+and $[f] = Hz$. The frequency refers to cycles 
+per second. 
+
+\new{Q-factor} 
+For damped driven oscillators, the Q-factor is an important 
+number. 
+
+\[
+    Q := \frac{\omega_0}\gamma = \frac {A_{res}} {A_0}
+\]
+
+
 \new{Boundary conditions for N masses}
 The solutions for the n mass oscillators are in the form of:
 
 \[
-    \psi(m, t) = A \Ixp(\omega t + k_ma) + B \Ixp(\omega t - k_ma)
+    \psi(m, t) = A \Ixp{(\omega t + k_ma)} + B \Ixp{(\omega t - k_ma)}
 \]
 
 Plugging into the 2nd order DE, we derive an expression for the angular 
@@ -177,7 +337,11 @@ Where $m \in \mathbb{Z}^+$
 
 
 
-
+\new{Free end Distance relation}
+Always set the origin to be distance $a/2$ apart from the free end. 
+This is because the two masses at the boundary must 
+be symmetric. 
+Refer to pset 5-1. 
 
 
 
@@ -212,6 +376,54 @@ And $c$ is called the phase velocity of the wave.
 The wave number depends on the frequency of the wave, which is 
 not necessarily the normal mode frequency
 
+\new{Nodes and Antinodes}
+In a standing wave, nodes are the points that do not move. 
+Max amplitude is achieved at antinodes. 
+
+\new{Waves traveling in different medium}
+Consider a transverse wave moving from one string 
+of linear mass density $\mu_1$ to another string with linear 
+mass density $\mu_2$.
+The velocity of the waves on each string is entirely determined 
+by the lmd. 
+
+\[
+    (v_1, v_2) = \left(
+        \frac{T}{\mu_1}
+        ,
+        \frac{T}{\mu_2}
+    \right)
+\]
+
+Let the incident wave to be in the form of 
+\[
+    \psi_i(x, t) := f_i(t - x/v_1) 
+\]
+
+We make a natural assumption that the combined 
+wavefunction must be smooth with respect to position. 
+Let $f_t, f_r$ be the simplified translated wavefunction 
+and the simplified reflected wavefunciton. 
+We derive 
+\[
+    \frac{f_r}{f_i} = \frac{v_2 - v_1}{
+        v_1 + v_2
+    }
+    \textAnd 
+    \frac{f_t}{f_i} = \frac{2v_2}{v_1 + v_2}
+\]
+
+\new{Natural conditions on the string displacements}
+We assume that the wavefunction is continuous and 
+differentiable at all positions. Also, 
+\[
+    \dot\psi(x, 0) = 0
+\]
+allows us to easily complexify the solution. 
+
+
 \normalsize 
+
+
 
 \end{document}

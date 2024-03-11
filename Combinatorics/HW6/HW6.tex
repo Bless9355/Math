@@ -265,6 +265,63 @@ two elements in the same chain. Thus, indeed the assumed
 maximum antichain is verifed to be maximum. By Dilworth's 
 theorem, the cover we have obtained is the minimum chain cover. 
 
+
+\new{Sec6.7Q11}
+Determine the number of permutations of $[8]$ in which no even integer 
+is in its natural position. 
+
+\new{Solution}
+Define a universial set $S$ to be all the permutations 
+of $[8]$. A permutation satisfies property $P_i$ if the 
+number $i$ does not show up in position $i$. Let $A_i$ 
+be the set of permutations that satisfy $P_i$. 
+We wish to count 
+\[
+    |\cap_{i \in \{2, 4, 6, 8\}} \bar{A}_i|
+\]
+. 
+Apply the inclusion exclusion principle. 
+\[
+    |\cap_{i \in \{2, 4, 6, 8\}} \bar{A}_i|
+    = 
+    |S| - \sum_i |A_i| + \sum_{i, j} |A_i \cap A_j|
+    - \sum_{i, j, k} |A_i \cap A_j \cap A_k|
+    + |A_1\cap A_2 \cap A_3 \cap A_4|
+\]
+\[
+    =
+    8! - 4\m 7! + 6\m 6! - 4\m 5! + 4!
+    = \boxed{24204} 
+\]
+
+\new{Sec6.7Q12}
+Determine the number of permutations of $[8]$ in which 
+exactly four numbers are in their natural position. 
+
+\new{Solution}
+Construct all such permutations sequentially and apply the 
+principle of multiplication. Choose four elements and fix 
+them in their original position. Then, derange 
+the other four. We count the answer to be 
+\[
+    \binom{8}{4} \m D_4 = \boxed{1660} 
+\]
+
+\new{Sec6.7Q14}
+Determine the number of permutations of $[n]$ in which exactly 
+k numbers are in their natural position. 
+
+\new{Solution}
+Apply the same logic from problem 12. 
+\[
+    \boxed{
+    \binom{n}{k} \m D_{n-k}
+    }
+\]
+
+
+
+
 \new{Sec5.7q24}
 \fullFigure{Fig24.png}
 
@@ -317,36 +374,92 @@ of allowed permutations.
     = 288 - 48 = \boxed{240}
 \]
 
-\new{b} Define the condition $P_i$ to be the condition where 
-the rooks in column $2i-1, 2i$ to be in the forbidden position. 
-Let the three parts that correspond to $P_i$ be $A_i$ ($0 \leq i 
-\leq 3$). Notice, 
+\new{b} 
+Define $P_i, A_i$ as we did in part a. 
+Also, group rooks $(1, 2), (3, 4), (4, 6)$ into three groups. 
+To apply the inclusion-exclusion principle, the 
+greatest challenge will be to count the number 
+of multiplicites involved in each intersect. 
+
+We refine our notation for writing down intersects. 
+Let $\{s_i\}$ be a subset of $[6]$. All intersects of $A_i$'s 
+can be written as $
+    \cap_{i} A_{s_i}
+$. From now on, we refer to each intersect by the 
+corresponding subset which includes all the subscripts 
+ranging from 1 to 6. 
+For example, $A_1\cap A_2$ is referred as $\{1, 2\}$. 
+
+Define a grouping function $\phi:[6]\mapsto \{1, 2, 3\}$
+defined as $\phi(n) = \lceil n/2\rceil$. The grouping function 
+will connect rook $i$ to its corresponding group number. 
+We say that an intersect $\{s_i\}$ has $m$ groups involved if 
+the image of the subset under the function $\phi$ has 
+a size of $m$.  For example, $A_1\cap A_2$, or $\{1, 2\}$
+has an image $\{\phi(1), \phi(2)\} = \{1\}$ under the grouping function 
+$\phi$. Thus, the intersect has only one group involved. 
+
+Let intersect $\{s_i\}$ to be an intersect with size $n$. 
+Also, suppose the intersect involves $m$ groups. We claim 
+the size of the intersect equals 
+\[
+    2^m (6 - n)!
+\]
+To justify this counting, we construct all valid arrangements 
+of nonattacking rooks for intersect $\{s_i\}$. We first arrange 
+all the rooks that are to be in the forbidden position, that is 
+all the rook $s_i$'s. Observe that each group, regardless if 
+there are one or two rooks in the group, has two degrees of freedom. 
+For the free rooks not included in the intersect, arrange 
+them as free permutations. The principle of multiplication 
+yields the result above. 
+
+We consider all the possible intersects. 
+However, we are only concerned with the group number 
+of each intersect. 
+We wish to count the number of intersects of size $n$
+involving $m$ groups. Say there are $x$ such intersects. 
+We write $x|mg$. Here is an exhaustive list of 
+all the intersects. 
+\newcommand{\size}[1]{
+    {
+        \textrm{size }{#1}:
+        \hspace{3mm}
+    }
+}
+
+\begin{align*}
+    &\size1 6|1g\\
+&\size 2 3|1g, 12|2g\\
+&\size3 12|2g, 8|3g\\
+&\size4 3|2g, 12|3g\\
+&\size5 6|3g\\
+&\size6 1|3g
+\end{align*}
+
+Applying our observation on the sizes of the intersects, 
+we list out the number of permutations corresponding 
+to the size of each intersect. 
+
+\begin{align*}
+    &\size1 6\m2\m5! = 1440\\
+&\size2 3\m2\m4! + 12\m2^2\m4! = 1296  \\
+&\size3 12\m2^2\m3!+ 8\m2^3\m3! = 672\\
+&\size4 3\m2^2\m2!+ 12\m2^3\m2! = 216\\
+&\size5 6\m2^3\m1! = 48\\
+&\size6 1\m2^3\m0! = 8
+\end{align*}
+
+By the inclusion-exclusion principle, we count the answer. 
 
 \[
-    |A_1| = |A_2| = |A_3| = 2 \m 4! 
+    |S| + \sum_{i = 1}^{6} (-1)^i|[
+        \textrm{all intersects of size i}
+    ]|
 \]
-Also, the intersects are 
 \[
-    |A_1 \cap A_2| =  |A_2 \cap A_3| =  |A_1 \cap A_3|
-    = 4 \m 2!
-\]
-and 
-\[
-    |A_1 \cap A_2 \cap A_3| = 8
-\]
-
-Apply the inclusion-exclusion principle. 
-
-\[
-\begin{split}
-    |\bar{A}_1 \cap \bar{A}_2\cap \bar{A}_3| \\
-    =|S| -(|A_1| + |A_2| + |A_3|) 
-    +  |A_1 \cap A_2| +  |A_2 \cap A_3| + |A_1 \cap A_3|
-    - |A_1 \cap A_2 \cap A_3|
-    = \\
-    6! - 3\m2\m4! + 3\m4\m2! - 8
-    = 720 - 144 + 24 - 8 \\ = \boxed{592}
-\end{split}
+    = 720 - 1440 + 1296-672+216 -48 + 8
+    = \boxed{80}
 \]
 
 \end{document}

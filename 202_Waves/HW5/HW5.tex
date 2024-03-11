@@ -124,6 +124,171 @@ Daniel Son
 
 \normalsize 
 
+\new{Question 1}
+a) A RLC circuit is constructed by connecting 
+four inductors and five capacitors. 
+Using the analogy of the open-ended spring oscillator, 
+find the four mode frequencies of this system. 
+
+The dispersion relation gives the frequency with 
+respect to the wave number. For the spring oscillators, 
+\[
+    \omega = 2\omega_0 \sin (k_n a / 2)  
+    \textAnd 
+    k_n = \frac{2\pi}{\lambda_n}
+\]
+
+For free ends, the normal modes occur at
+\[
+    \lambda_n = \frac{2L}n
+\]
+Plugging this in to the dispersion relation, 
+\[
+    \omega= 2\omega_0 
+    \sin\left(\frac{n\pi a}{2L}\right)
+\]
+$L/a$ is the number of springs in the system, which is known
+to be five. 
+\[
+    \omega= 2\omega_0 
+    \sin\left(\frac{n\pi}{10}\right)
+\]
+
+
+\fullFigure{{Q1_1.png}}
+
+And there are the frequencies in $Hz$. 
+
+b)
+\fullFigure{{Q1_2.png}}
+
+c) Compare the experimental measurement of the 
+string displacement at the certain time with the 
+theoretical results. 
+
+\fullFigure{Q1_1stmode.png}
+\fullFigure{Q1_moremodes.png}
+
+\new{Question 2} Fixed end Waves
+
+Consider string connected with N beads, each 
+distance $a$ apart. The bead 1, N are 
+distance $a/2$ apart from the walls. 
+
+\noindent
+a) Consider the wave as a segment of an infinite wave. 
+What are the boundary conditions?
+
+Assume there is bead zero on the left of bead one, 
+and bead N+1 next to bead N. The string must 
+be fixed on the boundaries. Thus, 
+
+\[
+    y_0(t) = -y_1(t)
+    \textAnd
+    y_N(t) = -y_N(t)
+\]
+
+\noindent
+b) Derive an expression for $y_n(t)$. 
+
+We know that the complexified solutions come in the form of:
+\[
+    \tilde{y}_n(t) =
+    \tilde{A}\Ixp{(\omega t + kz_n)}
+    + \tilde{B}\Ixp{(\omega t - kz_n)} 
+\]
+
+The time derivative of this function is 
+\[
+    \tilde{\dot{y}}_n(t) =
+    i\omega(\tilde{A}\Ixp{(\omega t + kz_n)}
+    + \tilde{B}\Ixp{(\omega t - kz_n)} )
+\]
+
+Realify this solution, and set it equal to zero at time zero. 
+
+\[
+    \dot{y}_n(0) = Re(i\omega \tilde{y}_n(t)) = 0
+    \textOr 
+    Im(\tilde{y}_n(0)) = 0
+\]
+
+
+Impose $y_0(t) + y_1(t) = 0$. 
+\[
+     \tilde{A}\Ixp{(\omega t + kz_0)}
+    + \tilde{B}\Ixp{(\omega t - kz_0)} 
+    +
+ \tilde{A}\Ixp{(\omega t + kz_1)}
+    + \tilde{B}\Ixp{(\omega t - kz_1)}
+    = 0 
+\]
+\[
+     \tilde{A}\Ixp{(\omega t -ka/2)}
+    + \tilde{B}\Ixp{(\omega t +ka/2)} 
+    +
+ \tilde{A}\Ixp{(\omega t + ka/2)}
+    + \tilde{B}\Ixp{(\omega t - ka/2)}
+    = 0 
+\]
+\[
+    2\Ixp{\omega t} (
+        \tilde{A} \cos (ka/2)
+        + \tilde{B} \cos (ka/2)
+    )
+    = 0
+\]
+Technically, the real part of the LHS is zero, but we 
+can adjust t to align the phase so that the maximum amplitude is 
+achieved. 
+We can rule out $\sin(ka/2) = 0$. If this is the case, 
+the displacement will be identically zero for every bead. 
+\[
+    \tilde{B} = -\tilde{A}
+\]
+
+The general solution is rewritten as:
+\[
+    \tilde{y}_n(t) = \tilde{C} \Ixp{\omega t} \sin(kz_n)
+\]
+
+Enforce the right boundary condition. 
+\[
+    \tilde{A} \Ixp{\omega t} (\sin(kz_{N + 1}) + \sin(kz_N)) = 0
+\]
+\[
+    \sin(kz_N) + \sin(kz_{N + 1}) = 0
+\]
+\[
+    \sin(ka(N -1/2)) +  \sin(ka(N +1/2)) = 0 
+\]
+Use substitution $\theta:= ka/2$. 
+\[
+    \sin(kaN- \theta) = -\sin(kaN + \theta)
+\]
+The fuction $\sin(kaN - \theta)$ is odd with respect 
+to $\theta$. Hence $kaN = m\pi$ and $k = m\pi/(aN)$. 
+($m = 1, 2, 3, ...$). The dispersion relation provides 
+a closed form expression for the norml mode frequency. 
+\[
+    \omega_m = \omega_0 \sin(ka/(2N)) = \omega_0 \sin(m\pi/(2N))
+\]
+
+We note that for $m > N$, the frequencies end up being redundant 
+due to the summetry of the sin function. In conclusion, 
+
+\begin{align*}
+    \boxed{
+    y_n(t) = G\cos(\omega_m t)sin\bigg(\frac{(2n - 1)m \pi}{N}\bigg)}\\
+    \boxed{
+    \omega_m = \omega_0 \sin(m\pi/(2N))
+    }
+\end{align*}
+And $m = 1, 2, ... N$. 
+
+\newpage
+
 \new{Question 3} Closed-open ended oscillators 
 Consider $N$ masses attatched by a string of constant $k$, 
 each separated by a distance $a$ apart. One side of the 
@@ -494,4 +659,133 @@ The green dots indicate that for $N = 20$, the relationship
 between the wavenumber and the frequency is linear. 
 
 
+\new{Question 6}
+
+\fullFigure{Smith715.png}
+
+a) Expression for $\tau$
+
+We know that the wave travels a distance of $2L$ 
+every $\tau$ time. Also, the velocity of the wave 
+is determined by $\sqrt{T / \mu}$. Thus 
+
+\[
+    v = \frac{2L}{\tau} = \sqrt\frac{T}{\mu}
+    \textAnd 
+    \boxed{
+    \tau = 2L\sqrt\frac{\mu}{T}
+    }
+\]
+
+
+b) Is there a time when the original signal is inverted?
+
+No, the signal is never inverted. Since the 
+ends are fixed, the displacement function can be
+written as follows. 
+
+\[
+    y(x, t) = Re\left(
+        \sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)
+\Ixp{\omega_m t}
+    \right)
+    =
+        \sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)
+        \cos(\omega_m t)
+        \]
+
+The snapshot of the function at time $t = 0$ can be computed 
+by plugging in $t = 0$. 
+
+\[
+    y(x, 0) = 
+        \sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)
+        \cos(0)=\sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)
+\]
+
+The inversion will look like the following. 
+
+\[
+    - y(x, 0)=-\sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)
+\]
+
+We wish, for some time $\tau'$
+\[
+    y(x, \tau) = -y(x, 0)
+    \textOr 
+\sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)\cos(\omega_m t)
+        =-
+\sum_{m = 1}^\infty C_m \sin \left(
+            \frac{mx\pi}L 
+        \right)
+\]
+
+Thus, for all $m \in \mathbb{Z}^+$, 
+\[
+    \cos(\omega_m t) = -1
+\]
+
+Invoke the dispersion relation, and assume $N \rightarrow \infty$. 
+\[
+    \omega_m = 2\omega_0 \sin (\frac{m\pi}{2N})
+    \approxeq \omega_0 \frac{m\pi}{N}
+\]
+
+Say $\cos(\omega_1 t) = -1$. The angular frequency is 
+almost linear in relation with $m$. Thus, $\omega_2 = 2\omega_1$. 
+\[
+    \cos(\omega_2 t) = \cos(2\omega_1 t) = 2\cos(\omega_1 t)^2 - 1 = 1
+\]
+
+But $\cos(\omega_2 t) = -1$. We reach a contradiction. 
+
+\hfill \qed
+
+\fullFigure{Smith717.png}
+
+\new{Smith 7.17}
+A string with fixed ends is once plucked at the quarter end position 
+and at the half position. Two k-space graphs are shown. Find 
+which pluck corresponds to which graph. 
+
+\new{Solution} 
+The position where the string is plucked must be an antinode. 
+Let this position be $d$. We observe
+\[
+    \frac{m\lambda}2 + \frac\lambda4 = d
+    \textOr 
+    (2m+1)\lambda = 4d 
+    \textOr 
+    \lambda = \frac{4d}{2m + 1}
+\]
+for $m \in \mathbb{Z}^+$. 
+
+Now write the wavenumber. 
+\[
+    k = \frac{2\pi}\lambda = \frac{2\pi(2m + 1)}{4d}
+    = \frac{\pi(2m + 1)}{2d}
+\]
+
+Let $L$ be the length of the string. $d = L/2, L/4$. 
+\[
+    k_{L/2} = \frac{\pi(2m + 1)}{L}
+    \textAnd
+    k_{L/4} = \frac{2\pi(2m + 1)}{L}
+\]
+
+We notice that the spacings between the $k$ values are 
+more sparce for $d = L/4$. Thus, plot a corresponds to 
+$d = L/4$ andf plot b corresponds to $d = L/2$. \hfill \qed
 \end{document}

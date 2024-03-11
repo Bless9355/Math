@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\newcommand{\Pt}[1]{
+    $P_{#1}$
+}
+
+\newcommand{\Szpt}[1]{
+    $|P_{#1}|$
+}
+
+\newcommand{\bbinom}[2]{
+    \bigg(\binom{#1}{#2}\bigg)
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW5
+
+\Large
+Daniel Son
+\end{center}
+
+\new{Counting Derangements}
+A derangement is a permutation of the set 
+where no elements are fixed. 
+We define $D_n$ to be the number of 
+derangements of the cannonical set $[n]$.
+By the inclusion-exclusion 
+principle, we derive 
+\[
+    D_n = n!\left(1 - \frac{1}1 + \frac1{2!} - \frac1{3!} + \cdots +(-1)^n\frac1{n!}\right)
+\]
+By the alternating series test, we conclude 
+\[
+    D_n = \left\{
+        \frac{n!}e
+    \right\}
+\]
+
+\end{document}

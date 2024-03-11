@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  7 MAR 2024 13:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  8 MAR 2024 22:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -216,59 +216,96 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 127.
  (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+<Q1_1.png, id=1, 326.72063pt x 88.07906pt>
+File: Q1_1.png Graphic file (type png)
+<use Q1_1.png>
+Package pdftex.def Info: Q1_1.png  used on input line 158.
+(pdftex.def)             Requested size: 310.4979pt x 83.70552pt.
+<Q1_2.png, id=3, 553.31718pt x 425.33907pt>
+File: Q1_2.png Graphic file (type png)
+<use Q1_2.png>
+Package pdftex.def Info: Q1_2.png  used on input line 163.
+(pdftex.def)             Requested size: 310.4979pt x 238.68149pt.
+ [1
 
-{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Overfull \hbox (42.24934pt too wide) detected at line 271
+{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Q1_1.png>]
+<Q1_1stmode.png, id=17, 673.76718pt x 404.26031pt>
+File: Q1_1stmode.png Graphic file (type png)
+<use Q1_1stmode.png>
+Package pdftex.def Info: Q1_1stmode.png  used on input line 169.
+(pdftex.def)             Requested size: 310.4979pt x 186.30127pt.
+<Q1_moremodes.png, id=18, 494.59781pt x 537.50812pt>
+File: Q1_moremodes.png Graphic file (type png)
+<use Q1_moremodes.png>
+Package pdftex.def Info: Q1_moremodes.png  used on input line 170.
+(pdftex.def)             Requested size: 310.4979pt x 337.43445pt.
+ [2 <./Q1_2.png> <./Q1_1stmode.png>] [3 <./Q1_moremodes.png>] [4] [5]
+Overfull \hbox (42.24934pt too wide) detected at line 436
 []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@ []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) = 0[][][] + [][] \OMS/cmsy/m/n/10 ^^@ [][] ^^@ [][] \OT1/cmr/m/n/10 = 0
  []
 
-[2] [3]
-<lowestFreq.png, id=23, 429.10312pt x 351.56343pt>
+[6] [7]
+<lowestFreq.png, id=45, 429.10312pt x 351.56343pt>
 File: lowestFreq.png Graphic file (type png)
 <use lowestFreq.png>
-Package pdftex.def Info: lowestFreq.png  used on input line 458.
+Package pdftex.def Info: lowestFreq.png  used on input line 623.
 (pdftex.def)             Requested size: 172.5pt x 141.33098pt.
- [4 <./lowestFreq.png>]
-<Q5_1.png, id=29, 714.41907pt x 249.93375pt>
+ [8 <./lowestFreq.png>]
+<Q5_1.png, id=50, 714.41907pt x 249.93375pt>
 File: Q5_1.png Graphic file (type png)
 <use Q5_1.png>
-Package pdftex.def Info: Q5_1.png  used on input line 480.
+Package pdftex.def Info: Q5_1.png  used on input line 645.
 (pdftex.def)             Requested size: 310.4979pt x 108.62495pt.
-<Q5_2.png, id=30, 286.06876pt x 551.81157pt>
+<Q5_2.png, id=51, 286.06876pt x 551.81157pt>
 File: Q5_2.png Graphic file (type png)
 <use Q5_2.png>
-Package pdftex.def Info: Q5_2.png  used on input line 481.
+Package pdftex.def Info: Q5_2.png  used on input line 646.
 (pdftex.def)             Requested size: 172.5pt x 332.74823pt.
- [5 <./Q5_1.png> <./Q5_2.png>]
-<Morin2-84.png, id=37, 709.90219pt x 174.6525pt>
+ [9 <./Q5_1.png> <./Q5_2.png>]
+<Morin2-84.png, id=58, 709.90219pt x 174.6525pt>
 File: Morin2-84.png Graphic file (type png)
 <use Morin2-84.png>
-Package pdftex.def Info: Morin2-84.png  used on input line 486.
+Package pdftex.def Info: Morin2-84.png  used on input line 651.
 (pdftex.def)             Requested size: 310.4979pt x 76.39162pt.
-<Q5_3.png, id=38, 848.4197pt x 438.8897pt>
+<Q5_3.png, id=59, 848.4197pt x 438.8897pt>
 File: Q5_3.png Graphic file (type png)
 <use Q5_3.png>
-Package pdftex.def Info: Q5_3.png  used on input line 491.
+Package pdftex.def Info: Q5_3.png  used on input line 656.
 (pdftex.def)             Requested size: 310.4979pt x 160.61865pt.
- [6 <./Morin2-84.png> <./Q5_3.png>] (HW5.aux)
+<Smith715.png, id=60, 595.47469pt x 112.92188pt>
+File: Smith715.png Graphic file (type png)
+<use Smith715.png>
+Package pdftex.def Info: Smith715.png  used on input line 664.
+(pdftex.def)             Requested size: 310.4979pt x 58.87994pt.
+ [10 <./Morin2-84.png> <./Q5_3.png> <./Smith715.png>]
+Overfull \hbox (3.37363pt too wide) detected at line 733
+\OML/cmm/m/it/10 y\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; ^^\\OT1/cmr/m/n/10 ) = \OMS/cmsy/m/n/10 ^^@\OML/cmm/m/it/10 y\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; \OT1/cmr/m/n/10 0)[] [] \OML/cmm/m/it/10 C[] [] [] []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ![]t\OT1/cmr/m/n/10 ) = \OMS/cmsy/m/n/10 ^^@ [] \OML/cmm/m/it/10 C[] [] []
+ []
+
+<Smith717.png, id=67, 669.2503pt x 293.59688pt>
+File: Smith717.png Graphic file (type png)
+<use Smith717.png>
+Package pdftex.def Info: Smith717.png  used on input line 756.
+(pdftex.def)             Requested size: 310.4979pt x 136.21649pt.
+[11 <./Smith717.png>] [12] (HW5.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4599 strings out of 475248
- 73210 string characters out of 5757813
+ 4649 strings out of 475248
+ 74202 string characters out of 5757813
  1929785 words of memory out of 5000000
- 26108 multiletter control sequences out of 15000+600000
+ 26158 multiletter control sequences out of 15000+600000
  560673 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,6n,77p,368b,189s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,14n,77p,368b,189s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on HW5.pdf (6 pages, 602257 bytes).
+Output written on HW5.pdf (12 pages, 964790 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
+ 129 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
