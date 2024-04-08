@@ -1,0 +1,832 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW7
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize 
+
+\new{Q1 sums of fibbonacci numbers}
+
+Find a closed form solution for all the partial sums defined below. 
+
+a) \[
+s_n := \sum_{i = 1}^n f_{2i - 1}    
+\]
+
+b) \[
+s_n := \sum_{i = 0}^n f_{2i}    
+\]
+
+c) \[
+s_n := \sum_{i = 0}^n (-1)^if_{i}    
+\]
+
+d) \[
+s_n := \sum_{i = 0}^n f_{i}^2    
+\]
+
+
+
+\new{Solution}
+
+1. 
+\[
+    s_1 = 1 \textAnd 
+    s_n = f_{2n}
+\]
+
+2. \[
+    s_0 = 0 \textAnd 
+    s_n = f_{2n + 1} - 1 
+\]
+
+3. \[
+    s_n = (-1)^{n} f_{n - 1} - 1  
+    \textAnd f_{-1} := 1
+\]
+
+4. \[
+    s_n = f_{n + 1}^2 - f_{n}^2 - (-1)^n
+\]
+
+\new{Proof a}
+The base case holds trivially. $s_1 = f_1 = 1$. 
+For $n > 1$, 
+\[
+    s_n  = f_{2n -1} + s_{n -1} = f_{2n - 1} + f_{2n - 2}
+\]
+by the inductive hypothesis. Use the recursive relation for $f_n$. 
+\[
+    \boxed{
+    s_n = f_{2n}
+    }
+\]
+
+\new{Proof b}
+The base case holds trivially. $s_0 = f_1 - 1 = 0$. 
+For $n > 0$, 
+\[
+    s_n  = f_{2n} + s_{n -1} = f_{2n} + f_{2n - 1} - 1
+\]
+by the inductive hypothesis. Use the recursive relation for $f_n$. 
+\[
+    \boxed{
+    s_n = f_{2n + 1} - 1
+    }
+\]
+
+\new{Proof c}
+Apply a similar argument for a, b. $s_0 = (-1)^0f_{-1} - 1 =1-1= 0$ 
+for the base case. For the inductive case, 
+\[
+    s_{n + 1}  =  (-1)^{n + 1}f_{n +1} + s_{n} = (-1)^{n + 1}f_{n+1} + (-1)^{n}f_{n - 1} - 1
+\]
+\[
+    = (-1)^{n+1} (f_{n+1} - f_{n - 1}) - 1 = (-1)^{n+1} f_{n}  - 1
+\]
+which concludes the proof. 
+\hfill \qed
+
+\new{Proof d}
+We present an arbitrary polynomial division that 
+will come in handy later. 
+\[
+    x^2 - x - 1 
+    \parallel
+x^4 - 3x^2 + 1
+\]
+and this is over the field of real numbers. 
+This implies that the roots of $x^2 - x -1$ are also 
+roots for  $x^4 - 3x^2 + 1$. 
+
+Now we prove the identity 
+\begin{equation}
+    3 f_{n+1}^2 - f_{n+2}^2 - f_n^2 - 2(-1)^n = 0
+\end{equation}
+
+Recall that the nth fibbonacci number can be represented 
+as follows.
+\[
+    f_n = 
+    \frac{p^n - q^n} {\sqrt{5}}
+\]
+p, q are $(1 + \sqrt{5})/2, (1 - \sqrt{5}) /2$ respectively. 
+They are roots of the polynomial $ x^2 - x - 1 $.
+To prove the desired identiy in (1), we evaluate the 
+left hand side directly and show that it is identically zero
+. We obtain 
+
+\begin{equation}
+    \begin{split}
+    \frac 3 {{5}} 
+    \left[
+        p^{2n + 2} + q^{2n + 2} - 2(pq)^{n + 1}
+    \right]
+    -\frac 1 {{5}}
+    \left[
+        p^{2n + 4} + q^{2n + 4} - 2(pq)^{n + 2}
+    \right] 
+    \\
+-\frac 1 {{5}}
+    \left[
+        p^{2n} + q^{2n} - 2(pq)^{n}
+    \right] 
+    - 2(-1)^n
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \begin{split} = 
+        -\frac 1{{5}} \left[
+                (p^4 - 3p^2 + 1)p^{2n}
++ (q^4 - 3q^2 + 1)q^{2n}
+        \right] 
+        \\ 
+        -\frac 6 5 (pq)^{n + 1} 
+        + \frac 2 5 (pq)^{n + 2} 
+        + \frac 2 5 (pq)^{n} - 2(-1)^n
+    \end{split}
+\end{equation}
+
+We know that $p, q$ are roots to the quintic polynomial. 
+Also, we know $pq = 1$. 
+
+\[
+    = 0 - \frac 6 5 (-1)^{n + 1} 
+    + \frac 2 5 (-1)^{n + 2}
+    + \frac 2 5 (-1)^{n} - 2(-1)^n
+\]
+\[=
+    \frac{6 + 2 + 2}{5} (-1)^n - 2(-1)^n = 0
+\]
+
+Identity (1) can be slightly manipulated as 
+\begin{equation}
+    f_{n + 2}^2 - f_{n+1}^2 - (-1)^{n+1} 
+    = 
+    2f_{n + 1}^2 - f_n^2 - (-1)^n
+\end{equation}
+
+Now, we purport 
+\[
+    \boxed{
+    \sum_{i = 0}^{n} f_i ^2= f_{n + 1}^2 - f_n^2 - (-1)^n
+    }
+\]
+
+We prove this formula by induction on the integer $n$. 
+For the base case $n=1$, 
+\[
+0 = f_1^2 - f_0^2 - (-1)^0
+\textOr 
+0 = 1 - 0 - 1 
+\textOr 
+0 = 0
+\]
+Which is a tautology. 
+
+Assume the formula holds for $n$. We prove the formula 
+for $n +1$. That is, assuming (4), we prove 
+\[
+    \sum_{i = 0}^{n + 1} f_i ^2= f_{n + 2}^2 - f_{n + 1}^2 - (-1)^{n + 1}
+\]
+
+We evaluate the left sum to show equality. 
+\[
+    \begin{split}
+    \sum_{i = 0}^{n + 1} f_i^2 = 
+ f_{n + 1}^2  + 
+    \sum_{i = 0}^{n} f_i^2 
+    = 
+ f_{n + 1}^2  + 
+ f_{n + 1}^2 - f_n^2 - (-1)^n
+    \\=    
+ 2f_{n + 1}^2 - f_n^2 - (-1)^n
+    \end{split}
+\]
+
+Apply equation (4). 
+\[
+    \sum_{i = 0}^{n + 1} f_i ^2= f_{n + 2}^2 - f_{n + 1}^2 - (-1)^{n + 1}
+\]
+
+\hfill \qed
+
+\new{Q8} 
+A 1xn chessboard is given. Each block can 
+be colored either red or blue. No two consecutive 
+squares can be colored red. Compute $h_n$, the number 
+of distinct colorings of the chessboard. 
+
+\new{Solution} 
+We define two auxillary sequances $r_n, b_n$ 
+which count the number of colorings that satisfy the 
+coloring rule and has either a red or a blue coloring 
+on the nth block. We notice $r_1 = b_1 = 1$. 
+Also, by the nature of the coloring 
+\[
+    r_{n+1} = b_n \textAnd b_{n + 1} = r_n + b_n
+\]
+To color the last square red, the previous square 
+must be colored blue. To complete the board with blue, 
+the previous coloring does not matter. Also, we can write 
+\[
+    b_{n + 1} = b_n + b_{n - 1}
+\]
+Which is the linear recurrence for the fibbonacci sequence. 
+Also, $b_1 = 1, b_2 = 2$ so we conclude $b_n = F_n$. It 
+follows that $r_n = F_{n - 1}$. 
+\[
+    \boxed{
+    h_n = b_n + r_n = F_n + F_{n - 1} = F_{n + 1}
+    }
+\]
+
+\new{Q10} 
+Resolve Fibbonacci's rabbit problem assuming that the 
+cage has 2 pairs of rabbits in the beginning. 
+
+\new{Solution}
+A simple solution is to consider the new cage 
+as two cages that each include one rabbit pair. It follows 
+that the number of pairs in the nth month is $2F_n$. 
+
+In mathematical language, the linear recurrence relation 
+is linear. Let $G_n$ be the number of rabbits in the nth 
+month in the new cage. We know $G_n = 2F_n$ satisfies the 
+recurrence relation $G_{n + 2} = G_{n + 1} + G_n$ for 
+any $n \geq 0$. Also, $G_0 = 2\m F_0 = 2$ satisfies 
+the initial condition. Hence, $G_n = 2F_n$. 
+
+So the answer is 
+$\boxed{2F_{12} = 466}$
+
+\new{Q12}
+Define a sequence $h_n := n^3$. Verify the recurrence 
+relation 
+\[
+    h_n =  h_{n - 1} + 3n^2 - 3n + 1
+\]
+
+\new{Proof}
+Prove the relation directly by subsituting $h_n$ with 
+its definition. We evaluate the RHS. 
+
+\[
+    h_{n - 1} + 3n^2 - 3n + 1
+    = 
+    (n - 1)^3  + 3n^2 - 3n + 1
+\]
+
+Apply the binomial theorem to expand the cubic. 
+
+\[
+    = (n^3 - 3n^2 + 3n - 1 )+ 3n^2 - 3n + 1 
+    = n^3 = h_n
+\]
+\hfill \qed
+
+\new{Additional Problem 1}
+Let sequence $g_n$ count the number of coverings 
+of a 2xn chessboard with dominos. Prove that $g_n$ 
+satisfies the fibbonacci recurrence relation 
+by a bijective proof. 
+
+\new{Solution}
+We know that the number of ways to disect 
+a word of length n into bead of length 1 and 2 
+satisfied the fibbonacci recurrence relation. That is, 
+if $f_n$ counts the number of ways to break down 
+a word of length n into beads smaller than 2, 
+\[
+    f_{n + 2} = f_{n + 1} + f_{n}
+\]
+
+Consider a domino tiling of a 2xn board. Either 
+the domino must be arraged horizontal or vertical. 
+If a domino is arranged horizontally, a parallel domino 
+must be placed on top of it or under it
+\fullFigure{DominoCovers.png}
+
+The slanted orientation would have to repeat itself 
+to produce a perfect cover. As the pattern reaches 
+the boundary of the board, it is evident that 
+a perfect cover is not attainable. 
+
+Map the two horizontal dominos as a long bead and 
+a single vertical domino as a short bead. Below is an example. 
+\fullFigure{mapping.png}
+
+From any covering, it is possible to obtain 
+a unique arrangement of beads. Also, from any bead 
+arrangement, it is possible to create a covering. 
+Hence, this mapping is bijective. The number of 
+bead arrangements satisfy the fibbonacci recurrence 
+relation, and so does the number of domino coverings. 
+
+\[
+    g_{n + 2} = g_{n + 1}+ g_n 
+\]
+\hfill \qed
+
+\new{Additional Problem 2} 
+Find the generating functions for the given 
+sequences. 
+
+\new{Solution}
+The general strategy is to use derivatives and series 
+sums in a clever way to obtain a nice closed form for 
+the generating function 
+\[
+    \sum_{n = 0}^\infty a_n x^n
+\]
+
+The algebra behind deriving the sums are mostly trivial. 
+We demonstrate the process for one sample sequence 
+\[
+    a_n = n^2
+\]
+
+From the geometric sequence formula, 
+\[
+    1 + x + x^2 + \cdots + x^n \cdots = \frac 1 {1 - x}
+\]
+Or, in sigma notation, 
+\[
+    \sum_{x = 0}^\infty x^n = \frac 1 {1 - x}
+\]
+Take the derivative once to obtain 
+\begin{equation}
+    \sum_{x = 0}^\infty nx^{n - 1} = \frac 1 {(1 - x)^2}
+\end{equation}
+Multiply both sides by x. 
+\begin{equation}
+    \sum_{x = 0}^\infty nx^{n} = \frac x {(1 - x)^2}
+\end{equation}
+From (5), take the derivative again. 
+\[
+    \sum_{x = 0}^\infty n(n - 1)x^{n - 2} = \frac 2 {(1 - x)^3}
+\]
+Multiply both sides by $x^2$
+\begin{equation}
+    \sum_{x = 0}^\infty n(n - 1)x^{n} = \frac {2x^2} {(1 - x)^3}
+\end{equation}
+Add (6), (7) and write 
+\[
+   \sum_{n = 0}^\infty 
+        (n(n - 1) + n)x^n
+        = 
+        \frac {2x^2} {(1-x)^3} + 
+        \frac x {(1- x)^2}
+\]
+Which simplifies to
+\[
+   \sum_{n = 0}^\infty n^2 x^n = 
+   \frac{x^2 + x} {(1- x)^3} 
+\]
+
+Here is a table of sequences and their 
+corresponding generating functions. 
+\begin{center}
+\begin{tabular}{|c|c|} 
+ \hline
+ $a_n$ & GF\\
+ \hline 
+ 2 & \parbox{3cm}{\[
+ \frac 2 {1 - x}   
+ \]}\\
+ \hline
+
+ $2^n$ & \parbox{3cm}{
+    \[
+        \frac 1 {1 - 2x}
+    \]
+ }
+\\ \hline 
+$n - 1$ & \parbox{3cm}{
+    \[
+        \frac{2x - 1}{1-x^2}
+    \]
+}
+\\ \hline 
+$(n\%3 = 0)$ & \parbox{3cm}{
+    \[
+        \frac 1 {1-x^3}
+    \]
+    }
+    \\ \hline 
+$\binom{n}{2}$ & \parbox{3cm}{
+    \[
+        \frac {x^2} {(1-x)^3}
+    \]}
+    \\ \hline 
+    $n^2$ & \parbox{3cm} {
+        \[
+            \frac{x^2 + x}{(1 - x)^3}
+        \]
+    }
+    \\ \hline
+
+\end{tabular}
+\end{center}
+
+
+
+Mathematica confirms some of these results 
+\fullFigure{GFs.png}
+
+\new{Additonal Problem 3}
+Find the generating function for the number
+of ways to make change equal to $n $cents out of nickels, dimes, and silver
+dollars.
+
+\new{Solution}
+Provided an infinite number of nickels, the 
+generating function to make $n$ cents is as follows. 
+\[
+    1 + x^5 + x^{10} + \cdots = \frac 1 {1 - x^5} 
+\]
+and similarly, we write the generating functions for 
+only using the dimes and dollars. 
+\[
+    \frac 1{1 - x^{10}} \textAnd 
+    \frac 1{1 - x^{100}}
+\]
+To find the generating function of using all three 
+kinds of coins, we multiply the generating functions. 
+\[
+    \boxed{
+        G(x) = 
+        \frac 1 {
+            (1 - x^5)
+            (1 - x^{10}) 
+            (1- x^{100})
+        }
+    }
+\]
+
+\new{Additional Problem 4} 
+Find a GF for the number of solutions to the equation 
+\[
+    e_1 + e_2 + e_3 + e_4 = n
+\]
+given the restrictions on the variable $e_i$. 
+
+\new{Solution}
+Adding a little rigor to our notion of generating 
+functions would help. We prove the following claim. 
+For the rest of this problem, let $e_i$ be some 
+variable that takes integer values. 
+
+\new{Notation}
+We intorduce a notation to express the number 
+of solutions to a particular equation. Given 
+variables $e_i$ for some integers $i$, the number 
+of solutions of the equation 
+\[
+    \sum e_i = n
+\]
+is denoted by 
+\[
+    \langle
+        e_1, e_2, \dots, e_i
+    \rangle_n
+\]
+Depending on the value of $n$, this value can be 
+interpreted as a sequence. 
+Also, we provide a notation for the generating function 
+of this sequence. 
+\[
+    G\langle
+        e_1, e_2, \dots, e_i
+    \rangle(x)
+\]
+
+The restrictions on $e_i$ determine the generating function 
+$G\langle e_i \rangle(x)$. For example, if $e_i$ is 
+restricted to be a positive integer, 
+\[
+    G\langle e_i\rangle(x) = x + x^2 + \cdots = 
+    \frac x {1 - x}
+\]
+This fact trivially follows from the definition. $e_i = n$ 
+has a solution if and only if $e_i$ is allowed to be the 
+value $n$. 
+
+\new{Proposition} 
+Adding two variables in the equations results 
+in multiplication of the generating functions. 
+\[
+    G\langle
+        e_1, e_2, \dots, e_n
+    \rangle(x)
+    = 
+    \prod_{i = 1}^n 
+    G\langle e_i \rangle(x)
+\]
+
+\new{Proof}
+We prove by induction on $n$. The base case is trivial. 
+By the inductive hypothesis, we assume
+\[
+    G\langle
+        e_1, e_2, \dots, e_n
+    \rangle(x)
+    = 
+    \prod_{i = 1}^n 
+    G\langle e_i \rangle(x)
+\]
+
+Now, we wish to find the generating function 
+\[
+    G\langle
+        e_1, e_2, \dots, e_{n+ 1}
+    \rangle(x)
+\]
+In order to find the generating function, we 
+must find the value of the sequence 
+\[
+    \langle
+        e_1, e_2, \dots, e_{n+ 1}
+    \rangle_n
+\]
+Which is the number of solutions to the equation 
+\[
+     e_1 + e_2+ \dots+ e_{n+ 1} = N
+\]
+We partition all the solution based on the 
+possible values of $e_{n + 1}$
+Fix the value of $e_{n + 1} = l$. The size of the 
+corresponding part will be the number of solutions 
+to 
+\[
+     e_1 + e_2+ \dots+ e_n = N - l
+\]
+Which is in fact, the value 
+$
+    \langle 
+        e_1, e_2 , \dots, e_n
+    \rangle _{N - l}
+$. This value is given my the coefficient of 
+$x^{N - l}$ of the polynomial 
+$G\langle e_1 , \dots, e_n \rangle(x)$
+
+Consider the poynomial 
+\[
+    G\langle e_1 , \dots, e_n \rangle(x)
+    G\langle e_{n + 1} \rangle
+    = 
+    \prod_{i = 1}^{n + 1} 
+    G\langle e_i \rangle(x)
+\]where the equality follows by the inductive hypothesis. 
+The coeffieient of $x^{N}$ of this polynomial 
+will be the sum of the coefficients of $x^{N - l}$
+in the polynomial $G\langle e_1 , \dots, e_n \rangle(x)$ 
+for all values of $l$ which $G\langle e_{n+1}\rangle$
+is nonzero. In symbols, the $x^N$ coefficient is 
+\[
+   \sum_{l \textrm{ valid}}
+    \langle 
+        e_1, e_2 , \dots, e_n
+    \rangle _{N - l}
+    = \langle 
+        e_1, e_2 , \dots, e_{n + 1}
+    \rangle _{N}
+\]
+
+We have directly shown that 
+\[
+    \prod_{i = 1}^{n + 1} 
+    G\langle e_i \rangle(x)
+\]
+Is a generating function of $\langle 
+        e_1, e_2 , \dots, e_{n + 1}
+    \rangle _{N}$. 
+    
+    \hfill \qed
+
+In light of this powerful machinery, we can find the 
+GFs for variables that are independant. 
+
+\new{Question}
+Find $G\langle e_1, e_2, e_3, e_4\rangle (x)$ for 
+
+a) $e_i \in \mathbb{Z}^+$ for all $i \leq 4$
+
+b) $e_i \in \mathbb{Z}^+$ for all $i \leq 4$
+and $e_i$ is a multiple of i
+
+c) $e_i \in \mathbb{N}$ for all $i \leq 4$
+and $e_2 = 2e_1$, $e_3 + e_4 = 4$
+
+\new{Answer}
+
+a) 
+\[G\langle e_1, e_2, e_3, e_4\rangle (x) 
+= 
+\left(
+\frac x {1- x}
+\right)^4
+\]
+
+b) 
+\[
+    \begin{split}G\langle e_1, e_2, e_3, e_4\rangle (x) 
+= 
+\frac x {1- x}
+\frac {x^2} {1- x^2}
+\frac {x^3} {1- x^3}
+\frac {x^4} {1- x^4}
+\\= 
+\frac {x^{10} }
+{
+    (1 - x)(1 - x^2)(1- x^3) (1 - x^4)
+}
+\end{split}
+\]
+
+c)
+This is trickier since the variables 
+are interrelated. Write the equation
+\[
+        e_1+ e_2+ e_3+ e_4  = N
+\]
+Applying the substitution, this condition simplifies to 
+\begin{equation}
+    3e_1 = N - 4
+\end{equation}
+$e_2$ is entirely determined by $e_1$. Also, there 
+are five solutions to the eqation $e_3 + e_4 = 4$
+regardless of the value $N$. 
+
+We directly compute the generating function by counting 
+the values of $N$m which yields a solution for (8). 
+$e_1 \in \mathbb{N}$, so allowed values of $N$ are 
+$N = 4, 7, 10, 13, \dots $. Finally, we write the 
+generating function. 
+
+\[
+    G\langle e_1, e_2, e_3, e_4\rangle (x) 
+    = 
+    5(x^4 + x^7 + x^{10} + \cdots) = \frac{5x^4}{1-x^3}
+\]
+
+\new{Additional Problem 5} A certain flower shop has 2 black roses, 2 white
+roses, and an unlimited number of red roses. Let $b_n$ be the number of
+ways to form a bouquet of n roses, where $n \in N$.
+
+a) Find a formula for $b_n$
+
+b) Find the GF of $b_n$
+
+\new{Solution}
+In fact, it is easy to write out a GF for $b_n$ using 
+our Proposition proved in the previous problem. 
+
+\[
+    \boxed{
+    G(x) = \frac {(1 + x + x^2)^2} {1 - x}    
+    }
+    = 
+    \frac 9 {1-x} - (8 + 6x + 3x^2 + x^3)
+\]
+\[
+    = 1 + 3x + 6x^2 + 8x^3 + 9x^4 + \cdots
+\]
+
+Note that the coefficient for $x^i$ for all $i \geq 4$ 
+is $9$. Thus, we write the formula for $b_n$. 
+
+\[
+    \boxed{
+    (b_0, b_1, b_2, b_3) = (1, 3, 6, 8)
+    \textAnd 
+    b_i = 9 \textrm{  }^\forall i \geq 4
+    }
+\]
+
+
+\end{document}

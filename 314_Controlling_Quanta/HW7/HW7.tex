@@ -1,0 +1,222 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 314 HW7
+
+\Large
+Daniel Son
+\end{center}
+
+\new{Q2 no-cloning theorem}
+a) Consider a qualtum controlled-NOT gate. 
+This gate seems to copy the states for 
+\[
+    \ket{\psi} = \ket{0}, \ket{1}
+\]. 
+Does this gate violate the no-cloning theorem?
+
+\new{Solution}
+No, the no-cloning theorem introduced in Townsend 
+tells us that there does not exist a unitary operator 
+the copies a general quantum state. The c-NOT gate 
+successfully clones the $\ket{0}, \ket{1}$ state, 
+but it fails for an entangled state, for example 
+\[
+    \ket{\psi} = \frac 1 {\sqrt 2} (\ket{0}+\ket{1})
+\]. An attempt to copy $\ket{\psi}$ through the c-NOT 
+gate results in a state 
+\[
+\begin{bmatrix}
+    \frac 1 {\sqrt 2}
+    \\
+    0
+    \\0
+    \\
+\frac 1 {\sqrt 2}
+\end{bmatrix}
+\]
+The correct copy must result in a state 
+\[
+    \twobyoneMat(\frac 1 {\sqrt 2}, \frac 1 {\sqrt 2})
+    \otimes 
+    \twobyoneMat(\frac 1 {\sqrt 2}, \frac 1 {\sqrt 2})
+    = 
+\begin{bmatrix}
+    1/2 \\ 
+    1/2 \\ 
+    1/2 \\ 
+    1/2
+\end{bmatrix}
+\]
+
+And clearly the two states do not match which 
+leads to a contradiction. 
+\hfill \lightning 
+
+\vspace{.5cm}
+b) By using the method of Quantum Teleportation, Alice 
+can send a quantum state exactly by using entanglement 
+and sending two classical bits. Now, assume Bob recieved 
+a cubit from Alice and Bob made a measurement. How much 
+information about $\{\theta, \phi\}$ can Bob retrieve 
+from this experiemnt?
+
+\new{Solution}
+Suppose Bob recieves a state 
+\[
+    \ket{\psi} = \twobyoneMat(\cos(\theta/2), {e^{i \phi} \sin(\theta / 2) })
+\]
+We can retrieve the probability that $\ket{\psi}$ 
+will collapse to either $\ket{0}$ or $\ket{1}$. 
+\[
+    P(0) = \cos^2(\theta/2 )
+    \textAnd 
+    P(1) = \sin^2(\theta/2)
+\]
+Depending on Bob's measurement, we can claim that the 
+probability that $\ket{\psi}$ will collapse to the 
+measured state is more likely. If Bob measures 1, then 
+it is likely that 
+\[
+    \theta \in [\frac \pi 4, \frac {3\pi} 4] 
+    \cup  [\frac {5\pi} 4, \frac {7\pi} 4]
+\]
+. This method does not allow us to make any claims about the 
+phase $\phi$. 
+\vspace{.5cm}
+
+c) What if Bob is allowed many duplicates of the same 
+qubit?
+
+\new{Solution}
+It would be possible to narrow down the exact value of 
+$\theta$. Still, it would be impossible to recover 
+the value of $\phi$
+
+
+
+\end{document}
+

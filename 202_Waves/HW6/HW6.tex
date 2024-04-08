@@ -1,0 +1,766 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 202 HW6
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize 
+
+\new{Q1 Matching initial conditions for the wave equation} 
+
+We know that the 1D wave equation 
+\[
+    y'' = v_p^2\ddot{y}
+\]
+is satisfied by the solution 
+\[
+    y(x, t) = f(x - v_p t) + g(x + v_p t)
+\]
+for arbitrary functions $f, g$. Note that $f$ is the forward 
+moving wave and $g$ is the backward moving wave. 
+
+A wave is known to have an initial displacement 
+\[
+    y(x, 0) = \frac {.001} {1 + x^2}
+\]
+Compute the solution for the wave moving in $10m/s$ given that:
+
+a) the wave is moving forwards 
+
+b) the wave is moving backwrads
+
+c) the wave is traveling in opposite directions 
+
+\new{Solution}
+The case a, b can be dispatched with ease. We know that $g = 0$ and 
+$f = 0$ for case a, b, respectively. Thus, for a, 
+\[
+    f(x - v_p t) \bigg|_{t = 0} =  \frac {.001} {1 + x^2}
+    \textOr 
+    f(x) = \frac {.001} {1 + x^2}
+\].
+Likewise, for b, 
+\[
+    g(x + v_p t) \bigg|_{t = 0} =  \frac {.001} {1 + x^2}
+    \textOr 
+    g(x) = \frac {.001} {1 + x^2}
+\].
+Now we write the solution for the wave equation. 
+
+\[
+    y_a(x, t) = f(x - v_p t) =  \frac {.001} {1 + (x - 10m/s \cdot t)^2}
+\]
+
+\[
+    y_b(x, t) = g(x + v_p t) =  \frac {.001} {1 + (x + 10m/s \cdot t)^2}
+\]
+
+Case 3 can be resolved as considering the wave as a superposition 
+of the two waves $y_a, y_b$ with half amplitudes. In symbols, 
+
+\[
+    y_c = \frac 1 2 (y_a + y_b)
+    = .0005 \left(
+        \frac 1 {1 + (x - 10m/s \cdot t)^2}
+        + 
+        \frac 1 {1 + (x + 10m/s \cdot t)^2}
+    \right)
+\]
+
+\fullFigure{Q1_animation.png}
+
+
+\new{Q2 Schrodinger's Equation}
+
+Recall the general Schrodinger's Equation. 
+\[
+    i\hbar \dot{\ket{\psi}} = \hat H \ket{\psi}
+\]
+
+The Hamiltonian of the 1D particle can be 
+written as the sum of the kinetic and potential energy. 
+
+\[
+    \hat H = \hat P + \hat V = 
+    \frac {\hat p ^2} {2m} + \hat V
+\]
+
+The operator $\hat p$ denotes the momentum of the particle. 
+\[
+    \hat p = -i \hbar \triangledown 
+\]
+
+For a free particle, there is no potential energy. Rewrite the Hamiltonian. 
+
+\[
+    \hat H_{free} = - \frac {\hbar^2}{2m} \triangledown^2
+    = -\frac{\hbar^2}{2m} \Delta
+\]
+where $\Delta$ denotes the Laplacian. 
+
+Now, consider a free particle in 1 dimension. The equation simplifies to: 
+\[
+    i \hbar \frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2}
+\]
+
+\new{a)} Can $\psi(x, t)$ be in the form of $\Ixp{(kx - \omega t)}$? If so, 
+what is the dispersion relation?
+
+For the complex exponential form of $\psi$, the time derivative 
+acts as multiplying $-i\omega$ and the space derivative $ik$. Hence, 
+the 1D Schrodinger equation can be rewritten as 
+
+\[
+    i \hbar (-i\omega) = -\frac {\hbar^2}{2m} (ik)^2
+    \textOr 
+    \boxed{
+    \frac \omega {k^2} = \frac \hbar {2m}
+    }
+\]
+
+We also take note of the phase velocity 
+\[
+    v_p = \frac \omega k = \frac{\hbar k} {2m}
+\]
+
+\new{b)} Show that for an arbitrary function $f$, the Schrodinger's 
+equation cannot be satisfied by $\psi(x, t) = f(x - vt)$ for any velocity v. 
+
+Plug the candidate solution into the Schrodinger's equation. We get 
+\[
+    i\hbar (-v)f'(x - vt) = -\frac{\hbar^2}{2m} f''(x - vt)
+\]
+
+This implies that the ratio $f''/f'$ is a constant. This is not true 
+in general. Hence, $f(x - vt)$ is not a solution. 
+
+\new{c)} Let $\tilde \psi(x, t)$ be a solution to TDSE. Is the 
+realified version, $\Re{\tilde \psi} := \psi$ always a solution 
+for TDSE?
+
+Unfortunately, no. Let $\tilde \psi := A\Ixp{{kx - \omega t}}$
+be a solution to the TDSE. We take the real part and plug it 
+into the TDSE. 
+
+\[
+    \psi = \Re ( A\Ixp{{kx - \omega t}})= A\cos(kx - \omega t)
+\]
+
+Try $\psi$ as a candidate solution for TDSE. 
+
+\[
+    i \hbar \frac{\partial (A\cos(kx - \omega t))}{\partial t}
+    = -\frac{\hbar^2}{2m} A\cos(kx - \omega t)''
+\]
+
+The LHS of the equation is imaginary while the RHS is real. 
+Thus, both sides must identically equal zero, implying $A = 0$. 
+This is not true for a general $\tilde\psi$. \lightning
+
+\new{d)} In quantum mechanics, energy and momentum can be interpreted 
+as a multiple of frequency and wavenumber. We know that the 
+energy of a photon is determined by $E = hf$. Thus 
+\[
+    E = \hbar \omega
+\]
+By the DeBroglie equation, we have $p = h/\lambda$. $k = 2\pi / \lambda$ 
+so 
+\[
+    p = \hbar 
+    \] 
+
+Recall 
+\[
+    \frac \omega {k^2} = \frac \hbar {2m}
+\]
+. Replace $\omega, k$ with energy and momentum.
+\[
+    \frac E {p^2} = \frac 1 {2m} 
+    \textOr 
+    \boxed{
+        E = \frac{p^2}{2m}
+    }
+\]
+
+\new{e)} The Klein-Gordon Equation reads 
+\[
+    -\ddot\phi + c^2 \phi '' =
+    \left(
+        \frac {mc^2} \hbar
+    \right)^2 
+    \phi
+\]
+
+Let $\phi = A\Ixp{(kx - \omega t)}$. Again, the 
+time derivative operator and the space derivative operator 
+corresponds to $-i\omega$, $ik$ respectively. Thus, the equation 
+simplifies to 
+\[
+    -(i\omega)^2 \phi + c^2 (ik)^2 \phi = \left(
+        \frac {mc^2} \hbar
+    \right)^2 
+    \phi
+\]. 
+Divide by $\phi$ and simplify to obtain the dispersion relation. 
+\[
+    \omega^2 - (kc)^2 = \left(
+        \frac {mc^2} \hbar
+    \right)^2 
+\]
+Now utilize $E = \hbar \omega$ and $p = \hbar k$. Multiply both sides by $\hbar^2 $
+\[
+    E^2 = (pc)^2 + (mc^2)^2
+\]
+We have obtained the equation for relativistic energy. 
+
+\new{f)} Consider the 1D diffusion equation, 
+\[
+    \dot \phi = \gamma^2 \phi ''
+\]
+Does $\phi(x, t) = A\Ixp{(kx - \omega t)}$ satisfy this equation 
+if $k, \omega$ are both real? What if $\omega$ is not necessarily real? 
+How does the temperature distribution change over time?
+
+Again, using differential operators, we rewrite the equation as 
+\[
+   (-i\omega) \phi = \gamma^2 (ik)^2  
+   \textOr 
+   \omega = -i\gamma^2k^2
+\]
+
+If $k\in \mathbb{R}$, necessarily $\omega$ must be purely imaginary. So 
+assume this to be the case. Rewrite the temperature distribution $\tilde \phi$. 
+
+\[
+    \tilde \phi = A \Ixp{kx} e^{-i(-i\gamma^2k^2t)} = Ae^{-\gamma^2k^2t} e^{ikx} 
+\]
+
+Take the real part to retrieve $\phi$
+\[
+    \phi =  Ae^{-\gamma^2k^2t} \cos(kx)
+\]
+
+At any time, the temperature is distributed sinusoidially along 
+the x-axis. As time goes on, the amplitude of the distribution 
+decreases exponentially. Eventually, the temperature is distributed 
+equally along the whole plane. 
+
+
+\new{Q3 Multiple interferences}
+
+An infinite string has a wave number of $k_1$. A short segment 
+of length $L$ has a wave number of $k_2$. We distinguish the 
+string into three regions, region I, II, III. A wave travels 
+through this string from region I. Some reflection/transmission 
+occurs at two boundaries. Let $A_1, A_2, A_3$ be the 
+three waves traveling in the forward direction for each region. 
+Likewise, let $B_1, B_2$ be the backward traveling wave. 
+
+a) Compute $|A_{III}|/ |A_{I}|$ and $|B_I| / |A_I|$ given 
+$k_2L = 2\pi$. 
+
+b) Compute the two qualities when $k_2L = \pi$
+
+\new{Solution}
+The wave must be continuous and smooth at the boundaries, i.e. 
+$x = 0, L$. Thus, we write 
+
+\begin{align*}
+    A_1(0, t) + B_1(0, t) = A_2(0, t) + B_2(0, t)\\
+    (A_1(0, t) + B_1(0, t))' = (A_2(0, t) + B_2(0, t))'\\
+    A_2(L, t) + B_2(L, t) = A_3(L, t)\\
+    (A_2(L, t) + B_2(L, t))' = (A_3(L, t))'
+\end{align*}
+
+We also know that each complexified $A, B$ must be in the follwing form.
+
+\[
+    \tilde A_1(x, t) = a_1 \Ixp{(\omega t - k_1 x)}
+    \textAnd 
+    \tilde A_2(x, t) = a_2 \Ixp{(\omega t- k_2 x)}
+    \textAnd
+    \tilde A_3(x, t) = a_3 \Ixp{(\omega t - k_1 x)}
+\]
+
+\[
+    \tilde B_1(x, t) = b_1 \Ixp{(\omega t + k_1 x)}
+    \textAnd 
+    \tilde B_2(x, t) = b_2 \Ixp{(\omega t + k_2 x)}
+\]
+\color{red}
+Note that it is convinient to use $\omega t - kx$ in the exponent, 
+for we wish to extract the $\Ixp{\omega t}$ for any time $t$!
+\color{black}
+
+Realifying the forms and plugging in yields the following four formulas. 
+\begin{align}
+    a_1 \Ixp{\omega t} + b_1 \Ixp{\omega t}
+     = a_2 \Ixp {\omega t} + b_2 \Ixp{\omega t}
+    \nonumber \\
+    -k_1a_1 \Ixp{\omega t} + k_1b_1 \Ixp{\omega t}
+     = -k_2 a_2 \Ixp{\omega t} + k_2 b_2 \Ixp{\omega t}
+    \nonumber  \\
+     a_2 \Ixp{(\omega t - k_2 L)} + b_2 \Ixp{(\omega t + k_2 L)}
+     = 
+     a_3 \Ixp{(\omega t - k_1 L)}
+    \nonumber \\
+     -k_2a_2 \Ixp {(\omega t - k_2 L)}+ k_2b_2 \Ixp{(\omega t + k_2 L)}
+     = 
+     -k_1 a_3 \Ixp{(\omega t - k_1 x)}
+\end{align}
+
+Let $k_2 L = 2\pi$. Equations in (1) reduce to 
+\begin{align}
+    a_1 \Ixp{\omega t} + b_1 \Ixp{\omega t}
+     = a_2 \Ixp {\omega t} + b_2 \Ixp{\omega t}
+    \nonumber \\
+    -k_1a_1 \Ixp{\omega t} + k_1b_1 \Ixp{\omega t}
+     = -k_2 a_2 \Ixp{\omega t} + k_2 b_2 \Ixp{\omega t}
+    \nonumber  \\
+     a_2 \Ixp{(\omega t)} + b_2 \Ixp{(\omega t)}
+     = 
+     a_3 \Ixp{(\omega t - k_1 L)}
+    \nonumber \\
+     -k_2a_2 \Ixp {\omega t }+ k_2b_2 \Ixp{\omega t }
+     = 
+     -k_1 a_3 \Ixp{(\omega t - k_1 x)}
+\end{align}
+
+Let $t = 0$. 
+Comparing the equations in pairs as of the 1st 3rd, and 2nd 4th, we deduce 
+\[
+    a_1 + b_1 = a_3 \Ixp{k_1 L}
+\]
+\[
+    -a_1 + b_1 = -a_3 \Ixp{k_1 L}
+\]
+
+Thus, $b_1 = 0$ and $|a_3|/|a_a| = |\Ixp{k_1L}| = 1$
+
+Let $k_2 L = \pi$. Equations in (1) reduce to
+\begin{align}
+    a_1 \Ixp{\omega t} + b_1 \Ixp{\omega t}
+     = a_2 \Ixp {\omega t} + b_2 \Ixp{\omega t}
+    \nonumber \\
+    -k_1a_1 \Ixp{\omega t} + k_1b_1 \Ixp{\omega t}
+     = -k_2 a_2 \Ixp{\omega t} + k_2 b_2 \Ixp{\omega t}
+    \nonumber  \\
+     a_2 \Ixp{(\omega t)} + b_2 \Ixp{(\omega t)}
+     = 
+     -a_3 \Ixp{(\omega t - k_1 L)}
+    \nonumber \\
+     -k_2a_2 \Ixp {\omega t }+ k_2b_2 \Ixp{\omega t }
+     = 
+     k_1 a_3 \Ixp{(\omega t - k_1 x)}
+\end{align}
+
+
+
+Again, compare the equation in pairs as we did for the previous case. 
+\[
+    a_1 + b_1 = -a_3 \cos(k_1 L)
+\]
+\[
+    -a_1 + b_1 = a_3 \cos(k_1 L)
+\]
+
+Thus, $b_1 = 0$ and $|a_3/a_1| = 1$
+
+To sum up, the wave is amplified by a factor of $\sec(k_1 L) > 1$ 
+after passing the middle segment. If $k_2L = 2\pi$, the phase 
+of the wave is preserved. If $k_2 L = \pi$, the phase of the wave 
+is shifted by $\pi$. In both cases, there is no reflection in the 
+original string. Regadless of $k_2 L$, 
+
+\[
+    \boxed{
+        |B_I|/|A_I| = 0
+        \textAnd 
+        |A_{III}|/|A_I| = 1
+    }
+\]
+
+\new{Q4} BNC line 
+
+a) Describe the reflected pulse on a BNC cable where one 
+of the ends are open or shorted. 
+
+\halfFigure{Q4_bnc.png}
+
+When the end is shorted, the voltage of the end must be zero, 
+but the current is allowed to change. The current is preserved 
+and the voltage is reversed. When the end is open, the voltage 
+difference can change but the current between the two wires are 
+fixed to be zero. Hence the voltage is preserved and the current 
+is reversed. 
+
+b) Use the notion of Impedence to explain your results above 
+
+The voltage wave of the shorted end 
+or the current wave of the open end
+ can be considered as a string connected 
+to another string with infinite impedence. 
+\[
+    Z_2 = \infty
+\]
+\[
+    R = \frac{Z_1 - Z_2} {Z_1 + Z_2} = -1
+\]
+So the wave is reversed. 
+
+The current wave of the shorted end 
+or the voltage wave of the open end
+can be considered as a string connected 
+to another string with zero impedence. 
+\[
+    Z_2 = 0
+\]
+\[
+    R = \frac{Z_1 - Z_2} {Z_1 + Z_2} = 1
+\]
+So the amplitude is preserved. 
+
+If we fix $Z_open = \infty$ and $Z_short = 0$ 
+for both current and voltage, 
+we see from the results above that the 
+\color{red}
+reflection 
+formula works only for the current wave but not 
+the voltage wave. 
+\color{black}
+
+\new{Remark} Image waves 
+To remember fixed and free ends, consider image waves 
+traveling on the other side of the string. 
+
+c) Use the differential equations that relate the voltage 
+and the current wave to find an impedence value that works 
+for the voltage current. 
+
+From our results above, for the current wave, 
+\[
+    R_I = \frac{Z_1 - Z_2}{Z_1 + Z_2}
+\]
+
+We also know that the following differential equation 
+holds by charge conservation. 
+\[
+    - \frac {\partial I } {\partial x} 
+    = C_0 \frac {\partial V} {\partial t}
+\]
+The incident and reflect current wave is known to us. 
+\[
+    \tilde I_i = I_0 \Ixp{(kx - \omega t)} 
+    \textAnd 
+    \tilde I_r = R_I I_0 \Ixp{(kx + \omega t)}
+\]
+Likewise, we can express the incident and 
+reflect voltage wave. 
+\[
+    \tilde V_i = V_0 \Ixp{(kx - \omega t)} 
+    \textAnd 
+    \tilde V_r = R_V V_0 \Ixp{(kx + \omega t)}
+\]
+Relate $I_i, V_i$ and $I_r, V_r$ using the 
+differential equation. 
+\[
+    -kI_0 = -\omega C_0 V_0 
+    \textAnd 
+   - kR_II_0 = \omega C_0 R_V V_0
+\]
+Divide RHS by LHS and multiply by $-1$. 
+\[
+    \boxed{
+    R_V = -R_I = -\frac{Z_1 - Z_2}{Z_1 + Z_2}
+    }
+    \]
+
+\new{Q5 Dispersion relation and LC transmission line}
+
+Consider a LC transmission line comprised of capacitors 
+connected in parallel. Each of the capacitors are connected with 
+an inductor. Let the inductance and the capacitance 
+be $L$ and $C$. Remember the mechanical analog of the circuit. 
+
+\[
+  \begin{split}
+    q \mapsto x \\
+    L \mapsto m \\
+    C \mapsto 1/k\\ \textrm{k string constant}
+  \end{split}  
+\]
+
+We can compute the angular frequency of the circuit using the 
+dispersion relation. Beware that $k$ is the wavenumber, not 
+the spring constant. 
+
+\[
+    \omega = 2\omega_0 \sin (ka / 2 )
+\]
+
+The natural frequency of the circuit is 
+\[
+    \omega_0 = \sqrt{
+        \frac k m
+    } \mapsto \sqrt{\frac 1 {LC}}
+\]
+
+At continum, $a \rightarrow 0$. We approximate the sin as 
+an identity function. 
+
+\[
+    \omega \approxeq 2\omega_0 \frac {ka} 2
+    = \sqrt{\frac 1{LC}}  a k 
+    = \sqrt{\frac {a^2}{LC}}  k 
+    =  \sqrt{\frac 1{L_0C_0}}  k 
+\]
+
+The phase velocity is 
+\[
+    \boxed{
+    v_p = \omega / k = 
+\sqrt{\frac 1{L_0C_0}}
+    }
+    \]
+\new{Q6 Alternate derivattion of the impedence of BNC cable}
+\halfFigure{Q6_circuit.png}
+Let the impedence of the upper and the lower circuits be $Z_1$ and $Z_2$ 
+respectively. We know that $Z_1 = Z_2$. Also, 
+\[
+    Z_1 = i\omega L + \frac1 {i\omega C + \frac 1 {Z_\infty}}
+    \textAnd 
+    Z_2 =  Z_\infty
+\]
+The equality of the two impedences imply 
+\[
+    i\omega L + \frac1 {i\omega C + \frac 1 {Z_\infty}}
+    =
+     Z_\infty
+\]
+And with some algebra, we deduce 
+\[
+    Z_\infty ^2 - i\omega L Z_\infty - \frac L C = 0
+\]
+Apply the quadratic formula to compute $Z_\infty$. 
+\[
+    \boxed{
+    Z_\infty = \frac {i\omega L} 2
+    + \sqrt{
+        \frac L C - \left(
+            \frac {\omega L} {2}
+        \right)^2
+    }
+    }
+\]
+
+Now, we wish to take the continum limit of this impedence to find 
+the impedence of the BNC cable. Let $L_0, C_0$ be the impedence 
+and capacitence per unit length of the cable. Consider a 1m segment of the 
+cable. The total inductance and the capacitance is 
+\[
+    L_{tot} = (1m) L_0 \textAnd C_{tot} = (1m) C_0
+\]
+The continum case can be thought as disecting this 1m cable into 
+n segments with inductance and capacitance $L_{tot}/n$ and $C_{tot}/n$. 
+Plug this into our result from (a). 
+\[
+    Z_\infty = \frac {i\omega L_{tot}} {2n}
+    + \sqrt{
+        \frac {L_{tot}/n} {C_{tot}/n} - \left(
+            \frac {\omega L_{tot}} {2n}
+        \right)^2
+    }
+\]
+Send $n \rightarrow \infty$. Observe that $L_{tot}/C_{tot} = L_0/C_0$. 
+\[
+    \boxed{
+    Z_\infty = \sqrt{
+        \frac {L_0}{C_0}
+    }
+    }
+\]
+
+\new{Q7} Malus' Law
+
+a) A light passes through three polarizers. 
+The pass axis of the polarizers are arranged 
+0, 45, 90 degrees with respect to the electric field of 
+the light. Compute the intensity of the light after 
+it passes the polarizers. 
+
+The first polarizer does not affect the light. Apply 
+Malus's Law twice. 
+
+\[
+    I'/I = (\cos(\pi / 4))^ 2 = \boxed{1/ 4}   
+\]
+
+b) Consider $N+1$ polarizers that rotate 
+$\pi / N$ each. 
+
+Let $I_n$ be the intensity of the light after 
+passing the nth polarizer. By Malus' Law, 
+\[
+   I_n = (\cos(\pi / 2N)^2) I _{n - 1} 
+\]
+
+The first polarizer does not affect intensity. After 
+passing $N$ polarizers, the intensity is multiplied 
+by the cos square term $N$ times. 
+
+\[
+    \boxed{
+    I_{N + 1}/ I_0 = 
+    \cos(\pi / 2N)^{2N}
+    }
+\]
+
+c) 
+\halfFigure{Q7_Malus.png}
+
+
+d) Approximate the intensity at the limit $N \rightarrow \infty$
+\[
+    \begin{split}
+    I_{N + 1}/ I_0 = 
+    \cos(\pi / 2N)^{2N}
+    =
+    (1 - \sin(\pi / 2N)^2)^{2N}
+    \\
+    \approxeq 
+    (1 - (\pi / 2N)^2)^{2N}
+    \approxeq 
+    1 + (\pi / 2N)^2 \cdot 2N 
+    \approxeq  1
+    \end{split}
+\]
+
+So the intensity does not change. 
+
+\end{document}

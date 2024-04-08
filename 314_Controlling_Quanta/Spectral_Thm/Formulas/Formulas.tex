@@ -130,6 +130,45 @@ PHYS 314 Formula Sheet
 Daniel Son
 \end{center}
 
+
+\LARGE
+\noindent
+\textbf{Part 1 Quantum Computing}
+\normalsize
+
+\new{Eigenvalues of the Spin Operators}
+It is a convention to denote the basis state in 
+terms of the z-axis. A particle of spin-s with 
+spin value m is denoted as 
+\[
+    \ket{\phi} = \ket{s, m}
+\]
+
+Also, this notation provides insight of the 
+eigenvalues of the spin operators. 
+
+\[
+    \hat{S}_z\ket{s, m} = m \ket{s, m}
+    \textAnd 
+    \hat{S}^2\ket{s, m} = \sqrt{s(s+1)} \ket{s, m}
+\]
+
+\new{Behavior of the Spin operators under commutation}
+We are interested in mainly two types of spin operators. 
+One is the spin operator with repect to each axis, 
+and the other is the total angular spin. The following 
+relations hold. 
+
+\[
+    [\hat{S}_x, \hat{S}_y] = i\hbar \hat{S}_z
+    \textAnd 
+    [\hat{S}_z, \hat{S}^2] = 0
+\]
+
+In other words, the three axes $x, y, z$ behave well 
+under the spin operator, and the total angular 
+spin commutes with the total angular spin. 
+
 \new{Singlet States and Superposition}
 
 The singlet state is defined as follows.
@@ -250,7 +289,9 @@ eigenvalues and four energy eigenvectors.
 
 The higher energy eigenvalue is $A/2$, and the 
 corresponding states are the two product states (top/bottom) and 
-the entangled state which has the same signs. In symbols, 
+the entangled state which has the same signs. 
+These three states are referred as the \textbf{triplet states}. 
+In symbols, 
 
 \[
     \lambda = \frac{A}{2} \textAnd \ket{\psi} = \ket{z_+}\ket{z_+}, 
@@ -259,7 +300,7 @@ the entangled state which has the same signs. In symbols,
 \]
 
 The lower energy eigenvalue is $-3A/2$, and the 
-corresponding state is the singlet state. In symbols, 
+corresponding state is the \textbf{singlet state}. In symbols, 
 
 
 \[
@@ -268,6 +309,9 @@ corresponding state is the singlet state. In symbols,
 \]
 Remember that $\frac{2}{\hbar^2}S_1S_2$ has the eigenvalue of $1/2, -3/2$.
 
+The singlet corresponds to spin-0 and the triplet corresponds to 
+spin-1. 
+
 \new{Dirac's Spin Exchange} 
 The Hamiltonian $\hat{H} := \vec\sigma_1\cdot \vec\sigma_2$
 can be expressed as 
@@ -275,5 +319,174 @@ can be expressed as
     \vec\sigma_1\cdot \vec\sigma_2 = 
     2P_{\textrm{spin exchange}} - 1
 \]
+
+\new{Computing the Bra-ket of product vectors}
+When dealing with the EPR paradox, it is necessary 
+to find the product of to entangled states. We proceed
+with the principle that spins don't interact with each 
+other in a product state. Suppose
+
+\[
+    \ket{x+, x+} := \ket{x+}_1 \ket{x+}_2
+    \textAnd 
+    \ket{y+, y+} := \ket{y+}_1 \ket{y+}_2
+\]
+
+We compute the probability that the first state 
+collapses to the second state. 
+
+\[
+    P = |\braket{y+,y+}{x+,x+}|^2
+    = |\braket{y+}{x+} \braket{y+}{x+}|^2
+    = \frac 1 2 \frac 1 2 = \frac 1 4
+\]
+
+\new{Spin probability in terms of angles between Bloch vectors}
+Consider two states $\ket{a+}, \ket{b+}$ which has a bloch 
+vector oriented towards $\vec a, \vec b$. The probability that 
+one of them will collapse to the other is given as follows. 
+\[
+    P(a+ \rightarrow b+) = \braket{b+}{a+}^2 = 
+    \cos^2(\theta_{ab})
+\]
+and $\theta_{ab}$ is the angle between the two vectors. 
+This can be derived by fixing one of the vectors to 
+be the z-axis, then applying the bloch vector formula. 
+
+\[
+    \ket{n} = 
+    \begin{bmatrix}
+        \sin(\theta / 2)\\
+        \Ixp(\phi) \cos(\theta /2)
+    \end{bmatrix}
+\]
+
+\new{The Bloch vector and Rotations}
+
+The bloch vector is \textbf{a unit vector} that describes 
+the direction of the spin. To obtain the physical projection 
+of the spin, the bloch vector must be multiplied by $\hbar /2$. 
+In symbols, that is, 
+\[
+    \langle\hat{S}_x\rangle = 
+    \frac \hbar 2 r_x
+\]
+$r_x$ refers to the x-component of the Bloch vector. In terms of 
+opertators, 
+\[
+    \hat{S}_x = \frac \hbar 2 
+     \sigma_x
+\]
+
+And the total projection operator generates the rotation around 
+the axis. That is, 
+\[
+    \hat{R}_x(\theta) = \exp{\left(
+        \frac \hbar 2 \sigma_x
+        \cdot
+    \frac \theta {i \hbar}\right) }
+    = 
+    \exp \left(
+        -i \frac \theta 2 \sigma_x
+    \right)
+\]
+Computing this matrix exponential, we conclude a following 
+shorthand for the rotational operators. 
+\begin{equation}
+\begin{split}
+    \hat{R}_x(\theta) = \cos(\theta/2) - i \sin(\theta/2) \sigma_x 
+    \\  = \cos(\theta/2) + \frac 2 {i\hbar} \sin(\theta/2) \hat{S}_x
+\end{split}
+\end{equation}
+This result generalizes to other axes. 
+
+Also, it is useful to remember that rotation along the x-axis 
+by a angle of $\pi$ results in $(a, b) \mapsto(b, a)$. For the 
+y-axis, the same rotation results in $(a, b) \mapsto (-b, a)$.; 
+
+\newpage
+
+\Large
+\noindent
+\textbf{Part 2 Quantum Computing}
+\normalsize 
+
+\new{Introducing quantum circits}
+\fullFigure{Qcircuit.png}
+
+Here is a sample of a quantum circuit. Unlike traditional circuits 
+where each of the wires take a value of $0, 1$, a quantum circuit 
+can take some entangled state $\ket{\phi}$. 
+
+We assume that all quantum gates are \textbf{unitary, or reversible}. Without proof, 
+we acknowledge that any unitary operators can be 
+decomposed into rotations. Moreover, any non-unitary operator 
+can be emulated by \textbf{ancilla qbits}, which are wires with predetermined 
+values. 
+
+\new{Some basic gate definitions}
+
+Each quantum gate can be represented by an operator. We 
+define some important quantum gates. Here are a class 
+of gates defined to be the Pauli gates. 
+
+\[
+    \begin{split}
+        I := \twobytwoMat(1, 0, 0, 1) 
+        \hspace{2cm} 
+        X := \sigma_x = \twobytwoMat(0, 1, 1, 0)
+        \\
+        Y := \sigma_y = \twobytwoMat(0, -i, i, 0)
+        \hspace{2cm}
+        Z := \sigma_z = \twobytwoMat(1, 0, 0, -1)
+    \end{split}
+\]
+
+Note that square of any of these operators results in the 
+identity operator. Moreover, for any operator $A$ that satisfies 
+$A^2 = I$, 
+\[
+    \Ixp(Ax) = \cos(x) I + i\sin(x) A
+\]
+
+The rotation gates are defined by the rotation opertaors. 
+\[
+    \hat R_z(\theta) := \exp(-\frac {i \theta Z}  2)
+\]
+
+\new{Decomposing unitary gates}
+Without proof, we present that any unitary operator $\hat U$ 
+can be written as follows.
+\[
+    \hat U 
+    = 
+    e^{i\alpha} \hat R_l (\beta) \hat R_m (\gamma) \hat R_l (\delta)
+\]
+This decomposition holds for any nonparallel axis $l, m$ and for 
+some real numbers $\alpha, \beta, \gamma, \delta$. 
+
+Set $l = z, m = y$ for convinience. Also, we observe
+\[
+    X \hat R_z (\theta)  X = \hat R_z (-\theta)
+    \textAnd
+    X \hat R_y (\theta)  X = \hat R_y (-\theta)
+\]. A simple proof can be done by direct substitution. 
+Nicely decomposing the rotations, it is possible to decompose 
+$\hat U$ as 
+\[
+    \hat U = e^{i\alpha} AXBXC
+\]
+for some $A, B, C$ that satisfies $ABC = I$. 
+
+\new{Controlled Gates}
+Imagine a multiqubit gate where there is one control bit 
+and one or more manipulated qbits. The gate performs operation 
+$U$ on the manipulated qbits when the control bit is $\ket{1}$. 
+We call such gates c-U gates. It is depicted in the diagram as 
+follows. 
+
+\halfFigure{cUgate.png}
+
 \end{document}
+
 

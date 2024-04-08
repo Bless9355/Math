@@ -380,7 +380,7 @@ not necessarily the normal mode frequency
 In a standing wave, nodes are the points that do not move. 
 Max amplitude is achieved at antinodes. 
 
-\new{Waves traveling in different medium}
+\new{Waves traveling in different medium, same tension}
 Consider a transverse wave moving from one string 
 of linear mass density $\mu_1$ to another string with linear 
 mass density $\mu_2$.
@@ -389,9 +389,9 @@ by the lmd.
 
 \[
     (v_1, v_2) = \left(
-        \frac{T}{\mu_1}
+        \sqrt{\frac{T}{\mu_1}}
         ,
-        \frac{T}{\mu_2}
+        \sqrt{\frac{T}{\mu_2}}
     \right)
 \]
 
@@ -421,9 +421,161 @@ differentiable at all positions. Also,
 \]
 allows us to easily complexify the solution. 
 
+\new{Crash-intro to Fourier Transform}
+\fullFigure{Fourier.png}
 
-\normalsize 
+\new{Non-dispersive Waves}
+refers to waves in which the variance 
+of frequency and wavelength of the wave does not 
+affect the velocity of the wave. A good example is 
+a traverse wave on a string. 
 
+\[
+    v = \sqrt{\frac T \mu}
+\]
+where $T$ is the tension of the string and $\mu$ refers to mass density. 
+
+
+\new{Mechanical impedence and transmission across different tension}
+We define mechanical impedence of a string as follows. 
+\[
+    Z = \frac F v = \sqrt{T\mu}
+\]
+
+Mechanical impedence is analogous to drag force the string exerts 
+on the ends. That is $Z \mapsto b$. Using impedence, we can write out 
+the reflection and transmission coefficients. Let $Z_1, Z_2$ denote 
+the mechanical impedence of line 1 and line 2 where the wave 
+is traveling from line 1 to line 2. The reflection and transmission 
+coefficients are written as: 
+
+\[
+    R = \frac{Z_1 - Z_2} {Z_1 + Z_2}
+    \textAnd 
+    T = \frac{2Z_1} {Z_1 + Z_2}
+\]
+
+Reflection happens by a small amount, and transmission is dependant 
+on the original string. Perfect transmission happens when impedences 
+are matched. That is, $Z_1 = Z_2$. 
+
+\new{Space-Time relation of traveling waves}
+We know, mathematically, that the solutions to the wave equations 
+are in the form of 
+\[
+    \psi(x, t) = f(x - vt)
+\]
+Where $v$ is the longditudanal speed of the force. 
+By applying the chain rule, we can deduce 
+\[
+    \dot \psi = -v \psi '
+\]
+This can also be deduced by drawing the following diagram 
+\halfFigure{spacetimewave.png}
+
+\new{Energy and Power of a traveling wave}
+Considering the string as a conglomerate of segments, we can retrieve 
+a formula for the energy density of the wave. Note that the potential 
+energy of the string is compted by $Tdl$ where $dl$ refers to stretch. 
+The kinetic energy is related to the time derivative, and the potential energy 
+is related to the space derivative. Applying the wave equation, we derive 
+
+\[
+    \mathcal{E} = 
+    \mu \dot \psi^2 
+    = 
+    \mu v^2 (\psi ')^2
+\]
+
+So the wave equation somewhat coagulates the space and time dependance of energy. 
+The energy density of a wave is product of the lmd and square of the time derivative of the wave. 
+
+It makes sense that the power transmission is the negativ product of 
+linear energy density and transmission speed. This can be derived 
+rigorously using $\dot \psi = -v\psi '$. 
+\[
+    P(x, t) = -v \mathcal{E} 
+\]
+
+\new{Analysis of Standing waves using impedence}
+Fixed ends can be considered as a string connected to another 
+string with infinite impedence. Free ends likewise can be considered 
+as string connected to another spring with zero impedence. Enforcing 
+continuity and smoothness we can derive an equation for standing waves. 
+
+
+\new{Choosing the correct type of wave form}
+The solutions to the wavefunction come in the form of 
+\[
+    \psi(x, t) = A\Ixp{(kx - \omega t)}
+    \textOr 
+    A\Ixp{(\omega t - kx)}
+\]
+When imposing the boundary condition which is space-dependant, it is 
+more useful to adapt the latter form. 
+
+
+\new{Crash intro to optics}
+The four Maxwell equations govern the behavior of EM waves. 
+We are especially interested in the case of waves traveling 
+in isotropic media. That means, zero charge density and linear 
+current density. The four Maxwell Equations are presented 
+as below. 
+
+\begin{align*}
+    \triangledown \vec{E} = -\mu_0 \vec{H}
+    &&
+    \triangledown \vec{H} = -\epsilon_0 \vec{B}
+    \\
+    \dot{\vec{E}} = 0 
+    &&
+    \dot{\vec{H}} = 0
+\end{align*}
+
+The field $\vec{H}$ is rigorously defined in PM 11.9, 
+but for now, just remember 
+\[
+    \vec{H} = \frac 1 { \mu_0} \vec{B}
+\]
+
+$\mu$ refers to permeability and $\epsilon$ refers to 
+permittivity. The value of permeability is usually 
+fixed to be $\mu_0$ for transparent medium. The value of permittivity depends 
+on the medium. The diaelctric constant is defined as 
+\[
+    \kappa := \frac \epsilon {\epsilon_0}
+\]
+
+The velocity of an EM wave, aka light, depends on the traveling 
+medium. The index of refraction is defined as 
+\[
+    n := \frac c v
+\]
+. Note that the index is defined as the reciprocal of the 
+more intuitive definition. 
+
+From E\&M, recall that the energy transmission was governed 
+by the Poynting vector, 
+\[
+    \vec{S} := \vec E \times \vec H
+\]
+From the Maxwell's equations, we deduce the magnitude of $\vec{H}$. 
+\[
+    H = \frac {nE}{Z_0}
+\]
+Where $Z_0 := \sqrt{\mu_0/\epsilon_0} = 377 \Omega$ is defined 
+as the impedence of free space. 
+
+We also deduce that irradiance (or intensity) is proportional 
+to square of the E field. 
+\[
+    I = \frac n {2Z_0} E_0^2
+\]
+
+
+\new{Linear Polarization}
+
+A 
 
 
 \end{document}

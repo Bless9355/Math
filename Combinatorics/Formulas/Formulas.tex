@@ -66,6 +66,31 @@
     }
 }
 
+\newcommand{\textThen}{
+    {
+        \hspace{5mm}
+        \textrm{then}
+        \hspace{5mm}
+    }
+}
+
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[2]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+
+
 \newcommand{\m}{
     \cdot
 }
@@ -109,5 +134,125 @@ By the alternating series test, we conclude
         \frac{n!}e
     \right\}
 \]
+
+\new{Posets and Convolutions}
+
+Let $(X, \leq)$ be a finite poset. We consider 
+a class of functions that map pairs of the poset 
+$X$ to the reals. Let $f, g: X \times X \rightarrow \mathbb{R}$. 
+Define a discrete convolution of the two posets as follows. 
+
+\[
+    f * g(x, y) = \sum_{x \leq z \leq y} f(x, z) \m g(z, y)
+\]
+
+We define three important functions, each corresponding 
+to the identity, the ordering, and the inverse of the ordering. 
+They are called the Kronecker Delta, Zeta, and the Mobius Function. 
+
+\[
+\delta(x, y) =
+\begin{cases}
+     1 &\text{if } x = y \\ 
+    0 &\text{otherwise} \\
+\end{cases}
+\textAnd
+\zeta(x, y) =
+\begin{cases}
+     1 &\text{if } x \leq y \\ 
+    0 &\text{otherwise} \\
+\end{cases}
+\]
+
+It is trivial to find out that the delta function is 
+the convolutional identity. 
+
+Before writing out the Mobius function, we introduce a 
+constructive method to obtain the convolutional inverse 
+of an arbitrary function $f$. We requre $f(y, y)$ to be 
+nonzero. 
+
+Let $g$ be the left inverse of $f$. We easily observe 
+that for nondistinct paris, $g$ must be the reciprocal of 
+$f$. 
+\[
+    g(y, y) = \frac 1{f(y, y)} \hspace{5mm} \forall y \in X
+\]
+
+For distinct pairs, the convolution of $f, g$ must yield zero. 
+If $x > y$, then the convolution is automatically zero. 
+That is, 
+assuming $x < y$, 
+\[
+    f*g(x, y) = 
+    \sum_{x \leq z \leq y} f(x, z) \m g(z, y) = 0
+\]
+Break down the sum. 
+\[
+    f(x, x) \m g(x, y) + \sum_{x < z \leq y} f(x, z) \m g(z, y)
+     = 0
+\]
+Sove for $g(x, y)$. 
+\[
+    g(x, y) = -
+    \frac{1}{f(x, x)} \sum_{x < z \leq y} f(x, z) \m g(z, y)
+\]
+
+It is not hard to see that convolutions are associative. 
+This leads us to conclude that the left inverse equals to 
+right inverse. 
+
+\[
+    f_l * f * f_r = \delta *f_r = \delta * f_l 
+    \textOr 
+    f_r = f_l
+\]
+
+Finally, we present the Mobius Function. The mobius 
+function is defined as the inverse of the zeta function. 
+plug in $f \mapsto \zeta$. 
+
+\[
+    \mu(x, y) = 
+    \begin{cases}
+        1 & \text{if x = y}\\
+    - \sum_{\substack{x < z \leq y}} \mu(z, y) & \text{otherwise}
+    \end{cases}
+    \textThen 
+    \mu * \zeta = \delta
+\]
+
+\new{Proof of Mobius Inversion}
+\fullFigure{Mobius_proof.png}
+
+\new{Tips for Mobius Inversion}
+
+It is necessary that the cumulative function $G$ 
+is of simple form. If is is not clear what $G$ is, 
+then take the compliment of $G$'s argument with 
+respect to the universal set. 
+
+For example, it is horrendous to compute:
+\[
+    G(n) = \sum_{i|n} \phi(i)
+\]
+However, consider
+\[
+    G(n) = \sum_{i|n} \phi(n/i)
+\]
+Each divisor $i$ uniquely maps to another divisor $n/i$. 
+If a number $\xi$ is coprime with $n/i$, $gcd(\xi \m i, n) = i$. 
+More precisely, $(\xi, n/i) = 1$ iff $(\xi \m i, n) = i$. $\phi(n/i)$
+counts the number of such $\xi$, and this corresponds to the numbers 
+that have a gcd $i$ with $n$. Each number in $[n]$ must have 
+some gcd that divides n. Thus, $G(n)$ counts all numbers between $1, n$. 
+
+\new{Classic Mobius Inversion}
+
+Memorize this sum:
+\[
+    \sum_{i | n} \mu(n/i) i = \phi(i)
+\]
+
 
 \end{document}
