@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  7 APR 2024 18:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.11.4)  9 APR 2024 20:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -256,32 +256,37 @@ Package pdftex.def Info: TownSend_5_27.png  used on input line 266.
 <Qcircuit.png, id=32, 418.56375pt x 149.05687pt>
 File: Qcircuit.png Graphic file (type png)
 <use Qcircuit.png>
-Package pdftex.def Info: Qcircuit.png  used on input line 416.
+Package pdftex.def Info: Qcircuit.png  used on input line 436.
 (pdftex.def)             Requested size: 310.4979pt x 110.571pt.
- [5 <./Qcircuit.png>]
-<cUgate.png, id=37, 262.73157pt x 157.33781pt>
+<Quantum_Logic_Gates.png, id=33, 125.19212pt x 153.92941pt>
+File: Quantum_Logic_Gates.png Graphic file (type png)
+<use Quantum_Logic_Gates.png>
+Package pdftex.def Info: Quantum_Logic_Gates.png  used on input line 479.
+(pdftex.def)             Requested size: 310.4979pt x 381.78326pt.
+ [5 <./Qcircuit.png>] [6 <./Quantum_Logic_Gates.png>]
+<cUgate.png, id=41, 262.73157pt x 157.33781pt>
 File: cUgate.png Graphic file (type png)
 <use cUgate.png>
-Package pdftex.def Info: cUgate.png  used on input line 488.
+Package pdftex.def Info: cUgate.png  used on input line 542.
 (pdftex.def)             Requested size: 172.5pt x 103.3055pt.
- [6 <./cUgate.png>] (Formulas.aux)
+ [7 <./cUgate.png>] [8] (Formulas.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5248 strings out of 475248
- 85703 string characters out of 5757813
+ 5256 strings out of 475248
+ 85949 string characters out of 5757813
  1930785 words of memory out of 5000000
- 26744 multiletter control sequences out of 15000+600000
+ 26752 multiletter control sequences out of 15000+600000
  561633 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  67i,22n,77p,404b,242s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on Formulas.pdf (6 pages, 244096 bytes).
+Output written on Formulas.pdf (8 pages, 302475 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,6 +7,17 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 
+
+\usepackage{mathtools}
+
+
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
 \newcommand{\new}[1]{
     \vspace{2mm}
     \noindent
@@ -75,7 +86,7 @@
 
 \newcommand{\Ixp}[1]{
     {
-        e^{#1}
+        e^{i#1}
     }
 }
 
@@ -573,9 +584,60 @@ to square of the E field.
 \]
 
 
-\new{Linear Polarization}
+\new{Jones Calculus for polarization}
+Consider an EM wave traveling in isotropic media. It 
+is a convention to consider the electric field of the 
+wave for polarization. The electric field has both 
+x and y components which are sinusoids dependant 
+on time and the transmission axis z. That is, 
+\[
+    \vec E = \hat x E_x + \hat y E_y
+    \hspace{1cm}
+    \textrm{where}
+\]
+\[
+        E_x = E_{x0}\cos(kz - \omega t)
+        \textAnd 
+        E_y = E_{y0}\cos(kz - \omega t + \phi)
+\]
+Complexifying $E_x, E_y$, we can write 
+\[
+    \tilde E_x = E_{x0}\Ixp{(kz - \omega t)}
+    \textAnd
+    \tilde E_y = E_{y0}\Ixp{(kz - \omega t + \phi)}
+\]
+So, the vector $\tilde {\vec E}$ can be written as follows 
+\[
+    \tilde {\vec E }= 
+    \twobyoneMat(E_{x0}, E_{y0} \Ixp \phi) \Ixp{(kz - \omega t)}
+\]
+The exponential term outside the matrix is insignificant 
+to describe polarizaton. We define the constant matrix 
+as the \textbf{Jones vector} of the polarization. Factoring 
+out a global phase factor, a Jones matrix is in the form of 
+\[
+    L\twobyoneMat(1, \Ixp \phi)
+    \textOr
+    R\twobyoneMat(\Ixp \phi, 1)
+\]
+for $\phi \in [0, \pi]$. The first matrix represents a light 
+in which the y-axis has a \textit{slower} phase. Shift the y-sinusoid 
+of the EM wave to deduce that the light is left polarized. 
+Similarly, the second matrix represents a right polarized light. 
 
-A 
+The effect of an optical element can be represented as a linear transform 
+on the Jones vector. We call this 2x2 matrix a \textbf{Jones Matrix}. 
+So far, we have covered two major optical elements, the 
+linear polarizer and the waveplate. Using the bra-ket notation, 
+their Jones matrix can be written as follows. 
+
+\[
+    L_{\vec v} = \ket {\vec v} \bra{ \vec v}
+    \textAnd 
+    W(\hat f, \hat s, \phi) = \Ixp{\phi} \ket {\hat s} \bra{ \hat s} + \ket {\hat f} \bra{ \hat f}
+\]
+
+
 
 
 \end{document}
