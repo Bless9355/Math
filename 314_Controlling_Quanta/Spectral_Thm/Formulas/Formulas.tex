@@ -7,6 +7,7 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 
+
 \usepackage{mathtools}
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
@@ -579,6 +580,74 @@ Hilbert Space $\mathcal{H}$. Consider a mixed state
 \]
 If this state is measured with respect to the basis $B$, the 
 state collapses to $\ket {\psi_i}$ by a probability of $a_i^2$
+
+\fullFigure{cUgate_rep.png}
+
+\new{Classical computation vs Quantum computation}
+\halfFigure{Computational_Model.png}
+An object starts at state $\ket{0}$. It then goes through 
+two probabilistic manipulations $\alpha$ and $\beta$. 
+It is easy to compute the probability that the 
+ending state will be $\ket{3}$. 
+\[
+    P_{class}(\ket{0} \rightarrow \ket{3})
+     = 
+    \sum_{j \leq 3} \alpha_{0, j} \beta_{j, 3}
+\]
+
+Now, consider a quantum system. The two manipulations would 
+be some operator acting on a quantum state. If measurement 
+is made after each manipulation, the model would be 
+practically equivalent to the classical model. 
+\[
+    P_{q1}(\ket{0} \rightarrow \ket{3})
+     = 
+    \sum_{j \leq 3} |\alpha_{0j}|^2 |\beta_{j3}|^2
+    = 
+    \sum_{j \leq 3} |\alpha_{0j} \beta_{j3}|^2
+\]
+
+Assume the measurement is not made after the first manipulation. 
+The final quantum state can be written as follows. 
+\[
+    \ket \phi = \hat \beta \hat \alpha \ket 0
+    = 
+    \sum_{j \leq 3} \alpha_{0j} \beta_{j0} \ket 0 +
+    \sum_{j \leq 3} \alpha_{0j} \beta_{j1} \ket 1 +
+    \sum_{j \leq 3} \alpha_{0j} \beta_{j2} \ket 2 +
+    \sum_{j \leq 3} \alpha_{0j} \beta_{j3} \ket 3
+\]
+The probability that this final state will collapse to the final 
+state $\ket 3$ is 
+\[
+     P_{quantum}(\ket{0} \rightarrow \ket{3})
+     = 
+    |\sum_{j \leq 3} \alpha_{0j}\beta_{j3}|^2
+\]
+
+\new{Phase kickback for controlled gates} 
+A controlled gate takes two channel of input, the 
+control qubit and the target qbit. the control qbit is 
+preserved and the target qbit is manupulated by some bit. 
+The idea is to decompose the Hilbert state into the eigenstates
+of the target bit. Then, the scalar difference will carry out to 
+the control bit, and the role of the two channels would be reversed. 
+
+The Spectral theorem guarantees an orthonormal basis set for any normal 
+operators. Any quantum circuit element is a unitary, hence normal operator. 
+This decomposition is guaranteed to work. 
+
+For exmple, the Hadamard gates swaps the control bit and the 
+target bit. 
+
+\[
+    cX = P_0 \otimes I + P_1 \otimes X
+\]
+\[
+    cX = I \otimes P_{h1} + Z \otimes P_{h2}
+\]
+
+
 
 \end{document}
 

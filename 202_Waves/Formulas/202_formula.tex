@@ -536,7 +536,7 @@ as below.
 \begin{align*}
     \triangledown \vec{E} = -\mu_0 \vec{H}
     &&
-    \triangledown \vec{H} = -\epsilon_0 \vec{B}
+    \triangledown \vec{H} = -\epsilon_0 \vec{E}
     \\
     \dot{\vec{E}} = 0 
     &&
@@ -583,6 +583,37 @@ to square of the E field.
     I = \frac n {2Z_0} E_0^2
 \]
 
+\new{Isomorphism btw transmission lines and EM waves} 
+
+Remember from Morin 8.1, we defined how a signal travels through 
+a transmission line. Two signals appear, which is the voltage wave 
+$V$ and the current wave $E$. Let $L_0, C_0$ denote 
+the linear inductance and the capacitance. We obtained the result that 
+
+\[
+    v = \sqrt{\frac 1 {L_0 C_0}}
+\]
+
+Also, these two waves are isomorphic to the EM waves. The isomorphism 
+is given as follows 
+\[
+    V \mapsto E \hspace{1cm} I \mapsto B / \mu_0 
+\]
+
+We also know 
+\[
+    Z = V/I \textAnd E = cB 
+\]
+where $c$ is the velocity of the wave given by $1/\sqrt{\epsilon \mu}$
+
+With some algebra, we deduce 
+\[
+    Z = n Z_{free}
+\]
+. To obtain the result, use the asusmption that permeability is 
+constant for transparent media. 
+
+\newpage
 
 \new{Jones Calculus for polarization}
 Consider an EM wave traveling in isotropic media. It 
@@ -637,7 +668,107 @@ their Jones matrix can be written as follows.
     W(\hat f, \hat s, \phi) = \Ixp{\phi} \ket {\hat s} \bra{ \hat s} + \ket {\hat f} \bra{ \hat f}
 \]
 
+\new{Some useful implications of the Maxwell equations}
+We know that the EM wave equations are in the form of 
+\[
+    \vec E = \vec E_0 \Ixp(\vec k \vec r - \omega t) 
+    \textAnd
+    \vec B = \vec B_0 \Ixp(\vec k \vec r - \omega t) 
+\]
 
+Applying the Maxwell equations allow us to make the following conclusions. 
 
+The wavevector, or the direction of propagation, is perpendicular 
+to both the electic and the magnetic field. 
+\[
+    \vec k \cdot \vec E = \vec k \cdot \vec B = 0
+\]
+The magnitude of the Efield and the Bfield are proportional. 
+\[
+    E = cB  
+\]
+The cross product of the wavevector and the electric field 
+yields the magnetic field multiplied by the angular frequency. 
+\[
+    \vec k \times \vec E = \omega \vec B
+\]
+Finally, the Poyntinvg vector provides the energy propagation 
+of an EM wave. 
+\[
+    \vec S = \frac 1 {\mu_0} \vec E \times \vec B
+\]
+
+The velocity of the wave is the angular frequency over 
+the magnitude of the wavevector. 
+\[
+    v = \omega / k    
+\]
+
+\new{Waves carry Momentum}
+We have seen that waves transfer energy. But how can a wave 
+have momentum? To answer this question, we consider a free charge 
+in the transmission axis. Let $\hat k$ be the transmission axis 
+and $q$ be a charge sitting on this axis. The E and B field propagate 
+in a way that their vectors are perpendicular to each other and $\hat k$. 
+
+We wish to compute the infinesimal amount of work and momentum exerted 
+on the free charge. The electric field exerts force in the same direcion 
+of the movement of the particle. Thus, 
+
+\[
+    dW = F_E dx = (qE) (v_E dt) 
+\]
+
+Assuming the movement of the particle is nearly perpendicular to $\hat k$, 
+the magnetic field also exerts a force on the particle. 
+\[
+    dp = mv_E = ma_E dt = F_B dt = qv_E B dt
+\]
+
+Also remember $E = cB$. Thus, $cdp = dW$ and by integration, $cp = E$. 
+\[
+    p = \frac E c
+\]
+as desired. 
+
+\hfill 
+\qed
+
+\new{The double slit experiment}
+
+A vertical wavefront approaches a wall that has two slits. As 
+the wavefront hits the wall, two circular wavefronts are formed 
+by the huygens principle. The two wavefronts are in phase by construction. 
+\fullFigure{Double_Slit.png}
+
+Remember that for 2D circular waves, the amplitude decreases 
+by a factor of $\sqrt{r}$. With some algebra, we deduce the 
+irradiance as a function of $x$. 
+\[
+    \frac {I(x)} {I(0)} = 
+    \frac D {\sqrt{x^2 + D^2}}
+    \cos^2 \left(
+        \frac {kd} 2 
+        \frac x {\sqrt{x^2 + D^2}}
+    \right)
+    = 
+    \frac D {\sqrt{x^2 + D^2}}
+    \cos^2 \left(
+        \frac {d\pi} {2 \lambda} 
+        \frac x {\sqrt{x^2 + D^2}}
+    \right)
+\]
+
+For $x \ll D$,  
+\[
+    \boxed{
+    I_{tot}/I = \cos^2 \left(
+        \frac d D \frac x \lambda \pi
+    \right)
+    }
+\]
+The argument of the cosine square function can be interpreted 
+as the screen distance x projected to the wall space converted to 
+some phase factor by $\lambda$. 
 
 \end{document}

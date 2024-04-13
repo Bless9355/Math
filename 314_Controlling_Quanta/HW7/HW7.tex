@@ -250,8 +250,8 @@ it is likely that
     \theta \in [\frac \pi 4, \frac {3\pi} 4] 
     \cup  [\frac {5\pi} 4, \frac {7\pi} 4]
 \]
-. This method does not allow us to make any claims about the 
-phase $\phi$. 
+. To find the value of $\phi$, repeat the measurement with 
+respect to a different axis. 
 \vspace{.5cm}
 
 c) What if Bob is allowed many duplicates of the same 
@@ -282,9 +282,9 @@ the following Hamiltonian.
 
 \[
     \hat H 
-    := 
+    := \hbar
     \omega_1 (Z \otimes I + I \otimes Z) 
-    + \omega_2 Z \otimes Z
+    + \hbar \omega_2 Z \otimes Z
 \]
 for some appropriate value $\omega_1 t, \omega_2 t$. 
 
@@ -299,6 +299,7 @@ We wish to accomplish the identity
 for some phase factor $\phi$. 
 Expanding both sides into matricies, we 
 rewrite the identity as follows. 
+
 \[
     \begin{split}
     \begin{pmatrix}
@@ -339,7 +340,8 @@ guess a solution.
 \]
 where $\phi = -\frac \pi 4$. 
 
-\new{b} The Hadamard Gate is defined as 
+\new{b} 
+The Hadamard Gate is defined as 
 \[
     H := 
     \frac 1 {\sqrt{2}}
@@ -358,7 +360,10 @@ The transformation goes both directions. Thus,
 the Hadamard gate can be considered a "flip"
 of $\hat{x}$ and $\hat{z}$. Show that 
 a $X_c$ gate is equivalent to $HZ_cH$
+
 \new{Solution} 
+If the control channel has a state $\ket{0}$, the 
+bottom gate will perform the operation $H^2 = I$. 
 It suffices to show $HZH = X$. 
 Plug the equation into mathematica. 
 \halfFigure{HadamardSwap.png}
@@ -414,7 +419,7 @@ Up to a global phase of $e^{-i\pi / 4}$, the
 time evolution operator is a swap gate. 
 
 
-\new{BSM and Teleportation}
+\new{Q5 BSM and Teleportation}
 
 \new{a} Figure 4.11 of KLM shows a circuit that 
 conducts a Bell State Measurement. Prove this claim. 

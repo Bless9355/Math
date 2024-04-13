@@ -1,0 +1,376 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW8
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize 
+
+\new{Q16}
+Formulate a combinatorial problem for which the generating function is 
+\[
+    (1 + x + x^2)(1 + x^2 + x^4 + x^6) 
+    (1 + x^2 + x^4 + \cdots) (x + x^3 + x^5 + \cdots)
+\]
+\new{Solution} 
+Alice decided to spend the weekend in an arcade game plaza "Wonderland."
+Wonderland has four games. To enter the center, Alice has to pay 
+a quarter. The first game is Dune, and Alice 
+has to pay a quarter to play a round of the game. Nonetheless, 
+due to the popularity of the game, a player is allowed to play 
+a maximum number of two rounds of Dune for each visit. Wonderland 
+also has a Karaoke machine, and Alice has to pay two quarters 
+for each song. A player is allowed to sing maximum three songs 
+every visit. The other two games are pacman and tetris. These classic 
+games cost two quarters for each round. They are less popular than 
+the other two machines, so Alice can play as many games as she want. 
+
+The number of ways Alice can spend her time with n quarters in 
+Wonderland generates the generating function in question. We assume 
+that the order in which Alice plays each game does not affect 
+how she spends her time. That is, if Alice plays tetris then pacman, 
+the arrangement is considered equivalent if she plays pacman first 
+then tetris.
+
+\hfill \qed
+
+\new{Q17}
+Determine the generating function for the number $h_n$ of bags of fruit of apples, 
+oranges, bananas, and pears in which there are an even number of apples, at 
+most two oranges, a multiple of three number of bananas, and at most one pear. 
+Then find a formula for hn from the generating function. 
+
+\new{Solution}
+Upon inspection, we write the generationg function for $h_n$. 
+\[
+    \begin{split}
+    G(x) = (1 + x^2 + x^4 + \cdots) (1 + x + x^2) 
+    (1 + x^3 + x^6 + \cdots) (1 + x)
+    \\
+    = 
+    \frac 1 {1- x^2 }
+    \frac {1- x^3} {1 -x}
+    \frac 1 {1 - x^3}
+    (1 + x) 
+    = 
+    \frac 1 {(1-x)^2}
+    =
+    \sum_{n = 0}^\infty (n + 1) x^n
+    \end{split}
+\]
+
+\new{Q22}
+Determine the exponential generating function for the sequence of factorials. 
+
+\new{Solution}
+
+Recall the definition of exponential generating functions. 
+For a sequence $\{a_n\}_{n \in \mathbb{N}}$, the exponential 
+generating function is 
+\[
+    E(x) := \sum_{n = 0}^\infty \frac {a_nx^n} {n!}
+\]
+We know $a_n = n!$. Plug in the definition. 
+\[
+    \boxed{
+    E(x) = \sum_{n = 0}^\infty x^n = \frac 1 {1 - x}
+    }
+\]
+
+\hfill \qed
+
+\new{Preliminary for Q22}
+To better understand how EGFs can be used, we present 
+the following theorem, which is a slight generalization 
+of Thm 7.3.1 of the textbook. 
+
+\new{Theorem} Multiplying to EGFs generates the EGF 
+of a sequence that accounts for partitions. 
+
+Let $f_i(x)$ be the EGF of the sequence $\{a^i_n\}_{n \in \mathbb{N}}$. 
+The function 
+\[
+    \prod_{i \leq N} f_i(x)
+\]
+is an EGF of the sequence 
+\[
+    h_n := \sum_{m_1 + \dots m_N = n}\binom{n}{m_1, m_2, \dots, m_N}
+    \prod_{i \leq N} a_i
+\]
+
+A short proof can be written similarly to that of Thm 7.3.1. 
+
+\new{Q24}
+\fullFigure{Q24.png}
+
+\new{Solution}
+
+Use the theorem presented in the preliminary. For part a, the EGF 
+of $h_n$ is the product of the EGF for each of the objects. 
+We add the constant 1 to account for $h_0 = 1$. 
+\[
+    E_a(x) = 1 + \left(x + \frac {x^3}{3!} + \frac {x^5}{5!} + \cdots\right)^k
+    = 1 +\sinh^k(x)
+\]
+
+Similarly for part b, 
+\[
+    E_b(x) = 1 + \left(\frac{x^4}{4!} + \frac {x^5}{5!} + \frac {x^6}{6!} + \cdots\right)^k
+    = 1 + \left(e^x - 1 - x - \frac {x^2} {2!} - \frac{x^3}{3!}\right)^k
+\]
+
+For part c, 
+\[
+    E_c(x) = 
+    1 + \left(
+        x + \frac {x^2}{2!} + \frac {x^3}{3!} + \cdots
+    \right)
+\left(
+    \frac {x^2}{2!} + \frac {x^3}{3!} + \frac{x^4}{4!} + \cdots
+    \right)
+    \cdots
+\left(
+        \frac {x^k}{k!} + \frac {x^{k + 1}}{(k + 1)!} + \cdots
+    \right)
+\]
+
+For part d, do not add the constant 1. 
+\[
+    E_c(x) = 
+    \left(
+        1 + x
+    \right)
+\left(
+    1 + x + \frac {x^2}{2!} 
+    \right)
+    \cdots
+\left(
+     1 + x + \frac {x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^k}{k!}
+    \right)
+\]
+
+\hfill 
+\qed
+
+\new{Q25} 
+Let $h_n$ denote the number of ways to color the squares of a I-by-n board with 
+the colors red, white, blue, and green in such a way that the number of squares 
+colored red is even and the number of squares colored white is odd. Determine 
+the exponential generating function for the sequence $h_0, h_1, . .. , h_n , ... ,$ and then 
+find a simple formula for $h_n$. 
+
+\new{Solution} The generating function for $h_n$ can be written as 
+\[
+    \left(
+        1 + \frac {x^2} {2!} + \frac {x^4} {4!} + \cdots
+    \right)
+\left(
+        x + \frac {x^3} {3!} + \frac {x^5} {5!} + \cdots
+    \right)
+     \left(
+        1 + \frac {x^2} {2!} + \frac {x^3} {3!} + \cdots
+    \right)^2
+\]
+\[
+    = \left(
+        \frac {e^x + e^{-x}} 2
+    \right)
+\left(
+        \frac {e^x - e^{-x}} 2
+    \right)
+    e^{2x}
+    = 
+    \frac 1 4 (e^{4x} - 1)
+\]
+\[
+    = 
+    \sum_{k = 0} ^ \infty 
+    4^{k - 1} x^{k}
+     - \frac 1 4
+     =
+     \sum_{k = 1} ^ \infty 
+     4^{k - 1} x^k
+\]
+\[
+   = x + 4x^2 + 16 x^3 \cdots 
+\]
+Thus, we conclude 
+\[
+    h_n = 
+    \begin{cases} 
+        0 & (n = 0)
+        \\
+        4^{n - 1} & (n \geq 1)
+    \end{cases}
+\]
+
+\new{Q26} Determine the number of ways to color the squares of a I-by-n chessboard, 
+using the colors red, blue, green, and orange if an even number of squares is to 
+be colored red and an even number is to be colored green. 
+
+\new{Solution} Same as Q25, we write the generating function. 
+\[
+    \left(
+        1 + \frac {x^2} {2!} + \frac {x^4} {4!} + \cdots
+    \right)
+\left(
+        1 + \frac {x^2} {2!} + \frac {x^4} {4!} + \cdots
+    \right)
+     \left(
+        1 + \frac {x^2} {2!} + \frac {x^3} {3!} + \cdots
+    \right)^2
+\]
+
+\[
+    = \left(
+        \frac {e^x - e^{-x}} 2
+    \right)
+\left(
+        \frac {e^x - e^{-x}} 2
+    \right)
+    e^{2x}
+    = 
+    \frac 1 4 (e^{4x} + 2e^{2x} +1)
+\]
+\[
+    \frac 1 4 
+    \sum_{n = 0}^\infty 
+    \left(
+        4^n + 2^{n+1}
+    \right)x^n
+    +1
+\]
+Thus, \[
+ h_n = 
+ \begin{cases}
+    1 &(n = 0)\\
+    4^{n - 1} + 2^{n - 1} & ( n \geq 1)
+ \end{cases}
+\]
+
+\hfill \qed
+
+
+\end{document}
