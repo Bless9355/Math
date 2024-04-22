@@ -32,6 +32,9 @@
 \def\>{{\rangle}}
 
 
+\DeclareMathOperator{\sinc}{sinc}
+
+
 \newcounter{problemcnt}
 \setcounter{problemcnt}{0}
 
@@ -770,5 +773,89 @@ For $x \ll D$,
 The argument of the cosine square function can be interpreted 
 as the screen distance x projected to the wall space converted to 
 some phase factor by $\lambda$. 
+
+\new{Multislit experiment}
+Now, consider the same apparatus as the double slit, 
+but instead, include $N$ slits. We preceed with the assumption 
+that 
+\[
+    d \ll D \textAnd x \ll D \textAnd \theta \approxeq 0
+\]
+Also, the phase difference between two consecutive rays are 
+\[
+    \delta := ka\sin(\theta) := k' a
+\]
+We also know that the amplitude of the wave decreases by a 
+factor of $\sqrt{d}$ for cyllindrical waves, where $d$ is the 
+distance travelled. In the slit experiments, the amplitude of 
+a single ray depends on the angle $\theta$. Define 
+\[
+    A(\theta) = \sqrt{\frac {\cos(\theta)} D}A_{src} 
+\]
+Assuming $\theta$ small, 
+\[
+    A(\theta) \approxeq A(0)
+\]
+
+We first derive the amplitude for angle $\theta$ where there are 
+N slits, each a distance $d$ apart. 
+\[
+    A_{tot}(\theta) = 
+    A(\theta)\left| 
+        1 + e^{i\delta} + e^{2i\delta} +\cdots
+    \right|
+    = A(0) \frac {\sin(N\delta/2)} {\sin{\delta / 2}} 
+\]
+
+Also note 
+\[
+    A_{tot}(0) = A(0)\left| 
+        1 + 1 + 1 +\cdots 
+    \right|
+    = n A(0) 
+\]
+
+Thus, 
+\[
+    \frac{A_{tot}(\theta) }{A_{tot}(0)} = 
+    \frac{\sin(N\delta/2)}{N\sin(\delta/2)}
+\]
+
+Intensity is proportional to the square of the amplitude. 
+\[
+   \frac { I_{tot}(\theta)} {I_{tot}(0)} 
+   =\left( \frac{\sin(N\delta/2)}{N\sin(\delta/2)}\right)^2
+\]
+
+\new{Wide Slits}
+It is possible to derive the continum case by taking the limit. 
+However, the suggested solution is using the integral. Otherwise, 
+it is hard to see that the intensity is dependant on the 
+slit width. We finally reach, 
+
+\[
+    |A| \propto a \sinc\left(
+        \frac {k'a} 2
+    \right)
+    \textAnd
+    I
+\propto a^2 \sinc^2\left(
+        \frac {k'a} 2
+    \right)
+\]
+where $k' = k\sin(\theta)$
+
+\new{Diffraction and Reflection}
+The angle of incident and the angle of reflect 
+is defined to be the angle between the 
+ray and the normal axis. It is not necessary that 
+these two angle agree with each other. If any of the 
+rays exit the surface, we call this ray the 
+\textbf{diffracted} ray. If the incident angle 
+matches the reflected angle, we refer to 
+the phenomenon as \textbf{reflection}. 
+
+To compute the phase difference of a diffracted 
+ray, consider the change of difference traveled. 
 
 \end{document}

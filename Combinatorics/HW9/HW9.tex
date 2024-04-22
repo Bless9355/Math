@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\m}{
+    \cdot
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+Combinatorics HW9
+
+\Large
+Daniel Son
+\end{center}
+
+\normalsize 
+\new{Exercise 1}
+\fullFigure{Q1.png}
+
+\new{Exercise 3}
+Find a value of $n$ that satisfies 
+\[
+    \Delta n^x = n^x
+\]
+\new{Solution}
+Upon inspection, $n = 2$ works. 
+\[
+    \Delta 2^x = 2^{x + 1} - 2^x = 2 \cdot 2^x - 2^x = 2^x 
+\]
+
+\hfill \qed
+
+\new{Exercise 5a}
+Prove the linearity of the difference operator. That is, 
+for all real sequences $f, g$ and real numbers $c_1, c_2$, 
+\[
+    \Delta (c_1 f + c_2 g) = c_1 \Delta f + c_2 \Delta g
+\]
+
+\new{Solution }
+
+We prove the preservation of addition and scalar multiplication 
+separately. Let $\{f_n\}_{n \in \mathbb{N}}$, $\{g_n\}_{n \in \mathbb{N}}$
+be real sequences. We wish to show, for any natural number n, 
+\[
+    \Delta(f_n + g_n) = \Delta f_n + \Delta g_n
+\]. Directly evaluate the LHS. 
+\[
+    \Delta(f_n + g_n) = 
+    (f_{n + 1} + g_{n + 1} - f_n - g_n )
+=
+(f_{n + 1} - f_{n} + g_{n + 1} - g_n ) 
+= 
+\Delta f_n + \Delta g_n 
+\]
+
+Now, move on to show the preservation of scalar 
+multiplication. Let $c \in \mathbb{R}$ and $n$ be any natural number. 
+We wish to show
+\[
+    \Delta(cf_n) = c\Delta f_n 
+\]
+Again, by directly evaluating the LHS, 
+\[
+    \Delta(c f_n) = (cf_{n + 1} - cf_n) = c(f_{n + 1} - f_n) = c\Delta f_n
+\]
+Finally, consider the following line of algebra. 
+\[
+    \Delta (c_1 f + c_2 g) = 
+    \Delta(c_1 f) + \Delta (c_2 g) =
+    c_1 \Delta f + c_2 \Delta g
+\]
+
+\hfill \qed
+
+
+\new{Exercise 5b}
+Prove 
+\[
+\Delta (f g) = \Delta f\Delta g - f\Delta g - g\Delta f    
+\]
+
+\new{Solution}
+
+ $\{f_n\}_{n \in \mathbb{N}}$, $\{g_n\}_{n \in \mathbb{N}}$
+be real sequences. We wish to show, for any $n \in \mathbb{N}$, 
+\[
+\Delta (f g)_n = \Delta f_n\Delta g_n + f_n\Delta g_n + g_n\Delta f_n    
+\]
+
+We prove this by directly evaluating the RHS. 
+\[
+    RHS = (f_{n + 1} - f_n )(g_{n + 1} - g_n ) 
+    +f_n (g_{n + 1} - g_n )  +g_n(f_{n + 1} - f_n ) 
+\]
+\[
+    = f_{n + 1} g_{n + 1} - f_ng_n = \Delta (fg)_n
+\]
+
+\hfill \qed
+
+
+
+\end{document}
+

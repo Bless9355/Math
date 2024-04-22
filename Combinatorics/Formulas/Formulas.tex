@@ -259,5 +259,352 @@ Memorize this sum:
     \sum_{i | n} \mu(n/i) i = \phi(i)
 \]
 
+\new{Generating Functions and their sums}
+
+\new{Proposition} 
+Adding two variables in the equations results 
+in multiplication of the generating functions. 
+\[
+    G\langle
+        e_1, e_2, \dots, e_n
+    \rangle(x)
+    = 
+    \prod_{i = 1}^n 
+    G\langle e_i \rangle(x)
+\]
+
+\new{Proof}
+We prove by induction on $n$. The base case is trivial. 
+By the inductive hypothesis, we assume
+\[
+    G\langle
+        e_1, e_2, \dots, e_n
+    \rangle(x)
+    = 
+    \prod_{i = 1}^n 
+    G\langle e_i \rangle(x)
+\]
+
+Now, we wish to find the generating function 
+\[
+    G\langle
+        e_1, e_2, \dots, e_{n+ 1}
+    \rangle(x)
+\]
+In order to find the generating function, we 
+must find the value of the sequence 
+\[
+    \langle
+        e_1, e_2, \dots, e_{n+ 1}
+    \rangle_n
+\]
+Which is the number of solutions to the equation 
+\[
+     e_1 + e_2+ \dots+ e_{n+ 1} = N
+\]
+We partition all the solution based on the 
+possible values of $e_{n + 1}$
+Fix the value of $e_{n + 1} = l$. The size of the 
+corresponding part will be the number of solutions 
+to 
+\[
+     e_1 + e_2+ \dots+ e_n = N - l
+\]
+Which is in fact, the value 
+$
+    \langle 
+        e_1, e_2 , \dots, e_n
+    \rangle _{N - l}
+$. This value is given my the coefficient of 
+$x^{N - l}$ of the polynomial 
+$G\langle e_1 , \dots, e_n \rangle(x)$
+
+Consider the poynomial 
+\[
+    G\langle e_1 , \dots, e_n \rangle(x)
+    G\langle e_{n + 1} \rangle
+    = 
+    \prod_{i = 1}^{n + 1} 
+    G\langle e_i \rangle(x)
+\]where the equality follows by the inductive hypothesis. 
+The coeffieient of $x^{N}$ of this polynomial 
+will be the sum of the coefficients of $x^{N - l}$
+in the polynomial $G\langle e_1 , \dots, e_n \rangle(x)$ 
+for all values of $l$ which $G\langle e_{n+1}\rangle$
+is nonzero. In symbols, the $x^N$ coefficient is 
+\[
+   \sum_{l \textrm{ valid}}
+    \langle 
+        e_1, e_2 , \dots, e_n
+    \rangle _{N - l}
+    = \langle 
+        e_1, e_2 , \dots, e_{n + 1}
+    \rangle _{N}
+\]
+
+We have directly shown that 
+\[
+    \prod_{i = 1}^{n + 1} 
+    G\langle e_i \rangle(x)
+\]
+Is a generating function of $\langle 
+        e_1, e_2 , \dots, e_{n + 1}
+    \rangle _{N}$. 
+    
+    \hfill \qed
+
+In light of this powerful machinery, we can find the 
+GFs for variables that are independant. 
+
+
+\new{Preliminary for Q24}
+To better understand how EGFs can be used, we present 
+the following theorem, which is a slight generalization 
+of Thm 7.3.1 of the textbook. 
+
+\new{Theorem} Multiplying to EGFs generates the EGF 
+of a sequence that accounts for partitions. 
+
+Let $f_i(x)$ be the EGF of the sequence $\{a^i_n\}_{n \in \mathbb{N}}$. 
+The function 
+\[
+    \prod_{i \leq N} f_i(x)
+\]
+is an EGF of the sequence 
+\[
+    h_n := \sum_{m_1 + \dots m_N = n}\binom{n}{m_1, m_2, \dots, m_N}
+    \prod_{i \leq N} a_i
+\]
+
+A short proof can be written similarly to that of Thm 7.3.1. 
+
+\new{Linear and Homogenous Recurrence Relations}
+
+A \textbf{Linear recurrence relation} is some relation in 
+the form of:
+\[
+h_{n + k} = a_{k}(n) \m h_{n + k - 1} + \cdots + a_1(n) h_{n} + b(n) 
+\]
+
+Where $a_i(n), b(n)$ are some real valued functions 
+dependant on $n$ for all $i \in [k]$. If $a_i(n)$ 
+is constant and $b(n) = 0$, then the function is 
+\textbf{homogenous}.
+
+Assume the relation to be homogenous. The 
+\textbf{Characteristic Polynomial} of this relation 
+is 
+
+\[
+  t^k + a_k t^{k - 1} + \cdots a_1 = 0
+\]
+Let $\alpha_1, \dots, \alpha_k $ be the roots. 
+Assuming the roots are distinct, the solutions 
+come in form of 
+\[
+    h_n = c_1 \alpha_1^{n}
+    + c_2 \alpha_2^{n}
+    + \cdots 
+    + c_k \alpha_k^{n}
+\]
+
+If some of the roots are redundant, multiply 
+by a factor of $n$. For example, if the characteristic 
+polynomial of some recurrence relation is 
+\[
+    (t - 2)^k
+\]
+then the sequence $h_n$ is in the form of 
+\[
+    h_n = c_1 (2) + c_2 (2 n) + c_3 (2 n^2) \cdots (c_k 2n^{k - 1})
+\]
+
+\new{Fibbonacci Numbers} 
+
+The fibbonacci sequence satisfied the recurrence relation 
+\[
+    f_{n+2} = f_{n+ 1} + f_n 
+\]
+given the initial conditions $(f_0, f_1) = (0, 1)$. 
+We also define $F_n$ with the same relation but 
+different initial conditions. $(F_0, F_0) = (1, 1)$. 
+
+Either using GFs or recurrence relations, 
+we derive a closed form equation for $F_n$. 
+\[
+  F_n = \frac 1 {\sqrt{5}}   \left(
+    \phi^{n + 1}
+    - \psi^{n + 1}
+  \right)
+\]
+Where 
+\[
+    \phi = \frac {1 + \sqrt{5}} 2 
+    \textAnd 
+    \psi = \frac {1 - \sqrt{5}} 2
+\]
+Notice that the modullus of $\psi$ is less than 1. 
+Hence, for large enough n, the $\psi^{n+1}$ can 
+be ignored. We conclude 
+\[
+    F_n = \bigg\{\frac 1 {\sqrt 5}\phi^{n + 1}\bigg\}
+\]
+
+\new{Catalan Numbers} 
+
+The Catalan numbers satisfy the recurrence 
+\[
+    C_n = \sum_{k = 0}^{n -1} C_k C_{n -k - 1}
+\]
+along with the initial condition $(C_0, C_1) = (1, 1)$. 
+$C_n$ counts the number of triangulations of a 
+$(n + 2)$-gon or Dych words of length $2n$. 
+Using generating functions, it is possible to derive 
+\[
+    C_n = \frac 1 {n + 1} \binom{2n}{n}
+\] 
+There are five ways to triangulate a pentagon, which 
+means $C_3 = 5$. It is nice to plug this value to 
+confirm the equation. 
+
+\new{Difference Operator }
+
+Let $S$ be a subset of integers that are 
+closed under succession. Let $f_n$ be a 
+function that maps $S\rightarrow \mathbb{R}$. 
+\[
+    \Delta f(n) := f(n + 1)- f(n)
+\]
+
+We list some functions that behave nicely 
+under $\Delta$
+
+\begin{center}
+    \begin{tabular} {|c|c|c|}
+        \hline
+        $f(x)$ & $\Delta f(x)$ & Derivative Analogy\\
+        \hline 
+        $2^x$ & $2^x$ & $e^x$\\
+        \hline
+        $P(x, n)$ & $nP(x, n-1)$ & $x^n$\\
+        \hline 
+        $\binom{x} n$ & $\binom x {n - 1}$ & $x^n / n!$\\
+        \hline 
+        $n^x$ & $(n - 1) n^x$ & $a^x$ \\
+        \hline
+        $x!$ & $x \m x!$ & \\ 
+        \hline
+    \end{tabular}
+\end{center}
+
+We also define the antidifference operator, 
+which is the inverse of the difference operator. 
+
+\[
+    h = \Delta g
+    \textThen
+    g = \Delta^{-1} h
+\]
+
+\new{An initial condition problem}
+
+Let $\{h\}_{n \in \mathbb{N}}$ be a real sequence. 
+We are given an intial condition, that for all 
+integers $k \in [0, N]$, 
+\[
+    (\Delta^k h)_0 = c_k
+    \textAnd 
+    \Delta^{N + 1}h = 0
+\]
+where the second equation means that the $N+1$th 
+difference of $h$ is constantly zero. It is possible to 
+write $h_n$ as a closed form formula of $n$. 
+
+\[
+    h_n = 
+    c_0 \binom n 0 + c_1 \binom n 1 + \cdots 
+    + c_N \binom n N
+\]
+
+\new{Pochhammer Symbols}
+We used $P(n, k)$ to denote the kth falling products 
+of $n$. Alternatively, we can write 
+\[
+    [n]_k = P(n, k) = n(n - 1) \cdots (n - k + 1)
+\]
+
+\new{Bases of the Polynomial space $\mathbb{Z}[x]$}
+It is not hard to see that the polynomial over 
+the integers can be spanned by the $\mathbb{Z}$ 
+combinations of the base $\{x^k\}$ or $\{[x]_k\}$. 
+In other words, the power set and the Pockhamer set 
+are bases for the $\mathbb{Z}$-module $\mathbb{Z}[x]$
+
+For the Pochhammer set and the power set are both 
+bases, there exists a passive transformation between 
+the two bases. Restrict our space to cover polynomials 
+of degrees strictly less than $N$. Let $[s(i, j)]_{N\times N}$ 
+denote the matrix of the passive transform 
+from the Pochhammer base to the power base. That is, 
+the colomn vectors of the matrix contain the 
+coefficients of $[n]_i$. In symbols, 
+\[
+    [n]_i = s(i, 0) n^0 + s(i, 0) n^1 + \cdots + s(i, N) n^N
+\]
+
+\color{red}
+Note that we have used the row vector convention!
+\color{black}
+
+Using the falling product definition of $[n]_k$, 
+we derive the following recurrence relation. 
+\[
+    s(i + 1, j + 1) = 
+    \begin{cases}
+        1 & (i = j) \\ 
+        0 & (i < j) \\ 
+        s(i, j) - i \m s(i, j + 1)
+    \end{cases}
+\]
+The initial conditions are $s(0, 0) = 1$ 
+and $s(0, n) = s(n, 0) = 0$ for all nonzero $n$. 
+
+We call $s(i, j)$ as the \textbf{Signed Striling 
+Numbers of the First Kind}. 
+
+We also define the matrix $[S(i, j)]_{n\times n}$
+where the ith row of the matrix resembles 
+the expansion of $n^k$ in the Pochhammer base. 
+In symbols, 
+\[
+    n^i = 
+    S(i, 0) [n]_0 + S(i, 1) [n]_1 + \cdots S(i, N) [n]_N
+\]
+
+Using $n^{(i+1)} = (n-j+j)n^i$, we derive 
+\[
+    S(i, j) = 
+    \begin{cases}
+        1 & (i = j) \\ 
+        0 & (i < j) \\ 
+        S(i- 1, j- 1) + j \m S(i - 1, j)
+    \end{cases}
+\]
+The initial conditions are $S(0, 0) = 1$ 
+and $S(0, n) = S(n, 0) = 0$ for all nonzero $n$. 
+
+We call $S(i, j)$ as the \textbf{Striling 
+Numbers of the Second Kind}. 
+
+Remember that $S(2, 1) = 1$ and $s(2, 1) = -1$. 
+
+It is nice to memorize 
+\halfFigure{Stirling.png}
+
+Both Striling numbers depend on the diagonal left 
+entry and the top entry. Either $-i$, the negative 
+row number, or $j$ the column number is multiplied 
+to the top entry and added to the diagonal entry. 
+
 
 \end{document}
