@@ -1,0 +1,403 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 314 HW9
+
+\Large
+Daniel Son
+\end{center}
+
+\new{Problem 2}
+
+The Quantum Fourier Transform is defined as follows. 
+\[
+    QFT_m\ket{x} := \frac 1 {\sqrt m} \sum _{y = 0}^{m - 1} e^{2\pi i xy / m} \ket {y}
+\]
+
+\new{a)} Verify the inverse QFT of which the formula is given as 
+\[
+    (QFT_m)^{-1} \ket{x} = \frac 1 {\sqrt m} 
+    \sum_{y = 0}^{m - 1} e^{-2\pi i xy / m} \ket{y} 
+\]
+
+\new{Solution} 
+Naively, we wish to show, for any quantum state vector $\ket{x}$, 
+\[
+    (QFT_m)^{-1} QFT_n \ket{x} = \ket {x}
+\]
+
+Using the linearity of quantum operators, we deduce 
+that the equation is equivalent to the following expression. 
+
+\[
+    \frac 1 m \sum_{y, z < m} e^{2\pi i y (x-z)/m}\ket{z} = \ket {x}
+\]
+
+We will separate the double sum in terms of the basis vectors 
+$\ket{z}$ and show that its coefficient equals to zero unless 
+$z = x$. Rewrite the LHS as follows. 
+\[
+    \frac 1 m \sum_{y, z < m} e^{2\pi i y (x-z)/m}\ket{z} 
+    = \sum_{z < m} \xi_z \ket{z}
+\]
+where 
+\[
+    \xi_z := \frac 1 m \sum_{y < m } e^{2\pi i y(x - z)/m}
+\]
+
+We claim that $\xi_z = 1$ if and only if $z = x$ and the 
+term is zero otherwise. 
+
+\[
+    \xi_x = \frac 1 m \sum_{y < m } e^{2\pi i y(0)/m} 
+    = \frac m m = 1
+\]
+
+If $z \neq x$, then the complex exponentials would be 
+a sum of a unit vectors that are rotated by a phase. Geometrically, 
+they must sum to zero. Suppose $k = x-z \neq 0$. In symbols, 
+\[
+    \xi_z = \frac 1 m \sum_{y < m} e^{2\pi i y (k/m)} = 0
+\]
+
+In conclusion, 
+\[
+    (QFT_m)^{-1}QFT_m \ket{x} = \sum_{z_m} \xi_z \ket{z} = \ket{x}
+\]
+as desired. 
+
+\hfill \qed
+
+\new{b)} Concisely describe $(QFT_m)^2$. How about 
+$(QFT_m)^4$. 
+
+\new{Solution} We proceed with the same steps we used for 
+the previous problem. The coefficient of $\ket{z}$ of the 
+transform simplifes to the following expression. 
+\[
+    \xi_z = \frac 1 m \sum_{y < m} e^{2\pi i y(x+z)/m} 
+\]
+If $2\pi \frac {x + z} m$ is a nonzero phase, the sum 
+equals zero by geometry in the complex plane. Otherwise, 
+if the phase is zero, then the coefficient sums up to 1. 
+The phase is zero if and only if $z = m - x$. Thus, 
+\[
+    (QFT_m)^2 \ket{x} = \ket{m - x}
+\]
+
+So the double Quantum Fourier Transform inverts the state 
+$\ket x$ with respect to the mean. 
+
+Consequently, 
+\[
+    (QFT_m)^4 \ket{x} = (QFT_m)^2\ket{m-x} = \ket{x}
+\]
+
+\new{b-2)} Find the Eigenvalues of $QFT_m$
+
+\new {Solution} Let $\lambda$ be an eigenvalue of $(QFT_m)$. 
+\[
+    (QFT_m)^4  = \lambda ^4 I = I
+\]
+This implies 
+\[
+    \lambda^4 = 1
+\]
+So 
+\[
+    \lambda \in \{1, i, -1, -i\}
+\]
+We observe that if $m = 2$, then the eigenvalues are $\pm 1$. 
+Otherwise, we observe that all the eigenvalues show up. 
+
+\halfFigure{QFT_ev.png}
+
+\new{Problem 3}
+\fullFigure{QFT_TF.png}
+Prove this identity 
+
+\new{Solution}
+Before showing that this equation is true, first consider 
+what it means. The equation tells us that an QFT of a n-qbit 
+system can be considered as a superposition of 
+rotations of each individual quantum states. 
+The degree of rotation is determined by the rank of the 
+bit among the entire collection of bits along with the 
+frequency $\omega$ in question. 
+
+Label the rank of the n-qubits as $1, 2, \dots, n$. 
+When taking the tensor product of all the qubits, the 
+rank of the qubit determines the magnitude in which 
+it will affect the digit space. For example, consider 
+a 3-qbit system and suppose there are two states 
+$\ket{0}\ket 0 \ket1$ and $\ket{1} \ket 0 \ket {1}$.
+In digit space, these two states correspond to 
+$\ket{1}, \ket{5}$ respectively. 
+The difference
+ between the two states is the first qubit which has a rank of 1.
+ The rank 1 qubit affects the state by magnitude $4$. 
+ 
+In light of the relation between rank and magnitude 
+differenece, foil the right tensor product of the given identity. 
+
+\newcommand{\compKet}[1]{
+ \left(
+        \frac{\ket{0} +e^{2\pi i (2^{#1})\omega}\ket 1} {\sqrt 2}
+    \right)
+}
+
+\begin{equation}
+    \begin{split}
+    \left(
+        \frac{\ket{0} +e^{2\pi i (2^{n - 1})\omega}\ket 1} {\sqrt 2}
+    \right)
+    \otimes 
+    \compKet{n - 2}
+    \\
+    \otimes 
+    \cdots \otimes \compKet{0}
+      =  \frac 1 {\sqrt{2^n}} \sum_{y < 2^n} \xi_y \ket{y}
+    \end{split}
+\end{equation}
+
+Focus on one basis state $\ket{y}$. $y$, in digits, is some 
+nonnegative integer less than $2^n$. Write $\ket{y}$ as 
+\[
+    y = 2^{n - b_1} + 2^{n - b_2} + \cdots + 2^{n - b_m}
+\]
+assuming that $y$ has $m$ states that are $1$ in binary notation. 
+We also assume that $b_k$ is a strictly increasing interger sequence 
+where all entries are bounded between 1 and $n$
+Inspecting the tensor product, we notice that the coefficient 
+of $\ket{y}$ is 
+\[
+    \xi_y = e^{2\pi i 2^{n - b_1}\omega} e^{2\pi i 2^{n - b_2}\omega} \cdots e^{2\pi i 2^{n - b_m}\omega}
+\]
+\[
+    = e^{2\pi i 2^n (2^{-b_1} + 2^{-b_2} + \cdots + 2^{-b_m}) \omega}
+    = e^{2\pi i y \omega}
+\]
+And plugging in the coefficient to the sum, we conclude 
+\begin{equation}
+    \begin{split}
+    \left(
+        \frac{\ket{0} +e^{2\pi i (2^{n - 1})\omega}\ket 1} {\sqrt 2}
+    \right)
+    \otimes 
+    \compKet{n - 2}
+    \\
+    \otimes 
+    \cdots \otimes \compKet{0}
+      =  \frac 1 {\sqrt{2^n}} \sum_{y < 2^n} e^{2\pi i y \omega} \ket{y}
+    \end{split}
+\end{equation}
+
+\hfill \qed
+
+\new{b}
+We know that the inverse QTF reverts a quantum state 
+correctly to its corresponding state if the frequency value 
+is a multiple of $1/2^n$. The inverse QTF is also called the phase 
+estimation algorithm. Let $\omega$ be some frequency that 
+is not a integer multiple of $1/2^n$. Compute $p(x)$, the probability 
+that the quantum state will collapse to $\ket x$ after the phase estimation 
+algorithm. 
+
+\new{Solution}
+Consider state $\ket \psi$, which corresponds to sending through 
+the state $\omega$ through the regular QFT. 
+
+\[
+    \ket \psi 
+    := 
+    \frac 1 {\sqrt {2^n}} 
+    \sum_{y < 2^n} 
+    e^{2\pi i \omega y} \ket{y}
+\]
+Where $\omega =  .x_1 x_2 \dots x_n \dots $. 
+
+Recall that the inverse QTF for pure states is defined as follows. 
+\[
+    (QFT_{2^n})^{-1} \ket{x}:= 
+    \frac 1 {\sqrt 2^n} 
+    \sum _{y < 2^n} 
+    e^{-2\pi i y x/2^n }  \ket y
+\]  
+
+Apply the inverse QFT to state $\psi$ and 
+exploit linearity. 
+\[
+    (QFT_{2^n})^{-1} \ket \psi 
+     = 
+    \frac 1 {\sqrt {2^n}} 
+    \sum_{y < 2^n} 
+    e^{2\pi i \omega y /2^n} (QFT_{2^n})^{-1} \ket y
+\]
+\[
+    = 
+    \frac 1 {2^n} 
+    \sum_{y, z< 2^n} 
+    e^{2\pi i y (\omega - z/2^n)} \ket z 
+    := 
+    \sum_{z< 2^n} 
+    \xi_z \ket z 
+\]
+We wish to compute the coefficient $\xi_z$. Write 
+\[
+    \xi_z = \frac 1 {2^n} \sum_{y < 2^n} e^{2\pi i y (\omega - z/2^n)}
+\]
+This sum can be computed by the geometric series formula with ease. 
+\[
+    \xi_z  =  \frac 1 {2^n} \frac {
+        e^{2\pi i (\omega - z/ 2^n)} - 1
+    }
+    {e^{2\pi i (\omega - z/2^n)} - 1}
+\]
+Ignore the phase and apply the Euler's formula. 
+\[
+    |\xi_z| = \frac 1 {2^n} \frac {\sin(\pi (\omega - z / 2^n) 2^n)}
+    {\sin(\pi (\omega - z / 2^n))}
+    = 
+\frac 1 {2^n} \frac {\sin(\pi (2^n\omega - z) )}
+    {\sin(\pi (\omega - z / 2^n))}
+\]
+Use Born's probability rule to compute $p(x)$. 
+\[
+    p(x) = |\xi_z|^2 = 
+\frac 1 {2^{2n}} \frac {\sin^2(\pi (2^n\omega - z) )}
+    {\sin^2(\pi (\omega - z / 2^n))}
+\]
+
+\hfill \qed
+
+\new{c)} Here is a plot of $p(x)$ for $n = 3, 8, 10$ 
+where $\omega  = .7$. 
+
+\halfFigure{neq3.png}
+\halfFigure{neq8.png}
+\halfFigure{neq10.png}
+
+\end{document}
