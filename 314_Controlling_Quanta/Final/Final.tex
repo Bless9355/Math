@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{mathtools}
 \usepackage{ wasysym }
+\usepackage{enumerate}
 
 
 \newcommand{\new}[1]{
@@ -72,6 +73,17 @@
     }
 }
 
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
 \newcommand{\Ixp}[1]{
     {
         e^{i{#1}}
@@ -129,160 +141,426 @@
 PHYS 314 Final Project
 
 \Large
-Daniel Son
+Daniel Son, Sean Mealey
 \end{center}
 
-We wish to better understand the symmetry between 
-rotations in 3D space and the two dimentional complex 
-vector space. 
+\normalsize
 
-We start our venture with defining a peculiar map from 
-$\RR^3$ to $GL(\CC, 2)$. Consider $\vec{x} \in \RR^3$ 
-and write $\vec x = (x_1, x_2, x_3)^T$. We define the three 
-Pauli matricies as follows. 
+The linear Lie Group $SU(4)$ describes a quantum gate with two channels. 
+The goal of this paper is to understand the structure of this group. 
+For the first half of the paper, we will review the definition of Lie Groups 
+and Algebra which will lay down the foundation to understand the killing form. 
+The killing form will provide a method to verify if a Cartan decompositon 
+exists. 
+
+\section{Lie groups and Lie Algebras}
+
+
+In this section, we introduce definition and facts to 
+understand the nature of Lie groups and Lie algebras. 
+The definitions and facts should be considered as motivations, 
+and we will refrain from providing a full proof of the statments. 
+
+
+A \textbf{group} is defined to be a set equipped with a binary operation. 
+For the set to be called a group, the binary operation must satisfy 
+closure, associativity. A group must have an identity (i.e. $e \in G$ s.t. 
+$a e = a$ for all $a \in G$), and a corresponding 
+inverse for every group element, i.e. for all $a \in G$, there exists $a^{-1} \in G$ s.t. 
+$a a^{-1} = e$. 
+
+We introduce the concept of a \textbf{group representation}. 
+Crudely, a group representation can be considered as a matrix snapshot 
+of each group element. \footnote{Refer to A.Zee p89}
+Let $G$ be a group, and $M_n$ be the group of all n by n matricies 
+with complex entries. 
+Formally, a map $\Gamma: G \rightarrow M_n$ is a representation if 
+\[
+    \Gamma(a \cdot b) = \Gamma(a) \cdot \Gamma(b)
+\]
+for all elements $a, b \in G$. The operation between the matricies 
+are defined as the natural matrix multiplication. The representation 
+preserves the group operation. 
+
+We have the tools to consider distances between two group elements. 
+Let $\Gamma$ be a representation with degree 2 of group $G$. Any two elements 
+$a, b$ in $G$ will have a corresponding matrix in $M_2$.
+For simplicity, assume the representation maps the group 
+elements to matrices with real entries. 
+Write out 
+the representations of $a, b$. 
 
 \[
-    \sigma_x := \twobytwoMat(0, 1, 1, 0) 
-    \hspace{3mm}
-    \sigma_y := \twobytwoMat(0, -i, i, 0)
-    \hspace{3mm} 
-    \sigma_z := \twobytwoMat(1, 0, 0, -1)
+    \Gamma(a) = \twobytwoMat(a_{11}, a_{12}, a_{21}, a_{22})
+    \textAnd
+    \Gamma(b) = \twobytwoMat(b_{11}, b_{12}, b_{21}, b_{22})
 \]
 
-Now, consider the following mapping. 
+\newcommand{\squareterm}[1]{
+    (a_{#1} - b_{#1})^2
+}
+
+
+\newcommand{\compsquareterm}[1]{
+    |a_{#1} - b_{#1}|^2
+}
+
+
+
+The natural way to define the distance between two 2 by 2 matrices is 
+to take the Euclidean distance by considering the matrix 
+as a tuple of four numbers. \footnote{
+    If the matrix entries are complex, we can replace the 
+    difference of each entries with the modulus of the difference, 
+    e.g. $\compsquareterm{ij}$ instead of $\squareterm{ij}$
+}
 \[
-    \vec x \rightarrow \sigma_x x_1 + \sigma_y x_2 + \sigma_y x_3
-\]
+    d(\Gamma(a), \Gamma(b)) := 
+    \sqrt{  
+        \squareterm{11} + 
+        \squareterm{12} + 
+        \squareterm{21} + 
+        \squareterm{22}
+    }
+\].
 
-In matrix form the mapping can be rephrased as follows. 
+We generalize this notion of distance to n by n matricies. 
+Generalize $\Gamma$ to be a representation of degree $n$. 
+For group elements $a, b \in G$, define the \textbf{distance} between 
+$a, b$ as follows. 
 \[
-    \begin{bmatrix}
-        x_1 \\ x_2 \\ x_3
-    \end{bmatrix}
-    \rightarrow 
-    \begin{bmatrix}
-        x_3 & x_1 - ix_2 \\
-        x_1 + ix_2 & -x_3
-    \end{bmatrix}
+    d(a, b) := 
+    \sqrt{
+    \sum_{i, j} \squareterm{ij}
+    }
 \]
 
-A nice property of this mapping is that the norm of 
-$\vec{x}$ is the negative determinant of the mapped square matrix. 
+We finally have the tools to define a linear lie group. Let $G$ 
+be a group with a representation $\Gamma$. Suppose the degree of 
+the representation is n. $G$ is called a linear lie group if it 
+satisfies the following three properties. 
+\footnote{Refer to Cornwell p36-37}
 
+\new{(A) Parameterization around the identity}
+
+Let $C_\delta(I)$ be all the points in $G$ that is within a distance 
+$\delta$ from the identity. Call this the $\delta$-ball around the identity. 
+There must exist an injective mapping from the $\delta$-ball to 
+some tuple of real numbers, $\mathbb{R}^b$. Also, 
+the identity matrix must correspond to the zero tuple. In symbols, 
 \[
-    \begin{vmatrix}
-        x_3 & x_1 - ix_2 \\
-        x_1 + ix_2 & -x_3
-    \end{vmatrix}
-    = 
-    -x_3^2 - |x_1 - ix_2|^2 = - (x_1^2 + x_2^2 + x_3^2)
+    prm(\Gamma(E)) = prm(I_n) = (0, 0, \dots, 0) 
 \]
+where map $prm:M_n \rightarrow \mathbb{R}^b$ is the parameterization function. 
+$E$ denotes the identity function in the lie group. 
+The integer $b$ is called 
+the degree of the linear lie group. 
 
-For the rest of this paper, we wil refer to a 3 dimentional 
-vector interchangably with its square matrix form. 
+\new{
+(B) Dense Parameterization
+}
 
-\new{Rotation Group in 3D and SO(3)}
+Consider the space $\mathbb{R}^b$. The $\delta$-ball in the 
+group $G$ will fall into some points in this space. The goal of 
+this definition is to make the parameterization bijective for 
+some domain.
 
-Consider the set comprised of rotations in 3 dimensions. 
-We first verify that this set is a group under composition. 
-Combining any two rotations will result in another rotation, 
-so the set is closed under composition. The identity 
-rotation is preserving the original coordinate system as it is. 
-Applying a different rotation after or before the "do nothing" 
-rotation preserves the other rotation, so there exists an identity. 
- If a axis coordinate 
-is rotated, it can be rotated back to the original coordinate 
-system, so there exists an inverse. Indeed the set of 
-all rotations form a group. 
-
-In the context of describing the relationship between this 
-rotation group and other groups, it is useful to establish 
-a formal structure. Thus, we establish the group $SO(3)$, or the 
-the orthogonal group of dimension 3. $SO(3)$ is a set of all 
-3x3 matricies that satisfy 
+There must exist some positive real number $\eta$ in which 
+the $\eta$-ball in the $\mathbb{R}^b$ centered at the zero tuple 
+$(0, \dots, 0)$ in which all points fall under the image of the 
+$\delta$-ball under the parameterization. In other words, for every point 
+$(x_1, x_2, \dots, x_b)$, there exists some point $A \in C_\delta(I)$ such that 
 \[
-    A^\intercal A = A A^\intercal = I
+    prm(A) = (x_1, x_2, \dots, x_b)
 \]
-It is easy to verify that indeed $SO(3)$ is a group under 
-matrix multiplication.  
 
-Let $A$ be any element of $SO(3)$. We recognize that each of 
-its colomn vectors have length 1. In the matrix expansion, 
-the multiplication of the ith row and ith column must yield 1. 
-Also, the dot product between any two distinct column vectors 
-must yield zero. Hence, $A$ resembles some coordinate conversion 
-from the original coordinate system to an arbitrary orthonormal 
-coordinate system. 
+This implies that around some wierd neighborhood of some point in the 
+linear Lie group, the parameterization to the real tuples are bijective. 
 
-Any rotation must correspond to an active change of basis 
-from the original coordinate to some orthonormal coordinate. 
-Hence, $SO(3)$ describes the group of rotations. 
+\new{
+(C) Analytic Parameterization
+}
 
-
-\new{Group Action and Conjugation}
-
-We establish some mathematical background. Let $G$ be a 
-group, and $M$ be a set. Assume we are given some mapping 
-$\cdot :G\times M \rightarrow M$ that has two properties. 
-For all $m \in M$ and $g, f \in G$, 
+Now that there is a one-to-one correspondence betwen 
+the real tuples and some complex matricies, we can consider 
+a map from the real tuples to n by n matricies. 
+We slightly abuse notation. Let 
 \[
-    (g f) \cdot m = g \cdot (f \cdot m)
-\]
+    A = prm(g) = (x_1, x_2, \dots, x_b)
+    \]
+Define 
 \[
-    e \cdot m = m
+    \Gamma (x_1, x_2, \dots, x_b) = A
 \]
-In words, the multiplication between elements in $G, M$ 
-are defined so that associativity holds and identity is preserved. 
-If the two properties hold, we say that $G$ is a 
-\textbf{group action} on the set $M$. 
 
-For any set element $m \in M$, there would be a set of 
-elements that fix $m$. That is, $g\cdot m = m$. We call 
-the set of element with this property the \textbf{isotropic group}. 
+$A$ is an n by n matrix. Hence, each matrix element can be considered 
+as separate. That is, for each entry we can define
+\[
+    \Gamma _{ij}(x_1, x_2, \dots, x_b) = A_{ij}
+\]
+
+We dictate that each of the $\Gamma_{ij}$ must be analytic. 
+
+The linear Lie group can be better understood in conjunction with 
+the corresponding Lie algebra. The correspondence between the 
+Lie algebra and Lie groups are denoted by the matrix exponention. 
+The matrix exponential is defined as 
+\[
+    \exp(A) := I + A + \frac {A^2} {2!} + \cdots 
+    = \sum_{k = 0} ^ {\infty} \frac {A^k} {k!}
+\]
+
+We list out some useful facts about matrix exponentials. 
+
+\new{Facts}
+\begin{enumerate}
+\item Let $\{\lambda_1, \dots, \lambda_n\}$ be the set of 
+eigenvalues of $A$, then the eigenvalues of $\exp(A)$ are 
+$\{\exp(\lambda_1), \dots, \exp(\lambda_n)\}$
+
+\item The determinant of the matrix exponential is the expnential 
+of the trace. In symbols, 
+\[
+    \det(\exp(A)) = e^{tr(A)}
+\]. 
+
+\item
+The exponential map is bijective and continuous around the identity. 
+
+\item
+\[
+    \exp(A) \exp(-A) = I
+\]
+
+\item (Campbell-Baker-Housdorff)
+
+Let $A, B$ be two square matricies. Let the commutator be defined as 
+\[
+    [A, B] := AB - BA
+\]
+Suppose a square matrix $C$ satisfies the following identity. 
+\[
+    \exp(A)\exp(B) = \exp(C)
+\]
+Then, 
+\[
+    C = A + B + \frac 1 2 [A, B] + \frac 1 {12} ([a, [a, b]] + [b, [b, a]]) \cdots
+\]
+\end{enumerate}
+
+We continue our discourse to understand the correlation between 
+linear Lie groups and Lie algebras. 
+Suppose $A(t)$ to be a curve within the linear Lie group $G$.
+That is, the map $A$ takes a real value $t$ and maps it to 
+some element in the $G$. Also, suppose that for any real values $s, t$, 
+\[
+    A(s + t) = A(s) A(t)
+\]
+
+It is straightforward to observe that $A(t)$ is an abelian group 
+with an identity $E = A(0)$. Our goal is to identify a quintessential 
+property of all such curves and to generate them. 
+
+We present the following theorem. 
+\footnote{Refer to Sternberg p234-235}
+
+\new{Theorem} All curves that converts scalar addition to 
+matrix multiplication are characterized by the exponential map. 
 In symbols, 
 \[
-    G_m := \{g \in G| g \cdot m = g\}
+    A(t) = \exp(at) \textWhere a = \frac d {dt} A(t)
 \]
-We leave it as an exercise for the reader to verify that 
-the isotropic group is indeed a subgroup of $G$. 
 
-A group action can be defined on the group $G$ itself. That is, 
-the set $M$ can be $G$. We are interested in a particular action, 
+
+
+\proof 
+It is straightforward to see that given a matrix $a$, the exponential 
+map generates a nice curve. Write the following. 
 \[
-    \phi(g) a = g a g^{-1}
+    A(t) A(s) = \exp(at)\exp(as) = \exp(a (t + s)) = A(t + s)
 \]
-where $g, a$ are both group elements of $G$. We use the 
-symbol $\phi$ to differentiate between group action 
-and the set.
-This particular action is called 
-\textbf{conjugation}. 
-It might be the case that the element $a$ is not restricted 
-to the group $G$
 
-\new{Conjugation of SU(2) as a rotation}
-
-Let set $M$ be the set of all  
-unit vectors in $\RR^3$ represented in square matricies. 
-Let G be the group $SU(2)$. This
-is the group of complex 2x2 matricies that are unitary. In symbols, 
+Now, take any nice curve $A(t)$. It suffices to show, that for all 
+$t \in \mathbb R$, 
 \[
-    SU(2) := \{A \in \CC^{2X2}|A^\dagger A =AA^\dagger= I\}
+    A(t) \exp(-at) = I
 \]
-The binary operation is defined by matrix multiplication. 
-Since $M$ is also a set of 2x2 matricies, it is natrual 
-to define the operation between $M$ and 
-$SU(2)$ as matrix multiplication. 
+Clearly, if t is zero, $A(0) = I$ and $\exp(-a0) = I$ so the 
+equality holds. 
 
-Define a group action by conjugation. 
+The strategy is to take the derivative of the LHS with respect to 
+$t$ vanishes everywhere. Beforehand, consider the derivatinve 
+of $A(t)$. 
 \[
-    \phi(U) M := U M U^{-1} 
+    \frac d {dt} A(t) 
+    = \lim_{s \rightarrow 0} \frac {A(t + s) - A(t)} s 
+\]
+Since the curve is nice it is possible to factor out $A(t)$ from 
+the first summand. 
+\[\lim_{s \rightarrow 0} \frac {A(t)(A(s) - A(0))} s 
+    = A(t) \bigg[ \frac d {dt} A(t) \bigg] _{t = 0} = a A(t)
 \]
 
+Now take the desired derivative. 
+\[
+    \frac d {dt} A(t) \exp(-at) = 
+    \left(
+         \frac d {dt} A(t)
+    \right) \exp(-at)
+    + 
+    A(t) (-a) \exp(-at)
+\]
+\[
+    = a A(t) \exp(-at) - a A(t) \exp(-at) = 0
+\]
+
+\hfill 
+\qed
+
+The theorem suggests that the derivatives of the linear Lie group 
+around the identity generates the Lie group. The derivatives of 
+the group around the identity form an algebra. 
+
+For now, we losely define the \textbf{Lie algebra} as a vector space of linear 
+lie Groups equipped with a \textbf{Lie bracket}. The exponential map of 
+the lie algebra generates the lie group. For square matricies, 
+the lie bracket is defined as the commutator. Also, the common 
+convention is to denote the Lie group with a capital letter such 
+as $G$ and the Lie algebra as a lower case letter $\mathfrak g$. 
+
+Let $a, b \in \mathfrak g$. We list out a motivation for why 
+the lie bracket of the two elements, 
+$[a, b]$, must also be in the Lie algebra. For $\mathfrak g$ 
+generates $G$ by the exponential map, 
+\[
+    \exp(at) , \exp(bt) \in G
+\]
+$G$ is a group, and thus 
+\[
+    \exp(at) \exp(bt) = \exp(C(t)) \in G
+\]
+By the Campbell-Baker-Housdorff expansion, we can 
+find an expression for $C(t)$. 
+\[
+    C(t) = at + bt + \frac 1 2 [at, bt] + O(t^3)
+    = t\left(
+        a + b + \frac t 2 [a, b] + O(t^2)
+    \right)
+\]
+Let $C(t) := C'(t) t$. The exponential of $C(t)$ is generated 
+by $C'(t)$. For small enough $t$, we claim that the element 
+\[
+    a + b + \frac t 2 [a, b]
+\]
+must be in the subalgebra up to a leading term of $t$. By 
+the closure of vector spaces, the lie bracket $[a, b]$ must be 
+inside the lie algebra. 
 
 
-%Conjugacy mapping is an homomorphism
-%This homomorphism is onto, or endomorphic
-%Lagrange's Thm
-%The kernel 
+
+\section{Structure Constants and Cartan Decomosition}
+
+We wish to use Cartan Decomposition in order to decompose 
+the group $SU(4)$ into a direct sum of two subgroups. In order 
+to obtain a decomposition, we will use Cartan Decomposition. 
+The Cartan decomposition comes with nice properties, but to 
+guarantee that a Lie group has a Cartan decomposition, we 
+must understand structure constants and Killing forms. 
+
+Recall that a lie algebra is indeed a vector space. 
+This means that the algebra must have a basis. Let $\mathfrak g$ 
+be a lie algebra with basis vectors $X_1, X_2 , \dots X_n$. 
+
+Also, the Lie bracket is bilinear. That is, 
+\[
+    [\alpha X + \beta Y, Z] = \alpha [X, Z] + \beta[Y, Z]
+\]
+along with 
+\[
+    [X, Y] = -[Y, X]
+\]
+for any elements $x, y, z$ in the algebra $\mathfrak g$ and 
+any scalars $\alpha, \beta$. 
+\footnote{It is straightforward to check that this 
+property holds for the typical commutator bracket $[X, Y] = XY - YX$}
+
+These property imply that the lie bracket of any two elements 
+in the algebra can be represented by the elements 
+\[
+    [X_i, X_j] \textWhere i \neq j
+\]. Also the Lie bracket guarantees closure, and the Lie bracket 
+of the basis elements must also be a linear combination of the basis. 
+In symbols, 
+\[
+    [X_i, X_j] = C_{ij}^1X_1 + C_{ij}^2X_2 \dots C_{ij}^nX_n = \sum_{k \leq n} C_{ij}^k X_k
+\]
+
+So the $n^3$ coefficients $C_{ij}^k$ entirely determine the behavior 
+of the Lie bracket, and therefore determines the structure of the algebra. 
+We call these coefficients the \textbf{structure coefficients}. 
+
+Now, we introduce the Killing form of the algebra. 
+\footnote{We present a complicated definition, 
+but our interest is to apply the mathematical result, 
+and hence we ignore the motivation behind the definition. }
+Define a linear transform $L(Y)$ as follows. 
+
+\[
+    L\{X_i, X_j\}(Y) := [X_i, [X_j, Y]]
+\]
+
+For this transform is linear, it must have a matrix with respect to 
+the base $\{X_1, \dots X_n\}$. To construct the matrix, apply 
+the basis elements to the transform. 
+
+\[
+    L\{X_i, X_j\}(X_c) =  [X_i, [X_j, X_c]] 
+    = \left[X_i, \sum_{s} C_{jc}^s X_s\right]
+\]
+Invoking bilinearity, 
+\[
+    = \sum_s C_{jc}^s[X_i, X_s]
+    = \sum_s \sum _r C_{jc}^s C_{is}^r X_r
+\]
+Thus, the entry at the rth row and the cth column of the matrix of L 
+will be 
+\[
+    \sum_s C_{jc}^s C_{is}^r  =  \sum_s C_{is}^r C_{jc}^s
+\]
+
+Define a scalar function $B$ as follows. Also, invoke the previous 
+result to directly compute $B$. 
+\[
+    B(X_i, X_j) = tr(L\{X_i, X_j\}) = \sum_k L_{kk} = 
+    \sum_k \sum_s C_{is}^k C_{jk}^s
+\]
+The function $B$ also defines a square matrix. This matrix is called 
+the killing form. Explicitly, the matrix is
+\[
+    \begin{bmatrix}
+        B(1, 1) &  B(1, 2) & \cdots & B(1, n)\\
+        B(2, 1) &  B(2, 2) & \cdots & B(2, n)\\
+        \vdots & \vdots & \vdots & \vdots \\
+        B(n, 1) &  B(n, 2) & \cdots & B(n, n)\\
+    \end{bmatrix}
+\]
+
+Without proof, we claim that if the determinant of the killing 
+form is nonzero, then there exists a Cartan decomposition, 
+which will be introduced shortly. 
+
+\newpage
+
+\section{References}
+\begin{enumerate}[ {[}1{]} ]
+\item J. Zhang, J. Vala, S. Sastry, and K. B. Whaley, “Geometric theory of nonlocal two-qubit operations,” Physical Review A, vol. 67, no. 4, Apr. 2003, doi: https://doi.org/10.1103/physreva.67.042313.
+
+\item J. F. Cornwell, Group Theory in Physics. Academic Press, 1997.
+
+\item Shlomo Sternberg, Group theory and physics. Cambridge: Cambridge University Press, 2003.
+
+\item A. Zee, Group Theory in a Nutshell for Physicists. Princeton University Press, 2016.
+‌
+\end{enumerate}
 
 \end{document}

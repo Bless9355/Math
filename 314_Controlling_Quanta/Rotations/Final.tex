@@ -1,0 +1,288 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 314 Final Project
+
+\Large
+Daniel Son
+\end{center}
+
+We wish to better understand the symmetry between 
+rotations in 3D space and the two dimentional complex 
+vector space. 
+
+We start our venture with defining a peculiar map from 
+$\RR^3$ to $GL(\CC, 2)$. Consider $\vec{x} \in \RR^3$ 
+and write $\vec x = (x_1, x_2, x_3)^T$. We define the three 
+Pauli matricies as follows. 
+
+\[
+    \sigma_x := \twobytwoMat(0, 1, 1, 0) 
+    \hspace{3mm}
+    \sigma_y := \twobytwoMat(0, -i, i, 0)
+    \hspace{3mm} 
+    \sigma_z := \twobytwoMat(1, 0, 0, -1)
+\]
+
+Now, consider the following mapping. 
+\[
+    \vec x \rightarrow \sigma_x x_1 + \sigma_y x_2 + \sigma_y x_3
+\]
+
+In matrix form the mapping can be rephrased as follows. 
+\[
+    \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{bmatrix}
+    \rightarrow 
+    \begin{bmatrix}
+        x_3 & x_1 - ix_2 \\
+        x_1 + ix_2 & -x_3
+    \end{bmatrix}
+\]
+
+A nice property of this mapping is that the norm of 
+$\vec{x}$ is the negative determinant of the mapped square matrix. 
+
+\[
+    \begin{vmatrix}
+        x_3 & x_1 - ix_2 \\
+        x_1 + ix_2 & -x_3
+    \end{vmatrix}
+    = 
+    -x_3^2 - |x_1 - ix_2|^2 = - (x_1^2 + x_2^2 + x_3^2)
+\]
+
+For the rest of this paper, we wil refer to a 3 dimentional 
+vector interchangably with its square matrix form. 
+
+\new{Rotation Group in 3D and SO(3)}
+
+Consider the set comprised of rotations in 3 dimensions. 
+We first verify that this set is a group under composition. 
+Combining any two rotations will result in another rotation, 
+so the set is closed under composition. The identity 
+rotation is preserving the original coordinate system as it is. 
+Applying a different rotation after or before the "do nothing" 
+rotation preserves the other rotation, so there exists an identity. 
+ If a axis coordinate 
+is rotated, it can be rotated back to the original coordinate 
+system, so there exists an inverse. Indeed the set of 
+all rotations form a group. 
+
+In the context of describing the relationship between this 
+rotation group and other groups, it is useful to establish 
+a formal structure. Thus, we establish the group $SO(3)$, or the 
+the orthogonal group of dimension 3. $SO(3)$ is a set of all 
+3x3 matricies that satisfy 
+\[
+    A^\intercal A = A A^\intercal = I
+\]
+It is easy to verify that indeed $SO(3)$ is a group under 
+matrix multiplication.  
+
+Let $A$ be any element of $SO(3)$. We recognize that each of 
+its colomn vectors have length 1. In the matrix expansion, 
+the multiplication of the ith row and ith column must yield 1. 
+Also, the dot product between any two distinct column vectors 
+must yield zero. Hence, $A$ resembles some coordinate conversion 
+from the original coordinate system to an arbitrary orthonormal 
+coordinate system. 
+
+Any rotation must correspond to an active change of basis 
+from the original coordinate to some orthonormal coordinate. 
+Hence, $SO(3)$ describes the group of rotations. 
+
+
+\new{Group Action and Conjugation}
+
+We establish some mathematical background. Let $G$ be a 
+group, and $M$ be a set. Assume we are given some mapping 
+$\cdot :G\times M \rightarrow M$ that has two properties. 
+For all $m \in M$ and $g, f \in G$, 
+\[
+    (g f) \cdot m = g \cdot (f \cdot m)
+\]
+\[
+    e \cdot m = m
+\]
+In words, the multiplication between elements in $G, M$ 
+are defined so that associativity holds and identity is preserved. 
+If the two properties hold, we say that $G$ is a 
+\textbf{group action} on the set $M$. 
+
+For any set element $m \in M$, there would be a set of 
+elements that fix $m$. That is, $g\cdot m = m$. We call 
+the set of element with this property the \textbf{isotropic group}. 
+In symbols, 
+\[
+    G_m := \{g \in G| g \cdot m = g\}
+\]
+We leave it as an exercise for the reader to verify that 
+the isotropic group is indeed a subgroup of $G$. 
+
+A group action can be defined on the group $G$ itself. That is, 
+the set $M$ can be $G$. We are interested in a particular action, 
+\[
+    \phi(g) a = g a g^{-1}
+\]
+where $g, a$ are both group elements of $G$. We use the 
+symbol $\phi$ to differentiate between group action 
+and the set.
+This particular action is called 
+\textbf{conjugation}. 
+It might be the case that the element $a$ is not restricted 
+to the group $G$
+
+\new{Conjugation of SU(2) as a rotation}
+
+Let set $M$ be the set of all  
+unit vectors in $\RR^3$ represented in square matricies. 
+Let G be the group $SU(2)$. This
+is the group of complex 2x2 matricies that are unitary. In symbols, 
+\[
+    SU(2) := \{A \in \CC^{2X2}|A^\dagger A =AA^\dagger= I\}
+\]
+The binary operation is defined by matrix multiplication. 
+Since $M$ is also a set of 2x2 matricies, it is natrual 
+to define the operation between $M$ and 
+$SU(2)$ as matrix multiplication. 
+
+Define a group action by conjugation. 
+\[
+    \phi(U) M := U M U^{-1} 
+\]
+
+
+
+%Conjugacy mapping is an homomorphism
+%This homomorphism is onto, or endomorphic
+%Lagrange's Thm
+%The kernel 
+
+\end{document}
