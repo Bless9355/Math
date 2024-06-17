@@ -1,0 +1,370 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Recurrence relations with bounded behavior}
+    \large
+    Daniel Son
+\end{center}
+
+Let $x_n$ be a sequence of real numbers. 
+The goal of this paper is to solve the following recurrence. 
+\[
+    x_n = x_{n - 1} + x_{n - 2} - x_{n -1} x_{n - 2} /M 
+\]
+
+The motivation for this recurrence is a model of a population with 
+one species which asymptotically grows to a population cap $M$. 
+It is natural to assume that $x_0, x_1 \ll M$. 
+\footnote{
+    To derive this recurrence, start from the fibbonacci sequence, 
+    and multiply the growth term by an adjustment factor, 
+    $\frac {M - x} M$
+}
+
+Upon massaging the equation, we can write the following. 
+\begin{equation}
+     \label{eqn:x_recurrence}
+     M - x_n = 
+     \frac{
+        (M - x_{n - 1})(M - x_{n - 2})
+     } M
+\end{equation}
+
+We define an auxillary sequence, $y_n$ as follows. 
+\[
+    y_n := \ln(M - x_n)
+\]
+
+The recurrence relation of $y$ can be written easily by 
+taking the natural log of (\ref{eqn:x_recurrence}). Also for convinience, let 
+$m := \ln M$
+
+\begin{equation}
+    \label{y_recurrence}
+    y_n = y_{n - 1} + y_{n - 2} - m
+\end{equation}
+
+Which is similar to the fibbonacci recurrence. 
+We transcribe this into a matrix relation, presenting the 
+following proposition. 
+
+\new{Proposition 1} 
+The recurrence relation of (\ref{y_recurrence}) can be solved by the 
+following matrix recurrence. 
+
+\begin{equation}
+    \label{matrix_recurrence}
+    \twobyoneMat(y_n, y_{n - 1})
+     = 
+     \twobytwoMat(1, 1, 1, 0) \twobyoneMat(y_{n - 1}, y_{n - 2}) - 
+     \twobyoneMat(m , 0)
+\end{equation}
+We further simplify the recurrence by introducing following notations. 
+\[
+    \vec y_n := \twobyoneMat(y_n , y_{n - 1}) 
+    \textAnd 
+    F := \twobytwoMat(1, 1, 1, 0)
+\]
+Then, more succintly, 
+\begin{equation}
+    \label{simple_matrix_recursion}
+    \vec y_n = F \vec y_{n - 1} - m \twobyoneMat(1, 0)
+\end{equation}
+
+\new{Proposition 2}
+The solution for (\ref{simple_matrix_recursion}) is 
+\[
+    \vec y_n := F^{n - 1} \vec y_1 - m \twobyoneMat(F_n - 1, F_{n - 1} - 1)
+\]
+for $n \geq 2$. 
+
+\proof 
+Trivially, the equation holds for the case when $n = 2$. 
+Use induction to proceed. Using the inductive hypothesis, 
+write out a solution for $y_{n}$ where $n\geq 2$. 
+
+\[
+    \vec y_{n} = F^{n - 1} \vec y_1 - m \twobyoneMat(F_n - 1, F_{n - 1} - 1)
+\]
+
+We wish to explicitly compute $y_{n + 1}$ using the recurrence relation. 
+Write the following. 
+\[
+    \vec y_{n + 1} = F \vec y_n - m \twobyoneMat(1, 0) = 
+    F^n \vec y_1 - m F \twobyoneMat(F_n - 1, F_{n - 1} - 1) - m \twobyoneMat(1, 0)
+\]
+\[
+    = F^n \vec y_1 - m \twobyoneMat(
+        F_n - 1 + F_{n - 1} - 1, F_n - 1
+    ) - m \twobyoneMat(1, 0)
+    = F^{n} \vec y_1 - m \twobyoneMat(F_{n + 1} - 1, F_{n} - 1)
+\]
+\hfill \qed
+
+The matrix power $F^n$ can be expressed in terms of fibbonacci numbers. 
+\begin{equation}
+    \label{eqn:FibPower}
+    F^n = \twobytwoMat(F_n, F_{n - 1}, F_{n - 1}, F_{n - 2})
+\end{equation}
+
+With some algebra, we present the following result. 
+
+\new{Theorem 1} The closed form solution of $\vec y_n$ is 
+\[
+    \vec y_n = 
+    \twobyoneMat(
+        y_1F_{n - 1} + y_0F_{n - 2} - m F_n + m 
+        ,
+        y_1F_{n - 2} + y_0F_{n - 3} - m F_{n - 1} + m 
+    )
+\]
+and this implies 
+\begin{equation}
+    \label{eqn: y_solution}
+    y_n =  y_1F_{n - 1} + y_0F_{n - 2} - m F_n + m 
+\end{equation}
+\footnote{
+    Proof is some tedious lines of algebra. I can email the solution 
+    upon request. 
+}
+
+\new{Corollary} 
+By taking the exponential of (\ref{eqn: y_solution}), it is 
+possible to deduce the following. 
+\[
+    e^{y_n} = e^{y_1 F_{n - 1}} e^{y_0 F_{n - 2}} / e^{mF_n - m}
+\]
+Remember that 
+\[
+    e^{y_n} = M - x_n \textAnd e^m = M
+\]
+to conclude 
+\[
+    M - x_n = \frac {(M - x_1)^{F_{n - 1}} (M - x_0)^{F_{n - 2}} } 
+    {M^{F_n - 1}}
+    = M\frac {(M - x_1)^{F_{n - 1}} (M - x_2)^{F_{n - 2}} } 
+    {M^{F_{n - 1}}M^{F_{n - 2}}}
+\]
+and graciously, 
+\[
+        M - x_n  = M\left(
+            1 - \frac {x_1} M
+        \right)^{F_{n - 1}}
+        \left(
+            1 - \frac {x_0} M 
+        \right)^{F_{n - 2}}
+\]. 
+We present a closed form solution for $x_n$. 
+\begin{equation}
+    \label{eqn:x_solution}
+    \boxed{
+        x_n = M - M\left(
+            1 - \frac {x_1} M
+        \right)^{F_{n - 1}}
+        \left(
+            1 - \frac {x_0} M 
+        \right)^{F_{n - 2}}
+    }
+\end{equation}
+
+Here is a mathematica plot that 
+shows that the recurrence is indeed bounded, and 
+that the presented solution of the recurrence 
+matches the computational result. 
+
+\fullFigure{Plot.png}
+
+\new{Numerical Approximations}
+
+Recall from the beginning of the paper that 
+it is natural to assume 
+\linebreak
+$x_0, x_1 \ll M$. In other words, 
+$x_0/M, x_1/M \approx 0$. We can
+rewrite our solution in (\ref{eqn:x_solution}) 
+using the Taylor approximation. 
+\[
+    x_n 
+    \approx 
+    M - M \left(1 - F_{n - 1} \frac {x_1} M \right)\left(1 - F_{n - 2} \frac {x_0} M 
+    \right)
+    = 
+    F_{n - 1} x_1 + F_{n - 2} x_0 - \frac{F_{n - 1} F_{n - 2} x_0 x_1} M 
+\]
+
+The equation can be even more cleared out under the initial condition 
+\linebreak
+$x_0 = x_1$. 
+\begin{equation}
+    \label{eqn:approx1}
+  x_n \approx F_n x_0 - \frac{F_{n - 1}F_{n - 2} {x_0}^2} M
+  = x_0\left(
+    F_n - \frac{F_{n - 1} F_{n -2}} M x_0
+  \right)
+\end{equation}
+
+From binet's formula, we can approximate the fibbonacci sequence 
+to a decent accuracy. 
+\[
+    F_n \approx \frac {\varphi^n} {\sqrt 5}
+    \textWhere \varphi := \frac {1 + \sqrt 5} 2
+    \]
+
+Back to our approximation in (\ref{eqn:approx1}), we write:
+\[
+    x_n \approx x_0 \left(
+        \frac {\varphi^n} {\sqrt 5} - 
+        \frac {\varphi^{2n - 3}} {5M} x_0
+    \right)
+    = \boxed{
+        x_0 \frac {\varphi^n} {\sqrt 5} \left(
+            1 - \frac {\varphi^{n - 3}} {\sqrt 5 M} x_0
+        \right)
+    }
+\]
+
+Here is a mathematica plot that compares the approximation 
+with the exact values. The model performs decently until 
+it reaches the maximum populatiion. After equilibrium, the model 
+fails. 
+
+\fullFigure{Approx.png}
+
+\end{document}

@@ -1,0 +1,291 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{hyperref}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \LARGE
+    \textbf{Solutions for CH2}
+
+    \large
+    Daniel Son
+\end{center}
+
+\new{Ex 2.1}
+
+For convergence, we present the \textbf{Hadamard's formula} 
+that provides the radius of convergence for any 
+generating function. Let $g_a(x)$ be the generating 
+function of the sequence $a_n$. We define 
+\[
+\frac 1 R := \limsup_{n \rightarrow \infty} |a_n|^{1/n}
+\]
+. For $x < R$, the series converges, and for $x>R$ the 
+series diverges. The behavior of the function at $x=R$ 
+depends on the sequence. The convergence/divergence 
+can be proved by comparing the partial sums to geometric 
+series.
+\footnote{To learn more, visit 
+\url{https://en.wikipedia.org/wiki/Cauchy-Hadamard_theorem}}
+
+Using the formula, we write out the radius of convergence 
+for both $a_n, b_n$. 
+
+\[
+\frac 1 {R_a} = \limsup_{n \rightarrow \infty} |a^n|^{1/n} 
+\textAnd 
+\frac 1 {R_b} = \limsup_{n \rightarrow \infty} |n!|^{1/n} 
+\]
+
+To compute $R_b$, recall the Stirling's formula which 
+provides an asymptotic estimation
+\footnote{Asymptotic estimation means that the ratio 
+of the estimate to the value converges to zero at the $n \rightarrow 
+\infty$ limit. }
+of $n!$. 
+
+\[
+    n! \sim \left(
+        \frac n e
+    \right)^n \sqrt{2\pi n}
+\]
+
+We finally present the values of $R_a, R_b$. 
+
+\[
+    R_a = 1/|a| \textAnd R_b = \lim_{n \rightarrow \infty}e/n = 0
+\]
+
+$R_b = 0$ means that $g_b(x)$ diverges for all values of nonzero $x$. 
+\hfill \qed
+
+\new{Ex2.2} 
+
+Make use of Hadamard's formula. We wish to compute the following. 
+\begin{equation} \label{22r}
+\frac 1 R = \limsup_{n\rightarrow \infty} \binom{2n}{n} ^{1/n}
+= 
+\limsup_{n\rightarrow \infty}
+\left(
+    \frac {(2n)!}{(n!)^2}
+\right)^{1/n}
+\end{equation}
+
+Using Stirling's formula, it is possible to write the multiplicative 
+identity in two different ways. 
+
+
+\[
+    \lim_{n \rightarrow \infty} 
+    \left(\frac {n!}{(n/e)^n \sqrt{2\pi n}}
+    \right)^2
+    = 
+    \lim_{n \rightarrow \infty} \frac {(2n)!}{(2n/e)^{2n} \sqrt{4\pi n}}
+    = 1
+\]
+\pagebreak
+
+Multiply and divide by 1 in (\ref{22r}). We obtain the following. 
+
+\[
+    \frac 1 R 
+    = 
+    \limsup_{n \rightarrow \infty} 
+    \left(
+    \frac{
+        (2n/e)^{2n} \sqrt{4\pi n}
+    }{
+        (n/e)^{2n} 2\pi n
+    }
+    \right)^{1/n}
+    = 4
+\]
+Thus, the radius of convergence is 
+\[
+\boxed{
+    R = \frac 1 4
+}
+\]. 
+
+\new{Ex2.5}
+
+Let $g_k(x)$ be the generating function of $a_n = n^k$
+Take the derivative of $g_k(x)$ to derive the recurrence
+\[
+x(G_k(x))' = G_{k+1}(x)
+\]
+
+Notice that $g_0$ is the geometric series. Thus 
+\[
+    g_0(x) = \frac 1 {1 - x}
+\]
+Some computation shows that:
+\begin{eqnarray*}
+g_1(x) & = & \frac x {(1-x)^2}
+\\
+g_2(x) & = & \frac {(x +x^2)}{(1-x)^3}
+\\
+g_3(x) & = & \frac{(x + 4x^2 + x^3)}{(1-x)^4}
+\end{eqnarray*}
+\hfill \qed
+
+\new{Ex2.10}
+
+We will show the first identity and leave the proof 
+of the second and third as an exercise to the reader. 
+So the decimal expansion is created so that each digit 
+is a fibbonacci number. Call the desired fraction $d$. 
+We write the following. 
+
+\[
+    d = .\overline{F_1F_2F_3\cdots} = F_1 (.1) + F_2 (.1)^2 + F_3 (.1)^3 + \cdots 
+\]
+
+Write $d$ in sigma notation. 
+\[
+    d = \sum_{n = 0}^\infty F_n (.1)^n
+\]
+
+In fact, $d$ is the generating function of the fibbonacci sequence evaluated 
+\linebreak at $x = .1$. 
+\[
+    d = g_f(.1) = \frac x {1 - x - x^2} \bigg|_{x = .1}
+    = \frac {10} {89}
+\]
+\hfill \qed
+
+\end{document}

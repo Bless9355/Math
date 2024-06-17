@@ -1,0 +1,1017 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+
+
+\usepackage{mathtools}
+
+
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+
+\DeclareMathOperator{\sinc}{sinc}
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textThen}{
+    {
+        \hspace{5mm}
+        \textrm{then}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i#1}
+    }
+}
+
+\newcommand{\partialderiv}[2]{
+    {
+        \frac{\partial #1}{\partial #2}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+
+\begin{document}
+\begin{center}
+\LARGE
+PHYS 202 Final Exam
+
+
+\Large
+Daniel Son
+\end{center}
+
+\newpage
+
+\fullFigure{A1.png}
+
+\new{Solution}
+
+We know the following Taylor expansions. 
+\[
+    e^x \approxeq 1 + x + \frac {x^2} 2
+    \textAnd 
+    \ln(1 - x) \approxeq -\left(
+        x + \frac {x^2} 2
+    \right)
+\]
+Hence, 
+\[
+    f(x) = e^x \left(
+        1 - \ln(1 - x)
+    \right)
+    \approxeq 
+    \left(
+        1 + x + \frac {x^2} 2 
+    \right)
+    \left(
+        1 + x + \frac {x^2} 2
+    \right)
+\]
+\[
+    \approxeq 1 + 2x + x^2 \left(
+        \frac 1 2 + 1 + \frac 1 2
+    \right) + \cdots 
+    = \boxed{
+        1 + 2x + 2x^2
+    }
+\]
+Just up to a leading order, we can also write $1 + 2x$. 
+Plugging in $x = .1$ yields $f(x) = 1.22$ by computing 
+$f$ through a calculator. By our approximation, we also 
+get $f(x) \approxeq 1.22$. 
+\hfill \qed
+
+\fullFigure{A2.png}
+
+\new{Solution for a, b}
+
+We first write out the Newton's 2nd law for oscillators 
+connected to one side of the wall. 
+
+\[
+    m \ddot{x} = -k_{eff} x
+\]
+
+We wish to derive an equation of this form for the two-wall oscillator. 
+Here is a free body diagram for the two-wall oscillators. 
+
+
+\newpage
+\fullFigure{A2_diagrams.png}
+
+Write out Newton's second law. Let $x$ be the 
+raw position away from zero. 
+
+\[
+    m \ddot x = -k (x - l_0) + k (2l - x)
+\]
+
+We know that at $x = l$, the force exerted on the oscillator 
+is zero. 
+
+\[
+    0 = -k(l - l_0) + k(2l - l)
+\]
+
+Thus, by subracting zero from the first equation, 
+
+\[
+    m \ddot x - 0 = 
+    -k(x - l_0 - l + l_0) + k (2l - x - 2l + l)
+\]
+\[
+    m \ddot x = -k(x - l) - k (x - l) = -2k (x - l)
+\]
+
+Relabel $x$ to be the displacement. The old $x - l$ 
+becomes the new $x$. 
+
+\[
+    \boxed{
+    m\ddot x = -2k} x \textOr 
+    m \ddot x -k_{eff} x
+\]
+
+where $\boxed{k_{eff} = 2k}$. 
+\hfill \qed
+
+\new{Solution for c} We repeat a similar procedure 
+for the vertical oscilator. Apply Newton's second law. 
+Start with $x$ denoting the raw position of the mass. 
+Suppose, at the equilibrium state, the top spring has length 
+$l_1$ and the bottom string has length $l_2$. 
+\[
+    m \ddot x = m g  -k (-l_1 - l_2 + l_0 + x) - k (x - l_0) 
+\]
+At equilibrium, no force acts on the mass. 
+\[
+    0 = m g  -k (-l_1 - l_2 + l_0 + l_1) - k (l_1 - l_0) 
+\]
+
+Subtracting the second equation from the first, we again obtain, 
+\[
+    m \ddot x = -2k (x - l_1) 
+\]
+and relabeling $x$ to be the displacement from the equilibrium 
+position $l_1$, 
+\[
+    m \ddot x = -2k x 
+\]
+Which is exactly the equation that we derived in the previous part. 
+The fundamental frequency of the oscillator is 
+\[
+    \omega_0 = \sqrt {\frac {2k} m}
+\]
+and this value does not change when the oscillator is tilted so 
+that the gravity affects the motion. 
+
+
+\newpage
+\fullFigure{A3.png}
+
+\new{Solution for a)}
+A wave passing through a birefringent material experiences 
+different speed depending on the axis of measurement. 
+Assume that the light passing through the medium is linearly polarized, 
+entering the birefringent material in a manner where 
+the magnitude of the slow component is equal to the fast component. 
+\halfFigure{A3_pol.png}
+The wave component that is passing through 
+the slow axis will experience more phase shift compared to the 
+component passing through the fast axis. Thus, if the phase 
+difference experienced by the slow component is $\pi / 2$ 
+more than the phase difference experienced by the fast component, 
+the material acts like a quarter waveplate, circularly polarizing the light. 
+
+\new{Solution for b)}
+Let the width of the material be $w$. We compute the 
+phase difference experienced by the fast and the slow component. 
+
+\[
+    \phi _{slow} = k_{slow} w = \frac{2\pi w} {\lambda_{slow}} 
+    = \frac {2\pi w n_{slow}} {\lambda}
+\]
+
+By analogy, 
+\[
+    \phi_{fast} = \frac {2\pi w n_{fast}} {\lambda}
+\]
+
+Write out the phase difference. We wish the value to equal $\pi / 2$. 
+\[
+    \phi_{slow} - \phi_{fast} = \frac \pi 2 = 
+     \frac {2\pi w (n_{slow} - n_{fast})} {\lambda}
+\]
+
+Fiddling over the constants, we deduce the following. 
+\[
+    \boxed{
+    w = \frac {\lambda} {4 (n_{slow} - n_{fast})} \approxeq 16 \mu m
+    }
+\]
+
+\new{Solutions for c)}
+A circularly polarized light will yield half of the original intensity 
+after passing a linear polarizer. This can be easily demonstrated\footnote{
+    We can indeed show this for an arbitrary linear polarizer. 
+    Let $M$ denote a matrix that passively changes the bases to 
+    a desired linear polarizer. $M$ must be real and orthogonal. The 
+    first entry of $M \twobyoneMat(1, i)$ describes the magnitude 
+    of the electric field. This value equals to $M_{11} + iM_{22}$. 
+    The magnitude of this component is $M_{11}^2 + M_{22}^2$, which 
+    must equal to 1 because $M$ is known to be orthogonal. 
+} through 
+a simple Jones Calculus. Write out a Jones vector 
+for some circularly polarized light with intensity 2. 
+\footnote{
+The intensity can be computed by multiplying the complex conjugate 
+of the vector.} 
+\[
+    \twobyoneMat(1, i)
+\]
+Now apply a linear polarizer that has a pass axis of $\hat x$. 
+\[
+    \twobytwoMat(1, 0, 0, 0) 
+\twobyoneMat(1, i)
+= \twobyoneMat (1, 0)
+\]
+This light has an intensity $1$. Indeed this result generalizes for 
+any axis. So to check circular polarization, place the linear polarizer 
+in any orientation, and check if the intensity is halved. 
+
+\hfill \qed
+
+\newpage 
+\fullFigure{A4.png}
+\halfFigure{A4_diagram.png}
+\new{Solution}
+We wish to achieve TM polarizaton.\footnote{In fact, 
+the magnitude for this specific case is not very different 
+between TE and TM polarization}
+This happens when the magnetic vector of the incident 
+wave is parallel to the boundary plane, that is, 
+perpendicular to the plane of incidence.\footnote{refer to Fowles p41-42} Here is a nice figure 
+from Fowles p48. 
+
+\halfFigure{Fowles_48.png}
+
+Using our imaginary powers, we orient the dipoles of the ice 
+and the glass to create this configuration. 
+
+Send in the light through the Brewster's angle for perfect 
+transmission. 
+We measure the brewster's angle by the following formula. 
+\[
+    \boxed{
+    \theta_{b} = \arctan\left(\frac {n_{glass}} {n_{ice}}\right) 
+    \approxeq
+    49^{\circ}
+    }
+\]
+
+Also, we know that at the Brewster's angle, 
+the reflected ray is perpendicular to the refracted ray.\footnote{Or, one can use Snell's law to find the angle of 
+refraction}
+Thus, $\phi = 41 ^ {\circ}$. 
+Fowles also provides a transmission coefficient 
+for TM polarization. 
+
+\[
+    t_s = \frac{2\cos(\theta)\sin{\phi}} {\sin (\theta + \phi) 
+    \cos(\theta - \phi)} 
+    \approxeq .87
+\]
+
+Squaring the transmission coefficient provides the power ratio 
+that is transmitted into the glass. 
+
+\[
+    \boxed{
+    P_t/P_0 = t_s^2 \approxeq .76
+    }
+\]
+
+\newpage
+\fullFigure{A5.png}
+\halfFigure{A5_wingnut.png}
+\new{Solution}
+The word is Wingnut and it was mentioned in Mar 15, 2024. 
+
+\newpage
+\fullFigure{B1.png}
+
+\new{Solution for a, b}
+\halfFigure{B1_FBD.png}
+Let $x_1, x_2$ be 
+the horizontal displacement of the two masses from the equilibrium positon. 
+Assuming the displacements are small, we approximate that all movements of the 
+masses are entirely horizontal.
+By this approximation, the vertical force component must equal zero. 
+This way, we can measure the sum of the tension 
+and gravity in simple terms. 
+
+\[
+    \vec T + \vec F_g = - mg \frac {x_1} l \hat{x}
+\]
+\footnote{$\hat{x}$ is a convention used instead of $\hat{i}$. It is 
+a unit vector pointing in the direction of x. }
+
+\newpage
+Write out Newton's 2nd law for the two masses in the $\hat x$ direction. 
+\[
+    -k (x_1 - x_2) - \frac {x_1} l mg = m \ddot x_1
+\]
+\[
+    -k (x_2 - x_1) - \frac {x_2} l mg = m \ddot x_2
+\]
+
+Assume the solution to be some complex exponential both for $x_1, x_2$. 
+\[
+    x_1 = Ae^{i \omega t} \textAnd x_2 = Be^{i \omega t}
+\]
+
+Plug in the solutions. After some lines of algebra, we obtain 
+a system of linear equations for $A, B$. 
+
+\[
+    \left(-m\omega^2 + \frac{mg} l + k  \right) A - kB = 0
+\]
+\[
+    -kA +\left(-m\omega^2 + \frac{mg} l + k\right) B = 0
+\]
+
+In matrix form, the equation nicely reduces to the following. 
+\[
+    \twobytwoMat(
+ {\left(-m\omega^2 + \frac{mg} l + k \right)}, -k, 
+ -k,  {\left(-m\omega^2 + \frac{mg} l + k \right)}
+    )
+    \twobyoneMat(A, B) = \twobyoneMat(0, 0)
+\]
+
+For the amplitudes to be nonzero, the 2x2 matrix must not be 
+invertible. This means that the determinant of the matrix must be zero, 
+which leads to the following identity. 
+
+\[
+     \left(-m\omega^2 + \frac{mg} l + k \right)^2 - k^2 = 0
+\]
+\[
+     \left(-m\omega^2 + \frac{mg} l \right)\left(-m\omega^2 + \frac{mg} l + 2k \right) = 0
+\]
+
+For the identity to hold, positive $\omega$ must take one 
+of the two values. 
+
+\[
+    \omega = \sqrt{\frac g l} \textOr \sqrt{\frac g l + \frac {2k} m}
+\]
+
+The first frequency, which has a lower value, corresponds to the 
+symmetric mode. The two masses move parallel to each other at the 
+same magnitude. The second frequency, with a higher value, corresponds 
+to the antisymmetric mode. The two masses move opposite to each other 
+at the same magnitude. 
+
+\hfill \qed
+
+\new{Solution for c}
+Any general movement of the oscillator can be described 
+by a linear combination of the two normal modes. Let the 
+complexified $x_1, x_2$ to be written in complex amplitudes $A, B$. 
+For simplicity, omit the tilde.\footnote{
+    In fact, $A, B$ must be real. We know that the 
+    velocity of the mass at $t = 0$ must be zero for $x_1, x_2$. 
+    This means $\dot x_1 = \dot x_2 = 0$. With some algebra, 
+    one can deduce $Im (\omega_s A) = Im (\omega_f B) = 0$. 
+    All frequencies are real, and thus $Im(A) = Im(B) = 0$. 
+}
+
+\[
+    \ddot x_1 = Ae^{i\omega_s} + Be^{i\omega_f}
+    \textAnd
+    \ddot x_2 = Ae^{i\omega_s} - B e^{i\omega_f}
+\]
+
+At time $t = 0$, the displacement of the two masses are 
+measured as $-.05d$ and $.1d$. Write down the system in matrix form. 
+
+\[
+    \twobytwoMat(1, 1, 1, -1) \twobyoneMat(A, B) = 
+    \twobyoneMat(-.05d, .1d)
+\]
+
+Multiply the inverse of the 2x2 matrix to compute $A, B$. 
+\[
+    \twobyoneMat(A, B) = \twobytwoMat(1, 1, 1, -1) ^{-1} \twobyoneMat(-.05d, .1d)
+    = \frac d {40} \twobyoneMat(1, -3)
+\]
+
+Finally, plug in the values and take the real part to obtain the 
+displacements $x_1, x_2$. 
+
+\[
+    x_1 = \frac d {40} (\cos(\omega_s t) - 3 \cos (\omega_f t))
+\]
+\[
+    x_2 = \frac d {40} (\cos(\omega_s t) + 3 \cos (\omega_f t))
+\]
+
+where \[(\omega_s, \omega_f) = \left(\sqrt{\frac g l} , \sqrt{\frac g l + \frac {2k} m}\right)\]
+
+As a sanity check, we verify that the velocity of both masses 
+at $t = 0$ must vanish, for the time derivative would be 
+some combination of $\sin$ waves. It is trivial to see that 
+the displacement at $t = 0$ is also satisfied in our solution. 
+\hfill \qed
+
+\newpage 
+\fullFigure{B2.png}
+
+\new{Solution for a}
+
+We ignore damping for our calculations. We deduce the following. 
+\[
+    m \ddot x = -kx + F(t)
+\]
+
+\new{Solution for b}
+
+We first observe that the function $F$ cannot be constantly nonzero. 
+If that is the case, the oscilaltor will not reach a stable state, but 
+will continuously shift to one direction. 
+
+Complexify the equation, and suppose the force takes the form of 
+\[
+    F(t) = c_n e^{i2\pi n t/T}
+\]
+Assume the displacement to take a similar form. 
+\[
+    x(t) = x_n e^{i2\pi n t/T}
+\]
+The differential equation simplifies to a relation between the constants, 
+independant of time. 
+\[
+    -m\left(
+        \frac {2\pi n} T
+    \right)^2 + k = c_n / x _n
+\]
+\[
+     x_n = \frac{c_n } {
+        k - m\left(
+            \frac {2\pi n} T
+        \right)^2
+    }
+\]
+
+By the fourier series expansion, it is possible to write out 
+any $F(t)$ that is physical (which means continuous, and smooth) 
+as a sum of complex exponentials. 
+
+Using Fourier decomposition, decompose $F(t)$ into the following. 
+\[
+    F(t) = \sum_{n \in \mathbb Z} c_n e^{i2\pi n t/T}
+\]\footnote{To compute $\tilde c_n$, refer to Boaz}
+
+Then, the displacement function is given as 
+\[
+    \boxed{
+    x(t) = \sum_{n \in \mathbb Z}  \frac{ c_n } {
+        k - m\left(
+            \frac {2\pi n} T
+        \right)^2
+    } e^{i2\pi n t/T}
+    }
+\]
+
+\new{Solution for c}
+\newcommand{\mydenom}{
+{
+        k - m\left(
+            \frac {2\pi n} T
+        \right)^2
+    }
+}
+We know one thing about $F(t)$-it is a real valued function. 
+For real valued function, we know that the fourier coefficient 
+$ c_n$ satisfies the following relation. 
+\[
+     c_{-n} = ( c_{n})^*
+\]
+
+To see why this is true, consider the equations for $c_n$. 
+Up to constants, 
+\[
+    c_n \sim \int_{-T/2} ^{T/2} e^{-2\pi i n t / T} F(t) dt
+\]
+\[
+    c_{-n} \sim \int_{-T/2} ^{T/2} e^{2\pi i n t / T} F(t) dt
+\]
+Since $F$ is real, it is easy to see that the two coefficients are 
+complex conjugates of each other. 
+
+Now, write out the equation for $x(t)$. 
+
+\[
+    x(t) = \sum_{n = -\infty} ^ \infty \frac{c_n e^{2\pi i n t /T}} \mydenom
+    = \frac {c_0} k + \sum_{n = 1}^\infty \frac {c_n e^{2\pi i n t/T}} \mydenom
+    + \sum_{n = 1}^\infty c_{-n} \frac {e^{-2\pi i n t/T}} \mydenom
+\]
+\[
+    = \frac{c_0} k + \sum_{n = 1}^\infty \frac{c_n e^{2\pi i n t/T}} \mydenom + 
+    \sum_{n = 1}^\infty (c_{n})^* \left(\frac{e^{2\pi i n t/T}} \mydenom\right)^*
+    = \frac{c_0} k + 2 \Re \{\sum_{n = 1}^\infty \frac{c_n e^{2\pi i n t/T}} \mydenom\}
+\]\[
+    =
+    \frac {c_0} k + \sum_{n = 1}^\infty 2\Re\{\frac{c_n e^{2\pi i n t / T}}\mydenom\}
+    =
+    \boxed{
+        \frac {c_0} k + \sum_{n = 1}^\infty 2|c_n| \frac{\cos(2\pi n t / T + \phi_n)} \mydenom
+    }
+\]\footnote{
+    Though this result seems more complicated than that of part b, 
+    it reduces the number of computations by a factor of 1/2. 
+    Suppose we are approximating $x(t)$ up to the first n terms. Each summand 
+    of this result corresponds to two summands of the result in b. 
+}
+
+Where $\phi_n = \arg(c_n)$.  \hfill \qed
+
+\newpage 
+\fullFigure{B3.png}
+
+\new{Solution for a}
+Considering the three slits as a bundle, there must be a large envelope 
+function that encloses the intensity projected on the wall. It is likely 
+that some sinusoid that decays at the edges is involved. The actual intensity 
+function will be a collection of fringes under the envelope. The 
+fringes are formed by interference. 
+
+\new{Solution for b}. 
+\fullFigure{B3_def.png}
+Also, define $I_0$ to be the intensity when $\theta = 0$.
+This will be the point on the center of the wall. That is, 
+if we draw a normal line from the slit, the intersection between 
+the line and the screen will be the point where $\theta = 0$. 
+The interferecne 
+is entirely constructive here. Let $k$ be the wavenumber and define 
+\[
+    \delta = kd\sin(\theta)
+\]
+
+For convinience, set the top ray to be the reference ray. 
+We will compute the relative phase and magnitude changes 
+assuming that the top ray to have phase zero at the screen. 
+The two bottom rays will have additional phase difference incurred 
+by extra distance traveled, assuming $\theta > 0$. 
+At the point of the screen corresponding to angle $\theta$, 
+we can write the intensity as follows. 
+\[
+    \left|
+        \frac I {I_0}
+    \right|
+    = 
+    \left|\frac {1 + e^{i\delta} + e^{3i\delta}} 3 \right|^2
+    = \left(
+        \frac {1 + e^{i\delta} + e^{3i\delta}} 3
+    \right)\left(
+        \frac {1 + e^{-i\delta} + e^{-3i\delta}} 3
+    \right)
+\]
+With some lines of algebra, we graciously derive the following 
+\[
+    \left|
+        \frac I {I_0}
+    \right|
+    = \frac 1 3 + \frac 2 9 (
+        \cos(\delta) + \cos(2\delta) + \cos(3\delta)
+    )
+\]
+
+\new{Solutiion for c}
+
+Here are some phasor diagrams. The blue arrows are component 
+vectors, and the red vector is the sum corresponding to 
+the square root of the intensity. 
+\fullFigure{B3_phasor.png}
+
+From these phasor diagrams, we deduce the following intensity plot. 
+\fullFigure{B3_plot.png}
+
+The red points mark the maximum, and the blue points mark the minimum. 
+With some algebra, we can deduce that in the window of $\delta \in 
+[0, 2\pi]$, the intensity ratio takes exactly seven extremas.\footnote{
+    Please see B3c-continued in scratchwork.
+}
+
+\newpage
+\fullFigure{B4.png}
+
+\new{Solution for a}
+\fullFigure{B4_laser.png}
+
+Also, note that 
+\[
+    FSR_{lazer} = 4FSR_{cavity}
+\]
+
+\new{Solution for b}
+The light traverses the cavity four times. Also, the spikes 
+occur when the rays interfere constructively. Thus, for 
+one free spectral range movement, the cavity lens either 
+comes close or goes further away by $\lambda/4$. 
+
+Over one cycle of the oscilloscope, the PZT voltage is applied 
+for twelve FSR's. $\lambda/4 \cdot 12 = 3\lambda$. We conclude 
+that the PZD moved by $3\lambda$. 
+
+\hfill \qed
+
+\new{Solution for c}
+The laser cavity is made out of a tube surrounded by two high 
+reflectivity mirrors on each end with a gain medium at the center. 
+
+Let $d$ be the length of the laser cavity and $R$ the 
+distance between the mirrors for the Faby-Perot cavity. 
+As stated in part a, the FSR of the laser is four times 
+that of the confocal Faby Perot Interferometer\footnote{We 
+assume confocal, because the question said "just as we did in lab"}. 
+Thus, we derive the following identity. 
+\[
+    \frac c {2d} = 4\cdot\frac c {4R} 
+    \textAnd 
+    \boxed{R = 2d}
+\]
+
+\new{Solution for d}
+We wish to derive an equation for the wavelength of the laser. 
+The laser cavity can be considered as a fixed end string. 
+\fullFigure{B4_n.png}
+
+From the boundary condition, we write 
+\[
+    \frac {n\lambda} 2 = d = \frac R 2
+    \textOr 
+    \lambda = \frac R n
+\]
+
+Here is a diagram of the Michelson Interferometer. 
+\halfFigure{B4_Mich.png}
+
+The horizontal wave travels by an extra length of 
+$\Delta x$, which is displacement of the moving translation 
+stage. The extra phase difference of this ray compared 
+to the vertical ray is 
+\[
+    \Delta \phi  = 2\Delta x k = \frac {4\pi \Delta x} \lambda
+    = \frac {4\pi n \Delta x} R
+\]\footnote{
+    An attentative reader might ask why we are ignoring 
+    the phase retardation incurred by the reflection and 
+    the transmission of the beam splitter. Note that the 
+    vertical ray is once reflected and transmitted, and 
+    the horizontal ray is once transmitted and reflected, 
+    in that order. This means that the reflections 
+    and transmissions do not affect the relative phase difference. 
+}
+
+Let $I_0$ be the intensity measured at the bullseye pattern 
+when the length of the two legs are equal, i.e. $\Delta x = 0$. 
+Setting the electric field magnitude of one of the rays as $E_0$, 
+we deduce that $I_0 \sim (2E_0)^2 = 4E_0^2$. 
+When the translation 
+stage has moved by $x$, we can compute the intensity ration. 
+For simplicity, write $x, \phi$ instead of $\Delta x, \Delta \phi$
+
+\[
+    I_{x} /I = \left|\frac {E_0(1 + e^{i\phi})} {2E_0}\right|^2
+    = \left|\frac {1 + e^{i\phi}} 2\right|^2
+    = \left(\frac {1 + e^{i\phi}} 2\right)\left(\frac {1 + e^{i\phi}} 2\right)^*
+\]
+\[=
+    \left(\frac {1 + e^{i\phi}} 2\right) \left(\frac {1 + e^{-i\phi}} 2\right)
+    = \frac {2 + e^{i\phi} + e^{-i\phi}} 4 
+    = \frac 1 2 + \frac 1 2 \cos(\phi)
+\]
+
+Replace $\phi$ with the equation that we derived previously. 
+
+\[
+    \boxed{\frac {I_x} {I_0} = \frac 1 2 + \frac 1 2 \cos\left(\frac{4\pi n x} R\right)}
+\]
+
+Qualitatively, the ratio above describes the sharpness of the fringes in 
+the bullseye pattern. When the Intensity value reaches its peak, 
+for example when $x = 0$, then the distinction between the 
+fringes would be most sharp. However, as $x$ slowly increases, 
+there will be a point where the interference between the two rays 
+would be completely destructive. In that case, the bullseye pattern would 
+be gone, and it would be hard to distinguish between the fringes 
+around this region. 
+
+\newpage
+
+\fullFigure{B5.png}
+
+
+\new{Solution for a}
+
+This might sound like a boring solution, but simply take the 
+fourier transform of $E(t)$. 
+\newcommand{\fourier}[2]{
+\int_{#1}^{#2} e^{-ikt} E(t) dt
+}
+
+\[
+    \hat E(k) = \frac 1 {\sqrt{2\pi}}
+    \fourier{-\infty}{\infty}
+    = \frac 1 {\sqrt{2\pi}}\left(
+    \fourier{0}{\tau} + \fourier {T}{T + \tau}\right)
+\]
+
+
+\newcommand{\expterms}[3] {
+    %exponent, from, to
+\int_{#2}^{#3} \frac {e^{#1}} 2 dt
+}
+
+
+\newcommand{\dblexpterms}[3] {
+    %exponent, from, to
+\int_{#2}^{#3} {e^{#1}} dt
+}
+
+
+
+Using Euler's formula, expand the $\cos$ function into 
+complex exponentials. We write the following. 
+
+\[
+    =
+    \frac 1 {\sqrt {2\pi}}
+    \left(
+    \expterms{i(\omega_m - k) t}{0} {\tau} +
+    \expterms{-i(\omega_m + k) t}{0} {\tau} +
+    \expterms{i(\omega_m - k) t}{T} {T + \tau} +
+    \expterms{-i(\omega_m + k) t}{T} {T +\tau} +
+    \right)
+\]
+
+We wish to unify all the ranges of integration. Focus on 
+the third summand. Apply a simple u-substitution, $u = t - T$. 
+\[
+    \expterms{i(\omega_m - k) t}{T}{T + \tau} = 
+    \int_{u = 0}^{\tau} \frac {e^{i(\omega_m - k) (u + T)}} 2 du
+    = e^{i(\omega_m - k)T} \expterms{i(\omega_m - k) t}{0}{\tau}
+\]
+We can simplify the last summand in a similar manner. We proceed with 
+\[
+    \hat E(k) = 
+    \frac 1 {\sqrt{2\pi}} \left(
+        (1 + e^{i(\omega_m - k)T})
+         \expterms{i(\omega_m - k) t}{0} {\tau}
+         + 
+          (1 + e^{-i(\omega_m + k)T})
+\expterms{-i(\omega_m + k) t}{0} {\tau} 
+    \right)
+\]
+\begin{equation*}
+    \begin{split}
+    =\frac 1 {\sqrt{2\pi}}
+    \bigg(
+    \cos((\omega_m - k)T/2) e^{i(\omega_m - k)T/2}
+    \dblexpterms{i(\omega_m - k)}{0}{\tau}
+    +\\
+    \cos((\omega_m + k)T/2) e^{-i(\omega_m + k)T/2}
+    \dblexpterms{-i(\omega_m + k)}{0}{\tau}
+    \bigg)
+    \end{split}
+\end{equation*}
+
+We now interpret this result. Square 
+the fourier transform. 
+We end up with three terms, which is the square of 
+the first and the second summand, and a cross term 
+which is twice the multiple of the two summands. 
+
+Pay attention to the two integrals. 
+The particle experiences 
+enough oscillations within the two short regions. This means 
+that the complex integral 
+\[
+ \dblexpterms{i(\omega_m - k)}{0}{\tau}
+ \textAnd 
+\dblexpterms{-i(\omega_m + k)}{0}{\tau}
+\]
+is nonzero only if the exponents are close enough to zero. 
+This implies that the cross term can be ignored. This is because 
+$\omega_m$ is large enough that the neighborhood of 
+$+\omega_m$ does not intersect with the neighborhood of $-\omega_m$. 
+If the frequency lied outside the neighborhood of one region, one 
+of the two integrals will vanish. 
+
+Focus on the two square terms. These two integrals will define an envelope, 
+each located 
+around $k = +\omega_m, -\omega_m$. Inside the two envelopes, 
+the E field magnitude is determined by the two cosine functions. 
+Nonetheless, we want the intensity, so square the two cosine functions. 
+The intensity fringes are described by 
+\[
+    \cos^2((\omega_m - k)T/2) \textAnd \cos^2((\omega_m + k)T/2)
+\]\footnote{We can ignore the exponential coefficients, for we are taking 
+the square magnitude. Also, we are not interested in the magnitude 
+of these fringes, but just the frequencies. }
+Using trig identity, rewrite the two terms. 
+\[
+    \frac{\cos((\omega_m - k)T) + 1} 2 \textAnd \frac{\cos((\omega_m + k)T) + 1} 2
+\]
+
+Both of the functions have a width of $\frac {2\pi} T$ in frequency 
+space. This means that the peak-to-peak distance of the two 
+frequencies that spike are$\frac {2\pi} T$ away from each other.  
+
+
+
+In light of our descoveries, we plot the power specturm. 
+\fullFigure{B5_PS.png}
+
+\new{Solution for b}
+The asked quantities were all derived in part a. 
+The width of the entire spectrum is about $\boxed{2\omega_m}$, 
+so it is determined by the microwave frequency. 
+The peak-to-peak distance of the fringe is $\boxed{2\pi / T}$, so 
+it is determined by the time the atom is airborne. 
+Also, we note that as the timeslot $\tau$ decreases, the peaks 
+of the envelope function becomes more wider. If $\tau$ increases, 
+lesser and lesser fringes will fit into the envelope. 
+
+\newpage
+\fullFigure{B6.png}
+\new{Solution for a}
+\fullFigure{B6_lens.png}
+
+\new{Solution for b}
+The diagram suggests that the image of the two lens 
+occur at the same position. We justify this rigorously 
+by ray matricies. The ray matrix for a lens of focal length $f$ is 
+
+\[
+    M_f = \twobytwoMat(1, 0, -1/f, 1)
+\]
+
+Thus, 
+\[
+    M_{-2f} = \twobytwoMat(1, 0, 1/(2f), 1)
+    \textAnd 
+    M_{f} = \twobytwoMat(1, 0, -1/f, 1)
+\]
+
+Label the two different lens configuration as top and bottom, 
+arranged in part a. Compute the corresponding ray matrix for 
+each configuration. 
+
+\[
+    M_t = M_{-2f}M_{f} = \twobytwoMat(1, 0, -1/(2f), 1)
+\]
+\[
+    M_b = M_{f}M_{-2f} = \twobytwoMat(1, 0, -1/(2f), 1)
+\]
+
+So both configurations act like a converging lens that has 
+a focal length of $2f$. Recall the formula 
+\[
+    \frac 1 s + \frac 1 {s'} = \frac 1 f
+\]
+We know the focal length $f$ and the location of the image $s$. Thus, 
+\[
+    \frac 1 {3f} + \frac 1 {s'} = \frac 1 {2f}
+    \textOr 
+    2s' + 6f = 3s' 
+    \textOr 
+    s' = 6f
+\]
+So, for both matricies, the image is created at a distance $6f$ from 
+the lens, opposite to the original image. 
+\hfill \qed
+
+\new{Solution for c}
+We know that the magnifying factor $m$ is $-s'/s$. By the formula, 
+our image has a magnifying factor of $-6f/f = -6$. So the image 
+for both orientations would be six times the original height, and 
+the image would be inverted. 
+\hfill \qed
+
+
+\end{document}

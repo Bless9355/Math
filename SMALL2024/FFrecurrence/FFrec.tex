@@ -1,0 +1,205 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Recursion on Finite Field Matricies}
+
+    \large
+    Daniel Son
+\end{center}
+
+From Lidi's result, we know that a recursive sequence over 
+any finite field is periodic. We wish to stretch this result 
+to matricies. 
+
+\new{Proposition}
+Let $F$ be a finite field. Consider a fixed depth recursive relation 
+over matricies of dimension N by N. Denote the sequence as 
+\[
+    X_n := 
+    \begin{bmatrix}
+        x_n^{11}  && \cdots && x_n^{1N} \\ 
+        \vdots && \ddots && \vdots \\ 
+        x_n^{N1}  && \cdots && x_n^{NN} \\ 
+    \end{bmatrix}
+\]
+and the depth of the recursion $d$. The recursive relation 
+can be written as 
+\[
+    X_{n} = f(X_{n - 1}, X_{n - 2}, \dots , X_{n - d})
+\]   
+where $f$ is some polynomial involving $d$ constants. 
+
+Any such finite recursion must be periodic. 
+
+\proof 
+We apply the pigeonhole principle. The $n$th matrix is 
+entirely determined by the previous $d$ matricies, 
+$X_{n -1}, \dots, X_{n - d}$. 
+In other words, if the previous $d$ matricies agree, 
+then the two matricies must agree.  
+In symbols, if
+\[
+    (X_{m -1}, \dots, X_{m - d}) =  (X_{n -1}, \dots, X_{n - d})
+\]
+then,
+\[
+    X_m = X_n
+\]. 
+Call the tuple previous $d$ matricies that determine $X_n$ to be 
+the \textbf{seed} of $X_n$. 
+Since $F$ is a finite field, there are only finite number of different 
+seeds. By the principle of multiplication, the number of possible seeds 
+are 
+\[
+    |F|^{N^2 d}
+\]  
+because there are $|F|^{N^2}$ different N by N matricies over $F$ and 
+$d$ of such matricies determine the seed. 
+
+Though large, the number of different possible seeds are finite. 
+This implies that in an infinite sequence, the series must be periodic.
+\hfill \qed 
+
+\new{Remark}
+Note that this result applies only to recurrences with fixed depth. 
+For example, the catalan recurrence does not fall under this umbrella, 
+and its periodicity is undetermined by this result. 
+
+\end{document}

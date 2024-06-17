@@ -1,0 +1,236 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Rallying Soldiers in a Conway Game}
+
+    \large
+    Conway group
+\end{center}
+
+So previously, we have studied on how to send a single soldier to the 
+highest level possible, given a board multiplicity m. In this paper, 
+we focus on a similar but different problem: given 
+a board multiplicty m, what is the maximum amount of soldiers we can 
+rally on a single grid?
+
+\new{Problem}
+\textit{
+ The Rallying Problem
+}
+
+Assume we have a two dimensional checkerboard that 
+extends infinitely both in the horizontal and the vertical direction. 
+A borderline is drawn, and we are provided with $m $soldiers on 
+each grid of the checkerboard under 
+the reference line. Select any grid that is adjacent and below 
+the borderline. What is the maximum number of soldiers we 
+can focus on the target grid? 
+
+\halfFigure{mtp1.png}
+\begin{center}
+    \textbf{Figure 1. The rallying problem for m = 1}
+\end{center}
+
+It is easier to study this problem on a one dimensional strip. 
+From the 2D board, focus on one vertical strip and ignore the rest of 
+the board. Assuming $x = \psi - 1$ \footnote{$\psi$ is the golden ratio 
+$\frac {\sqrt 5 - 1} 2$}, we compute that the monovariant of the single strip is 
+\[
+    \frac m {1 - x} = \frac m {2 - \psi} = (1 + \psi) m 
+\]
+Where the last equality follows from the formula $\psi^2 + \psi - 1 = 0$. 
+
+Assume, after a series of manipulations, we end up with $r$ soldiers 
+in the target square. The score of the board will be $r$. The monovariant
+ is invariant under a Conway move. Hence, we obtain the following inequality. 
+ \[
+    r < (1 + \psi) m
+ \]\footnote{equality holds assuming we allow infinite number of moves } 
+
+We have shown the following. 
+
+\new{Proposition 1} The theoretical upper bound of $r$ in a 
+1D strip is 
+\[
+    \lceil (1 + \psi)\rceil - 1
+\]. 
+
+In a 1D strip, it is possible to come up with an optimal strategy 
+that asymptotically approaches this limit. For utility, define 
+the following. 
+
+\new{Definiton} \textit{Fibbonacci inversion function}
+
+Let 
+\[
+    \mathcal{F} (N) = n   
+\]
+where $n$ is the index of the largest fibbonacci number less than 
+or equal to  $N$. 
+That is, $F_{n} \leq N < F_{n + 1}$. 
+
+\new{Proposition 2} \textit{The heavy-headed stick}
+Suppose $n = \mathcal{F} (m)$. In a 1D strip of the Conway game 
+with multiplicity $m$, it is possible to rally $F_{n + 1}$ 
+Soldiers to one target grid. 
+
+\proof Here is a visual demonstration. 
+\fullFigure{HeavyHead.png}
+
+\new{Proposition 3} \textit{Multiple Heavy Heads}
+Suppose $n - 1 = \mathcal{F} (m/2)$. In a 1D strip of the Conway game 
+with multiplicity $m$, it is possible to rally $m + F_{n + 1}$ 
+Soldiers to one target grid.
+\proof Here is a visual demonstration. 
+\fullFigure{Strategy1.png}
+\hfill \qed
+
+The construction of $n$ 
+follows from the fact that the superposed board needs the 
+following multiplicity $m$. 
+\[
+    m = \max_{0 \leq j < N}\{(j + 1)F_{N - j}\}
+\]
+\hfill \qed
+
+
+
+
+\end{document}
