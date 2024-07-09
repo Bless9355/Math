@@ -1,0 +1,311 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+
+
+\newcommand{\new}[1]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Variants of Conway's Soldiers: Monovariant 
+    methods and Fibonacci jumping}
+
+    \large
+    Conway group
+\end{center}
+
+%0. Establishing conventions Inverse fibbonacci
+%1. Two Problems of interest
+%2. Monovariants and upper bounds
+%3. Useful arrangements
+%4. Strategy for the M game
+%5. Additional problems. 
+
+
+\section{Review of notations and preliminaries}
+
+We define our fibbonacci sequence with the following initial 
+conditions and recurrence relation. 
+\[
+    (F_0, F_1) = (0, 1)
+    \textAnd 
+    F_n = F_{n - 1} + F_{n - 2} \hspace{5mm}\forall n \geq 2
+\]
+
+By Binet's Formula, it is possible to write out an explicit equation 
+for the $n$th Fibonacci number. 
+\[
+    F_n =
+    \frac 1 {\sqrt 5} 
+    \left(
+        \varphi^n - (1 - \varphi)^n 
+    \right)
+    \textWhere 
+    \varphi = \frac {1 + \sqrt 5} 2
+\]  
+Assuming $n \geq 1$, it is possible to obtain the following inequality. 
+\[
+    \bigg|F_n  - \frac {\varphi^n} {\sqrt 5}\bigg| \leq \frac 1 {\sqrt 5}(\varphi - 1)^n 
+    < .277
+\]
+We are interested in computing the fibbonacci inverse function. 
+Introduce the notation 
+\[
+    \mathcal{F}^{-1} (m) = n
+\]. 
+
+\new{Proposition 1} Inverse Fibbonacci Inequality 
+
+\[
+    \log_{\varphi}(m - .277) +.167 <  \mathcal{F}^{-1} (m) < \log_{\varphi}(m + .277) +.168
+\]
+\proof
+Given an integer $m$, we wish to compute $n$ that satisfies the following 
+inequality. 
+\begin{equation}
+    \label{invfib}
+    F_{n - 1} < m \leq F_{n}
+\end{equation}
+Using our estimation, we can write 
+\begin{equation*}
+ \frac {\varphi^{n - 1}} {\sqrt 5} - .277
+    <
+    m \leq  \frac {\varphi^n} {\sqrt 5} + .277
+\end{equation*}.
+With some algebra, it is not hard to derive
+\begin{equation}
+    \log_{\varphi}(m - .277) +.167 < n < \log_{\varphi}(m + .277) +.168
+\end{equation}
+
+\hfill \qed
+
+\new{Remark} For large enough $m$, it is reasonable to make the estimation 
+\[
+    m \approx \log_{\varphi}(m) +.167
+\]
+
+
+
+\section{Conway Soldiers and two related problems}
+\textit{figure to be added...}
+Consider an infinite chessboard. Draw a horizontal line 
+across the board, and fill all the grids under the line 
+with one checkers. \footnote{In some formulations, 
+the checkers are formulated as soldiers, hence the name Conway 
+Soldiers}. In each turn, we are allowed to take a soldier and 
+jump across a neighboring checker, moving the checker two grids. 
+If a jump occurs, the neighboring checker which is jumped upon is taken 
+away. We continue this game for a finite number of moves. 
+
+We are interested in two main problems. 
+
+\new{Problem 1}
+\textit{
+ The M-level Problem
+}
+
+What is the highest level $M$ which 
+can be reached by the rules of Conway Checkers?
+
+\new{Problem 2 }
+\textit{
+ The Rallying Problem
+}
+
+Select any grid that is adjacent and below 
+the borderline. What is the maximum number of soldiers we 
+can focus on the target grid? 
+
+We reserve the variables $M, R$ for the solution for the 
+two problems. That is, given multiplicity $m$, $M$ 
+will refer to the optimal solution for the M-level problem, 
+and $R$ will refer to the maximum number of soldiers that 
+can be rallied at the target square. 
+
+\section{Monovariant Methods to compute upper bounds}
+\textit{More figure, and reference}
+
+We start with computing the bound of $M$ using the 
+monovariant method. Assume, after some sequence of moves, 
+it is possible to send a single checker to level $M$. 
+By the symmetry of the infinite board, we can choose 
+any square that is $M$ grids north from the boundary. 
+At the end of the game, the score of the board must be 
+strictly greater than 1. After a sequence of moves, there 
+must be one piece in the target grid. Also, there must be 
+some other grids in the board, since we are only allowed 
+to conduct finite number of jumps. \footnote{The board 
+must have a infinite number of checkers after a finite number 
+of moves. }
+ 
+\newpage
+
+\new{Theorem} \textit{Upper bound for M}
+\[
+    \log_\varphi(m) + 5 > M
+\]
+\proof
+Compute the inital score of the board which we will call $T$. For simplicity, 
+consider the score of one horizontal strip, and call it $s$. 
+Remember that there are $m$ checkers in each board initially. 
+Using the geometric series formula, it is possible to derive the following. 
+\[
+T = (\varphi - 1)^M \frac \varphi {5 - 3\varphi} 
+\]
+$T$ must be greater than $1$. Thus, we can write 
+\[
+m(\varphi - 1)^M \frac \varphi {5 - 3\varphi} > 1
+\]
+Which leads to 
+\[
+m \frac \varphi {5 - 3\phi} > \left(
+    \frac 1 {\varphi - 1}
+\right)^M = \varphi^M
+\]
+Taking the log base golden ratio gives us the desired result. 
+\[
+    \log_\varphi(m) + 5 > M
+\]
+We note that equality can be achieved when we allow infinite number of 
+steps. 
+\hfill \qed
+
+\new{Proposition} \textit{Fibonacci Climb}
+Given two grids that each have $F_{n+1}, F_n$ checkers, 
+it is possible to send a single checker $n$ grids away from 
+the beginning location. 
+
+\new
+
+\end{document}

@@ -1,0 +1,290 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \vspace{1mm}
+    \newline
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{RMT cheetsheet}
+
+    \large
+    Benevolent TomatoG
+\end{center}
+
+\new{Definition} {Wigner Matricies} 
+\textit{These info are taken from feier's pdf}
+
+Consider two probability distributions, $Y, Z$ with zero mean. 
+Let $Z$ to have a variance of 1. Assume all the moments of 
+these two distributions to be finite. 
+
+These distributions form a random matrix ensenble. To construct 
+a matrix from these two distributions, take the distribution $Y$ 
+$N$ times and fill the diagonal entries. Then, fill up the 
+upper diagonal by drawing from $Z$, $N(N-1)/2$ times. 
+
+\new{Definition}{ESD and DSDs}
+Consider a Wigner Matrix ensenble $\mathcal{M}_n$. The $n$ 
+eigenvalues of any matrix in the ensenble form a \textbf{spectral density}. 
+Let $M_n \in \mathcal M_n$ to have a ESD of $f(x)$. The ESD is written as follows. 
+\[
+    f(x) = \frac 1 n \sum_{\lambda \in \text{Spec}(M_n)} \delta(x - \frac \lambda {\sqrt n}) 
+\]
+
+The average of the ESDs provide a deterministic spectral density(DSD) of 
+the entire ensenble. 
+
+\new{Theorem}{Markov's Inequality}
+This is a nice tool that bounds the probability of a random variable 
+being "too large" by the expected value. \textbf{This only works when 
+the random variable is positive!}
+\[
+    \frac{\<X\>} a \geq \mathcal{P}(x \geq a) 
+\]
+
+\new{Theorem}{Chebyshev's Inequality}
+We use this inequality to bound the random variable to the mean. Unilike 
+the Markov's inequality, the probability is bounded by the standard deviation. 
+\[
+    \frac 1 {k^2} \geq \mathcal{P}(|X - \mu| > k\sigma) 
+\]
+
+\new{Remark} {Strategy of using probability inequalities}
+Take the ESD. Approximate it in some compact region, and compute the probability 
+that the ESD is bounded to the desired distribution. Bound the probability using markov. 
+Then, use a delta-epsilon argument to bound the probability. 
+
+\newcommand{\Sp}{
+    \text{Spec}
+}
+
+\newcommand{\tr}{
+    \text{tr}
+}
+
+\new{Concept} {Stieltjes Transform}
+
+Define the Stieltjes Transform by the following equation. 
+\[
+    s_n(z) := \int_{x \in \mathbb{R}} \frac{f(x)}{x-z}dx 
+    = \int_{x \in \mathbb{R}} \frac{1}{x-z}d\mu 
+\]
+Where $\mu$ is the measure corresponding to the ESD of some random matrix. 
+
+Stieltjes transforms are nice, for they can be written as an expression 
+of the trace. 
+\[
+    s_n(z) = \tr(M_n/\sqrt{n} - zI)^{-1}
+\]
+
+\proof
+We deduce some properties about traces. Consider a n-by-n matrix 
+$A$ and its spectrum $\Sp(A)$. By the eigenvalue-trace lemma, we know 
+\[
+\sum_{\lambda \in \Sp(A)} \lambda = \tr(A)
+\]
+We easily deduce 
+\[
+\sum_{\lambda \in \Sp(A)} \frac 1 \lambda = \tr(A^{-1})
+\textAnd 
+\Sp(A - z I) = \{\lambda_i - z\}
+\]
+and infer 
+\[
+    \Sp[(M_n/\sqrt{n} - zI)^{-1}] = 
+    \left\{
+        \frac 1 {\lambda_i / \sqrt{n} - z}
+    \right\}
+\]
+which implies 
+\[
+    \tr[(M_n/\sqrt{n} - zI)^{-1}] = \sum_{\lambda \in \Sp(M_n)}\frac 1 {\lambda / \sqrt{n} - z}
+\]. 
+Notice that the sum can be expressed as an integral using the ESD of 
+$M_n$. Let $f(x)$ to be the ESD, and we can write the following. 
+\[
+    \tr[(M_n/\sqrt{n} - zI)^{-1}] = 
+    \int_{x \in \mathbb{R}}\frac {f(x)} {x - z}dx := s_n(z)
+\]. 
+\hfill \qed
+
+\newpage
+
+\new{Theorem} {Moment of the GOE}
+The odd moment of the GOE ensenble vanishes. The $2k$th moment 
+of the GOE ensenble matches the kth Catalan number. 
+\[
+    C_k = \frac 1 {k + 1} \binom {2k} k
+    \]
+
+\proof 
+
+
+The theorem holds by five observations. 
+\begin{enumerate}
+    \item Using the eigenvalue trace lemma, we can express 
+    the trace of $A^{2k}$ as circuits/cycles of length 2k. 
+    By the nature of expected values, all cycles that have 
+    an unmatched edge can be ignored. This indicates that 
+    all the odd moments vanish. 
+    \item All cycles that have more than three kinds of the 
+    same edges, regardless of direction, can be ignored. 
+    Consider the expansion
+    \[
+        a_{i1i2}a_{i2i3} \dots a_{iki1}
+    \]
+    and simplify them to the form 
+    \[
+        a_{i1i2}^3a_{i2i3}^2 \dots a_{iki1}^2
+    \]
+    . These contribution dies out, since they have a total 
+    of degree freedom $k$, hence a contribution of $N^{k}$. 
+    \item All cycles that have arrows pointing in the same direction 
+    dies out. All such cycles can be bijected to a partition of 
+    $[k]$. The degree of freedom is also $k$, and this dies out. 
+    \item So all circuits must be comprised of sets of edges 
+    that travel in the different direction. Count this by the 
+    nmber of Dych words and the Catalan numbers appear!
+    \item Note that the double variance in the center entries 
+    are countered in step 3. All pairs $a_{ii}^2$ can be 
+    considered as two edges that connect to each other in different directions. 
+\end{enumerate}
+\hfill \qed
+
+\end{document}

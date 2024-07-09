@@ -9,6 +9,7 @@
 \usepackage{mathtools}
 \usepackage{ wasysym }
 \usepackage{enumerate}
+\usepackage{verbatim}
 
 
 \newcommand{\new}[1]{
@@ -138,62 +139,57 @@
 \begin{document}
 \begin{center}
     \Large
-    \textbf{Killing Pairs in a NxN board}
+    \textbf{Report for Smith's proof of Fermat's Last Theorem}
 
     \large
-    Chess Group
+    Daniel Son
 \end{center}
-
-Consider a NxN board where $N$ is large enough. We arrange $r$ rooks in the board. 
-We are interested in counting the killing paris of this board. Define the family of 
-arrangement 
+\begin{comment}
+The proof has a gap in page 2, equation (6). Smith claims that 
+the inequality
 \[
-\mathcal{A}_r := \{A_1, ... A_{\binom {N^2} {r}}\}
+    (k+1)^n < (z_{y, k } + 1)^n
 \]
-to be the family of all rook arrangements in the NxN board. Use the 
-variable $Kp(A)$ to denote the killing pairs of arrangement $A$. 
-$\mathbb{E} [Kp (A)]_{A \in A_r}$ is denoted by $Kp[\mathcal{A}_r]$
-
-\new{Problem 1} \textit{Jumping rooks}
-
-Assume $r \ll N^2$. 
-If rooks are allowed to jump pieces, what is the expected value 
-of the killing pairs?
-\vspace{3mm}
-
-In fact, by a simple combinatorial construction, we can 
-see that the expected value of the killing pair increases 
-linearly as we place additional rooks. For large $N$, we observe 
+implies the inequality 
 \[
-    Kp[\mathcal{A}_r] = \frac{r(r - 1)}{N}
+    y^n + (k+1)^n < (z_{y, k } + 1)^n
 \]
 
-\new{Problem 2} \textit{Non-jumping rooks}
+Set $n = 3, z_{y, k} = 5, k = 4, y = 100$. Clearly the first 
+statement holds. 
+\[
+    4^3 < 6^3
+\]
+Nonetheless, the second statement fails.
+\[
+    100^3 + 4^3 \nless 6^3 
+\]\end{comment}
 
-Assume $r \ll N^2$. 
-If rooks are not allowed to jump pieces, what is the expected value 
-of the killing pairs?
-\vspace{3mm}
+In page 2, from equations 7-10, Smith implicitly assumes 
+that both $z_{y + 1, k}$ and $z_{y, k+1}$ are both in $\mathbb{Z}$.
+In order to reach the conclusion $\alpha = \beta$, he assumes 
+$z_{k, y} + \alpha , z_{k, y} + \beta \in \mathbb{Z}$.  
+Thus, what Smith has proved is that there are no 
+solutions to the system 
+\begin{eqnarray*}
+    (y+1)^n + k^n = x^n \\
+    y^n + (k+1)^n = x^n
+\end{eqnarray*}. 
 
-We wish to adopt graph theory in our approach. From an 
-arrangement $A$, we construct a graph as follows. 
+Moreover, the implication of $\alpha = \beta$ is absurd. 
+If the assumption holds, $z_{y+1,k} = z_{y, k}$. Note that $z_{y+1,k} \neq z_{y, k}$. This can verified 
+by computing $z$ directly. We have an explicit formula 
+for $z_{y, k}$.  
+\[z_{y, k} = \sqrt[n]{y^n + k^n}\]
 
-\new{Constructing graph from a rook arrangement}
+Compare $z_{10, 4}$ and $z_{11, 4}$ for $n = 5$
+\halfFigure{zval.png}
 
-\begin{enumerate}
-    \item Construct a vertex for every rook. 
-    \item Each pair of rook are connected if they are a killing pair. 
-    \item Add an observer vertex, that is arbitrarily far from the board. 
-    Connect each certex to the observer vertex. 
-\end{enumerate}
-
-Denote this graph by $G(A)$. 
-
-\textbf{
-Turns out that the crossing lemma needs a condition
-$E > 4V$... This is a dead end. 
-}
+And clearly the two values do not match. 
 
 
+
+
+
+\hfill \lightning
 \end{document}
-

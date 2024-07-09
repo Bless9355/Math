@@ -1,0 +1,396 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{openquestion}{Question}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Modeling a Leslie population with constant migration }
+
+    \large
+    PP Group
+\end{center}
+
+\section{Abstract}
+
+%Define population, 3 age groups, constant migration
+The goal of this paper is to model a population growth that 
+has constant migration. We use the Leslie matrix model, dividing 
+the population into three age groups, and deduce conditions 
+for the stability assuming constant migration. 
+
+\section{Setup}
+
+We consider a population with three age groups. 
+The model is discrete, and we measure the population 
+after each discrete time staes. Denote the 
+population vector at time $n$ as 
+\[
+    \vec p _ n := (p_1, p_2, p_3)
+\]
+which implies that the total population at time $n$ to be 
+\[
+    P_n := p_1 + p_2 + p_3
+\]
+Given the initial population $p_0$, we model the evolution of 
+the population vector by the following recurrence relations. 
+\[
+    \vec p_{n + 1} = L \vec p_n + \vec m
+    \textOr
+    \vec p_{n + 1} = L \vec p_n - \vec e
+\]
+The first equation describes a model with constant immigration 
+into the system, and the second equation describes a model 
+with constant emigration. Assume $\vec m, \vec e$ to be vectors 
+in $\mathbb R_{pos}^3$. 
+
+
+\begin{comment}
+The matrix $L$ is a 3-by-3 leslie matrix written as 
+\[
+    L := \begin{bmatrix}
+        0 & f & f \\ 
+        s & 0 & 0 \\
+        0 & s & 0 
+    \end{bmatrix}
+\]
+where $s, f$ are survival and fertility rates respectively. 
+We naturally assume $0 \leq s \leq 1$ and $f \geq 0$
+
+\end{comment}
+
+
+For simplicity, we consider a N-byN leslie matrix with perfect survival and 
+fertility rate f. For example, if $N = 3$, 
+\begin{equation}
+    L := \begin{bmatrix}
+        f & f & f \\ 
+        1 & 0 & 0 \\
+        0 & 1 & 0 
+    \end{bmatrix}
+\end{equation}
+
+\section{Results}
+
+\new{Theorem} {Limiting behavior of the system}
+If the operator norm of $L$ is less than $1$, the 
+population vector converges to 
+\[
+    \vec p_{eq} = (L - I)^{-1} \vec m 
+    \textOr 
+     \vec p_{eq} = (L - I)^{-1} \vec e
+\]   
+where $I$ is the identity matrix of order 3. 
+The convergence depends on the value $1 - fs - fs^2$. 
+That is, if $fs^2 + fs - 1 < 0$, then a constant positive 
+influx of population is necessary to maintain an equilibrium. 
+Otherwise, if $fs^2 + fs - 1 > 0$, then a constant positive 
+outflux is required. 
+
+\proof 
+Without loss of generality, choose the recurrence 
+\[
+    \vec p_{n + 1} = L \vec p_n + \vec m
+    \] 
+and by simply applying the recurrence $n$ times, we obtain 
+\[
+    \vec p_n = L^n \vec p_0 + \left(\sum_{i = 0}^{n - 1} L^i\right) \vec m
+\]
+which, by the geometric series formula, again simplifies to 
+\[
+    \vec p_n = L^n \vec p_0 + (L - I)^{-1} (L^n - I) \vec m
+\]
+. Assuming that the operator norm of $L$ is strictly less than 1, 
+as $n \rightarrow \infty$, $L^n$ converges to the zero matrix. 
+Hence, 
+\[
+    \vec p_{eq} = -(L - I)^{-1}\vec m
+\]. 
+In order for this equilibrium population to be positive, the 
+matrix $-(L - I)^{-1}$ must yield a positive result when multiplied 
+with the migration vector $m$. Recall the adjoint inverse formula. 
+\[
+    A^{-1} = \frac 1 {|A|} \text{adj}(A)^{T}
+\]
+Thus, we must obtain 
+\[
+    -|(L - I)^{-1}| > 0 
+    \textOr 
+    -\frac 1 {fs^2 + fs - 1} > 0
+\]  
+This inequality is achieved when 
+\[
+    fs^2 + fs - 1 < 0
+\]
+When the model satisfies the recurrence relation 
+with emigration out of the system, substitude $\vec m$ with $-\vec e$ 
+and repeat the argument 
+
+\hfill \qed
+
+\newpage
+
+\new{Example} {Numerical Example}
+\halfFigure{oneSys.png}
+Here is a plot of the case with constant immigration into the system. 
+Notice that the population ocverges after $n = 400$. 
+
+\newpage
+
+\new{Model} {Leslie Predator-Prey}
+Let $\alpha_n$, $\beta_n$ be the population vectors 
+of the predator and prey at timestep $n$. The Leslie 
+Predator-Prey model is defined by the following 
+system of matrix differences. 
+\begin{eqnarray*}
+    \alpha_{n - 1} &=& \max(L_\alpha \alpha_n + k m \beta_n, \vec 0) \\ 
+    \beta_{n - 1} &=& \max(L_\beta \beta_n - k \alpha_n, \vec 0) \\ 
+\end{eqnarray*}
+$k, m$ are predation ratio and nurturing ratios, both between $0, 1$. 
+
+We assume that the x-value of $L_\alpha$ is less than $1/2$ 
+and that the x-value of $L_\beta$ is greater than $1/2$. In 
+other words, the predator population decays in absense of the prey 
+and the prey populatin explodes in absence of the predator. 
+
+Moreover, the population is fixed to be nonnegative. 
+
+\new{Problem} {Optimal Predation Strategy}
+For what ranges of the real value $k$ guarantees exponential growth 
+of the predator? Moreover, what value of $k$ is necessary to guarantee 
+maximum growth?
+
+\new{Lemma 1} {Coulpled 1st order to 2nd order}
+The predator population satisfies the following second order 
+difference equation. 
+\[
+\alpha_n = (L_\alpha + L_\beta) \alpha_{n - 1} - L_\beta L_\alpha \alpha_{n -2} - m k^2 \alpha_{n - 2}
+\]
+\[
+\beta_n = (L_\beta + L_\alpha) \beta_{n - 1} - L_\alpha L_\beta \beta_{n -2} - m k^2 \beta_{n - 2}
+\]
+
+For simplicity, consider a leslie matrix of order 1. That is, a scalar. 
+
+
+
+The following three propositions properly models 
+the population where the dimension of the Leslie matrix 
+is 1. That is, the population growth is characterized 
+by a exponential of a scalar without interaction. 
+To emphasize the scalarness, write $l_a < 1$ and $l_b > 1$ 
+instead of $L_a, L_b$. 
+
+\new{Prop} {Eigenvalues of the companion matrix}
+Using Lemma 1, it is possible to obtain a companion matrix that 
+describes the population. 
+\[
+    \twobytwoMat(
+        l_a + l_b, -l_a l_b -k^2 m, 1, 0
+    )
+\]
+The eigenvalue of this matrix is purely real if and only if 
+\[
+    k \leq \frac {l_a - l_b} {2\sqrt{m}}
+\]
+Otherwise, the eigenvalues of these maticies are complex conjugates 
+of each other. 
+
+\new{Prop} {Exponential growth of population for small predation}
+The following condition guarantees that the predator and prey population 
+to not vanish as $n \rightarrow \infty$. 
+\[
+    k < \sqrt{
+        \frac {(1 - l_b)(l_a - 1)} {m}
+    }
+\]
+
+\proof Compute the eigenvalues of the companion matrix directly, 
+and set it to be less than one. 
+
+\new{Prop} {Complex eigenvalue implies extinction}
+If 
+\[
+    k \geq \frac {l_a - l_b} {2\sqrt{m}}
+\]
+then the population is guaranteed to be extinct. 
+
+\proof Take the eigendecomposition and notice that the rotation 
+eventually takes the population to some zero value. 
+\hfill \qed
+
+\vspace{5mm}
+
+It turns out that solving the recurrence for the general case 
+where $L_a, L_b$ is extremely challenging. Suppose we wish to 
+solve the PP model where the Leslie matricies are degree $k$-by-$k$, 
+where $k > 1$. If we adopt the scalar solution, we have to compute 
+the eigenvalues of a $2k$-by-$2k$ matrix, and show that the eigenvector 
+corresponding to the dominating eigenvalue is positive. Another 
+attempted solution was to consider the following characteristic equation of 
+the 2nd order recurrence
+\[
+    \Lambda^2 - (L_\alpha + L_\beta) \Lambda + (L_\alpha L_\beta - k^2 m I) = 0
+\]
+In general, $L_\alpha$ and $L_\beta$ do not commute. This imposes 
+hardships when applying the quadratic formula to solve this equation.
+Also, by the natural condition of the predator prey model, it is impossible 
+to set $L_\alpha = L_\beta$, for the former matrix describes a vanishing 
+population while the latter describes a growing population.  
+
+Two go-arounds for this problem are as follows:
+\begin{enumerate}
+    \item Consider a competitive model where $L_\alpha = L_\beta$
+    \item Suppose $L_\alpha = \rho L_\beta$ for some scalar $\rho$
+\end{enumerate}
+
+For both cases, we can obtain a closed form formula for the population. 
+
+\end{document}

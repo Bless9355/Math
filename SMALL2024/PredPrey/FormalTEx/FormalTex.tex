@@ -1,0 +1,89 @@
+\documentclass[12pt]{amsart}
+
+\textwidth = 6.2 in
+\textheight = 8.5 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.3 in
+\parskip = 0.05 in
+\parindent = 0.3 in
+
+\usepackage{amsrefs}
+\usepackage{enumerate}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{color}
+\def\cc{\color{blue}}
+\usepackage[normalem]{ulem}
+\usepackage{comment}
+\usepackage{yfonts}
+\usepackage{xcolor}
+\newcommand\note[1]{\textcolor{red}{\normalfont(#1)}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{openquestion}{Question}
+
+
+\newcommand{\Log}{\text{Log}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newsavebox\foobox
+\newlength{\foodim}
+\newcommand{\slantbox}[2][0]{\mbox{%
+        \sbox{\foobox}{#2}%
+        \foodim=#1\wd\foobox
+        \hskip \wd\foobox
+        \hskip -0.5\foodim
+        \pdfsave
+        \pdfsetmatrix{1 0 #1 1}%
+        \llap{\usebox{\foobox}}%
+        \pdfrestore
+        \hskip 0.5\foodim
+}}
+
+\newcommand{\laplace}{\slantbox[-.45]{$\mathscr{L}$}}
+\newcommand{\invlaplace}{\laplace^{-1}}
+\newcommand{\fourier}{\mathcal{F}}
+\newcommand{\invfourier}{\mathcal{F}^{-1}}
+
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+
+\usepackage{graphicx}
+\def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
+
+\def\rotatechartwo#1{\reflectbox{#1}}
+\newcommand{\badC}{\rotatecharone{$\mathcal{C}$}}
+
+\newcommand{\frc}[1]{\normalfont{\text{frac}}(#1)}
+\newcommand{\cen}[2]{\normalfont\text{Cen}(#1,#2)}
+
+\title{Matrix Recurrence Relations}
+\author{Matrix recurrence relations group (SMALL 2024)}
+
+\begin{document}
+\maketitle
+\section{Stability}
+
+\subsection{Preliminaries}
+\end{document}

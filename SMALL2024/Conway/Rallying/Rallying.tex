@@ -150,16 +150,25 @@ we focus on a similar but different problem: given
 a board multiplicty m, what is the maximum amount of soldiers we can 
 rally on a single grid?
 
-\new{Problem}
+\new{Problem 1}
 \textit{
- The Rallying Problem
+ The M-level problem
 }
 
 Assume we have a two dimensional checkerboard that 
 extends infinitely both in the horizontal and the vertical direction. 
 A borderline is drawn, and we are provided with $m $soldiers on 
 each grid of the checkerboard under 
-the reference line. Select any grid that is adjacent and below 
+the reference line. 
+What is the highest level $M$ which 
+can be reached by the rules of Conway Checkers?
+
+\new{Problem 2 }
+\textit{
+ The Rallying Problem
+}
+
+Consider the same board from Problem 1. Select any grid that is adjacent and below 
 the borderline. What is the maximum number of soldiers we 
 can focus on the target grid? 
 
@@ -196,13 +205,13 @@ In a 1D strip, it is possible to come up with an optimal strategy
 that asymptotically approaches this limit. For utility, define 
 the following. 
 
-\new{Definiton} \textit{Fibbonacci inversion function}
+\new{Definiton} \textit{Fibonacci inversion function}
 
 Let 
 \[
-    \mathcal{F} (N) = n   
+    \mathcal{F}^{-1} (N) = n   
 \]
-where $n$ is the index of the largest fibbonacci number less than 
+where $n$ is the index of the largest fibonacci number less than 
 or equal to  $N$. 
 That is, $F_{n} \leq N < F_{n + 1}$. 
 
@@ -215,12 +224,17 @@ Soldiers to one target grid.
 \fullFigure{HeavyHead.png}
 
 \new{Proposition 3} \textit{Multiple Heavy Heads}
-Suppose $n - 1 = \mathcal{F} (m/2)$. In a 1D strip of the Conway game 
-with multiplicity $m$, it is possible to rally $m + F_{n + 1}$ 
-Soldiers to one target grid.
+
+Suppose $n - 1 = \mathcal{F}^{-1} (m/2)$. Consider a 1D strip of the Conway game 
+with multiplicity $m$. 
+Suppose that the strip has a fixed head(or the top grid) 
+and extends infintely below. 
+It is possible to rally $m + F_{n + 1}$ 
+Soldiers to the head/top grid.
+
+
 \proof Here is a visual demonstration. 
 \fullFigure{Strategy1.png}
-\hfill \qed
 
 The construction of $n$ 
 follows from the fact that the superposed board needs the 
@@ -229,6 +243,16 @@ following multiplicity $m$.
     m = \max_{0 \leq j < N}\{(j + 1)F_{N - j}\}
 \]
 \hfill \qed
+
+\new{Corollary} 
+We can approximate the number of added soldiers, $F_{n+1}$. 
+\[
+    F_{n + 1} \approx \varphi^{n + 1}  
+    \approx \varphi^{\log_\varphi (m/2) + 2}
+    = \frac {m \varphi^2} 2
+\]
+\hfill \qed
+
 
 
 

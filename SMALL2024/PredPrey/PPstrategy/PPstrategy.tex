@@ -1,0 +1,454 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+
+\newcounter{problemcnt}
+\setcounter{problemcnt}{0}
+
+\newcommand{\Problem}{{
+    \vspace{5mm}
+    \stepcounter{problemcnt}
+    \noindent
+    \arabic{problemcnt}. 
+}
+}
+
+\newcommand{\nProblem}[1]{
+    \vspace{5mm}
+    \noindent
+    \setcounter{problemcnt}{#1}
+    \arabic{problemcnt}. 
+}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{openquestion}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Predator-Prey Model using Leslie matricies and optimal predation strategies}
+
+    \large
+    PP Group
+\end{center}
+
+\section{Abstract}
+
+In this paper, we introduce a new predator-prey model based 
+the Lotka-Voltera model. Replacing the constant coefficients to 
+Leslie matricies motivates the study of dominant eigenvalues 
+which can be conducted using techniques in Complex Analysis. 
+Using the theory of dominating eigenvalues, we provide a bound 
+for maximum predation rate for population survival in a long term. 
+We also discuss the competetive model, and prove the 
+last species standing theorem, which describes the unlikelyhood 
+of stable equilibrium between two competetive species. 
+
+\section{The Leslie model on a single specie population}
+%simple leslie matrix
+
+Leslie matricies characterize the change of population with 
+different age groups, given the survival rate and the fertility rate 
+of the species. 
+
+%possibly some explanation of Leslie matricies
+
+We focus on a specific class of Leslie matricies with 
+a fixed fertility rate $f$ and a survival rate 1. 
+
+\begin{definition}[Simple Leslie Matricies]
+    \label{LeslieDef}
+
+    Suppose $N \in \mathbb{Z}_{pos}$. A simple Leslie matrix that 
+    characterizes the population evolution is defined as follows. 
+
+    \[
+        (L_f)_{ij} = \begin{cases}
+            f & (i = 0)\\
+            1 & (i \neq 0 \wedge j=i+1)\\
+            0 & \textrm{Otherwise}\\
+        \end{cases}
+    \]
+        Or writing the matrix out, 
+    \[L_f :=
+    \begin{bmatrix}
+        f & f& \cdots & f \\ 
+        1 & 0 & \cdots & 0 \\
+        0 & 1 & \cdots & 0\\
+        &&\vdots &\\
+        0 & \cdots & 1 & 0
+    \end{bmatrix} 
+    \]. 
+\end{definition}
+
+The maximum eigenvalue of this Matrix describes the asymptotic 
+behavior of the population. The first apporach is to compute the characteristic 
+equation and find the roots to derive properties about the eigenvalues. 
+
+\begin{theorem}[Lotka-Euler Equation]
+    \label{LEeq}
+    The characteristic equation of a simple leslie matrix $L_f$ of 
+    order $N$ is 
+    \[
+        \ch_N(x):=x^N - f(x^{N-1} + \cdots + x + 1)
+    \]
+    which, using the geometric series formula, can be simplified as 
+    \[
+        x^{N} - f \frac {x^N - 1} {x - 1}
+    \]
+\end{theorem}
+
+\proof Induct on N. 
+
+Using methods from Complex Analysis, it is possible to derive the following 
+two theorems. 
+
+\begin{theorem}[Complex Roots of the Characteristic Equation]
+
+    The complex roots of the characteristic equation $\ch_N$ is always 
+    lie inside the unit circle. 
+\end{theorem}
+
+
+\begin{theorem}[Real Root of the Characteristic Equation]
+
+    The real root of the characteristic equation has a magnitude greater 
+    than $1$, given that $1-fN \leq 0$. 
+\end{theorem}
+
+
+
+With a little more analysis, we provide a lower bound and the 
+upper bound of the maximum eigenvalues of $L_f$. 
+
+\begin{theorem}[Bounds for the maximum eigenvalue]
+
+ Given that $1-fN \leq 0$, the maximum eigenvalue of $L_f$ of order 
+ $N$ is given by 
+ \[
+ 1 + \frac f {N + 1} \leq \lambda_{max} \leq 1 + f
+ \]
+\end{theorem}
+
+\section{The predator-prey model}
+%PP model
+
+
+\begin{definition}[Leslie Predator-Prey]
+Let $\alpha_n$, $\beta_n$ be the population vectors 
+of the predator and prey at timestep $n$. The Leslie 
+Predator-Prey model is defined by the following 
+system of matrix differences. 
+\begin{eqnarray}
+    \alpha_{n - 1} &=& \max(L_\alpha \alpha_n + k m \beta_n, \vec 0) \\ 
+    \beta_{n - 1} &=& \max(L_\beta \beta_n - k \alpha_n, \vec 0) \nonumber
+\end{eqnarray}
+$k, m$ are predation ratio and nurturing ratios, both between $0, 1$. 
+\end{definition}
+
+We assume that the x-value of $L_\alpha$ is less than $1/2$ 
+and that the x-value of $L_\beta$ is greater than $1/2$. In 
+other words, the predator population decays in absense of the prey 
+and the prey populatin explodes in absence of the predator. 
+
+Moreover, the population is fixed to be nonnegative. 
+
+\begin{openquestion}[Optimal Predation Strategy]
+For what ranges of the real value $k$ guarantees exponential growth 
+of the predator? Moreover, what value of $k$ is necessary to guarantee 
+maximum growth?
+\end{openquestion}
+
+%Might add the winner-takes all thm?
+
+\begin{theorem}[Coulpled 1st order to 2nd order]
+The predator population satisfies the following second order 
+difference equation. 
+\[
+\alpha_n = (L_\alpha + L_\beta) \alpha_{n - 1} - L_\beta L_\alpha \alpha_{n -2} - m k^2 \alpha_{n - 2}
+\]
+\[
+\beta_n = (L_\beta + L_\alpha) \beta_{n - 1} - L_\alpha L_\beta \beta_{n -2} - m k^2 \beta_{n - 2}
+\]
+\end{theorem}
+
+
+\section{Special case 1: when $L$ is a scalar}
+%solution for scalars
+
+
+The following three propositions properly models 
+the population where the dimension of the Leslie matrix 
+is 1. That is, the population growth is characterized 
+by a exponential of a scalar without interaction. 
+To emphasize the scalarness, write $l_a < 1$ and $l_b > 1$ 
+instead of $L_a, L_b$. 
+
+\begin{theorem}[Eigenvalues of the companion matrix]
+Using Lemma 1, it is possible to obtain a companion matrix that 
+describes the population. 
+\[
+    \twobytwoMat(
+        l_a + l_b, -l_a l_b -k^2 m, 1, 0
+    )
+\]
+The eigenvalue of this matrix is purely real if and only if 
+\[
+    k \leq \frac {l_a - l_b} {2\sqrt{m}}
+\]
+Otherwise, the eigenvalues of these maticies are complex conjugates 
+of each other. 
+\end{theorem}
+
+\begin{theorem}[Exponential growth of population for small predation]
+The following condition guarantees that the predator and prey population 
+to not vanish as $n \rightarrow \infty$. 
+\[
+    k < \sqrt{
+        \frac {(1 - l_b)(l_a - 1)} {m}
+    }
+\]
+\end{theorem}
+
+\proof Compute the eigenvalues of the companion matrix directly, 
+and set it to be less than one. 
+
+\begin{theorem}[Complex eigenvalue implies extinction]
+If 
+\[
+    k \geq \frac {l_a - l_b} {2\sqrt{m}}
+\]
+then the population is guaranteed to be extinct. 
+\end{theorem}
+
+\proof Take the eigendecomposition and notice that the rotation 
+eventually takes the population to some zero value. 
+\hfill \qed
+
+\section{Special case 2: when $L_a = \rho L_b$}
+%Special solution for leslie matricies
+
+To solve the second order matrix 
+recurrence related to 
+the predator-prey model, 
+we solve a characteristic equation 
+where the coefficients are matricies.
+
+We wish to find a matrix $\Lambda$ such that 
+\[
+\Lambda^2 - (\rho + 1) L_\beta \Lambda + \rho L_\beta^2+ mk^2 I = 0
+\]
+Since the only matricies involved on this equation are $I$ and $L_\beta$
+which commute, we can use the quadratic equation to solve this equation. 
+
+
+\begin{theorem}
+    The population of the predator in (\ref{LeslieDef}) 
+    can be characterized as 
+    \[
+    \vec \alpha_n = \vec v_1\Lambda_1^{n} + \vec v_2\Lambda_2^{n}
+    \]
+    for some vectors $\vec v_1$ and $\vec v_2$. Moreover, 
+    the growth of $\vec \alpha_n$ is dominated by the maximum eigenvalue 
+    of $\Lambda_1$. Call the maximum eigenvalue of $L_f$ 
+    as $\lambda_{max}$. We write
+    \[
+        \lambda_{max} = \frac {
+            (\rho + 1) + \sqrt{(\rho + 1)^2 \lambda_{max}^2 - 4mk^2}
+        } 2
+    \]
+\end{theorem}
+
+Withs some more analysis, we provide a bound for $k$ that guarantees 
+the survival of both the predator and $k$.
+
+\begin{theorem}
+    Given that $\rho \geq 1 - \frac {2f}{1 + N + f}$, the following condition 
+    guarantees population growth. 
+    \[k \leq \frac {1 - \rho} {2\sqrt{m}} \left(1 + \frac f {1 + N}\right)^2\]
+\end{theorem}
+
+\section{The Competetive Model}
+We can slightly modify one of the sign of the model and 
+study the following system. 
+\begin{definition}[Leslie Competetive Model]
+Let $\alpha_n$, $\beta_n$ be the population vectors 
+of the predator and prey at timestep $n$. The competetive 
+model is defined by the following 
+system of matrix differences. 
+\begin{eqnarray}
+    \alpha_{n - 1} &=& \max(L_\alpha \alpha_n - k m \beta_n, \vec 0) \\ 
+    \beta_{n - 1} &=& \max(L_\beta \beta_n - k \alpha_n, \vec 0) \nonumber
+\end{eqnarray}
+$k, m$ are interaction ratio and competetive advantage, both between $0, 1$. 
+\end{definition}
+
+A similar analysis used for the predator-prey model 
+can be applied to yield the following result. 
+
+\begin{theorem}[Last Species Standing]
+    In a Leslie competetive model, one of the two 
+    species are likely to vanish as $n \rightarrow \infty$ 
+    Suppose $\vec \alpha_0 = \alpha_0 (1, \cdot, 1)$ and 
+    $\vec \beta_0 = \beta_0 (1, \cdot, 1)$
+    the fate of the species is determined 
+    by the sign of the term 
+    \[
+        D := \alpha_0 - \sqrt{m} \beta_0
+    \]
+    . To qualify, if $D > 0$, then the population $\beta$ 
+    vanishes. If $D < 0$, then the population $\alpha$ vanishes. 
+    If $D = 0$, either both species vanish or grow exponentially together. 
+\end{theorem}
+
+
+
+\section{Difficulties for the general case solution}
+%Fuuture works
+
+
+It turns out that solving the recurrence for the general case 
+where $L_a, L_b$ is extremely challenging. Suppose we wish to 
+solve the PP model where the Leslie matricies are degree $k$-by-$k$, 
+where $k > 1$. If we adopt the scalar solution, we have to compute 
+the eigenvalues of a $2k$-by-$2k$ matrix, and show that the eigenvector 
+corresponding to the dominating eigenvalue is positive. Another 
+attempted solution was to consider the following characteristic equation of 
+the 2nd order recurrence
+\[
+    \Lambda^2 - (L_\alpha + L_\beta) \Lambda + (L_\alpha L_\beta - k^2 m I) = 0
+\]
+In general, $L_\alpha$ and $L_\beta$ do not commute. This imposes 
+hardships when applying the quadratic formula to solve this equation.
+
+
+
+
+\end{document}

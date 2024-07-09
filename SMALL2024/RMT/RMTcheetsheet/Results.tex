@@ -1,0 +1,457 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{
+        {#2}
+    }
+    \vspace{2mm}
+    \newline
+}
+
+\def\calO{{\mathcal{O}}}
+\def\th{{\theta}}
+\def\_{{\hspace{1mm}}}
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\Proof}{{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{Proof}}
+}
+}
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{RMT results}
+
+    \large
+    Benevolent Tomato
+\end{center}
+\new{Proposition}{Eigenvalues of R} 
+By a simple computation, 
+\[
+    \lambda = \frac {1 + \sqrt{4a^2 + 1}} 2
+\]
+
+\new{Observation}{Spectral density of R}
+Experimentally, the spectral density of the eigenvalues 
+resemble the following. 
+
+\halfFigure{density.png}
+
+\new{Theorem} {Eqn for spectral density}
+The spectral density of $R$ is given as the following. 
+\[
+    f(x) = 
+    \begin{cases}
+        0 & x \in (0, 1) \\ 
+        \frac {2x - 1}{\sqrt{2\pi}\sqrt{x^2 - x}} e^{\frac{-\sqrt{x^2 - x}} 2} 
+        & x < 0 \\ 
+        -\frac {2x - 1}{\sqrt{2\pi}\sqrt{x^2 - x}} e^{\frac{-\sqrt{x^2 - x}} 2} 
+        & x > 1 \\ 
+    \end{cases}
+\]
+\proof 
+The strategy is to compute the cumulative distribution 
+function for the eigenvalues. 
+Let $a$ denote the random variable and $\lambda$ the desired 
+eigenvalue. $x$ denotes the bound for the eigenvalue. Note that, 
+given $\lambda < 0$, 
+\[
+    \lambda < x \leftrightarrow a \in (\sqrt{x^2 - x}, \infty) 
+    \cup  (-\infty, -\sqrt{x^2 - x})
+\]
+and also, given $\lambda > 1$, 
+\[
+    \lambda < x \leftrightarrow a \in (-\sqrt{x^2 - x}, \sqrt{x^2 - x})
+\]
+
+Let $g(x)$ denote the PDF of the Gaussian distribution with mean zero 
+and variance 1. It is possible to show, that 
+
+for $x < 0$
+\[
+    f(x) = -\frac {2x - 1}{\sqrt{x^2 - x}} g(\sqrt{x^2 - x})  
+\]
+
+for $x > 1$
+\[
+    f(x) = \frac {2x - 1}{\sqrt{x^2 - x}} g(\sqrt{x^2 - x})  
+\]
+
+Trivially, it is impossible for the eigenvalue to value between 
+zero and one. This is a consequence of elementary algebra. 
+Finally, substituting 
+\[
+    g(x) = \frac 1 {\sqrt{2\pi}} e^{-x^2/2}
+\]
+yields the desired result. 
+\hfill \qed
+
+\new{Proposition}{Kronecker Product of an ensenble times a 
+constant 2 by 2 matrix} 
+
+Let $\mathcal{A}$ be a matrix ensenble with spectral density 
+$f(x)$. The spectral density of the ensenble
+\[
+    \twobytwoMat(-a, 0, 0, -b) \otimes 
+    \mathcal{A}
+\]
+is
+\[
+    \frac{f(x/a) + f(x/b)} 2
+\]. 
+\proof 
+Decompose the function $f(x)$ into a $\delta$ bins. 
+\[
+    f(x) = \int_{t = -\infty}^{\infty} f(t) \delta(x - t) dt
+\]
+Move the bins appropriately to get the desired result. 
+\qed
+
+
+\new{Conjecture} {Kronecker product of two ensenbles}
+Let $\mathcal{A}, \mathcal{B}$ be two marix ensenbles with 
+spectral densities $f(x)$ and $g(x)$. The spectral density 
+of the Kronecker product of the two ensenbles are given by 
+\[
+    h(x) = \int_{t \in  \mathbb{R}} f(t) g(tx) dt
+\].
+
+\new{Definition} {Red sea ensenble} Let $a~N(0, 1)$. Consider the following 
+matrix ensenble. 
+
+\[
+    R := \twobytwoMat(0, a, a, 1)
+\]
+
+\newpage
+
+\new{Question} {lemma for computing trace of the Topelitz distb}
+Consider finite sequence of integers $(i_n)$ which 
+have $k$ integers. For all $n \in [k]$, 
+$i_n \in [N]$. 
+\footnote{Let the cannonical set $[N]$ denote the set that includes 
+all natural numbers less than or equal to $N$. }
+Also, for convinience, set $i_0 = i_k$
+This sequence satisfies 
+\[
+    |i_{n - 1} - i_{n}| = x_i
+\]
+for any $n \in [k]$. $x_n$ is an auxillary sequence of integers 
+that is also drawn from $[N]$, i.e. $x_n \in [N] \forall n\in[k]$. 
+Also, $x_i$ satisfies the following condition. Given any 
+integer $v \in [N]$, there are either two or zero values that 
+satisfiy
+\[
+    x_i = v  
+\]
+. Can we compute the number of solutions of this system 
+as a function of $N, k$?
+\new{Remark} {It suffices to find the asymptotic behavior 
+of the number of solutions as $N \rightarrow \infty$}
+
+
+%Definition of v_p
+
+\new{Definition} {Spaced Bases}
+Consider the vector space $\mathbb{R}^{(N-1)}$. 
+Define the $m$th spaced base $\nu_m$ as follows. 
+\[
+    (\nu_m)_i := \begin{cases}
+        1 & (m|i) \\ 
+        0 & (m \nmid i)
+    \end{cases}
+\]
+For example, in a $(9-1)$ dimensional vector space, 
+the 3rd space base will be 
+\[
+    \nu_3 = \{0, 0, 1, 0, 0, 1, 0, 0\}
+\]
+Moreover, if $m|N$, we call the vector a divisor vector.
+Otherwise, the vector is called a nondivisor vector.  
+For convinience $\nu_1$ is identified as a nondivisor vector. 
+
+\new{Proposition} {The image of divisor vectors
+under transformation}
+Let $A$ be the average matrix of the $DFT$ ensemble of 
+order $N$, that is a $(N-1)$-by-$(N-1)$ matrix. Let 
+$m|N$. Then, the following formula precisely describes the 
+entries of the image of the $m$th spaced vector under the transformation 
+induced by $A$. 
+\[
+    (A \nu_m)_i = \frac N 
+    {\text{lcm}(N/\text{gcd}(i, N), m)} - 1
+\]
+
+\proof 
+By direct computation, we write the $i$th entry of $A\nu_m$. 
+\[
+    A \nu_m = \sum_{j = 1}^{N - 1} A_{ij} (\nu_m)_j
+\]
+The terms in the sum is nonvanishing if and only if 
+\[
+    N|ij \textAnd m|j
+\]
+which is equivalent to the condition 
+\[
+    \frac N {\text{gcd}(N, i)} | j 
+    \textAnd 
+    m | j
+\]
+. We wish to count the number of $j$'s in the range $[1, N-1]$ 
+that satisfy the condition. We conclude
+\[
+    (A \nu_m)_i = \frac N 
+    {\text{lcm}(N/\text{gcd}(i, N), m)} - 1
+\] \qed \hfill
+%The basis of the span of A
+%New matrix
+%prove lb
+
+\new{Remark} {Image of nondivisor vectors}
+By a similar argument, when $m \nmid N$, 
+
+\[
+    (A \nu_m)_i = \bigg\lfloor\frac {N - 1} 
+    {\text{lcm}(N/\text{gcd}(i, N), m)}\bigg \rfloor
+\]
+
+
+
+\new{Corollary} {Divisor vectors map to divisor vectors}
+Let $m|N$. Then $ A \nu_m$ can be expressed as a linear 
+combination of divisor vectors, i.e
+\[
+     A \nu_m = \sum_{d|N} \tilde a_{md} \nu_m
+\]
+
+\proof 
+Suppose we start from $A\nu_m$ and subtract divisor vectors 
+to make it zero. We demonstrate this with $A\nu_2$ for 
+$N = 8$. We start with the vector 
+\[
+    \{0,1,0,3,0,1,0\}
+\]
+Subtract $\nu_2$ to obtain 
+\[
+\{0,0,0,1,0,0,0\}
+\]
+and subtract $\nu_4$ to obtain the zero vector. We conclude 
+\[
+A\nu_2 = \nu_2 + \nu_4
+\]
+Now we prove the theorem in a genereral sense. 
+Suppose we have subtracted $k$ vectors in a sense described above, 
+and call the remainder vector $r_k$. 
+We induct on $k$. If $k = 0$, we take $p$, the smallest prime divisor 
+of $N$. Look at all the entries $j$ such that $p|j$. We know 
+\[
+     (A \nu_m)_j = \frac N 
+    {\text{lcm}(N/\text{gcd}(j, N), m)} - 1 \geq \frac N 
+    {\text{lcm}(N/\text{gcd}(p, N), m)} - 1
+\]
+and thus subtracting $(A\nu_m)_p \nu_p$ will preserve 
+all the matrix entries positive. 
+
+Now, let $k \geq 1$. Let $p$ to be the index of the first 
+positive value occuring in $r_i$. If $p \nmid N$, then the 
+$p$th entry of $A\nu_m$ will be zero, so we can assume $p | N$.
+By subtracting $(r_k)_k\nu_p$, we only affect the entries of $r_k$ 
+that are a multiple of $k$. It suffices to show that for all $p|j$, 
+$     (A \nu_m)_j \geq      (A \nu_m)_p$
+\[
+     (A \nu_m)_j = \frac N 
+    {\text{lcm}(N/\text{gcd}(j, N), m)} - 1 \geq \frac N 
+    {\text{lcm}(N/\text{gcd}(p, N), m)} - 1
+\]
+and the theorem holds. \hfill \qed
+
+\new {Remark} {Nondivisor vectors map to divisor vectors} 
+Replace the formula for divisor vectors to nondivisor vectors, 
+and repeat the same inductive argument used for the divisor vectors. 
+
+\new {Theorem} {Eigenvalues of A}
+The nonzero eigenvalues of $A$ are exactly the eigenvalues of 
+the simplified matrix 
+\[
+    \tilde A := [\tilde a_{d_i d_j}]
+\] 
+where $d_i$ is the $i$th proper divisor of $A$ greater than 1. Therefore, if $N$ has 
+$\sigma(N)$ divisors including $N$, it can have at maximum $\sigma(N) - 2$ eigenvalues, 
+for $\tilde A$ is a square matrix of order $\sigma(N) - 2$. 
+
+\proof We first notice that the set of all spacing vectors 
+\[
+    \{\nu_1, \nu_2, \cdots \nu_{N - 1}\}
+\]
+form a basis of $\mathbb{R}^{N-1}$. By the proposition, we notice 
+that the image of this base under the transformation $A$ maps to 
+the space induced by 
+\[
+    \{\nu_{d_1}, \nu_{d_2}, \cdots \nu_{d_{\sigma(N) - 1}}\}
+\]
+. Hence, all nonzero eigenvectors must be in the subspace 
+\[
+    \text{span}(\nu_{d_1}, \nu_{d_2}, \cdots \nu_{d_{\sigma(N) - 1}})
+\]
+and the coefficients $\tilde{a}$ are described in the proposition. 
+\hfill \qed
+
+\new {Remark} {The simplified matrix for prime powers}
+If $N = 2^k$ , the simplified matrix can be simply 
+written as 
+\[
+    \begin{bmatrix}
+        1 & 2  & \cdots & 2^{k - 2} & 2^{k - 1} \\ 
+        1 & 2 & \cdots & 2^{k - 2} & 0\\ 
+        &&\vdots \\ 
+        1 & 0 & \cdots &0 &0
+    \end{bmatrix}
+\]
+
+\new{Theorem} {Lower bounds of the largest eigenvalue of 
+the DFT matrix}. 
+Let $\lambda_{max}$ be the maximum eigenvalue of a $(N-1)$-by-$(N - 1)$ 
+average matrix. The lower bound is 
+\[
+  \lambda_{max} \geq \sqrt{
+    \frac N {\sigma(N)} \sum_{d|N} \frac 1 d  -1
+  }  
+\]
+
+\proof 
+Since the average matrix is real symmetric, its eigenvalues 
+must be real. We also know that there are only $\sigma(N)$ nonzero 
+eigenvalues of this matrix. Thus, 
+\[
+ \sum_{i \leq \sigma(N)} \lambda_i^2 \leq \sigma(N)  \lambda_{max}^2
+\]
+By the eigenvalue trace lemma, 
+\[
+    \sum_{i \leq \sigma(N)} \lambda_i^2  = \text{tr}(A^2) = \sum_{1 \leq i, j \leq N} a_{ij}^2 
+    = \sum_{d|N} \left(
+        \frac N d - 1
+    \right)
+    = \sum_{d|N} \left(
+        \frac N d
+    \right) - \sigma(N)a
+\]  
+Combining the two observations, we conclude 
+\[
+\lambda_{max}^2 \geq 
+    \frac N {\sigma(N)} \left(\sum_{d|N} \frac 1 d\right)  -1  
+\]
+\hfill \qed
+
+\new {Corollary} {When N is a power of 2}
+By plugging in $N = 2^k$, we obtain 
+\[
+\lambda_{max} = o\left(
+    \frac {2^k} {\sqrt k}
+\right)
+\]
+
+\end{document}

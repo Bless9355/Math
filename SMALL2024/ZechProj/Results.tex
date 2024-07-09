@@ -138,62 +138,27 @@
 \begin{document}
 \begin{center}
     \Large
-    \textbf{Killing Pairs in a NxN board}
+    \textbf{Title}
 
     \large
-    Chess Group
+    Zechendorf group
 \end{center}
 
-Consider a NxN board where $N$ is large enough. We arrange $r$ rooks in the board. 
-We are interested in counting the killing paris of this board. Define the family of 
-arrangement 
+\new{Theorem} 
+\textit{Number of Moves in a Zeckendorf Game}
+
+Suppose a Zechendorf game starts with $N$ numbers in 
+the entry $F_0$. The number of moves $M_N$ for the game to terminate 
+is determined by the following identity. 
 \[
-\mathcal{A}_r := \{A_1, ... A_{\binom {N^2} {r}}\}
+    M_N \equiv N - \nu(N) + S_1
+\equiv N - \nu(N) + S_2 - \bigg\lfloor \frac {N + 1} 3\bigg\rfloor 
 \]
-to be the family of all rook arrangements in the NxN board. Use the 
-variable $Kp(A)$ to denote the killing pairs of arrangement $A$. 
-$\mathbb{E} [Kp (A)]_{A \in A_r}$ is denoted by $Kp[\mathcal{A}_r]$
+The quantity $\nu{N}, S_i$ denotes the number of summands 
+in the Zeckendorf decomposition of $N$ and the number of 
+splitting moves performed in grid $i$. 
 
-\new{Problem 1} \textit{Jumping rooks}
-
-Assume $r \ll N^2$. 
-If rooks are allowed to jump pieces, what is the expected value 
-of the killing pairs?
-\vspace{3mm}
-
-In fact, by a simple combinatorial construction, we can 
-see that the expected value of the killing pair increases 
-linearly as we place additional rooks. For large $N$, we observe 
-\[
-    Kp[\mathcal{A}_r] = \frac{r(r - 1)}{N}
-\]
-
-\new{Problem 2} \textit{Non-jumping rooks}
-
-Assume $r \ll N^2$. 
-If rooks are not allowed to jump pieces, what is the expected value 
-of the killing pairs?
-\vspace{3mm}
-
-We wish to adopt graph theory in our approach. From an 
-arrangement $A$, we construct a graph as follows. 
-
-\new{Constructing graph from a rook arrangement}
-
-\begin{enumerate}
-    \item Construct a vertex for every rook. 
-    \item Each pair of rook are connected if they are a killing pair. 
-    \item Add an observer vertex, that is arbitrarily far from the board. 
-    Connect each certex to the observer vertex. 
-\end{enumerate}
-
-Denote this graph by $G(A)$. 
-
-\textbf{
-Turns out that the crossing lemma needs a condition
-$E > 4V$... This is a dead end. 
+\textit{
+    scrap this... there is an algebra mistake in the pf. 
 }
-
-
 \end{document}
-

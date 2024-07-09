@@ -11,11 +11,14 @@
 \usepackage{enumerate}
 
 
-\newcommand{\new}[1]{
+\newcommand{\new}[2]{
     \vspace{2mm}
     \noindent
     \textbf{
     \underline{#1}}
+    \textit{{#2}}
+    \newline
+    \vspace{2mm}
 }
 
 \def\calO{{\mathcal{O}}}
@@ -107,7 +110,7 @@
 \def\twobytwoMat(#1, #2, #3, #4){
     {
         \begin{bmatrix}
-            {#1} & {#2}\
+            {#1} & {#2}\\
             {#3} & {#4}
         \end{bmatrix}
     }
@@ -116,7 +119,7 @@
 \def\twobyoneMat(#1, #2){
     {
         \begin{bmatrix}
-            {#1}\
+            {#1}\\
             {#2}
         \end{bmatrix}
     }
@@ -125,7 +128,7 @@
 \def\twobytwoDet(#1, #2, #3, #4){
     {
         \begin{vmatrix}
-            {#1} & {#2}\
+            {#1} & {#2}\\
             {#3} & {#4}
         \end{vmatrix}
     }
@@ -138,62 +141,9 @@
 \begin{document}
 \begin{center}
     \Large
-    \textbf{Killing Pairs in a NxN board}
+    \textbf{Red sea in a 2x2 GOE}
 
     \large
-    Chess Group
+    RMT Group
 \end{center}
-
-Consider a NxN board where $N$ is large enough. We arrange $r$ rooks in the board. 
-We are interested in counting the killing paris of this board. Define the family of 
-arrangement 
-\[
-\mathcal{A}_r := \{A_1, ... A_{\binom {N^2} {r}}\}
-\]
-to be the family of all rook arrangements in the NxN board. Use the 
-variable $Kp(A)$ to denote the killing pairs of arrangement $A$. 
-$\mathbb{E} [Kp (A)]_{A \in A_r}$ is denoted by $Kp[\mathcal{A}_r]$
-
-\new{Problem 1} \textit{Jumping rooks}
-
-Assume $r \ll N^2$. 
-If rooks are allowed to jump pieces, what is the expected value 
-of the killing pairs?
-\vspace{3mm}
-
-In fact, by a simple combinatorial construction, we can 
-see that the expected value of the killing pair increases 
-linearly as we place additional rooks. For large $N$, we observe 
-\[
-    Kp[\mathcal{A}_r] = \frac{r(r - 1)}{N}
-\]
-
-\new{Problem 2} \textit{Non-jumping rooks}
-
-Assume $r \ll N^2$. 
-If rooks are not allowed to jump pieces, what is the expected value 
-of the killing pairs?
-\vspace{3mm}
-
-We wish to adopt graph theory in our approach. From an 
-arrangement $A$, we construct a graph as follows. 
-
-\new{Constructing graph from a rook arrangement}
-
-\begin{enumerate}
-    \item Construct a vertex for every rook. 
-    \item Each pair of rook are connected if they are a killing pair. 
-    \item Add an observer vertex, that is arbitrarily far from the board. 
-    Connect each certex to the observer vertex. 
-\end{enumerate}
-
-Denote this graph by $G(A)$. 
-
-\textbf{
-Turns out that the crossing lemma needs a condition
-$E > 4V$... This is a dead end. 
-}
-
-
 \end{document}
-
