@@ -1,0 +1,247 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{MATH 403 Pset 1}
+
+    \large
+    Daniel Son
+\end{center}
+
+\new{Problem} {Section 2.1 Q2}
+\begin{enumerate}
+    \item[a)] Show that the intervals in the definition of outer measure may be assumed to be closed.
+    \item[b)] Show that for any $\delta$, the intervals in the definition of outer measure may be assumed to be open and of length less than $\delta$.
+    \item[c)] Show that if $A$ is contained in an interval $K$, then we can assume that all intervals $I_i$ in the cover are contained in $K$.
+\end{enumerate}
+
+\begin{proof}[part a)]
+Recall the definition of the outer measure. 
+\begin{equation}
+    \lambda^*(A) \ := \ 
+    \inf \bigg\{
+        \sum_{s \in S} |s| :
+        A \subseteq \bigcup_{s \in S} s, 
+        \textnormal{
+            S is a collection of intervals
+        }
+        \bigg\}
+\end{equation}
+We define a custom outer measure where all intervals are closed. 
+\begin{equation}
+    \alpha(A) \ := \ 
+    \inf \bigg\{
+        \sum_{s \in S} |s| :
+        A \subseteq \bigcup_{s \in S} s, 
+        \textnormal{
+            S is a collection of closed intervals
+        }
+        \bigg\}
+\end{equation}
+Clealy, $\alpha(A)$ takes the infimum of a more restricted set compared to the regular outer measure. Hence, $\lambda^*(A) \leq \alpha(A)$. It suffices to show $\lambda^*(A) \geq \alpha(A)$ to show that the two measures are indeed equivalent. 
+
+Any fully open or half open interval has a corresponding closed interval that has the same length but includes the original interval. Consider the following. 
+\begin{equation}
+    (a, b) \subseteq (a, b] \subseteq [a, b] \textAnd
+    (a, b) \subseteq [a, b) \subseteq [a, b] 
+\end{equation}
+
+Consider a collection of a interval $S$, either closed or open, that is included in the infimum for the outer measure $\lambda^*(A)$. By substituting all the intervals in $S$ with the fully-closed interval, we obtain a collection $\widetilde S$ where all intervals are closed, the sum of the length is preserved, and includes $A$. 
+In symbols, that is 
+\begin{eqnarray}
+    A \ \subseteq \ \bigcup_{s \in \widetilde S} s \textAnd
+    \sum_{s \in S} |s| \ = \ \sum_{s \in \widetilde S}|s|.
+\end{eqnarray}
+The existance of the collection $\widetilde S$ shows that  $\lambda^*(A) \geq \alpha(A)$ which concludes the proof 
+\end{proof}
+
+
+\begin{proof} [part b)]
+   We start with a simple observation that we can split any interval $s = (a, b)$ into a collection of intervals $\dot s$ that have a length strictly less than $\delta$ and $\bigcup \dot s = s$. Let $k$ be the greatest integer that satisfies 
+   \begin{equation}
+    a + k \frac \delta 2 \ < \ b
+   \end{equation}
+   where $k$'s uniqueness is guaranteed by the well-ordering theorem. Let our collection $\dot s$ be written as follows. 
+   \begin{equation}
+    \dot s \ := \ \bigg\{
+    (a, a + \frac \delta 2), [a + \frac \delta 2, a + \frac \delta 2), \dots, [a + k \frac \delta 2, b)    
+    \bigg\}
+   \end{equation}
+   Apparently $\bigcup \dot s = s$ and the number of collection in $\dot s$ is finite. Also, change the open/closedness of the first and the last interval depending on the open/closedness of the inital interval $s$. 
+
+   Now, define the custom outer measure $\alpha(A)$ as in part a, where this time the length of each interval is restricted to be strictly less than $\delta$. Again, it suffices to show that $\alpha(A) \leq \lambda^*(A)$. For each collection $S$ included in the infimum computation of $\lambda^*(A)$, we define a new collection 
+   \begin{equation}
+    \dot S \ := \ \{\dot s : s \in S \}
+   \end{equation}
+   
+   $\dot S$ sees witness to $\alpha(A) \leq \lambda^*(A)$
+\end{proof}
+
+\begin{proof}[part c)]
+    We repeat the procedure in the previous parts. Let the custom measure $\alpha(A)$ to restrict the collections such that the union of the collections are contained in the interval $K$. For collection $S$ associated with $\lambda^*(A)$, we define 
+    \begin{equation}
+        \dot S \ := \ \{s \cap K: s \in S\}
+    \end{equation}
+    Since $A \subseteq K$ by assumption, $A \subseteq \bigcup \dot S = K \cap \bigcup S $ so $\alpha(A) \geq \lambda^*(A)$ which concludes the proof. 
+\end{proof}
+
+\new{Problem} {Section 2.1 Q7}
+
+Show that the union of countably many null sets is a null set.
+
+\begin{proof}
+    For simplicity, we call $S$ the collection of pairwise disjoint 
+    intervals that cover the set $A$ 
+     \footnote{i.e. $A \subseteq \bigcup S$} as \textbf{coverings}
+    and denote its length $|S|$ as the sum of the length of its component intervals. 
+
+    A null set is a set with an outer measure zero. This means, that for any $\epsilon >0$, there exists some covering of the null set with a length shorter than $\epsilon$. 
+
+    Now, we move on to the proof of the proposition. Let $\{A_n\}_{n \in \Zpos}$ be a collection of null sets. For each $A_n$, it is possible to obtain a covering of the set, namely $S_n$ such that $|S_n| < \frac \epsilon {2^n}$. From the collection of coverings 
+    $\{S_n\}_{n \in \Zpos}$, we take the union $\bigcup_{n \in \Zpos} \bigcup_{s \in S_n} s$ and disassemble the resulting subset of $\RR$ into disjoint intervals. Call this new covering $S_\epsilon$. For example, if 
+    \begin{equation}
+        S_1 \ = \ \{(1, 1.5), (4, 6)\}, S_2 \ = \ \{(.5, 2)\}
+    \end{equation}
+    then the total union of the coverings are 
+    \begin{equation}
+        \bigcup_{n \in \Zpos} \bigcup_{s \in S_n} s \ = \ 
+        (1,2) \cup (4, 6)
+    \end{equation}
+    and we obtain 
+    \begin{equation}
+        S_\epsilon \ =\ \{(1, 2), (4, 6)\}
+    \end{equation}
+    Clearly, the length of the covering $S_\epsilon$ is less than $\epsilon$. 
+    \begin{equation}
+        |S_\epsilon| \ \leq \ |S_1| + |S_2| + |S_3| + \cdots \ \leq \ 
+        \epsilon \left(
+            \frac 1 2 + \frac 1 4 + \frac 1 8 \dots 
+        \right) \ = \ \epsilon
+    \end{equation}
+    The union of countable number of countable sets are countable, so there must be a contable number of intervals in the collection $S_\epsilon$
+\end{proof}
+
+\end{document}

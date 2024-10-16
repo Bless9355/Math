@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\HH}{\mathcal{H}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Quantum Ladder Operators for Predator Prey Model}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+\setcounter{section}{-1}
+
+\section{Preliminary}
+
+\subsection {Setting up the space}
+
+$B(\HH)$ is defined as the space of bounded operators in the Hilbert 
+space $\HH$. $B(\HH)$ can be considered as a group representation of 
+an abstract $C*$-algebra. A $C*$-algebra is a algebra that satisfies
+\begin{equation}
+    \|A\|^2 \ = \  \|A*A\| \hspace{5mm} \forall a \in B(\HH)
+\end{equation}
+Note that unbounded operators can be bounded by the exponential map. 
+For example, suppose $X$ is an operator with unbounded operator norm. 
+The following function maps $X$ to a bounded operator. 
+\begin{equation}
+    X \mapsto e^{iX}
+\end{equation}
+
+\subsection{Canonical Commutation Relation(CCR)}
+We choose $2L$ operators from the space $B(\HH)$. 
+\begin{equation}
+    \{ \hat a_l, \hat a^\dag_l| \ l \in [L] \ 
+    \} 
+\end{equation}
+Also, set this set of operators to satisfy CCR. 
+\begin{definition}[CCR]
+    The set of operators satisfy CCR if $\forall l, m \in [N]$
+    \begin{enumerate}
+        \item $[a_l, a^\dag_m] = \delta_{l, m} I$
+        \item $[a_l, a_m] = [a^\dag_l, a^\dag_m] = 0$
+    \end{enumerate}
+    . This means the operators $a_l$ commute with each other and so does 
+    $a^\dag_l$. Also, 
+    \begin{equation}
+    a_l a^\dag_l = a_l^\dag a_l + I 
+    \end{equation}
+    so pushing a $a_l$ to the right costs an additional identity matirx. 
+    Moreover, if the indicies of the operators do not match, the just 
+    commpute. 
+\end{definition}
+We also define two operators, $\hat n_l, \hat N$
+\begin{eqnarray}
+    \hat n_l \ = \ a^\dag_l a_l \nonumber\\ 
+    \hat N \ = \ \sum_{l \in [N]} \hat n_l
+\end{eqnarray}
+Here is a motivating example. Suppose $\varphi_0$ is the vaccum whcih 
+gets anhilated by any of the operator $a$. e.g. $a_1\varphi_0 = 0$. 
+\begin{eqnarray}
+    \hat n_1 (a^\dag_1)^3 \varphi_0\ = \ 
+    (a^\dag_1 a_1) (a^\dag_1)^3\varphi_0 \ =\ 
+    (a^\dag_1)(a^\dag_1 a_1 + I)(a^\dag _1)^2\varphi_0 \nonumber\\ 
+    = \cdots = \ 3 (a_1^\dag)^3
+\end{eqnarray}
+
+We call the $a_l$ operators as the anhilation operator, and 
+$a_l^\dag$ as the creation operator.\footnote{anhilator starts with 
+an $a$ so the anti-anhilator is the creator}
+
+It is possible to create an orthonormal set of basis in $\HH$ by the 
+vaccum $\varphi_0$. 
+\begin{equation}
+    \varphi_{n_1, \dots, n_L} \ = \ 
+    \frac {1} {\sqrt{
+            n_1! \cdots n_L!
+        }}
+    (a_1^\dag)^{n_1}  \cdots
+    (a_L^\dag)^{n_L} 
+    \varphi_0 
+\end{equation}
+where $n_1, \dots, n_L \in \NN$. 
+
+
+\end{document}

@@ -1,0 +1,509 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{bbold}
+\usepackage{gensymb}
+\usepackage{array}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+
+\newcommand{\PW}{\text{PW}}
+\newcommand{\NC}{\text{NC}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{The General Moment of Anticommutator 
+    Products involving Block Circulant Matricies}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+%====Prelims=====
+%The modular restrictions
+
+\begin{definition} [Equivalence relation $\approx$ and $\simeq$]
+
+    $(i, j) \approx (i', j')$ if and only if 
+    \begin{equation}
+        i \ = \ j' \textAnd j \ = \ i'
+    \end{equation}
+
+    Also, 
+$(i, j) \simeq (i', j')$ if and only if 
+    \begin{eqnarray}
+        i - j \ \equiv \ j' - i \mod N 
+    \\
+       i \ \equiv \ j' \textAnd j \ \equiv \ i' \mod m
+    \end{eqnarray}
+    The value of $N, m$ are implied from context. 
+\end{definition}
+
+\begin{definition}[Product Words]
+A \textit{product word} of length \(2k\) is composed of \(k\) blocks, where each block is one of \(\{AB, BA\}\). 
+We denote the set of all product words of length $2k$ as 
+$\PW(2k)$.
+
+
+For example, when \(k = 3\),
+\[
+W \ = \ AB \, BA \, AB \, BA \in \PW(8)
+\]
+is an example of a product word of length 6. To 
+refer to the specific index of the word, use the superscript. 
+For example, $W^3 \ =\ B$. 
+
+\end{definition}
+
+\begin{definition}[Combining pairings]
+    Suppose we are given $W \in PW(4k)$ and two pairings 
+    $\pi, \delta \in \mathcal{P}[2k]$. We denote the 
+    combined pairing of $\pi, \delta$ with respect 
+    to the product word $W$ as 
+    \[
+        \pi *_W \delta
+    \]
+    where the combined pairing denotes an element in $\mathcal{P}[4k]$ 
+    where the composition between $A$'s are specified by $\pi$ and 
+    composition between $B$'s are specified by $\delta$. 
+
+    For example if 
+    \[
+    \pi \ = \ (1 2) (3 4) \textAnd 
+    \delta \ = \ (12) (34)
+    \]
+    the combined pairing is 
+    \[
+    \pi *_W \delta \ = \ (1 4)(2 3)(5 8)(67)
+    \]
+\end{definition}
+    
+
+%====For GOE x BC====
+
+We wish to compute $\mu_N^{(2k)}$, the $2k^{th}$ moment of 
+the anticommutator product of ensemble $A$ which is a GOE 
+and ensemble $B$ which is a m-block circulant matrix, 
+where both $A, B$ are of order $N$. It is straightforward to 
+verify the following. 
+
+\begin{prop}[Even moment as product words]
+    \label{thm:baseForm}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W\in \PW(2k)}
+        \sum_{1 \leq i_1 , \dots, i_{4k} \leq N}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}  
+        \mathbb{E}_{(\pi*_W\delta)}\left(
+        \prod_{l = 1}^{4k} W^{l}_{i_l i_{l + 1}}
+        \right) \mathbb{1}_{(\pi*_W\delta)}
+    \end{equation}
+\end{prop}
+
+\begin{theorem}[GOE times Block Circulant]
+    \label{thm: GOEBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+\end{theorem}
+\footnote{
+    $\gamma_n$ denotes a permutation of the cannonical set $[n]$ 
+    where $\gamma_n(x) = x + 1 \mod n$. 
+}
+
+\begin{theorem}[Block Circulant times Block Circulant]
+    \label{thm:BCBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in  \mathcal P[2k]}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+    \end{equation}
+\end{theorem}
+
+To prove these two theorems, we need to establish 
+the following propositions. 
+
+\begin{prop} [Rules for pairing] \label{thm:pairingRule}
+    For a pairing of each word, each of the compositions 
+    must match $A$'s to $A$'s and $B$'s to $B$'s. Moreover, 
+    the index configurations are confirmed once the 
+    two matricies are matched. That is, 
+    if $A_{i_s, i_{s + 1}}$ is matched with 
+    $A_{i_t, i_{t + 1}}$, then 
+    \begin{equation}
+        (i_s, i_{s + 1}) \ \approx \ (i_t, i_{t + 1})
+    \end{equation}. Also, 
+    if $B_{i_s, i_{s + 1}}$ is matched with 
+    $B_{i_t, i_{t + 1}}$, then 
+    \begin{equation}
+        (i_s, i_{s + 1}) \ \simeq \  (i_t, i_{t + 1})
+    \end{equation}
+\end{prop}
+
+\begin{proof}
+    Introduce the signed variable $\epsilon_j$. Adding 
+    up the signed difference allows us to find 
+    that if any one of the signs are nonzero, the 
+    degree of freedom reduces. 
+\end{proof}
+
+\begin{prop} [GOE pairing rules]
+    Let $A$ be the GOE ensemble in the anticommutator. 
+    The compositions of $A$ must not cross with any other 
+    compositions. The compositions between Block 
+    Circulant matricies can match, and the crossings 
+    do not reduce the degree of freedom. 
+\end{prop}
+\begin{proof}
+    The compositions of $A$'s in each pairing slices 
+    the entire word. For example, consider the product word 
+    \[
+        W \ = \ ABBABAAB
+    \]
+    where the pairing is given as 
+    \[
+        \pi \ = \ (1 4)(2 3)(5 8) (6 7)
+    \]
+    The composition $(14)$ slices the word into 
+    \[
+        W_1 \ = \ BB 
+        \textAnd 
+        W_2' \ = \ BAAB 
+    \]
+    where each word is extracted from between ($W_1$) and 
+    outside ($W_2$) the composition $W^1 = W^4 = A$. Call 
+    this composition of $A$'s as the slicing composition.
+    Furthermore, the slicing composition $(58)$ slices $W_2'$ 
+    into another word. 
+    \[
+        W_2 \ = \ BB
+    \]
+
+    The observation has two implications. The first implication 
+    is that any transposition that crosses with the slicing 
+    composition reduces a degree of freedom. Hence, crossings 
+    with slicing composition, which can be any transposition between $A$'s, 
+    result in a vanishing contribution. 
+
+    The second implication is that any pairing where the 
+    slicing compositions do not cross with other compositions 
+    always have a positive nonzero contribution. After reducing the entire 
+    product word according to all its slicing compositions, we 
+    we are left with finite number of sub-words that are comprised solely 
+    of $B$'s. For the word $W$, the remaining words are $W_1, W_2$. 
+
+    Composition between $B$'s lose one degree of freedom, regardless of 
+    crossings. So these always have a contribution.
+\end{proof}
+
+Finally, we present a proof of theorem \ref{thm: GOEBC}.
+\begin{proof} 
+    From proposition \ref{thm:baseForm}, we recognize that 
+    it suffices to count the number of integer sequences 
+    $i_1, \dots, i_{4k}$ that satisfy the pairing restrictions. 
+    Fix a pairing $\pi$ that pairs all the GOE $A$'s and a
+    pairing $\delta$  that pairs the Block Circulnat $B$'s. 
+    From 
+    We first configure the modular residue of $i$'s mod $m$. 
+    Clearly, by proposition \ref{thm:pairingRule}, the number of such configurations are \footnote{More details to be added 
+    from BC paper and FP paper. $\#(\pi)$ denotes the number of orbits of the permutation $\pi$} 
+    \[
+    m^{
+        \# ((\pi *_W \delta)\circ \gamma_{2k})
+    }
+    \]
+    Move on to 
+    choose the value of $\lfloor i / m \rfloor$. 
+    We know that as long as the slicing compositions of $A$ do 
+    not cross with other compositions, the degree of freedom 
+    is not reduced. Otherwise, the contribution is can be ignored 
+    at the limit $N \rightarrow \infty$. Thus, the ways to configure 
+$\lfloor i / m \rfloor$ is 
+\begin{equation}
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+\end{equation}
+where $\mathbb{1}_{(\pi*_w\delta)}$ is defined to be $1$ if and only if 
+the pairing $(\pi*_w\delta)$ is non-crossing in the sense of proposition 
+\ref{thm:pairingRule} and zero otherwise. 
+
+The variance of all the random variables involved in the matricies are 
+fixed to be $1$. Thus, from proposition \ref{thm:baseForm}, we obtain 
+\label{thm: GOEBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+\end{proof}
+
+%A pairings must be Non-Crossings
+%Pairings must match in opposite directions
+%powers of m and (N/m)'s
+
+%====For BC x BC====
+%present result
+
+\begin{remark}
+    Though topology, we can rewrite the moment as
+    \begin{equation}
+        \sum_{W, \pi, \delta} m^{-2g} \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+    where $g$ is the minimum genus of the graph correlated to 
+    $((\pi *_W \delta) \circ \gamma_{2k} )$. 
+\end{remark}
+
+\begin{theorem}[6, 8, 10th moment of GOE times Block Circulant]
+    
+\begin{table}[h!]
+\centering
+\caption{Spectral Density of GOE times Block Circulant}
+\renewcommand{\arraystretch}{1.5} % Increase row height
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{7cm}|}
+\hline
+\textbf{Moment} & \textbf{Value} \\
+\hline
+2nd moment & $2$ \\
+\hline
+4th moment & $10 + \frac{2}{m^2}$ \\
+\hline
+6th moment & $66 + \frac{38}{m^2}$ \\
+\hline
+8th moment & $498 + \frac{544}{m^2} + \frac{54}{m^4}$ \\
+\hline
+10th moment & $4066 + \frac{7000}{m^2} + \frac{2086}{m^4}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{Normalized Spectral Density of GOE times Block Circulant}
+\renewcommand{\arraystretch}{1.5} % Increase row height
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{10cm}|}
+\hline
+\textbf{Moment} & \textbf{Value} \\
+\hline
+Normalized 4th moment & $$\frac{5}{2} + \frac{1}{2m^2}$$ \\
+\hline
+Normalized 6th moment & $$\frac{33}{4} + \frac{19}{4m^2}$$ \\
+\hline
+Normalized 8th moment & $$\frac{249}{8} + \frac{34}{m^2} + \frac{27}{8m^4}$$ \\
+\hline
+Normalized 10th moment & $$\frac{2033}{16} + \frac{875}{4m^2} + \frac{1043}{16m^4}$$ \\
+\hline
+\end{tabular}
+\end{table}
+
+% Second Table: Normalized Spectral Density of Block Circulant times Block Circulant
+\begin{table}[h!]
+\centering
+\caption{Normalized Spectral Density of Block Circulant times Block Circulant}
+\renewcommand{\arraystretch}{1.5} % Increase row height
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{10cm}|}
+\hline
+\textbf{Moment} & \textbf{Value} \\
+\hline
+Normalized 4th moment & $$ \frac{10m^4 + 86m^2 + 48}{4m^4 + 8m^2 + 4}$$ \\
+\hline
+Normalized 6th moment & $$\frac{66m^6 + 1890m^4 + 9084m^2 + 3360}{8m^6 + 24m^4 + 24m^2 + 8}$$ \\
+\hline
+Normalized 8th moment & $$ \frac{498m^8 + 33236m^6 + 529634m^4 + 1759064m^2 + 499968}{16m^8 + 64m^6 + 96m^4 + 64m^2 + 16}$$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\end{theorem}
+
+
+
+
+\section{Auxiliary Sequences and Recurrence Relations}
+
+\begin{definition}[\(\sigma_{n, s, k}\)]
+The auxiliary sequence \(\sigma_{n, s, k}\) is defined with the following initial conditions. 
+\begin{enumerate}
+    \item \(\sigma_{n, s, k} = 0\) if \(s + k > n\)
+    \item \(\sigma_{n, s, 0} = (2n - 1)!!\), where \(C_n\) is the \(n\)-th Catalan number, \(C_n = \frac{1}{n + 1} \binom{2n}{n}\)
+    \item \(\sigma_{n, s, 2k + 1} = 0\)
+    \item \(\sigma_{n, s, -k} = 0\)
+\end{enumerate}
+
+The recurrence relation for \(\sigma_{n, s, 2k}\) is given by:
+\[
+\sigma_{n, s, 2k} = 
+\sum_{p = s + 1}^{n} 
+\sum_{q = p + 1}^{n}
+\sum_{r = 0}^{2k}
+\left[
+\sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
++ 
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+\right]
+\]
+\end{definition}
+
+\begin{theorem}[Moments of GOE times PT]
+Let $\mu^{(k)}_N$ be the $k$th moment of the spectral density of 
+the anticommutator $AB + BA$ where $A$ is a GOE and $B$ is 
+a palindromic topelitz matrix. Then, we obtain the following formula. 
+\[
+    \mu^{(k)}_N = \sigma_{N, 0, N}
+\]
+\end{theorem}
+
+\end{document}
+
+
+\end{document}

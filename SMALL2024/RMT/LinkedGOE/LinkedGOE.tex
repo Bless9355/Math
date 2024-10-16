@@ -1,0 +1,393 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newcommand{\Tr}{\textrm{Tr}}
+
+
+\newcommand{\Eta}{H}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Algebraically Linked GOEs}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+\section{Statement of the Result} 
+\begin{definition}[Algebraic Link]
+    Let $X, Z$ be independant GOEs of dimension $N$-by-$N$. We define 
+    an algebraically linked GOE with link variable $l \in [0, 1]$ 
+    as follows. 
+    \[
+        Y = l X + (1-l) Z
+    \]
+\end{definition}
+
+\begin{definition}[Spectral Density of the Anticommutator]
+    Let $X, Y$ be two GOEs that are not necessarily independant. 
+    Let $\Lambda$ denote the set of all eigenvalues of the matrix 
+    $XY + YX$. The spectral density of the Anticommutator 
+    is defined as the following. 
+    \[
+    \mu(x) \ := \ 
+    \lim_{N \rightarrow \infty} \mathbb{E}\left[
+    \frac 1 N \sum_{\lambda \in \Lambda} 
+    \delta\left(
+        x - \frac \lambda N
+    \right)
+    \right]
+    \]
+    
+\end{definition}
+
+It is well known that we can compute the $(n)$th moment 
+by using the trace. 
+
+\begin{theorem}[Normalized Spectral Density of the Anticommutator]
+    Denote the $k$th moment of this probability 
+    distribution as $\mu^{(k)}$. Then, 
+    \[
+    \mu^{(n)} \ = \ \Tr \left(\left[\frac 1 {\sqrt N}(XY+YX)\right]^n\right)
+    \].
+\end{theorem}
+
+Our result provides a formula for $\mu^{n}$ that involves 
+a constant defined via a reasonable recursion. 
+
+\begin{theorem}[Moments of the anticommutator of two algebraically linked GOEs]
+    \[ \mu^{(n)} \ = \ 
+    \sum_{k = 0}^n \nu_{n, k} (2l)^{k} (1 - l)^{n - k} 
+    \] 
+\end{theorem}
+
+Here are the moments up to $n = 7$. 
+
+\begin{align*}
+\mu^{(1)} &= 2 l \\
+\mu^{(2)} &= 2 - 4 l + 10 l^2 \\
+\mu^{(3)} &= 18 l - 36 l^2 + 58 l^3 \\
+\mu^{(4)} &= 10 - 40 l + 204 l^2 - 328 l^3 + 378 l^4 \\
+\mu^{(5)} &= 170 l - 680 l^2 + 2140 l^3 - 2920 l^4 + 2634 l^5 \\
+\mu^{(6)} &= 66 - 396 l + 3054 l^2 - 9576 l^3 + 22014 l^4 - 25932 l^5 + 19218 l^6 \\
+\mu^{(7)} &= 1666 l - 9996 l^2 + 46830 l^3 - 120680 l^4 + 222558 l^5 - 230412 l^6 + 144946 l^7
+\end{align*}
+
+
+\section{Combinatorial Preliminaries}
+
+\begin{definition}[Special Words]
+A \textit{special word} of length \(2k\) is composed of \(k\) blocks, where each block is one of \(\{XX, ZX, XZ\}\). The characteristic of a special word \(w\), denoted by \(\chi(w)\), is the number of blocks \(XX\) used in the word.
+
+For example, when \(k = 3\),
+\[
+XX \, ZX \, XZ
+\]
+is an example of a special word of length 6 with characteristic 1.
+\end{definition}
+
+\begin{definition}[Set of Special Words]
+\(\Eta_{n, k}\) is defined as the set of all special words of length \(2n\) with characteristic \(k\).
+
+For example, if \(n = 2\) and \(k = 1\), then
+\[
+\Eta_{2, 1} = \{\text{XX ZX}, \, \text{XX XZ}, \, \text{ZX XX}, \, \text{XZ XX}\}.
+\]
+\end{definition}
+
+\begin{definition}[Valid Pairings]
+A \textit{valid pairing} is a partition of the indices of the word into pairs such that each pair contains the same type of letter.
+
+For example, for the word \(XXZZ\), a valid pairing is \(\{\{1, 2\}, \{3, 4\}\}\).
+\end{definition}
+
+\begin{definition}[Non-Crossing Pairings]
+A \textit{non-crossing pairing} is a valid pairing where for any two pairs \(\{i, k\}\) and \(\{j, l\}\), it is not the case that \(i < j < k < l\).
+
+For example, for the word \(XXZZ\), the pairing \(\{\{1, 2\}, \{3, 4\}\}\) is non-crossing, while the pairing \(\{\{1, 3\}, \{2, 4\}\}\) is crossing because \(1 < 2 < 3 < 4\).
+\end{definition}
+
+\begin{definition}[Pairing number of a property $n, k$]
+    Call \(\nu_{n, k}\) to be the pairing number of the property $n, k$
+    \footnote{Technically, would be accurate to say the the Pairing number 
+    of the words with property $n, k$, but the word is clearly implied by the context}
+\(\nu_{n, k}\) is defined as the number of valid, non-crossing pairings for all special words in \(\Eta_{n, k}\). To compute \(\nu_{n, k}\):
+
+\begin{enumerate}[(i)]
+    \item Consider all special words in \(\Eta_{n, k}\).
+    \item For each word, count the number of valid, non-crossing pairings of the indices.
+    \item Sum these counts for all words in \(\Eta_{n, k}\).
+\end{enumerate}
+
+Mathematically, \(\nu_{n, k}\) is given by:
+\[
+\nu_{n, k} = \sum_{w \in \Eta_{n, k}} \phi(w)
+\]
+Where $\phi(w)$ counts valid, non-crossing pairings of $w$. 
+\newpage
+For example, if \(n = 2\) and \(k = 0\):
+\[
+\Eta_{2, 0} = \{\text{ZX ZX}, \, \text{ZX XZ}, \, \text{XZ ZX}, \, \text{XZ XZ}\}
+\]
+\[
+\begin{aligned}
+&\text{For } \text{ZX ZX}, \text{ no valid non-crossing pairings.} \\
+&\text{For } \text{ZX XZ}, \text{ valid non-crossing pairing: } \{\{1, 4\}, \{2, 3\}\}. \\
+&\text{For } \text{XZ ZX}, \text{ valid non-crossing pairing: } \{\{1, 4\}, \{2, 3\}\}. \\
+&\text{For } \text{XZ XZ}, \text{ no valid non-crossing pairings. } \{\{1, 3\}, \{2, 4\}\}. \\
+\end{aligned}
+\]
+Therefore, \(\nu_{2, 0} = 1 + 1 = 2\).
+\end{definition}
+
+
+\section{Counting Valid Pairings by $\sigma$-recurrences}
+
+In this section, we provide a method to compute Pairing numbers 
+with a property $n, k$. We introduce an additional quantity to the property 
+of the word, $s$, that denotes the number of $XX$ blocks at the beginning 
+of the word. 
+
+\begin{definition}
+    Define the pairing number of the property $n, s, k$ as the following. 
+    \[
+\sigma_{n, s, k} = \sum_{w \in \Eta_{n, s, k}} \phi(w)
+\]. 
+$\Eta_{n, s, k}$ denotes the set of all words composed of $n$ blocks that have at least
+$s$ $XX$ blocks in the beginning of the word, and $k$ blocks of $XY$, $YX$. 
+\end{definition}
+
+\begin{theorem}[\(\sigma_{n, s, k}\)]
+The auxiliary sequence \(\sigma_{n, s, k}\) is defined with the following initial conditions. 
+\begin{enumerate}
+    \item \(\sigma_{n, s, k} = 0\) if \(s + k > n\)
+    \item \(\sigma_{n, s, 0} = C_n\), where \(C_n\) is the \(n\)-th Catalan number, \(C_n = \frac{1}{n + 1} \binom{2n}{n}\)
+    \item \(\sigma_{n, s, 2k + 1} = 0\)
+    \item \(\sigma_{n, s, -k} = 0\)
+\end{enumerate}
+
+The recurrence relation for \(\sigma_{n, s, 2k}\) is given by:
+\begin{equation}
+\sigma_{n, s, 2k} = 
+\sum_{p = s + 1}^{n} 
+\sum_{q = p + 1}^{n}
+\sum_{r = 0}^{2k}
+\left[
+\sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
++ 
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+\right]
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+    Initial conditions 1, 3, 4 trivially follows from the nature of 
+    valid pairings. $s + k \leq n$ in any block. Also, if there are 
+    $2k + 1$ blocks of the type $XY, YX$, the number of $Y$'s in the 
+    word is odd, and hence there exists no valid pairing. Clearly, 
+    the number of $XY, YX$ blocks cannot be negative. 
+
+    Consider initial condition 2. If $k = 0$, then the word is entirely 
+    composed of $XX$ blocks, so the number of non-crossing pairngs can 
+    be easily counted by the Catalan numbers. This concludes the proof 
+    for the four initial conditions. 
+
+    We move on to prove the recurrence relation. Let $p$ be the 
+    first occurence of any block that has a $Y$ and $q$ the block in which 
+    the $Y$ in the $p$th block matches to. For example, if $(n, s, k) = (5, 1, 2)$, 
+    here is an example word with the pairing with $p = 3, q = 5$. 
+
+    \newcommand{\red}[1]{\color{red} {#1} \color{black}}
+
+    \[
+    W \ = \
+    XX \, XX \, X\red{Y} \, XX \, \red{Y}X
+    \]
+
+    Note that the pairing between the $Y$ blocks divide into two types. 
+    Type 1 pairing is $XY \, YX$ and Type 2 paring is $YX \, XY$ both in order. 
+    Pairing the two $Y$'s split the word into two sub-words, the word 
+    outside the $YY$ block and thw word between the $YY$ block. So for the previous example, 
+
+    \[
+        W_1 \ = \ XX \, XX \, XX \textAnd W_2 \ = \  XX
+    \]
+    where $W_1$ is outside the $Y$ pairing and $W_2$ is between the $Y$ pairings. 
+
+    For pairing Type 1, the value of $s$ increases by 1 after the splitting for 
+    the outer word. For pairing Type 2, the value of $s$ increases from zero to 1 
+    after the split. The inner word and the outer word can be considered 
+    independent. The important obsevation to deduce the latter fact is to observe 
+    that the pairing number is equivalent for the following two blocks. 
+    \[
+    X \, [\textnormal{Some Blocks}] \, X
+    \]
+ \[
+    XX \, [\textnormal{Some Blocks}]
+    \]
+
+    With these fact in mind, we count the contribution of 
+    Type 1 and Type 2 matchings for fixed $p, q$. 
+    For Type 1, the contribution is 
+    \[
+    \sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
+    \]
+    For Type 2, the contribution is 
+    \[
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+    \]
+    This proves the recursive relation 
+\[
+\sigma_{n, s, 2k} = 
+\sum_{p = s + 1}^{n} 
+\sum_{q = p + 1}^{n}
+\sum_{r = 0}^{2k}
+\left[
+\sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
++ 
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+\right]
+\]. 
+\end{proof}
+
+\begin{remark}[Relation to \(\nu_{n, k}\)]
+\(\nu_{n, k}\) is related to \(\sigma_{n, s, k}\) by the following:
+\[
+\nu_{n, k} = \sigma_{n, 0, n - k}
+\]
+This means that to compute \(\nu_{n, k}\), we compute \(\sigma_{n, 0, n - k}\) 
+using the above initial conditions and recurrence relation. 
+\end{remark}
+
+\begin{remark}[Case where $X$'s are allowed to cross]
+    When computing the moments for GOE anticommutated 
+    with Palindromic Topelitz, we can modify the initial condition as 
+    \[
+        \sigma_{n, s, 0} \ = \ (2n - 1)!!
+    \]
+    to obtain the Pairing Number appropriate for this case. 
+\end{remark}
+\end{document}

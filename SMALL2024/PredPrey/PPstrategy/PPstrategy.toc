@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}Abstract}{1}{}%
+\contentsline {section}{\numberline {2}Single Species Population}{2}{}%
+\contentsline {subsection}{\numberline {2.1}Definition of Simple Leslie Matricies and the Lotka-Euler Equation}{2}{}%
+\contentsline {subsection}{\numberline {2.2}Bounding Maximum Eigenvalue}{3}{}%
+\contentsline {section}{\numberline {3}The predator-prey model}{7}{}%
+\contentsline {subsection}{\numberline {3.1}The predator-prey model with Leslie Matricies}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Real-valued model where $L$ is a scalar}{9}{}%
+\contentsline {subsection}{\numberline {3.3}The Complex-valued model with $L_a = \rho L_b$}{10}{}%
+\contentsline {section}{\numberline {4}The Competetive Model}{11}{}%
+\contentsline {subsection}{\numberline {4.1}Last Species Standing}{12}{}%

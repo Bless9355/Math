@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Strong Induction for AM-GM}
+
+    \large
+    Benevolent Tomato, ChatGPT
+\end{center}
+\begin{theorem}[AM-GM Inequality]
+Let $x_1, x_2, \dots, x_N$ be non-negative real numbers. Then the following inequality holds:
+\[
+\frac{x_1 + x_2 + \cdots + x_N}{N} \geq \sqrt[N]{x_1 x_2 \cdots x_N}
+\]
+with equality if and only if $x_1 = x_2 = \cdots = x_N$.
+\end{theorem}
+
+\begin{proof}
+We will use strong induction on $N$ to prove the AM-GM inequality.
+
+\textbf{Base Case:} For $N = 2$, the inequality is the classical AM-GM inequality for two numbers:
+\[
+\frac{x_1 + x_2}{2} \geq \sqrt{x_1 x_2}
+\]
+This holds by the trivial identity derived from squaring both sides:
+\[
+(x_1 - x_2)^2 \geq 0
+\]
+Thus, the base case holds.
+
+\textbf{Inductive Step:} Suppose the AM-GM inequality holds for $n < N$. We will prove it for $N$.
+
+For $N$ even, let $x_1, \dots, x_N$ be non-negative real numbers. Then,
+\[
+\frac{x_1 + \cdots + x_{N/2}}{N/2} \geq \sqrt[N/2]{x_1 \cdots x_{N/2}} \quad \text{and} \quad \frac{x_{N/2+1} + \cdots + x_N}{N/2} \geq \sqrt[N/2]{x_{N/2+1} \cdots x_N}
+\]
+Taking the arithmetic mean of these inequalities, we obtain:
+\[
+\frac{x_1 + \cdots + x_N}{N} \geq \sqrt[N]{x_1 \cdots x_N}
+\]
+Now, if $N$ is odd, we can show that for any natural number $N$, adding an additional variable $x_{N+1}$, we have:
+\[
+\frac{x_1 + \cdots + x_N + x_{N+1}}{N+1} \geq \sqrt[N+1]{x_1 \cdots x_N x_{N+1}}
+\]
+(denote this as $(*)$).
+
+If we set $x_{N+1} = k(x_1 + \cdots + x_N)$, then:
+\[
+\sum_{i \leq N} x_i + x_{N+1} = (k+1) \sum_{i \leq N} x_i
+\]
+and $(*)$ simplifies to:
+\[
+\frac{k+1}{N+1} \left(\sum_{i \leq N} x_i \right) \geq \sqrt[N+1]{x_1 \cdots x_N \cdot k \sum_{i \leq N} x_i}
+\]
+Taking the logarithm of both sides, we obtain:
+\[
+\frac{1}{k}\left(\frac{k+1}{N+1}\right)^{N+1} \left(\sum_{i \leq N} x_i \right) \geq \sqrt[N]{x_1 \cdots x_N}
+\]
+Thus, by the intermediate value theorem, there exists a $k > 0$ such that:
+\[
+\frac{(k+1)^{N+1}}{k(N+1)^{N+1}} = 1
+\]
+Therefore, the inequality holds.
+
+If $k \to 0$, the left-hand side blows up and hence guarantees the inequality. For $k = N$, the left-hand side is $\frac{N}{N+1} < 1$, so by the intermediate value theorem, there exists a $k$ satisfying the condition.
+
+Thus, the AM-GM inequality is proved by induction.
+\end{proof}
+
+\end{document}

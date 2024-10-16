@@ -1,0 +1,440 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newcommand{\red}[1]{
+    \color{red}
+    {#1}
+    \color{black}
+}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{defn}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\textnormal{ch}}
+\newcommand{\Tr}{\textnormal{Tr}}
+\newcommand{\PW}{\textnormal{PW}}
+\newcommand{\E}{\mathbb{E}}
+
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Convergence of Anticommutator Spectral Densities}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+\begin{comment}
+ \begin{eqnarray} \mu_{A_N}(x)dx & \ = \ & \frac{1}{N}
+\sum_{i=1}^N
+\delta\left(x - \frac{\lambda_i(A_N)}{\sqrt{N}}\right) \nonumber\\
+M_m(A_N) & = & \mathbb{R} x^m \mu_{A_N}(x)dx \nonumber\\ M_m(N) & =
+& \mathbb{E}[M_m(A_N)] \nonumber\\ M_m &\ =\ & \lim_{N \to \infty} M_m(N).
+ \end{eqnarray}
+\end{comment}
+
+\begin{defn}[Dependency of Pairings]
+    Let $\mathcal{P}_2[n \cdot 2k]$ to denote the set of all pairings of the cannonical set 
+    $[n\cdot 2k]$. Consider $\pi \in \mathcal{P}_2[n\cdot 2k]$. Partition the set 
+    $[n\cdot 2k]$ into $n$ blocks, namely 
+    \begin{eqnarray*}
+    B_1 \ = \ \{1, 2, \dots, 2k\} \\ 
+    B_2 \ = \ \{2k +1 , 2k +2, \dots, 4k\} \\
+    \vdots \\
+    B_n \ = \ \{(n - 1)2k +1 , (n - 1)2k +2, \dots, n\cdot 2k\} \\ 
+    \end{eqnarray*}
+    A block $B_i$ is called to be dependent, if the image of $B_i$ 
+    under the paring $\pi$ is not a subset of $B_i$. The dependency 
+    of the pairing is the number of dependent blocks of a pairing. 
+
+    For example, the pairing $\pi \in \mathcal{P}[8]$ 
+    defined as 
+    \[
+    \pi \ = \ (12)(34)(58)(67)
+    \]
+    has two dependent blocks, namely $B_3, B_4$. Hence, 
+    its dependency is 2. 
+\end{defn}
+
+From the works of \red{Hammond and Miller}, we employ the fourth moment 
+method. With slight modification of the normalization coefficient, 
+we establish the following. 
+
+\begin{theorem}[Fourth Moment Method for Convergence]
+    If, for any positive integer $m$
+    \begin{equation}\label{eqn:ForthMom}
+        \E \left[
+            \frac 1 {N^{4m + 4}}
+            \big|
+            \Tr(AB + BA)^m - \E[\Tr(AB + BA)^m]
+            \big|^4
+        \right]
+         \ = \ O\left(
+                \frac 1 {N^2}
+            \right)
+    \end{equation}
+    then spectral density of the anticommutator product converges 
+    almost surely. 
+\end{theorem}
+
+We bound the lefthand side of (\ref{eqn:ForthMom}) appropriately. In order 
+to do this, we first expand out the forth power by the binomial 
+expansion. For convinience, introduce the 
+following shorthand. 
+\[
+    M_j \ = \ \E\left[(\Tr(AB + BA)^m)^j\right]
+\] 
+
+\begin{prop}
+    The lefthand side of (\ref{eqn:ForthMom}) can be rewritten as 
+    \begin{equation} \label{eqn:binomial}
+        \frac 1 {N^{4m + 4}}
+        \left(
+            M_{4} -4 M_{3} M_1 + 6 M_{2} M_1^2 -3 M_1^4
+        \right)
+    \end{equation}
+\end{prop}
+\begin{prop}
+    Define $D_j$ to be the contribution from the summands of the trace 
+    expansion that involves pairings of maximum dependency. In symbols, 
+    \begin{equation}
+        D_j \ = \
+        \sum_{W \in PW(j\cdot 2m)} 
+        \sum_{a_1, a_2, \dots, a_j}
+        \sum_{
+            \substack{
+            \pi \in \mathcal{P}_2[j \cdot 2k]\\
+            \pi \textnormal{ dependency j}
+            }
+        }
+\E_\pi[W_{a_1s}W_{a_2s}\cdots W_{a_js}]
+    \end{equation}
+    \footnote{The subscript $s$ is an abuse of notation. See page 14 of 
+    Hammond and Miller.}
+    where $a_1, a_2, \dots, a_j$ are finite sequences of $2m$ integers 
+    between $1$ and $N$. 
+    $M_j$ can be rewritten as a sum involving pairings of different 
+    dependencies. Namely, 
+    \begin{eqnarray} \label{eqn:MjExpansions}
+        M_2 \ = \ D_2 + M_1^2 \nonumber \\
+        M_3 \ = \ D_3 + 3M_1D_2 + M_1^3 \nonumber \\
+        M_4 \ = \ D_4 + 3D_2^2 + 6 D_2 M_1^2 + 4D_3M_1 + M_1^4 
+    \end{eqnarray}
+\end{prop}
+
+\begin{proof}
+    We show that the proposition must hold for $j = 2$, for the simplicity of 
+    notation. For higher values of $j$, the proof is similar up to a slight modifictation, 
+    and we provide a verbal reasoning without the symbolic manipulation.
+    We start with the principal definition of $M_2$. 
+
+    \begin{equation}
+         M_2 \ = \ \E\left[(\Tr(AB + BA)^m)^2\right] 
+         \ = \ 
+            \sum_{W \in PW(2m)} \sum_{V \in PW(2m)}
+            \E\left[\Tr(W)\Tr(V)\right]
+    \end{equation}
+
+    Introducing two finite sequences $a, b$ of $2m$ integers 
+    between $1$ and $N$, we can further expand this equation. 
+    For convinience, set $a_{2m + 1} = a_{2m}$ and \newline $b_{2m + 1} = b_{2m}$. 
+    
+
+    \begin{equation}
+        M_2 \ =\ 
+\sum_{W \in PW(2m)} \sum_{V \in PW(2m)}
+        \sum_{a, b}
+        \E\left[ W_{a_1a_2} W_{a_2a_3} \cdots W_{a_{2m}a_1}
+            V_{b_1b_2} V_{b_2b_3} \cdots V_{b_{2m}b_1}
+        \right]
+    \end{equation}
+
+For $W, V$ iterates through the set of all product words of length $2m$, 
+We can consider the product $WV$ to iterate through all the product words 
+of length $2 \cdot 2m$. Furthermore, all the random variables are Gaussian. 
+Hence, we can use Wick's formula. We progress to the following equation. 
+
+\begin{equation}
+    M_2 \ = \ 
+    \sum_{W \in \PW(4m)} \sum_{a, b} \sum_{\pi \in \mathcal{P}[4m]} 
+    \E_\pi\left[
+        \prod_{i = 1}^{2m} 
+            W^{(i)}_{a_ia_{i + 1}}
+        \prod_{i = 1}^{2m}
+W^{(i + 2m)}_{b_ib_{i + 1}}
+    \right] 
+\end{equation}
+
+Finally, split the sum of involving the pairings with respect to 
+the dependency. For $j = 2$, $\mathcal{P}[4m]$ can either have a 
+dependency of two or zero. 
+
+
+\begin{eqnarray}
+    \begin{split}
+    M_2 \ = \ 
+    \sum_{W \in \PW(4m)} \sum_{a, b} \sum_{\substack{\pi \in \mathcal{P}[4m]\\
+    \pi \textnormal{ dependency 0}
+    }} 
+    \E_\pi\left[
+        \prod_{i = 1}^{2m} 
+            W^{(i)}_{a_ia_{i + 1}}
+        \prod_{i = 1}^{2m}
+W^{(i + 2m)}_{b_ib_{i + 1}}
+    \right] \\
+    + 
+\sum_{W \in \PW(4m)} \sum_{a, b} \sum_{\substack{\pi \in \mathcal{P}[4m]\\
+    \pi \textnormal{ dependency 2}
+}} 
+    \E_\pi\left[
+        \prod_{i = 1}^{2m} 
+            W^{(i)}_{a_ia_{i + 1}}
+        \prod_{i = 1}^{2m}
+W^{(i + 2m)}_{b_ib_{i + 1}}
+    \right] 
+    \end{split} \\ 
+    \ = \ M_1^2 + D_2
+\end{eqnarray}
+The last equality follows from the nature of the paired expectations. 
+\footnote{Refer to Mingo and Speicher CH1} If the pairing $\pi$ has zero dependency, it 
+The pairied expectation of $\pi$ can be considered as products of 
+the paired expectation of two independent blocks. The second summand 
+is the principal definition of $D_2$
+
+From the case of $j = 2$, we observe that the decomposition of $M_j$ 
+is determined by the property of the pairings $\pi \in \mathcal P[j\cdot 2m]$. 
+For $j = 3$, each pairings can be categorized as dependency 3 (completely dependent) 
+dependency 2 (one independent block with two blocks depending on each other)
+or dependency zero (all blocks independent). Upon inspection of the ways 
+the blocks can be paired to each other, we conclude that there are 
+only one configuration for complete dependence or independence. 
+If the dependency is 2, choosing an independent block decides 
+the other two dependent blocks, so there are 3 ways such pairings can occur. 
+
+A similar argument can be carried out to the $j = 4$ case. 
+
+\end{proof}
+
+\begin{lemma}\label{thm:Dependencies}
+    If 
+    \begin{equation}\label{eqn:simpleForthMom}
+        \frac 1 {N^{4m + 4}} (3D_2^2 + D_4) \ = \ O\left(
+            \frac 1 {N^2}
+        \right)
+    \end{equation}
+    then the spectral density of the anticommutator product converges almost surely. 
+\end{lemma}
+
+\begin{proof}
+    Plug in equation (\ref{eqn:MjExpansions}) to equation (\ref{eqn:binomial}). 
+    Simple algebra proves the result. 
+\end{proof}
+
+\begin{theorem}\label{thm:PTPTcvg}
+    Suppose $A, B$ are random matricies drawn from Topelitz 
+    ensembles. Then, equation (\ref{eqn:ForthMom}) indeed holds and 
+    the spectral density converges almost surely. 
+\end{theorem}
+
+\begin{proof}
+    It suffices to show 
+    \begin{equation}
+        D_2 \ = \ O(N^{2m + 1})
+        \textAnd 
+        D_4 \ = \ O(N^{4m + 1})
+    \end{equation}
+    Start with proving the first inequality. To compute $D_2$, we must consider 
+    two finite sequences $a, b$. 
+    Recall that the paired 
+    expectation $\E_\pi$ is a product of the expected values in the form of 
+    \begin{equation}
+        \E[W_{i_si_{s + 1}}^{(s)} W_{i_{\pi(s)}i_{\pi(s) + 1}}^{(\pi(s))}] 
+    \end{equation}
+    where the sequence $i$ is either $a$ or $b$. 
+    The modular restriction of the Topelitz ensenble dictates 
+    that this term is $1$ if and only if 
+    \begin{equation}
+        i_s - i_{s + 1} \equiv i_{\pi(s)} - i_{\pi(s) + 1} \mod N
+    \end{equation}
+    and vanishes to zero otherwise. The anticommutator structure 
+    imposes an additional restriction that the letter $W^{(s)}$ and 
+    $W^{(\pi(s))}$ must both be $A$ or both be $B$'s in order for the expected 
+    value to not vanish. 
+
+    We wish to overcount the number of pairings that produces 
+    a nonvanishing expectation. In order to do this, we choose 
+    all the modular differences of $a, b$. Using the difference 
+    notation, we note that there are $2m$ copies of $\Delta a$ 
+    and $2m$ copies of $\Delta b$ to be chosen. By the nature 
+    of the pairing, we observe that choosing one of the 
+    differences decides another paired difference. We also have 
+    the following restriction. 
+
+    \begin{eqnarray} \label{eqn:ModRestr}
+        \sum_{i = 1}^{2m} \Delta a_i \ = \ a_{2m + 1} - a_1 \ =\ 0 \nonumber \\
+        \sum_{i = 1}^{2m} \Delta b_i \ = \ b_{2m + 1} - a_1 \ =\ 0 
+    \end{eqnarray}
+
+    The two equations takes away one degree of freedom from the original 
+    $2m$ degrees of freedom from to choose the paired differences. The 
+    fact that pairing $\pi$ is dependant accounts for the fact 
+    that condition (\ref{eqn:ModRestr}) cannot be naturally met without losing a degree of freedom. 
+    Also, we only lose one degree of freedom because the pairedness of the differences imply  
+      \begin{eqnarray}
+        \sum_{i = 1}^{2m} \Delta a_i+ \sum_{i = 1}^{2m} \Delta b_i \ =\ 0 
+    \end{eqnarray}
+
+    Finally, choosing $a_1, b_1$ determines both sequences $a, b$, and 
+    this adds two degrees of freedom. Thus, there are $2m -1 + 2 = 2m + 1$ 
+    degrees of freedom to choose $D_2$ and we conclude 
+    \begin{equation}
+        D_2 \ = \ O(N^{2m + 1})
+    \end{equation}
+
+    Similarly, for $D_4$, we lose three degrees of freedom by the dependence 
+    for the four sequences, and recieve four degrees of freedom by the 
+    choice of $a_1, b_2, c_1, d_1$, where the four sequence $a, b, c, d$ 
+    show up in the sum index of $D_4$. The total degree of freedom is 
+    $4m - 3 + 4 = 4m + 1$ which leads to the bound 
+    \begin{equation}
+        D_4 \ = \ O(N^{4m + 1})
+    \end{equation}
+
+\end{proof}
+
+\begin{cor}
+    Suppose $A, B$ are random matricies drawn either drawn from GOE, 
+    Palindromic Toeplitz, or Block Circulant ensembles. Then, equation (\ref{eqn:ForthMom}) indeed holds and 
+    the spectral density converges almost surely. 
+\end{cor}
+
+\begin{proof}
+    The derivation of lemma \ref{thm:Dependencies} 
+    does not involve the structure of individual matrix ensembles.
+    All the three ensenbles listed in the corollary have either 
+    equal or more strict modular restrictions for the paired expectations 
+    to be nonvanishing, and therefore the value of $D_2, D_4$ are strictly 
+    larger for the case of the anticommutator of different products 
+    other than Topelitz anticommuted with Topelitz. Therefore the bounds in 
+    theorem \ref{thm:PTPTcvg} carries out directly. 
+\end{proof}
+
+\end{document}

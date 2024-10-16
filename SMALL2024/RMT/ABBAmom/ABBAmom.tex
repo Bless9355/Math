@@ -1,0 +1,334 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+\newcommand{\tr}{
+    {
+        \textrm{tr}
+    }
+}
+
+
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Notes on higher moments of the anticommutator}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+%talk about how to compute trace of higher matrix powers
+\section{Higher moments of a regular GOE}
+Let $A$ be a square matrix of order $N$. 
+We all know the following shorthand to compute trace. 
+\[
+    \tr(A^k) \ = \  \sum_{s} \prod_{i = 0}^{n - 1} a_{si, s(i+1)}
+\]
+Where $s_0, \cdots, s_{n-1}$ ranges over all finite sequences of length $k$ 
+drawn from $[1, N]$. Also, for convinience, we let 
+$s_n = s_0$.
+
+Now, let $A$ to be drawn from a GOE. 
+We also know that the following formula for the moment of a 
+$N$-by-$N$ matrix ensenble. 
+\[
+\mu_k \ = \  \lim_{n \rightarrow \infty} \frac {
+    \<\tr(A^k)\>
+} {N^{k/2 + 1}}
+\]
+\footnote{denotes the expected value. That is, 
+for a random variable $X$, $  \<X\>=\mathbb{E}[X] $ }
+
+Consider the sequence $\{s\}$ as a set of verticies and 
+the pair of indicies $s_i, s_{i+1}$ that occur in the trace 
+expansion as edges. Each summand in the trace expansion 
+corresponds to a closed walk. We have established the following. 
+\begin{theorem} [Graph theoretical computation of moments]
+    \label{thm:graph1}
+    Let $S_k$ be the set of all closed walks of length $k$ over
+    $N$ verticies. Then, the moment can be computed as follows. 
+    \begin{equation}
+\mu_k \ = \ \lim_{n \rightarrow \infty} \frac {\<
+    \sum_{s\in S_k} \prod_{i = 0}^{n - 1} a_{si, s(i+1)}
+    \>
+} {N^{k/2 + 1}}
+    \end{equation} 
+\end{theorem}
+
+By using the nature of expected values, it is not hard to derive 
+the following Corollary. 
+
+\begin{corollary} [Trees]
+    Let $T_{2k}$ be the set of all traversals over a tree with
+    \newline
+    $k + 1$ verticies. Then, the moment of the 
+    experimental density of a GOE can be computed as follows. 
+    \begin{equation}
+\mu_k \ = \  \begin{cases}\<
+    \sum_{s\in T_k} \prod_{i = 0}^{n - 1} a_{si, s(i+1)}
+    \>  & 2|k \\ 0 & 2 \nmid k
+\end{cases}
+    \end{equation} 
+\end{corollary}
+
+\section{Anticommutator of two GOEs}
+Let $A, B$ be two matrices drawn from two GOEs that 
+are asymptotically free. We wish to compute 
+the moments of $AB + BA$. We wish to compute 
+\begin{equation}\label{eqn:acTr}
+\mu_k \ = \ \lim_{n \rightarrow \infty} \frac {
+    \<\tr[(AB+BA)^k]\>
+} {N^{k + 1}}
+\ = \ \lim_{n \rightarrow \infty}
+\sum_{P\in \mathcal{P}_k}
+\frac{\<\tr(P)\>} 
+{N^{k + 1}}
+\end{equation}
+
+\newcommand{\prodW}{\mathcal{P}}
+
+The set $\prodW_k$ is the set of \textbf{Product Words} of length $2k$, that 
+is, all strings of length $2k$ that are 
+combinations of $AB$ and $BA$. For example, 
+\[
+    \mathcal{P}_2 = \{
+    ABAB, ABBA, BAAB, BABA   
+    \}
+\]
+
+\begin{definition} [Characteristic of product words]
+Consider the product word $P \in \prodW_n$. The characteristic 
+of the product word is denoted by $\chi(P)$, and it is the number 
+of integers $0\leq i < 2n$ such that $P_i = P_{i + 1}$. For example, 
+if $P = ABBA$
+\[
+    \chi(P) \ = \ 2
+\]
+since $P_2 = P_3$ and $P_4 = P_1$. 
+\end{definition}
+
+We wish to analyze the anticommutator trace in (\ref{eqn:acTr}) expansion using 
+graph theory. In light of Theorem \ref{thm:graph1}, we construct a colored 
+a graph for each product word. Before we move on, however, we provide some 
+definitions to simplify our analysis. 
+\begin{definition}[Cliff Edges]
+    Consider $T_{2k}$, a tree traversal over a tree with $k + 1$ 
+    verticies. We define a cliff edge to be an edge which the 
+    traversal passes through and returns right after the passing. 
+    Formally, it is the edge corresponding to $T_i T_{i+1}$ where 
+    $T_{i + 2} = T_i$.
+\end{definition}
+
+%Some graphical explanation
+It is possible to relate each summand in (\ref{eqn:acTr}) to 
+a colored traversal of a tree. Below is an example. 
+\halfFigure{ABBA.png}
+
+We have a simple tree with three verticies, and the traversal 
+consists of four directed edges. Each edge that corresponds 
+to the matrix $A$ is colored blue, and the ones that correspond to 
+$B$ black. We refer to the colored traversals corrresponding 
+to the product words as \textbf{Matched Colored Traversals(MAT)}
+For all the matrix entries have mean zero, we notice 
+that each edge must be repeated twice. Using a degree 
+of freedom argument, we verify that the two pair of edges 
+must come from opposite directions\footnote{e.g. the summand 
+can contain two occurences $A_{12}$ and $A_{21}$ but 
+not $A_{12}$ and $A_{12}$. This is without applying symmetry condition 
+of the GOE. }. Moreover, by the mean zero property of each matrix 
+entry, each pair of directed edges must have a same color. We present 
+the following observations. 
+
+
+\begin{proposition}
+    \label{thm:cliff}
+    In a graph traversal, there necessarily exists a cliff edge. Moreover 
+    in a MAT, there exists two cliff edges with different colors. 
+\end{proposition}
+
+\begin{theorem}
+    Let $P\in \prodW_{k}$ be a product word that has a characteristic 
+    less than $k$. Then 
+    \[
+    \lim_{n \rightarrow \infty} \frac{\<\tr(P)\>} 
+{N^{k + 1}} \ = \  0
+    \]
+\end{theorem}
+
+\begin{proof}
+    We induct on $k$. For $k = 1$, the theorem follows trivially. 
+    First, we write 
+\[\lim_{n \rightarrow \infty} \frac{\<\tr(P)\>} 
+{N^{k + 1}} \ = \  
+    \sum_{s\in T_k} \<\prod_{i = 0}^{n - 1} P_i({s_i, s_{i+1}})
+    \> 
+    \]
+    where $P_i$ is the $i$th character of the product word, and can 
+    either be $A$ or $B$. The parantheses that follows denote 
+    the entry of the matrix. For example, if $P_i = A$ then 
+    $P_i({s_i, s_{i+1}}) = A_{s_i, s_{i+1}}$. 
+
+    Consider each summand which correspond to a colored tree traversal. 
+    In the tree traversal $T_k$, we know from proposition \ref{thm:cliff}
+    that there must exist a cliff edge. If the traversal has 
+    two directed edges with differing color for a cliff edge, the 
+    entire term vanishes. 
+
+    Otherwise, by the proposition, we exclude the two cliff edges 
+    that have different colors to obtain a new traversal $\bar s \in T_{k - 1}$. 
+    By the inductive hypothesis, the summand vanishes.  
+\end{proof}
+
+\begin{corollary}
+    \label{thm:AABB}
+    The odd moments of the anticommutator product of GOEs vanish. 
+    Moreover, the even moments are dominated by two terms with the 
+    maximum characteristics. In symbols, 
+    \begin{equation}
+        \mu_{2k + 1} = 0 
+        \textAnd 
+        \mu_{2k} = 2 \<\prod_{i = 0}^{n - 1} L^{(k)}_i({s_i, s_{i+1}})\>
+    \end{equation}
+    Where $L^{(k)}$ is an alternating combination of $AA$ and $BB$. For example, 
+    $L^{(4)} \ = \ AABBAABB$\footnote{Note that $L^{(k)} \notin \prodW_k$. $L^{(k)}$ is derived 
+    from the cyclicity of trace. }
+
+\end{corollary}
+
+\section{The Challenge}
+We have narrowed down the moment computation from counting traces of $2^k$ product words 
+to counting a single matrix product that has a simpler form. We wish to 
+solve the following combinatorial problem. 
+
+\begin{question}[The number of AABB-MATs]
+    Consider $T_{2k}$ to be a MAT of any tree with $k + 1$ 
+    verticies that correspond to the word $L^{(k)}$. How many traversals 
+    $T_{2k}$ exist? 
+\end{question}
+
+
+\end{document}

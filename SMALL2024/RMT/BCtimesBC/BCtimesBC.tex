@@ -1,0 +1,379 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Lower moments of Anticommutators with Block Circulant Ensembles}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+
+Before we move on to computing the lower moments, of the 
+anticommutator products, we simplify the computation using the 
+cyclicity of trace. 
+Let \(A\) and \(B\) be square matrices. We observe the following. 
+
+\begin{prop}[Trace Expansion for the second and the forth Moment]
+The trace of the power of the anticommutator can be simplified as follows. 
+\[
+\text{Tr}[(AB + BA)^2]\ =\ 2(\text{Tr}(ABAB) + \text{Tr}(AABB))
+\]
+\[
+\begin{aligned}
+\text{Tr}[(AB + BA)^4] \ =\ & 2 \text{Tr}(ABABABAB) + 4 \text{Tr}(ABABABBA) + 2 \text{tr}(ABBAABBA) \\
+& + 4 \text{Tr}(ABABBABA) + 4 \text{Tr}(ABBABABA)
+\end{aligned}
+\]
+\end{prop}
+\begin{proof}
+We demostrate for the second power and leave the proof for the forth 
+power as an exercise. 
+
+First, we expand \((AB + BA)^2\):
+\[
+(AB + BA)^2 \ =\  ABAB + ABBA + BAAB + BABA
+\]
+
+Using the cyclic property of the trace, \(\text{Tr}(XY) = \text{Tr}(YX)\), we have:
+\[
+\text{Tr}(ABBA) \ =\ \text{Tr}(AABB) \quad \text{and} \quad \text{Tr}(BAAB) = \text{Tr}(AABB)
+\]
+
+And thus 
+\[
+\text{Tr}[(AB + BA)^2] \ =\ 2(\text{Tr}(ABAB) + \text{Tr}(AABB))
+\]. 
+
+\end{proof}
+
+We proceed with computing the second moment of the 
+anticommutator product of an anticommutator matrix 
+and a GOE. Let $A$ be a GOE and $B$ be a $m$-circulant matrix. 
+Also, set the order of both matricies to be $N$. 
+Let $\mu_N$ denote the spectral density of the anticommutator product 
+$AB + BA$ and $\mu_N^{(k)}$ the $k$th moment. 
+Using 
+the eigenvalue trace lemma, we obtain the following. 
+
+\begin{equation}
+    \mu_N^{(k)} \ = \  \frac 1 {N^{k + 1}} \mathbb{E}(Tr[(AB+BA)^k])
+\end{equation}
+
+\begin{theorem}[2nd and 4th moment of GOE times Block Circulant]
+    \[
+        \mu_N^{(2)} \ =\ 2 \textAnd 
+        \mu_N^{(4)} \ =\ 10 + \frac 2 {m^2}
+    \]
+\end{theorem}
+
+\begin{proof}
+    Start with the second moment. 
+    We use the eigenvalue trace lemma along with the trace expansion 
+    for $k = 2$. Also note that the expected value is linear. 
+\begin{equation}
+    \label{eqn:secondGOEBC}
+    \mu_N^{(2)} \ = \ \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) + \frac 1 {N^3}\mathbb{E}(Tr(AABB))
+\end{equation}
+We compute each of the summands independantly. Focus on the first 
+summand, and use Wick's formula to rewrite the summand in tractable 
+form. \footnote{We adopt the notion from the free probability book}
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) \
+    =  \
+    \frac 1 {N^3} 
+    \sum_{1 \leq i_1, i_2, i_3, i_4 \leq N} 
+    \sum_{\pi \in \mathcal{P}[4]}
+    \mathbb{E}_\pi (
+        A_{i_1i_2}B_{i_2i_3}A_{i_3i_4}B_{i_4i_1}
+    )
+\end{equation}
+It is trivial that the pairings that match $A$'s with $B$'s 
+vanish, for the two matricies $A$, $B$ are assumed to be indepent. 
+Thus, the permutation $\pi$ must be 
+\[
+    \pi \ = \ (13)(24)
+\]
+and the double sum simplifies to 
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) \
+    =  \
+    \frac 1 {N^3} 
+    \sum_{1 \leq i_1, i_2, i_3, i_4 \leq N}
+    \mathbb{E} (
+        A_{i_1i_2}A_{i_3i_4}
+    )
+\mathbb{E} (
+        B_{i_2i_3}B_{i_4i_1}
+    )
+\end{equation}
+Since $A$ is a GOE and $B$ is a block circulant matrix, the indicies $i$ must 
+satisfy the following condition. 
+
+\begin{eqnarray}
+    i_1 \ = \ i_4 \textAnd i_2 \ = \ i_3 \\
+    i_2 - i_3 \ \equiv \ i_4 - i_1 \mod N \\
+    i_2 \ \equiv \ i_1 \mod m
+\end{eqnarray}
+
+Notice that the choice of $i_1, i_2$ determines both $i_3, i_4$. Hence, 
+there are a maximum $N^2$ sequences of $i$'s where the expected value 
+is nonvanishing. So as $N \rightarrow \infty$, 
+
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) \
+    =  \ 0
+\end{equation}
+
+Repeat the procedure for $ABAB$. 
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(AABB)) \
+    =  \
+    \frac 1 {N^3} 
+    \sum_{1 \leq i_1, i_2, i_3, i_4 \leq N}
+    \mathbb{E} (
+        A_{i_1i_2}A_{i_2i_3}
+    )
+\mathbb{E} (
+        B_{i_3i_4}B_{i_4i_1}
+    )
+\end{equation}
+For the expected value to be nonvanishing, the sequence $i$ must satisfy 
+\begin{eqnarray}
+    i_1 \ = \ i_3 \textAnd i_2 \ \  \textrm{free} \\
+    i_3 - i_4 \ \equiv \ i_1 - i_4 \mod N \\
+    i_3 \ \equiv \ i_1 \mod m
+\end{eqnarray}
+The conditions simplify to $i_1 = i_3$ and other variables are free. 
+Thus, there are $N^3$ sequences of $i$ where the expected value is 
+nonvanishing. In the limit $N\rightarrow \infty$, 
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(AABB)) \
+    =  \ 1
+\end{equation}
+
+Finally, from (\ref{eqn:secondGOEBC}), 
+\[
+    \mu_N^{(2)} \ = \ 2 (0 + 1) \ = \ 2
+\]
+
+As for the forth moment, we notice that there are five summands in the 
+trace expansion. However, by a degree of freedom argument, the pairings 
+which have a crossings of $A$'s vanish. Hence, we deduce 
+\begin{equation}
+    \label{eqn:forthGOEBC}
+    \mu_N^{(4)} \ = \ \frac 2 {N^{5}} \mathbb{E}(Tr(ABBAABBA)) + \frac 4 {N^5}\mathbb{E}(Tr(ABABBABA))
+\end{equation}
+
+Focus on the first summand. Use Wick's formula and rewrite as the following. 
+
+\begin{equation}
+    \begin{split}
+\frac{2}{N^5} \sum_{1 \leq i_1, \dots,  i_8 \leq N} 
+\sum_{\pi \in \mathcal{P}[8]} \mathbb{E}_\pi \left( A_{i_1i_2} B_{i_2i_3} B_{i_3i_4} A_{i_4i_5} A_{i_5i_6} B_{i_6i_7} B_{i_7i_8} A_{i_8i_1} \right)
+    \end{split}
+\end{equation}
+
+
+
+With some brute-force condition checking, it possible to verify that 
+any pairings that have a crossing with $A$'s do not contribute to the sum. 
+So, the following two pairings have zero contribution as $N\rightarrow \infty$
+\begin{eqnarray}
+    (15)(23)(48)(67) \\ 
+    (14)(27)(36)(58)
+\end{eqnarray}
+The first permutation has a crossing $(15)(48)$ where both transposition 
+pair two $A$'s. For the first permutation, the crossing is $(14)(27)$ and 
+the first transposition pairs two $A$'s while the second pairs two $B$'s. 
+
+Note that the crossings between pairings of $B$'s do contribute to the sum. 
+To demonstrate the fact, we compute the contribution of the pairing 
+\[
+    \pi \ = \ (18)(26)(37)(45)
+\] which is 
+\begin{equation}
+    \begin{split}
+\frac{2}{N^5} \sum_{1 \leq i_1, \dots,  i_8 \leq N} 
+\mathbb{E} \left( A_{i_1i_2} A_{i_8i_1}\right)
+\mathbb{E}
+\left(B_{i_2i_3} B_{i_6i_7}\right) 
+\mathbb{E}
+\left(B_{i_3i_4} B_{i_7i_8}  \right)
+\mathbb{E}
+\left(
+A_{i_4i_5} A_{i_5i_6}  
+\right)
+    \end{split}
+\end{equation}
+We wish to count the number of finite sequences $i$ of length 
+8 that satisfies the conditions below. 
+\begin{eqnarray}
+i_2 \ = \ i_8 \\
+i_2 - i_3 \ \equiv \ i_7 - i_6 \mod N\\ 
+i_3 - i_4 \ \equiv \ i_8 - i_7 \mod N\\
+i_4 \ = \ i_6 \\ 
+i_2 \ \equiv \ i_7, i_3 \ \equiv \ i_6 \mod m \\ 
+i_3 \ \equiv \ i_8, i_4 \ \equiv \ i_7 \mod m
+\end{eqnarray}
+
+Determine the residue of $i$'s by mod $m$ first. Notice that $i_1, i_5$ 
+are free to be any value mod $m$, and all other values must be congruent 
+to each other mod $m$. As for the value $\lfloor i/m\rfloor$, we determine that t
+here are five degrees of freedom where the $i's$ split into the following 
+equivalence classes. 
+\[
+\{
+    i_2, i_8\}, \{i_4, i_6\}, \{i_3\}, \{i_5\}, \{i_1\}
+\]
+The index $i_7$ is determined by the conditions. 
+Thus, there are 3 degrees of freedom to choose $i \mod m$ and 
+5 degrees of freedom for $\lfloor i/m \rfloor$. The total contribution 
+in the limit is 
+\[
+    \frac 1 {N^5}m^3 \left(
+        \frac N m
+    \right)^5 = \frac 1 {m^2}
+\]  
+
+If there are no crossings in the pairings, the contribution equals exactly one. 
+Thus, by (\ref{eqn:forthGOEBC}), we write 
+\[
+    \mu_N^{(4)} \ = \ 2 \left(3 + \frac 1{m^2}\right) + 4(1) \ = \ 10 + \frac 2 {m^2}
+\]
+
+\end{proof}
+
+\begin{theorem}[2nd moment of Block Circulant times Block Circulant]
+    \[
+        \mu_N^{(2)} \ =\ 2 + \frac 2 {m^2} 
+    \]
+\end{theorem}
+
+The proof is similar to the case of GOE times Block Circulant. 
+
+\end{document}

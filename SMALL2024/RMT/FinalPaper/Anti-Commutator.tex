@@ -1,0 +1,1968 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Don't change this stuff... %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,reqno]{amsart}
+
+% Import useful packages
+\usepackage{array}
+\usepackage{graphics}
+\usepackage{amssymb, amsthm, amsmath, amsfonts,amscd, wasysym}
+\usepackage{multicol}
+\usepackage{xfrac}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage{verbatim}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc, positioning, matrix, arrows, decorations.pathmorphing, shapes, backgrounds}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.6}
+\usepackage{lpic}
+%\usepackage{float}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{pgfornament}
+\usepackage{pict2e} % Need this for strikethrough command \strike
+%\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+\usepackage{hyperref}
+\usepackage{diagbox}
+\usepackage{slashbox}
+\usepackage{bbold}
+
+% Set margins and other page properties
+\setlength{\paperwidth}{8.5in}
+\setlength{\paperheight}{11in}
+\setlength{\voffset}{-0.15in}
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{8pt}
+\setlength{\footskip}{30pt}
+\setlength{\textheight}{8.5in}
+\setlength{\hoffset}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{9pt}
+
+\setcounter{section}{-1} % This numbers the first section as Section 0.
+
+% Theorem environments
+\newenvironment{answer}{\color{Blue}}{\color{Black}}
+\newenvironment{exercise}
+{\color{Blue}\begin{exr}}{\end{exr}\color{Black}}
+
+\theoremstyle{plain} %italicizes text
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{conj}[theorem]{Conjecture}
+
+\newtheorem*{claim}{Claim}
+\newtheorem*{question}{Question}
+\newtheorem*{conv}{Convention}
+
+\theoremstyle{remark}
+\newtheorem{exr}{Exercise}
+\newtheorem*{rmk}{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem{example}{Example}
+
+\newtheorem*{FTA}{Fundamental Theorem of Algebra}
+
+% Fancy letters
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\N}{\mathbb N}
+\newcommand{\R}{\mathbb R}
+\renewcommand{\P}{\mathbb P}
+\newcommand{\C}{\mathbb C}
+\newcommand{\E}{\mathbb E}
+\newcommand{\F}{\mathbb F}
+\newcommand{\D}{\mathbb D}
+\newcommand{\Ac}{\mathcal A}
+\newcommand{\Bc}{\mathcal B}
+\newcommand{\Cc}{\mathcal C}
+\newcommand{\Ec}{\mathcal E}
+\newcommand{\Fc}{\mathcal F}
+\newcommand{\Hc}{\mathcal H}
+\newcommand{\Lc}{\mathcal L}
+\newcommand{\Oc}{\mathcal O}
+\newcommand{\Rc}{\mathcal R}
+\newcommand{\Sc}{\mathcal S}
+\newcommand{\Zc}{\mathcal Z}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\epsilon}
+\newcommand{\z}{\zeta}
+\renewcommand{\t}{\theta}
+\renewcommand{\l}{\lambda}
+\newcommand{\s}{\sigma}
+\renewcommand{\o}{\omega}
+
+% Arrows
+\newcommand{\isom}{\xrightarrow{\sim}}
+\newcommand{\bijectarrow}{
+  \hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow
+}
+\newcommand{\surjectarrow}{
+  \rightarrow\mathrel{\mspace{-15mu}}\rightarrow
+}
+\newcounter{sarrow}
+\newcommand\xrsquigarrow[1]{
+    \stepcounter{sarrow}
+    \begin{tikzpicture}[decoration=snake]
+    \node (\thesarrow) {\strut#1};
+    \draw[->,decorate] (\thesarrow.south west) -- (\thesarrow.south east);
+    \end{tikzpicture}
+}
+
+% Functions and operators
+\newcommand{\one}{
+    {\rm 1\hspace*{-0.4ex} \rule{0.1ex}{1.52ex}\hspace*{0.2ex}}
+}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\im}{\textup{im }}
+\renewcommand{\ker}{\textup{ker }}
+\newcommand{\ord}{\textup{ord}}
+\newcommand{\supp}{\textup{supp}}
+\renewcommand{\Im}{\textup{Im }}
+\renewcommand{\Re}{\textup{Re }}
+\newcommand{\area}{\textup{area }}
+\renewcommand{\bar}{\overline}
+\newcommand{\ideal}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+
+% Relations
+\newcommand{\ns}{\mathrel{\lhd}}
+\newcommand{\nsup}{\mathrel{\rhd}}
+\newcommand{\nseq}{\mathrel{\unlhd}}
+\newcommand{\nsupeq}{\mathrel{\unrhd}}
+\renewcommand{\mod}[1]{\textup{ (mod~$#1$)}}
+\newcommand{\textmod}[1]{(mod \nolinebreak $#1$)}
+
+\newsymbol\dnd 232D
+\newcommand{\divides}{\Bigm \vert}
+\newcommand{\ndivides}{
+    \mathrel{\mkern.5mu % small adjustment
+    % superimpose \nmid to \big|
+    \ooalign{\hidewidth$\biggm\vert$\hidewidth\cr$\nmid$\cr}%
+    }
+}
+
+% Other
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Hom}{\textup{Hom}}
+\newcommand{\mattwo}[4]{
+    \begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}
+}
+\newcommand\myasterismi{%
+  \par\bigskip\noindent\hfill\pgfornament[width=17pt]{7}\hfill\null\par\bigskip
+}
+\newcommand\myasterismii{%
+  \par\bigskip\noindent\hfill\pgfornament[width=17pt]{1}\hfill\null\par\bigskip
+}
+\newcommand\myasterismiii{%
+  \par\bigskip\noindent\hfill\pgfornament[width=17pt]{4}\hfill\null\par\bigskip
+}
+\newcommand*\circled[1]{
+    \tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=2pt] (char) {#1};}
+}
+\newcommand*\squared[1]{
+    \tikz[baseline=(char.base)]{
+    \node[shape=rectangle,draw,inner sep=2pt] (char) {#1};}
+}
+
+\newcommand{\ignore}[1]{}
+
+% Strikeout, or strikethrough, hack without using ulem
+\makeatletter
+\newcommand{\strike}[1]{%
+  \begingroup
+  \settowidth{\dimen@}{#1}%
+  \setlength{\unitlength}{0.05\dimen@}%
+  \settoheight{\dimen@}{#1}%
+  \count@=\dimen@
+  \divide\count@ by \unitlength
+  \begin{picture}(0,0)
+  \put(0,0){\line(20,\count@){20}}
+  \put(0,\count@){\line(20,-\count@){20}}
+  \end{picture}%
+  #1%
+  \endgroup
+}
+\makeatother
+
+
+% Formatting spacing
+\newcommand{\removeline}{\vspace{-0.12in}}
+
+% Legendre symbol
+\newcommand{\legendre}[2]{\ensuremath{\left( \frac{#1}{#2} \right) }}
+
+% Begin document
+\begin{document}
+
+% Set pagestyle
+\pagestyle{fancy}{
+\lhead{} \chead{} \rhead{}
+\lfoot{} \cfoot{\thepage} \rfoot{}
+}
+
+
+
+
+
+
+
+
+
+
+
+%Daniel's custom commands
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\PW}{\textnormal{conf}}
+\newcommand{\NC}{\textnormal{NC}}
+
+
+
+
+
+
+
+
+\title{Notes on Anti-Commutator}
+\author{RMT Group (SMALL 2024)}
+\date{June 2024}
+
+
+\maketitle
+\thispagestyle{empty}
+
+\subsection{Moments of $\{\textup{GOE, BC}\}$ and $\{\textup{BC, BC}\}$}
+
+
+\begin{definition} [Equivalence relation $\approx$ and $\simeq$]
+
+    $(i, j) \approx (i', j')$ if and only if 
+    \begin{equation}
+        i \ = \ j' \textAnd j \ = \ i'
+    \end{equation}
+
+    Also, 
+$(i, j) \simeq (i', j')$ if and only if 
+    \begin{eqnarray}
+        i - j \ \equiv \ j' - i \mod N 
+    \\
+       i \ \equiv \ j' \textAnd j \ \equiv \ i' \mod m
+    \end{eqnarray}
+    The value of $N, m$ are implied from context. 
+\end{definition}
+
+
+\begin{definition}[Valid Configuration]
+A \textit{Valid Configuration} of length \(2k\) is composed of \(k\) 2-blocks, where each block is one of \(\{AB, BA\}\). 
+We denote the set of all product words of length $2k$ as 
+$\PW(2k)$.
+
+
+For example, when \(k = 3\),
+\[
+W \ = \ AB \, BA \, AB \, BA \in \PW(8)
+\]
+is an example of a valid configuration of length 6. To 
+refer to the specific index of the configuration, use the superscript. 
+For example, $W^{3} \ =\ B$. 
+
+\end{definition}
+
+\begin{definition}[Combining pairings]
+    Suppose we are given $W \in \PW(4k)$ and two pairings 
+    $\pi, \delta \in \mathcal{P}[2k]$. We denote the 
+    combined pairing of $\pi, \delta$ with respect 
+    to the product word $W$ as 
+    \[
+        \pi *_W \delta
+    \]
+    where the combined pairing denotes an element in $\mathcal{P}[4k]$ 
+    where the composition between $A$'s are specified by $\pi$ and 
+    composition between $B$'s are specified by $\delta$. 
+
+    For example if 
+    \[
+    \pi \ = \ (1 2) (3 4) \textAnd 
+    \delta \ = \ (12) (34)
+    \]
+    the combined pairing is 
+    \[
+    \pi *_W \delta \ = \ (1 4)(2 3)(5 8)(67)
+    \]
+\end{definition}
+    
+
+%====For GOE x BC====
+
+We wish to compute $\mu_N^{(2k)}$, the $2k^{th}$ moment of 
+the anticommutator product of ensemble $A$ which is a GOE 
+and ensemble $B$ which is a m-block circulant matrix, 
+where both $A, B$ are of order $N$. It is straightforward to 
+verify the following. 
+
+\begin{prop}[Even moment as configurations]
+    \label{thm:baseForm}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W\in \PW(2k)}
+        \sum_{1 \leq i_1 , \dots, i_{4k} \leq N}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}  
+        \mathbb{E}_{(\pi*_W\delta)}\left(
+        \prod_{l = 1}^{4k} W^{l}_{i_l i_{l + 1}}
+        \right) \mathbb{1}_{(\pi*_W\delta)}
+    \end{equation}
+\end{prop}
+
+We first present the formula for the even moments. 
+
+\begin{theorem}[GOE times Block Circulant]
+    \label{thm: GOEBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+\end{theorem}
+\footnote{
+    $\gamma_n$ denotes a permutation of the cannonical set $[n]$ 
+    where $\gamma_n(x) = x + 1 \mod n$. 
+}
+
+\begin{theorem}[Block Circulant times Block Circulant]
+    \label{thm:BCBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in  \mathcal P[2k]}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+    \end{equation}
+\end{theorem}
+
+To prove these two theorems, we need to establish 
+the following propositions. 
+
+\begin{prop} [Rules for pairing] \label{thm:pairingRule}
+    For a pairing of each valid configuration, each of the compositions 
+    must match $A$'s to $A$'s and $B$'s to $B$'s. Moreover, 
+    the congruence classes of the indicies are confirmed once the 
+    two matricies are matched. That is, 
+    if $A_{i_s, i_{s + 1}}$ is matched with 
+    $A_{i_t, i_{t + 1}}$, then 
+    \begin{equation}
+        (i_s, i_{s + 1}) \ \approx \ (i_t, i_{t + 1})
+    \end{equation}. Also, 
+    if $B_{i_s, i_{s + 1}}$ is matched with 
+    $B_{i_t, i_{t + 1}}$, then 
+    \begin{equation}
+        (i_s, i_{s + 1}) \ \simeq \  (i_t, i_{t + 1})
+    \end{equation}
+\end{prop}
+
+
+\begin{proof}
+    Introduce the signed variable $\epsilon_j$. Adding 
+    up the signed difference allows us to find 
+    that if any one of the signs are nonzero, the 
+    degree of freedom reduces. 
+\end{proof}
+\footnote{
+For a detailed explanation, refer to Lemma 2.6 of \cite[MMS]
+}
+
+From now on, we focus on the \textbf{pairings}, that is, an element 
+of a 2-partition of the cannonical set. 
+Call a 2-block of this partition a \textbf{matching}. 
+For example, 
+for a permutation $(13)(24) \in \mathcal{P}[4]$, $(13)$ is considered 
+as a matching of the permutation. Also, if two matchings 
+$(i, j), (k, l)$ exists within a pairing where $i < j < k < l$, we 
+say that the two matchings cross and hence the pairing is \textbf{crossing}. 
+
+\begin{prop} [GOE pairing rules]
+    Let $A$ be the GOE ensemble in the anticommutator. 
+    The matchings of $A$ must not cross with any other 
+    matchings. The matching between Block 
+    Circulant matricies can cross, and the crossings 
+    do not reduce the degree of freedom. 
+\end{prop}
+\begin{proof}
+    The matching of $A$'s in each pairing slices 
+    the entire configuration. For example, consider the product word 
+    \[
+        W \ = \ ABBABAAB
+    \]
+    where the pairing is given as 
+    \[
+        \pi \ = \ (1 4)(2 3)(5 8) (6 7)
+    \]
+    The composition $(14)$ slices the configuration into 
+    \[
+        W_1 \ = \ BB 
+        \textAnd 
+        W_2' \ = \ BAAB 
+    \]
+    where each configuration is extracted from between ($W_1$) and 
+    outside ($W_2$) the matching $W^1 = W^4 = A$. Call 
+    this matching of $A$'s as the slicing matching.
+    Furthermore, the slicing matching $(58)$ slices $W_2'$ 
+    into another configuration. 
+    \[
+        W_2 \ = \ BB
+    \]
+
+    The observation has two implications. The first implication 
+    is that any matching that crosses with the slicing 
+    matching reduces a degree of freedom. Hence, crossings 
+    with slicing matching, which can be any pairings between $A$'s which have a 
+    crossing, 
+    result in a vanishing contribution. 
+
+    The second implication is that any pairing where the 
+    slicing compositions do not cross with other compositions 
+    always have a positive nonzero contribution. After reducing the entire 
+    product word according to all its slicing compositions, we 
+    we are left with finite number of sub-words that are comprised solely 
+    of $B$'s. For the word $W$, the remaining words are $W_1, W_2$. 
+
+    Composition between $B$'s lose one degree of freedom, regardless of 
+    crossings. So these always have a contribution.
+\end{proof}
+
+Finally, we present a proof of theorem \ref{thm: GOEBC}.
+\begin{proof} 
+    From proposition \ref{thm:baseForm}, we recognize that 
+    it suffices to count the number of integer sequences 
+    $i_1, \dots, i_{4k}$ that satisfy the pairing restrictions. 
+    Fix a pairing $\pi$ that matches all the GOE $A$'s and a
+    pairing $\delta$  that pairs the Block Circulnat $B$'s. 
+    From 
+    We first configure the modular residue of $i$'s mod $m$. 
+    Clearly, by proposition \ref{thm:pairingRule}, the number of such configurations are \footnote{Refer to \cite{MS} 1.7 for details. $\#(\pi)$ denotes the number of orbits of the permutation $\pi$} 
+    \[
+    m^{
+        \# ((\pi *_W \delta)\circ \gamma_{2k})
+    }
+    \]
+    Move on to 
+    choose the value of $\lfloor i / m \rfloor$. 
+    We know that as long as the slicing matchings of $A$ do 
+    not cross with other matchings, the degree of freedom 
+    is not reduced. Otherwise, the contribution is can be ignored 
+    at the limit $N \rightarrow \infty$. Thus, the ways to choose 
+$\lfloor i / m \rfloor$ is 
+\begin{equation}
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+\end{equation}
+where $\mathbb{1}_{(\pi*_w\delta)}$ is defined to be $1$ if and only if 
+the pairing $(\pi*_w\delta)$ is non-crossing in the sense of proposition 
+\ref{thm:pairingRule} and zero otherwise. 
+
+The variance of all the random variables involved in the matricies are 
+fixed to be $1$. Thus, from proposition \ref{thm:baseForm}, we obtain 
+\label{thm: GOEBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+\end{proof}
+
+\begin{remark}
+    Using a result from group theory, we can rewrite the number of orbits of 
+    a permutation as a genus of a graph that embeds the permutation, and hence 
+    the following formula holds
+    \begin{equation}
+    \mu_N^{(2k)} \ = \ 
+        \sum_{W, \pi, \delta} m^{-2g} \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+    where $g$ is the minimum genus of the graph correlated to 
+    $((\pi *_W \delta) \circ \gamma_{2k} )$. 
+\end{remark}
+
+
+\section{Anti-Commutator of Palindromic Toeplitz}
+Consider the anti-commutator $\{A_N,B_N\}:=A_NB_N+B_NA_N$, where $\{A_N\}_{N}, \{B_N\}_{N}$ are independent Palindromic Toeplitz ensembles with entries drawn from $\mathcal{N}_\R(0,1)$. We compute the $k^{th}$ moment of $A_NB_N+B_NA_N$. The normalizing factor in this case is $N^k$ instead of $N^{k/2}$.
+
+\textbf{Claim:} If $A,B$ are both Palindromic Toeplitz matrices as defined above the moments of the anticommutator, $AB+BA$, denoted $M_k$ for the $k$th moment are $0$ if $k$ is odd and $2^k\cdot ((k-1)!!)^2$ if $k$ is even.
+
+\textbf{Proof Sketch:} For $k$ even we can just use $2k$ instead and prove that $M_{2k}=2^{2k}\cdot ((2k-1)!!)^2$. By the eigenvalue trace lemma we know that $M_k=\frac{1}{N^{k+1}}\mathbb{E}[\text{Tr}((AB+BA)^k)]$ and by binomial expansion we see that this can be split up into terms of the form $\mathbb{E}[\text{Tr}(ABBABAAB...BAAB)]$ with $k$ pairs of $AB$s or $BA$s in a row. Also we can ignore the $N^{k+1}$ term until we normalize at the end. In any case we see that $\mathbb{E}[\text{Tr}(ABBABAAB...BAAB)] $ \newline  $=\sum_{1\leq i_1,i_2,...,i_{2k}\leq N}\mathbb{E}[a_{i_1,i_2}b_{i_2,i_3}b_{i_3,i_4}a_{i_4,i_5}...a_{i_{2k-1},i_{2k}}b_{i_{2k},i_1}]$. Clearly, since all of the matrix entries are assumed to have mean $0$, we need to have everything in pairs at least and if any of them are in a triple or more we see that the number of degrees of freedom is $\leq \frac{2k-1}{2}+1$ where the $2k-1$ comes from having $2k-3$ indices in pairs and at least one triple that adds $+1$ and another $+1$ from the choice of the first term $i_1$, so this proves that these must be pairs. Note that the indices being $a$ and $b$ doesn't matter here but it will when we need to count pairs.
+
+So now we see that for odd moments we have products of the form $ABABBABA...AB$ where the number of $A$ terms is odd so in our formula $\mathbb{E}[\text{Tr}(ABBABAAB...BAAB)]=\sum_{1\leq i_1,i_2,...,i_{2k}\leq N}\mathbb{E}[a_{i_1,i_2}b_{i_2,i_3}b_{i_3,i_4}a_{i_4,i_5}...a_{i_{2k-1},i_{2k}}b_{i_{2k},i_1}]$ we have an odd number of $a_{i_\ell,i_{\ell+1}}$ terms so we cannot properly pair these and the $a$ terms are independent of the $b$ terms so we cannot have crossing pairs so this proves that all of the odd moments are $0$.
+
+Now we can move to even moments. Here we can write $M_{2k}$ and we see that we have a sum of the form $\mathbb{E}[\text{Tr}(ABBABAAB...BAAB)]=\sum_{1\leq i_1,i_2,...,i_{4k}\leq N}\mathbb{E}[a_{i_1,i_2}b_{i_2,i_3}b_{i_3,i_4}a_{i_4,i_5}...a_{i_{4k-1},i_{2k}}b_{i_{4k},i_1}]$ and if we have these properly paired up they would contribute $1$ since the variance of all of these terms is assumed to be $1$. So we can count the number of ways to pair up terms. We know that $a$ terms can only be paired with other $a$ terms and there are $2k$ of these terms so it is well known that there are $(2k-1)!!$ ways to pair up these terms, similarly for the $b$ terms there are also $(2k-1)!!$ ways to pair. Once we have these paired up we can assign the actual indices $i_1,i_2,...,i_{4k}$ and from the Toeplitz matrix paper we see that the number of ways to assign these indices given the pairs is on the order of $1N^{k+1}$ with coefficient $1$, note that this step is independent of choices of $A$s and $B$s so we can lift this argument directly. So this means that for a specific list of ABABAB...BA we have $\mathbb{E}[\text{Tr}(ABBABAAB...BAAB)]=((2k-1)!!)^2\cdot N^k$. Now note that there are a total of $2^{2k}$ configurations since we are expanding $(AB+BA)^{2k}$ so inductively there are $2^n$ terms in $(AB+BA)^n$ and the expansion of $(AB+BA)^{n+1}$ are just the configurations for $(AB+BA)^{n}$ but with an $AB$ or $BA$ at the end which multiplies a factor of $2$. So adding these together we get that $M_{2k}=\frac{1}{N^k}\mathbb{E}[\text{Tr}(AB+BA)^k]=\frac{2^{2k}}{N^{k+1}}\sum_{1\leq i_1,i_2,...,i_{4k}\leq N}\mathbb{E}[a_{i_1,i_2}b_{i_2,i_3}b_{i_3,i_4}a_{i_4,i_5}...a_{i_{4k-1},i_{2k}}b_{i_{4k},i_1}]=2^{2k}\cdot ((2k-1)!!)^2$ so this proves the moments of this distribution.
+
+\section{anti-commutator of Wigner Matrices}
+
+In this section, we consider the anti-commutator of two independent Gaussian Wigner Matrices. The main reference for the first part of this section is Mingo and Speicher's Free Probability and Random Matrices. 
+
+\begin{defn}
+For a positive integer $n$, let $[n]=\{1, 2, \cdots, n\}$, and $\mathcal{P}(n)$ denote all partitions of the set $[n]$, i.e. a \textbf{partition} $\pi=(V_1,\cdots, V_k)$ of $\mathcal{P}(n)$ is a tuple of subsets of $[n]$ such that $V_i\neq\emptyset$ for all $i$, $V_1\cup\cdots\cup V_k=[n]$, and $V_i\cap V_j=\emptyset$ for $i\neq j$. We call $V_1, V_2, \cdots, V_k$ \textbf{blocks} of $\pi$. A partition is called \textbf{pairing} if each block is of size 2. We denote all the pairings of $[n]$ as $\mathcal{P}_2(n)$.
+\end{defn}
+
+\begin{defn}
+A partition $\pi=(V_1,\cdots, V_k)$ of $[n]$ is \textbf{crossing} if there exists blocks $V$ and $W$ with $i, k\in V$ and $j, l\in W$ such that $i<j<k<l$.
+\end{defn}
+
+\begin{defn}
+Let $\Sigma=\{\a_1,\a_2,\cdots, \a_k\}$ be a finite alphabet and $\phi_k:=\a_1\a_2\cdots\a_k$. Define the canonical action of the symmetric group $S_k$ on $\phi_k$ is simply $\sigma \circ \phi_k:=\a_{\sigma(1)}\a_{\sigma(2)}\cdots \a_{\sigma(k)}$ for all $\sigma\in S_k$. Then a \textbf{$k$ configuration} is the string comprised of concatenation of group action on some $\phi_k$, i.e. $\sigma_1\circ \phi_k\sigma_2\circ \phi_k\cdots\sigma_\ell \circ \phi_k$ for some $\ell\geq 1$.
+\end{defn}
+In our case, we let $\Sigma:=\{\a_1, \a_2\}$, $a:=\a_1$ and $b:=\a_2$.
+\begin{prop}[Wick's formula]
+Suppose that $(X_1, \cdots, X_n)$ is a real Gaussian random vector. Then
+\begin{align*}
+\mathbb{E}[X_{i_1}, \cdots, X_{i_k}] \ = \ \sum_{\pi\in \mathcal{P}_2(k)}\mathbb{E_\pi}[X_{i_1},\cdots, X_{i_k}]
+\end{align*}
+for any $i_1,\cdots, i_k\in [n]$.
+\end{prop}
+
+Now we consider the $k^{th}$ moment of the anti-commutator $A_NB_N+B_NA_N$, where $A_N=(a_{ij})$ and $B_N=(b_{ij})$ are independent Gaussian Wigner matrices with entries drawn from $\mathcal{N}_\R(0,1)$:
+\begin{align*}
+M_k \ = \ \mathbb{E}[\textup{Tr}(A_NB_N+B_NA_N)^k] \ = \ \sum_{k\textup{ configuration}}\sum_{1\leq i_1,\cdots, i_k\leq N}\mathbb{E}[c_{i_1i_2}c_{i_2i_3}\cdots c_{i_{2k}i_1}]  
+\end{align*}
+subject to the restriction that a cyclic product $c_{i_1i_2}c_{i_2i_3}\cdots c_{i_{2k}i_1}$ is of a valid 2 configuration iff $(c_{i_{2m-1}i_{2m}}, c_{i_{2m}i_{2m+1}})=(a_{i_{2m-1}i_{2m}}, b_{i_{2m}i_{2m+1}})$ or $(b_{i_{2m-1}i_{2m}}, a_{i_{2m}i_{2m+1}})$ for all $1\leq m\leq k$. For example, when $k=2$, $a_{i_1i_2}b_{i_2i_3}b_{i_3i_4}a_{i_4i_1}$ is of a valid 2 configuration while $a_{i_1i_2}a_{i_2i_3}b_{i_3i_4}b_{i_4i_1}$ is not of a valid 2 configuration.
+ %Now, Wick's formula tells us that $\mathbb{E}[c_{i_1i_2}c_{i_2i_3}\cdots c_{i_ki_1}]=0$ when $k$ is odd; when $k$ is even, we have
+%\begin{align*}
+%\mathbb{E}[c_{i_1i_2}c_{i_2i_3}\cdots c_{i_{k}i_1}] \ = \ \sum_{\pi\in\mathcal{P}_2(k)}\mathbb{E}[c_{i_1i_2}c_{i_2i_3}\cdots c_{i_ki_1}]
+%\end{align*}
+It's clear that $M_k=0$ when $k$ is odd, since the contribution from each type of configuration is $o(N^{k+1})$, but the number of types of configurations depends only on $k$. When $k$ is even, by Wick's formula
+\begin{align*}
+\mathbb{E}[c_{i_1i_2}c_{i_2i_3}\cdots, c_{i_{2k}i_1}] \ = \ \sum_{
+\pi\in\mathcal{P}_2(2k)}\mathbb{E}_\pi[c_{i_1i_2},c_{i_2i_3},\cdots, c_{i_{2k}i_1}].
+\end{align*}
+Since $\mathbb{E}[c_{i_ri_{r+1}}c_{i_si_{s+1}}]=1$ when $i_r=i_{s+1}$ and $i_{r+1}=i_{s}$ and is 0 otherwise (how to justify that we can't have $i_{r}=i_s$ and $i_{r+1}=i_{s+1}$), then $\mathbb{E}[c_{i_1i_2}c_{i_2i_3}\cdots c_{i_{2k}i_1}]$ is the number of pairings $\pi$ of $[2k]$ such that $i_r=i_{s+1}$, $i_{r+1}=i_s$, and $a$'s and $b$'s are matched within themselves. Now, we think of a tuple of indices $(i_1,\cdots, i_{2k})$ as a function $i:[2k]\rightarrow [N]$ and write a pairing $\pi=\{(r_1,s_1), (r_2, s_2), \cdots, (r_{k},s_{k})\}$ as the product of transpositions $(r_1,s_1)(r_2,s_2)\cdots(r_k,s_k)$. We also take $\gamma_{2k}$ to be the cycle $(1, 2, 3, \cdots, 2k)$. If $\pi$ is a pairing of $[2k]$ and $(r,s)$ is a pair of $\pi$, then we can express our condition $i_r=i_{s+1}$ as $i(r)=i(\gamma_{2k}(\pi(r)))$ and $i_s=i_{r+1}$ as $i(s)=i(\gamma_{2k}(\pi(s)))$. Hence, $\mathbb{E}_\pi[c_{i_1i_2}c_{i_2i_3}\cdots, c_{i_{2k}i_1}]=1$ if $i$ is constant on the orbits of $\gamma_{2k}\pi$ and $0$ otherwise. Let $\#(\sigma)$ denote the number of cycles of a permutation $\sigma$, then
+\begin{align*}
+M_k \ = \ \mathbb{E}[\textup{Tr}(A_NB_N+B_NA_N)^k] &\ = \ \sum_{k\textup{ configuration}}\sum_{\pi\in \mathcal{P}_2(2k)}N^{\#(\gamma_{2k}\pi)}
+\end{align*}
+Using a theorem of Biane that embeds $NC(n)$ into $S_n$, we obtain the following result which implies that the only pairings $\pi$ that contributes are all the non-crossing pairings.
+\begin{prop}
+If $\pi$ is a pairing of $[2k]$ then $\#(\gamma_{2k}\pi)\leq k-1$ unless $\pi$ is non-crossing in which case $\#(\gamma_{2k}\pi)=k+1$.
+\end{prop}
+
+\begin{lemma} For sequences $f,g$ with conditions $f(0)=f(1)=1$ and $g(1)=1$ and recurrence defined by
+
+\[
+f(k)=2\sum_{j=1}^{k-1}g(j)f(k-j) + 2f(k-1) + \sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}(1+\mathbf{1}_{x_1>0})(1+\mathbf{1}_{x_2>0})f(x_1)f(x_2)g(k-1-x_1-x_2)
+\]
+and 
+\[
+g(k)=2f(k-1) + \sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}(1+\mathbf{1}_{x_1>0})(1+\mathbf{1}_{x_2>0})f(x_1)f(x_2)g(k-1-x_1-x_2)
+\]
+we get that the $2k$th moment is $M_{2k}=2f(k)$.
+\end{lemma}
+\begin{proof} We can prove this inductively. Note that $f$ here represents the number of non-crossing partitions of $\{i_1,i_2,...,i_{4k}\}$ into pairs for cyclic products starting with an $a$ term and $g$ represents the number of non crossing partitions starting and ending with $a$ such that the starting and ending $a$s are partitioned together(such as $a_{i_1,i_2}b_{i_2,i_3}...a_{i_{4k},i_1}$ with $i_{4k}=i_2$).
+
+So from these definitions it suffices to find $g(k)$ and we get that $f(k)=g(k) + m(k)$ where $m$ is the number of noncrossing partitions such that $a_{i_1,i_2}$ is not paired up with $a_{i_{4k},i_1}$. This means that $a_{i_1,i_2}$ is paired with some $a_{i_{4j},i_{4j+1}}$ with $j<k$, note that $4j$ is even because if it was odd we would get that there are an odd number of terms between so it wouldn't be possible to make non crossing pairings, it is a multiple of $4$ since we must have two more $b$s than $a$s between the configuration as explained in the next sentence. We also know that between indices $i_2,i_3,...,i_{2j-1}$ we must have two more $b$s than $a$s because otherwise we would get that after $a_{i_{4j},i_{4j+1}}$ there would be two more $a$s than $b$s and if there were any more than two more $b$s than $a$s this would also contradict the conditions. So this means that the non crossing pairings within $a_{i_1,i_2},b_{i_2,i_3},...,a_{i_{4j},i_{4j+1}}$ is $g(j)$ because we are constrained to the fact that $a_{i_1,i_2}=a_{i_{4j},i_{4j+1}}$. Then for the remaining non crossing pairs we have any configuration of indices from $4j+1$ through $4k$ without any restrictions which is equivalent to $2f(k-j)$ by definition, note that we can multiply by $2$ since we can start with either $a$ or $b$. So since $j$ can be anything from $1$ to $k-1$ this proves that $m(k)=2\sum_{j=1}^{k-1}g(j)f(k-j)$.
+
+So now it suffices to find $g(k)$. Since we start and end with $a$ in this case we must have $b_{i_2,i_3}$ and $b_{i_{4k-1},i_{4k}}$. If $b_{i_2,i_3}$ and $b_{i_{4k-1},i_{4k}}$ are also paired up we see that the remaining indices are essentially free which adds a term of $2f(k-1)$ since this is equivalent to pairing up the $4k-4$ remaining terms without any constraints. The other case is that $b_{i_2,i_3}$ is matched with $b_{i_{4x_1+3},i_{4x_1+4}}$ and $b_{i_{4k-1},i_{4k}}$ is matched with $b_{i_{4k-4x_2-1},i_{4k-4x_2-1}}$ with $4x_1+3<4k-4_{x_2}-1$ which means that $x_1+x_2<k-1$ so we get the sum $\sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}f(x_1)f(x_2)g(k-1-x_1-x_2)$ where we get a factor of 2 if $x_1>0$ since there is no restriction between the number of terms between $b_{i_2,i_3}$ and $b_{i_{4x_1+3},i_{4x_1+4}}$ starting with $a$s or $b$s and similarly for $x_2$. So this gives our formula for $f(k)$ counting the non-crossing partitions starting with $a$, but since we can just switch every $a$ to $b$ and every $b$ to $a$ for any partition we multiply by $2$ to get all of the different partitions which gives the even moments as $M_{2k}=2f(k)$.
+\end{proof}
+
+\begin{defn}
+A natural extension of the anticommutator is the \textbf{$\ell$-anticommutator} of matrices $A_1,A_2,...,A_\ell$ which is the sum of all possible products containing one of each matrices. Note that every one of these products corresponds to a permutation of these matrices that defines the ordering. This means that the $\ell$-anticommutator can be written as 
+\[
+\sum_{\sigma\in S_\ell}A_{\sigma(1)}A_{\sigma(2)}...A_{\sigma(\ell)}.
+\]
+\end{defn}
+
+Another natural question to ask is about the moments of the $\ell$-anticommuator when $A_1,A_2,...,A_\ell$ are all independent Wigner matrices. This is resolved by the recursion given in the following theorem
+
+\begin{theorem}
+For sequences $f_0,f_1,...,f_\ell$ defined such that $f_0(0)=1$, $0=f_1(0)=f_2(0)=...f_\ell(0)$ and $1=f_0(1)=f_1(1)=f_2(1)=...=f_\ell(1)$. With the recurrence relations for $k>1$ given by
+\[
+f_\ell(k)= k!\cdot f_0(k-1)
+\]
+\[
+f_{\ell-1}(k)=f_\ell(k)+\sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}} (\ell-1)!(1+(\ell!-1)\cdot \mathbf{1}_{x_1>0})(1+(\ell!-1)\cdot \mathbf{1}_{x_2>0})f_0(x_1)f_0(x_2)f_1(k-x_1-x_2-1)
+\]
+and for any $0< m<\ell-1$ the recurrence
+\[
+f_m(k)=f_{m+1}(k)+\sum_{\substack{1\leq x_1,x_2<k\\ x_1+x_2<k}}(\ell-m)!(m-1)!f_m(x_1)f_m(x_2)f_{\ell-m+1}(k-x_1-x_2)
+\]
+and finally
+\[
+f_0(k)=f_1(k)+k!\sum_{j=1}^{k-1}f_1(j)f_0(k-j)
+\]
+then the $2k$th moment of the $\ell$-anticommutator is 
+\[
+M_{2k}=\ell! \cdot f_0(k)
+\]
+\end{theorem}
+
+\begin{proof}
+Note that by the same lemmas given in the case for the $2$-anticommutator we get that if two terms are matched their indices must add to $1$ mod $2\ell$ the proof follows in the same way. Similarly to the previous lemma for the $2$-anticommutator we see that $f_m(k)$ counts the sequences of length $2k\ell$ such that the first $\ell$ terms are $A_1A_2...A_\ell$ and the first $m$ terms are matched with the final $m$ terms which must be in the same order. So then we see that if $A_{m+1}$ is matched to the next remaining term we get that this is counted by $f_{m+1}(k)$ so this is where the first term comes from. Then we see that if the $A_{m+1}$ term at the front it matched to the middle then it is matched to a term of index $2\ell x_1-m$, the number of internal matchings between these indices is $f_m(x_1)$. Similarly if we match from the end we must match to a term of the form $2\ell (k-x_2)+m$ for which there are $f_m(x_2)$ choices with an extra factor of $(\ell-m)!$ since we can order the final $\ell-m$ terms arbitrarily since the final $m$ terms have been fixed to be matched to the first $k$ terms. So then we see that between $2\ell x_1-m$ and $2\ell (k-x_2)+m+2$ there are $2m+2 \mod{2k}$ terms which is equivalent to fixing $\ell-m + 1$ terms on the outside which gives a factor of $f_{\ell-m+1}(k-x_1-x_2)$ and there are $(m-1)!$ ways to arrange the $m-1$ terms on the inside which gives the final sum we need to add to get $f_m(k)$. Note that the $f_{\ell-1}(k)$ case is a bit different but it works in the same way it was described in the $2$-anticommutator case. Also the $f_0$ case works in the exact same way so this proves the formula for the recurrence.
+
+So then we see that $f_0(k)$ represents the number of non-crossing partitions with $2k\ell$ terms with the first $\ell$ terms fixed to be $A_1A_2...A_\ell$ so if we apply any permutation to all of these terms we get that this would preserve the non-crossing of the partition and count all of the possible non-crossing partitions. We also know from earlier lemmas that the number of non-crossing partitions gives the even moments which means that the even moments would be $M_{2k}=\ell! \cdot f_0(k)$.
+\end{proof}
+
+\begin{lemma}\label{blockslemma}
+Fix $m\geq 1$, consider all the $S$-classes with $\abs{S}=m$. Then a $S$-class with a matching $\sim$ yields the highest degrees of freedom iff it satisfies the following conditions:
+\begin{enumerate}
+\item It consists only of the following blocks: (i) 1-block of $a$; (ii) 1-block of $b$; (iii) 2-block of $aa$, (iv) 2-block of $bb$;
+\item each 1-block is paired up to another 1-block and the letters in each 2-block are paired up to each other.
+\end{enumerate}
+ 
+\end{lemma}
+\begin{proof}
+Similar to Lemma 3.14 of \cite{split}, we see that when a 1-block of $a$ (resp. $b$) is paired up to another 1-block of $a$ (resp. $b$) or when the letters in a 2-block of $aa$ (resp. $bb$) are paired up to each other, the degree of freedom lost per block is 1. Now, fix a configuration $\mathcal{C}$ with $\a$ $a$'s and $\b$ $b$'s and a matching $\sim$. Suppose that $\sim$ partitions all the $a$'s into equivalent classes $\mathcal{E}_1, \cdots, \mathcal{E}_{s_a}$ and $\mathcal{E}'_1, \cdots, \mathcal{E}'_{s_b}$. Then naively, without any matching restriction, the degree of freedom of $\mathcal{C}$ is
+\begin{align*}
+\mathcal{\Tilde{F}}_{\mathcal{C}} \ = \ \sum_{\textup{blocks } \mathcal{B}}(\textup{len}(\mathcal{B})+1) \ = \ \a+\b+m
+\end{align*}
+To find the actual degree of freedom $\mathcal{F}_\mathcal{C}$ of $\mathcal{C}$, we can choose two indices from each equivalence class. However, adjacent $a$'s and $b$'s from different equivalent classes (which we call cross-overs) place restrictions on the indices and cause additional loss of degree of freedom. Let the loss of degree of freedom due to cross-overs be $\gamma$, then $\mathcal{F}_\mathcal{C}=2s_a+2s_b-\gamma$. Thus, the degree of freedom lost per block is
+\begin{equation}\label{degreeoffreedom}
+\mathcal{\overline{L}}_\mathcal{C} \ = \ \frac{\mathcal{\Tilde{F}_C}-\mathcal{F}_C}{m} \ = \ 1+\frac{\a+\b+\gamma-2s_a-2s_b}{m} 
+\end{equation}
+Since $\abs{\mathcal{E}_{i}},\abs{\mathcal{E}'_{j}}\geq 2$ for $1\leq i\leq s_a$ and $1\leq j\leq s_b$, then $s_a\leq \frac{\a}{2}$ and $s_b\leq \frac{\b}{2}$, and so $\mathcal{\overline{L}}\geq 1$. We've shown that if $\mathcal{C}$ satisfies the conditions (1) and (2), then $\mathcal{\overline{L}}_\mathcal{C}=1$. Hence, it suffices to show that if $\mathcal{C}$ with a matching $\sim$ loses 1 degree of freedom per block (or equivalently, satisfies $\frac{\a+\b+\gamma}{s_a+s_b}=2$), then it must satisfy the conditions (1) and (2). Since $\abs{\mathcal{E}_{i}},\abs{\mathcal{E}'_{j}}\geq 2$, then $\a\geq 2s_a$ and $\b\geq 2a_b$. Hence, if some $\abs{\mathcal{E}_{i}}>2$ or $\abs{\mathcal{E}'_{j}}> 2$, then $\frac{\a+\b+\gamma}{s_a+s_b}>2$. Moreover, if $\gamma>0$, then $\frac{\a+\b+\gamma}{s_a+s_b}>2$. Hence, if $\mathcal{C}$ with a matching $\sim$ loses 1 degree of freedom per block, then all the blocks are paired up and there can be no cross-overs from different equivalent classes. Thus, the only possible $S$-classes and matching are those satisfying conditions (1) and (2).
+\end{proof}
+
+\begin{defn}
+An $S_{ab}$-class is a 4-tuple $(m_{1a},m_{2a},m_{1b},m_{2b})$ where $m_{ic}$ represents how many $i$-blocks there are of variable $c\in \{a,b\}$. We know from a previous lemma that only the cases where blocks are $1$-blocks or $2$-blocks that are matched together are the ones that contribute to the trace calculation.
+\end{defn}
+
+We consider the limiting blip behavior that arises from anti-commutator of two ensembles. First off, we look at the anti-commutator of $k$-checkerboard and $j$-checkerboard, where $k$ and $j$ are coprime to each other.
+
+\begin{lemma}
+The total contribution to $\mathbb{E}\text{Tr}(AB+BA)^\eta$ of an $S$-class with $m_{1a}$ 1-blocks of $a$, $m_{1b}$ 1-blocks of $b$, $m_{2a}$ 2-blocks of $a$, and $m_{2b}$ 2-blocks of $b$ where we define $m_1=m_{1a}+m_{1b}$ and $m_2=m_{2a}+m_{2b}$  is 
+\begin{equation*}
+\resizebox{1.0\hsize}{!}{$\frac{2^{m_1}\eta^{m_1+m_2}}{m_{a1}!m_{b1}!m_{a2}!m_{b2}!}2^{\frac{m_{1a}+m_{1b}}{2}}(m_{1a})!!(m_{1b})!!\left(\frac{1}{k}\right)^{\eta-m_{1a}-2m_{2a}}\left(\frac{1}{j}\right)^{\eta-m_{1b}-2m_{2b}}\left(1-\frac{1}{k}\right)^{\frac{m_{1a}}{2}+m_{2a}}\left(1-\frac{1}{j}\right)^{\frac{m_{1b}}{2}+m_{2b}}N^{2\eta-|S|}$}
+\end{equation*} 
+\end{lemma}
+
+\begin{proof}
+First we see that the number of ways to choose where the blocks are is on the order of $\frac{2^{m_1}\eta^{m_1+m_2}}{m_{a1}!m_{b1}!m_{a2}!m_{b2}!}$, note that we choose $\eta$ to be large so we ignore the lower order terms. First, we can choose where the $2$-blocks are. There are $m_2$ total $2$-blocks, but we have the restriction that for any $2$-block must have its first $a$ or $b$ at an even index due to the expansion of $(AB+BA)^\eta$. So since we are calculating the $\eta$th moment, there are $2\eta$ terms, so there are $\eta$ possible starting points, also note that no two $2$-blocks can be directly adjacent, note that two $2$-blocks have at least one index between them that will be free, note that this is important for when we actually calculate the number of ways we can assign indices. So there are originally $\binom{\eta}{m_2}=\frac{\eta^{m_2}}{m_2!}+O(\eta^{m_2-1})$ choices for the $2$-blocks but since we cannot have any pair next to each other we get that if we fix two $2$-blocks to be adjacent we get that we must subtract at most $\eta\cdot \binom{\eta-2}{m_2-2}=O(\eta^{m_2-1})$ which means that the dominating term is $\frac{\eta^{m_2}}{m_2!}$ so then we can separate these into $a$-blocks and $b$-blocks which we can do arbitrarily giving \[\frac{\eta^{m_2}}{m_2!}\cdot\binom{m_2}{m_{2a}}=\frac{\eta^{m_2}}{m_{2a}!m_{2b}!}.\]
+
+So now that we have placed the $2$-blocks we can place the $1$-blocks note that the $1$-blocks do not have any restriction on the parity of the starting index and can start at any remaining open index. We see that every $2$-block takes up $4$ spaces since they are all of the form $waaw$ or $wbbw$ so to choose the remaining squares directly there are $\binom{2\eta-4m_2}{m_1}=\frac{2^{m_1}\eta^{m_1}}{m_1!}$ but we again have the restriction that no two of $1$-blocks are directly adjacent or even less than three $w$s apart (i.e. $wabw$) so if we set two $1$-blocks to be within three adjacent places we subtract a term on the order of $(\eta-4m_2)\cdot 3\binom{\eta-4m_2-2}{m_1-2}=O(\eta^{m_1-1})$ which is much smaller than the dominating term. So there are $\frac{2^{m_1}\eta^{m_1}}{m_1!}$ ways to choose the places where we have $1$-blocks and we must separate them into $a$s or $b$s arbitrarily so we multiply by $\binom{m_1}{m_{1a}}$ and get 
+\[
+\frac{2^{m_1}\eta^{m_1}}{m_1}\cdot \binom{m_1}{m_{1a}}=\frac{2^{m_1}\eta^{m_1}}{m_{1a}!m_{1b}!}
+\]
+So this proves that the number of ways to assign all the $1$ and $2$-blocks for $S$ is 
+\[
+\frac{2^{m_1}\eta^{m_1+m_2}}{m_{a1}!m_{b1}!m_{a2}!m_{b2}!}.
+\]
+ 
+So now it only remains to count the number of ways to assign indices. By a previous lemma, given the total number of blocks, the $S$-classes with the highest degree of freedom satisfy that the average loss of degree of freedom per block is 1. Since there are $\abs{S}$ blocks, and the loss of degree of freedom comes solely from matching $a$'s ans $b$'s in those blocks, then naively the total number of ways to assign indices to an arbitrary cyclic product in the $S$-class is $N^{2\eta-\abs{S}}$. However, this fails to account for the following restrictions on the indices: (1) indices of a weight $w_{i_ri_{r+1}}$ from $A$ satisfies $i_r\equiv i_{r+1}\textup{ (mod $k$)}$; (2) indices of a weight $v_{i_ri_{r+1}}$ from $B$ satisfies $i_r\equiv i_{r+1}\textup{ (mod $j$)}$; (3) indices of a non-weight $a_{i_ri_{r+1}}$ satisfies $i_{r}\not\equiv i_{r+1}\textup{ (mod $k$)}$; (4) indices of a non-weight $b_{i_ri_{r+1}}$ satisfy $i_{r}\not\equiv i_{r+1}\textup{ (mod $j$)}$.
+
+We first turn to pairing up the $a$'s and $b$'s within their 1 and 2-blocks. From before, we know that the $a$'s and $b$'s within 2-blocks must be matched together. For the 1-blocks, there are $m_{1a}!!$ ways of pairing up the $m_{1a}$ 1-blocks of $a$, and similarly $m_{1b}!!$ ways of pairing up the $m_{1b}$ 1-blocks of $b$. For each pair of 1-blocks, there are two ways of assigning their indices. For example, if $a_{i_r i_{r+1}}$ is paired with $a_{i_s i_{s+1}}$, we can either set $i_r = i_s$ and $i_{r+1} = i_{s+1}$, or $i_r = i_{s+1}$ and $i_{r+1} = i_s$. With $m_1 = m_{1a}+m_{1b}$ total 1-blocks, this contributes a term of $2^{\frac{m_1}{2}}$. 
+
+To incorporate the above restrictions in assigning indices, we first look at those of the non-weight $a$'s and $b$'s. For each pair of $a$'s, after assigning the first index, the second must \textit{not} be congruent to the first mod $k$. This reduces the number of possibilities for the second index from $N$ to $N\left(1-\frac{1}{k}\right)$, or, since we are collecting all our $N$'s in our naive expression $N^{2\eta-\abs{S}}$, this introduces a factor of $\left(1-\frac{1}{k}\right)$ per pair of $a$'s. We have in total $\frac{m_{1a}}{2}+m_{2a}$ pairs of $a$'s and hence, restrictions in assigning the indices of all $a$'s yield overall a term of $\left(1-\frac{1}{k}\right)^{\frac{m_{1a}}{2}+m_{2a}}$. A parallel argument follows for the $b$'s whose indices must not be congruent to each other mod $j$, which yields a term of $\left(1-\frac{1}{j}\right)^{\frac{m_{1b}}{2}+m_{2b}}$.
+
+We now look at the restrictions in assigning indices to weights $w$ and $v$. We show first that configurations containing a single weight or two weights of the same kind in isolation (e.g. $avva$ or $bwb$) may not allow for a consistent choice of indices given how the indices for our non-weight entries have been assigned in the previous paragraph.
+
+\begin{example}
+    Consider the configuration $$\cdots a_{i_1i_2}v_{i_2i_3}v_{i_3i_4}a_{i_4i_5}\cdots.$$ Then we must have $$i_2 \equiv i_3 \equiv i_4 \textup{ (mod $j$)}.$$ 
+    However, in assigning the indices of the $a$'s as described above, we only specified that $i_2 \not\equiv i_1 \textup{ (mod $j$)}$ and $i_4 \not\equiv i_5 \textup{ (mod $j$)}$ and not necessarily that $i_2 \equiv i_4 \textup{ (mod $j$)}$. Hence it may be that we end up with an inconsistent choice of indices.
+\end{example}
+
+We therefore exclude such configurations from our calculations, justifying this by noting that their contributions becomes small and negligible as $\eta$ gets large. 
+
+For weights in the remaining configurations, after specifying the first index of a weight $w$, the second index must be congruent to it mod $k$. This reduces the number of possibilities for this second index from $N$ to $\frac{N}{k}$ and again, with all the $N$'s collected in $N^{2\eta-\abs{S}}$ and $\eta - m_{1a} - 2m_{2a}$ number of weights $w$, restrictions in assigning the indices of all $w$'s yield overall a term of $\left(\frac{1}{k}\right)^{\eta - m_{1a} - 2m_{2a}}$. Similarly, with weights $v$ whose indices must be congruent to each other mod $j$, we get a term of $\left(\frac{1}{j}\right)^{\eta - m_{1b} - 2m_{2b}}$.
+
+\end{proof} 
+
+Now, we consider the limiting bulk and blip distribution of anti-commutator of GOE and $k$-checkerboard.
+
+\begin{lemma} For anticommutator of $A$ and $B$ where $A$ is a GOE and $B$ is $m$-checkerboard. For sequences $f,g$ with conditions $f(0)=f(1)=1$ and $g(1)=1$ and recurrence defined by
+
+\[
+f(k)=2\sum_{j=1}^{k-1}g(j)f(k-j) + 2f(k-1) + \sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}(1+\mathbf{1}_{x_1>0})(1+\mathbf{1}_{x_2>0})f(x_1)f(x_2)g(k-1-x_1-x_2)
+\]
+and 
+\[
+g(k)=2f(k-1) + \sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}(1+\mathbf{1}_{x_1>0})(1+\mathbf{1}_{x_2>0})f(x_1)f(x_2)g(k-1-x_1-x_2)
+\]
+we get that the $2k$th moment for $k>0$ is $M_{2k}=(1-\frac{1}{m})^{k}2f(k)$.
+\end{lemma}
+
+\begin{lemma} For anticommutator of $A$ and $B$ where $A$ is a $n$-checkerboard and $B$ is $m$-checkerboard. For sequences $f,g$ with conditions $f(0)=f(1)=1$ and $g(1)=1$ and recurrence defined by
+
+\[
+f(k)=2\sum_{j=1}^{k-1}g(j)f(k-j) + 2f(k-1) + \sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}(1+\mathbf{1}_{x_1>0})(1+\mathbf{1}_{x_2>0})f(x_1)f(x_2)g(k-1-x_1-x_2)
+\]
+and 
+\[
+g(k)=2f(k-1) + \sum_{\substack{0\leq x_1,x_2<k-1\\ x_1+x_2<k-1}}(1+\mathbf{1}_{x_1>0})(1+\mathbf{1}_{x_2>0})f(x_1)f(x_2)g(k-1-x_1-x_2)
+\]
+we get that the $2k$th moment for $k>0$ is $M_{2k}=2(1-\frac{1}{m})^{k}(1-\frac{1}{n})^{k}f(k)$.
+\end{lemma}
+%\textcolor{red}{I still think that our counting is wrong. For example, let's consider the cyclic product $w^{(b)}_{i_1i_2}a_{i_2i_3}w^{(b)}_{i_3i_4}w^{(a)}_{i_4i_5}w^{(b)}_{i_5i_6}a_{i_6i_1}$, where we match $a_{i_2i_3}$ with $a_{i_6i_1}$. Naively, 
+%there are $N$ choices for $i_1$, $\frac{N}{j}$ choices for $i_2$, $\left(1-\frac{1}{k}\right)N$ choices for $i_3$, $\frac{N}{j}$ choices for $i_4$, $\frac{N}{k}$ choices for $i_5$, and $\frac{N}{j}$ choices for $i_6$. But the problem is that now we can't guarantee all the $\frac{N}{j}$ choices of $i_6$ satisfies $i_3=i_6$ (we need $i_3=i_6$ since $a_{i_2i_3}$ and $a_{i_6i_1}$ are matched together).}
+
+For the anti-commutator of GOE and $k$-checkerboard, the bulk is of order $O(N)$ and the blips on either side of the bulk (each of which contains $k$ eigenvalues) are of order $O(N^{3/2})$. This can be easily justified using Weyl's inequality, by separating out the contribution of the bulk and the blip: $\{A_N,B_N\}=A_N(\overline{B_N}+\Tilde{B_N})+(\overline{B_N}+\Tilde{B_N})A_N=A_N\overline{B_N}+\overline{B_N}A_N+\Tilde{B_N}\overline{B_N}+\overline{B_N}\Tilde{B_N}$, where $\Tilde{B_N}$ is the weight matrix and $\overline{B_N}:=B_N-\Tilde{B_N}$. More precisely, the two blips are at $\pm\frac{1}{k}N^{3/2}+O(N)$, respectively.
+
+Since there are two blips, we need to use the following weight function to remove the contribution from other blips than the one we're looking at. Let $w_1=\frac{1}{k}$ and $w_2=-\frac{1}{k}$, then
+
+\begin{align*}
+f_1^{2n}(x) &\ = \ \left(\frac{x(2-x)(x-\frac{w_2}{w_1})(2-x-\frac{w_2}{w_1})}{(1-\frac{w_2}{w_1})^2}\right)^{2n} \\
+&\ = \ \left(\frac{x(2-x)(x+1)(3-x)}{4}\right)^{2n}\end{align*}
+
+
+\begin{defn}
+The \textbf{empirical blip spectral measure} associated to an $N\times N$ anti-commutator of GOE and $k$-checkerboard $\{A_N,B_N\}:= A_NB_N+B_NA_N$ around $w_iN^{3/2}$ is
+\begin{align*}
+\mu_{\{A_N,B_N\},i} \ = \ \frac{1}{k}\sum_{\lambda}f_i^{2n}\left(\frac{\lambda}{w_iN^{3/2}}\right)\delta\left(\frac{x-\left(\lambda-w_iN^{3/2}\right)}{N}\right)
+\end{align*}
+\end{defn}
+
+We set $i=1$ and look at the blip centered at $\frac{1}{k}N^{3/2}+O(N)$ first. Note that the polynomial $f_1^{2n}(x)$ can be written as $\sum_{\a=2n}^{8n}c_\a x^\a$. Then the expected $m$-th moment associated with the empirical blip spectral measure is
+\begin{align*}
+\mathbb{E}\left[\mu_{\{A_N,B_N\},1}^{(m)}\right] &\ = \ \mathbb{E}\left[\frac{1}{k}\sum_{\lambda}\sum_{\a=2n}^{8n}c_\a\left(\frac{k\lambda}{N^{3/2}}\right)^\a\left(\frac{\lambda-w_1N^{3/2}}{N}\right)^{m}\right] \\
+&\ = \ \mathbb{E}\left[\frac{1}{k}\sum_{\a=2n}^{8n}c_\a\left(\frac{k}{N^{3/2}}\right)^\a\left(\frac{1}{N^m}\sum_{i=0}^m \binom{m}{i}\left(-\frac{N^{3/2}}{k}\right)^{m-i}\textup{Tr}(\{A_N,B_N\}^{\a+i})\right)\right] \\
+&\ = \ \frac{1}{k}\sum_{\a=2n}^{8n}c_\a\left(\frac{k}{N^{3/2}}\right)^\a\frac{1}{N^m}\sum_{i=0}^m \binom{m}{i}\left(-\frac{N^{3/2}}{k}\right)^{m-i}\mathbb{E}[\textup{Tr}(\{A_N,B_N\}^{\a+i})]
+\end{align*}
+
+\begin{lemma}\label{Sclasscontribution} The total contribution to $\mathbb{E}\text{Tr}\{A_N,B_N\}^\eta$ of an $S_{ab}$ class $C$ with $m_1$ 1-blocks of $a$s and $m_2\leq \frac{\eta-m_1}{2}$ 2-blocks of $a$s is 
+\[
+p(\eta)\left(\left(\frac{N^{\frac{3}{2}\eta -\frac{1}{2}m_1}}{k^{\eta}}\right) + O\left(\frac{N^{\frac{3}{2}\eta -\frac{1}{2}m_1-1}}{k^\eta}\right)\right)\mathbb{E}_k\textup{Tr}C^{m_1}
+\]
+
+Where $p(\eta)=\frac{2\eta^{m_1}}{m_1!}+O(\eta^{m_1-1})$ and $C$ is a $k\times k$ Gaussian Wigner matrix.
+\end{lemma}
+
+\begin{proof}
+First we note that by \ref{blockslemma} any $S_{ab}$-class with at least one $b$ would have fewer degrees of freedom meaning that they would contribute at most $O\left(\left(\frac{N}{k}\right)^{3/2 \eta - m_1/2-1}\right)$ so we only need to consider the case where $m_2=\frac{\eta-m_1}{2}$ and there are no $b$s.
+
+First we count the number of ways we can have a list of $m_1$ 1-blocks and $\frac{\eta-m_1}{2}$ 2-blocks, first we can place the $\frac{\eta-m_1}{2}$ 2-blocks and then place the one blocks between the $w$s on the edges of the $2$-blocks. Note that there are $2$ ways to place the $2$-blocks since they are just alternating $aw$ and $wa$ terms we can start with either and they would fix the rest. So then since there are already $\frac{\eta-m_1}{2}$ 2-blocks placed we have $\binom{\frac{\eta-m_1}{2}}{m_1}=2\cdot \frac{(\eta/2)^{m_1}}{m_1!} + O(\eta^{m_1-1})$ since we assume that $m$ is not on the order of $\eta$, note that this assumes that now two $1$-blocks are adjacent since if we were to have two 1-blocks being adjacent this would contribute $\frac{\eta-m_1}{2}\cdot \binom{\frac{\eta-m_1}{2}}{m_1-2}=O(\eta^{m_1-1})$ so these cases contribute a lower order. Also note that for any 1-block we can make it either $aw$ or $wa$ without restriction because they always go between $w$s. So this multiplies a factor of $2$ for every 1-block which gives $2^{m_1+1}\cdot \frac{(\eta/2)^{m_1}}{m_1!} + O(\eta^{m_1-1})=\frac{2\eta^{m_1}}{m_1!}+P(\eta^{m_1-1})$ ways to choose the locations of all $1$-blocks.
+
+Now we make the observation that between any two one blocks all indices are equivalent mod $k$ other than the indices that are between the two blocks, this can be seen by the series $w_{i_1,i_2}a_{i_2,i_3}w_{i_3,i_4}w_{i_4,i_5}a_{i_5,i_6}a_{i_6,i_7}w_{i_7,i_8}a_{i_8,i_9}...$ we see that $i_5=i_7$ since the 2-block must be matched so we also get $i_3\equiv i_4\equiv i_5\equiv i_7\equiv i_8\mod{k}$ since the condition for having a $w$ instead of a $b$ is equivalence mod $k$, also note that index $i_6$ is free since the equivalence $i_5=i_7$ is sufficient to show that $a_{i_5,i_6}=a_{i_6,i_7}$. So first we can fix the equivalence class mod $k$ for all of the terms between every pair of 1-blocks. Since the 1-blocks must also be paired up they are also paired up mod $k$ we see that we can write the number of ways to pair these up specifying the matching is
+\[
+\sum_{1\leq i_1,i_2,...,i_{m_1}\leq k}\mathbb{E}[c_{i_1,i_2}c_{i_2,i_3}...c_{i_{m_1},i_1}]
+\]
+with every $c_{ij}\sum\mathcal{N}(0,1)$ which is just $\mathbb{E}\text{Tr}C^{m_1}$ where $c$ is a Gaussian Wigner matrix. So this specifies the congruence class mod $k$ for all of the indices except those that are in the middle of a 2-block.
+
+Now we can count the number of ways to assign indices. First we can assign the indices on all of the $1$-blocks which have $2m$ indices, but since they are already paired up and this pairing is already assigned we have $m_1$ choices for these indices and since the congruence class of all of these indices is fixed there are $(\frac{N}{k})^{m_1}$ ways to choose this. Then we can assign the indices of the 2-blocks, we see that for a 2-block $a_{i_1,i_2}a_{i_2,i_3}$ we have $i_1=i_3$ whose congruence class mod $k$ is fixed so there are $\frac{N}{k}$ choices for this index and $i_2$ can be anything so there are $N$ choices which gives $\frac{N^2}{k}$ choices for every 2-block which is $(\frac{N^2}{k})^{\frac{\eta-m_1}{2}}$. Now we can chose the remaining indices which is just any index that isn't in any 1-block or 2-block so these are just indices between two $w$s which is equal to the number of times we have two adjacent $w$s. We see that by symmetry the number of times we have two adjacent $w$s is equal to the number of times we have two adjacent $a$s which is just equal to the number of 2-blocks by definition. Each of these also must satisfy the equivalence mod $k$ so they have fixed congruence class so there are $\frac{N}{k}$ choices for each of these giving a total factor of $(\frac{N}{k})^{\frac{\eta-m_1}{2}}$. So multiplying these gives the total number of ways to assign indices which is
+
+\[
+\left(\frac{N}{k}\right)^{m_1}\cdot \left(\frac{N^2}{k}\right)^{\frac{\eta-m_1}{2}}\cdot \left(\frac{N}{k}\right)^{\frac{\eta-m_1}{2}}=\frac{N^{\frac{3}{2}\eta-\frac{1}{2}m_1}}{k^\eta}
+\]
+
+So combining all of these together we get that the contribution of this fixed $S_{ab}$ class is the desired result.
+\end{proof}
+
+%\begin{lemma}
+%Suppose the polynomial $f(x):=\sum_{\a}c_\a x^\a\in \R[x]$ has a zero of order $n>0$ at $x_0$. Then
+%\begin{align*}
+%\sum_{\a}c_\a x_0^\a p(\a) \ = \ 0
+%\end{align*}
+%for any polynomial $p$ of degree $d<n$.
+%\end{lemma}
+
+\begin{lemma}\label{inequalities}
+For any $0\leq p<m$,
+\begin{align*}
+\sum_{i=0}^m(-1)^i\binom{m}{i}i^p &\ = \ 0. \\
+\sum_{i=0}^m(-1)^{m-i}\binom{m}{i}i^m &\ = \ m!.
+\end{align*}
+\end{lemma}
+
+Observe that if $m_1>m$, then by Lemma \ref{Sclasscontribution} the contribution of an $S_{ab}$ class with $m_1$ $a$ block is
+\begin{align*}
+&\frac{1}{k}\sum_{\a=2n}^{8n}c_\a\left(\frac{k}{N^{3/2}}\right)^\a\left(\frac{1}{N^m}\sum_{i=0}^m\binom{m}{i}\left(-\frac{N^{3/2}}{k}\right)^{m-i}p(\a+i)\left(\frac{N^{\frac{3}{2}(\a+i)-\frac{1}{2}m_1}}{k^{\a+i}}\right)\right) \\
+&\ = \ \frac{C_{k,m}}{N^{\frac{1}{2}(m_1-m)}}\sum_{\a=2n}^{8n}c_\a \sum_{i=0}^m\binom{m}{i}(-1)^{m-i}p(\a+i) \\
+&\ = \ \frac{C_{k,m}}{N^{\frac{1}{2}(m_1-m)}}\sum_{\a=2n}^{8n}c_\a \sum_{i=0}^m\binom{m}{i}(-1)^{m-i}\left(\frac{2(\a+i)^{m_1}}{m_1}+O\left((\a+i)^{m_1-1}\right)\right) \\
+&\ \ll \ \frac{C_{k,m,m_1}}{N^{\frac{1}{2}(m_1-m)}}\sum_{\a=2n}^{8n}c_\a\a^{m_1}
+\end{align*}
+Since $f_1^{2n}(x) \ = \ \left(\frac{x(2-x)(x+1)(3-x)}{4}\right)^{2n}$, then $\abs{c_\a}\ll C_0^{2n}$ for some $C_0>0$. Moreover, $\a\ll\log\log(N)$, then for some $\epsilon>0$ 
+\begin{align*}
+\sum_{\a=2n}^{8n}c_\a \a^{m_1}\ll n^{m_1+1}C_0^{2n}\ll (\log\log(N))^{m_1+1}\log(N)\ll N^{1/2(m_1-m)-\epsilon}
+\end{align*}
+Hence, as $N\rightarrow 0$, the contribution of $S_{ab}$ class wth $m_1>m$ $a$ block and $m_2$ $aa$ block is negligible. Moreover, if $m_1<m$, then the contribution of an $S_{ab}$ class with $m_1$ $a$ block is
+\begin{align*}
+&\frac{1}{k}\sum_{\a=2n}^{8n}c_\a\left(\frac{k}{N^{3/2}}\right)^\a\left(\frac{1}{N^m}\sum_{i=0}^m\binom{m}{i}\left(-\frac{N^{3/2}}{k}\right)^{m-i}p(\a+i)\left(\frac{N^{\frac{3}{2}(\a+i)-\frac{1}{2}m_1}}{k^{\a+i}}\right)\right) \\
+&\ = \ \frac{C_{k,m}}{N^{\frac{1}{2}(m_1-m)}}\sum_{\a=2n}^{8n}c_\a\sum_{i=0}^m\binom{m}{i}(-1)^ip(\a+i) \\
+&\ = \ \frac{C_{k,m}}{N^{\frac{1}{2}(m_1-m)}}\sum_{\a=2n}^{8n}c_\a \sum_{q=0}^{m_1}c_q \a^{m_1-q} \sum_{i=0}^m(-1)^i\binom{m}{i} i^q \ = \ 0.
+\end{align*}
+Thus, we must have $m_1=m$.
+
+\begin{theorem}
+The expected $m$-th moment associated to the empirical blip spectral measure is
+\begin{align*}
+\mathbb{E}\left[\mu_{\{A_N,B_N\},1}^{(m)}\right] \ = \ 2\left(\frac{1}{k}\right)^{m+1}\mathbb{E}_k\textup{Tr}C^m
+\end{align*}
+\end{theorem}
+\begin{proof}
+By the discussion above, we know that $m_1=m$.
+
+\begin{align*}
+\mathbb{E}\left[\mu_{\{A_N,B_N\},1}^{(m)}\right] &\ = \ \frac{1}{k}\sum_{\a=2n}^{8n}c_\a\left(\frac{k}{N^{3/2}}\right)^\a\frac{1}{N^{m+\frac{1}{2}m}} \sum_{i=0}^m \binom{m}{i}\left(-\frac{N^{3/2}}{k}\right)^{m-i}\frac{2(\a+i)^m}{m!}\left(\frac{N^{3/2}}{k}\right)^{\a+i}\mathbb{E}_k\textup{Tr}C^{m} \\
+&\ = \ \frac{2}{m!}\left(\frac{1}{k}\right)^{m+1}\mathbb{E}_k\textup{Tr}C^m \sum_{\a=2n}^{8n}c_\a\sum_{i=0}^m \binom{m}{i}(-1)^{m-i}(\a+i)^m \\
+&\ = \ \frac{2}{m!}\left(\frac{1}{k}\right)^{m+1}\mathbb{E}_k\textup{Tr}C^m \sum_{\a=2n}^{8n}c_\a\sum_{i=0}^m \binom{m}{i}(-1)^{m-i}\sum_{p=0}^m \binom{m}{p}\a^{p}i^{m-p} \\
+&\ = \ \frac{2}{m!}\left(\frac{1}{k}\right)^{m+1}\mathbb{E}_k\textup{Tr}C\sum_{\a=2n}^{8n}\sum_{p=0}^m\binom{m}{p}c_\a\a^p\sum_{i=0}^m\binom{m}{i}(-1)^{m-i}i^{m-p}
+\end{align*}
+Since the inner sum is 0 if $p>0$ and $m!$ if $p=0$ by Lemma \ref{inequalities} and $f_1^{(2n)}(1)=\sum_{\a=2n}^{8n}c_\a=1$, then
+\begin{align*}
+\mathbb{E}\left[\mu_{\{A_N,B_N\},1}^{(m)}\right] &\ = \ \frac{2}{m!}\left(\frac{1}{k}\right)^{m+1}\mathbb{E}_k\textup{Tr}C^m\sum_{\a=2n}^{8n}c_\a m! \\
+&\ = \ 2\left(\frac{1}{k}\right)^{m+1}\mathbb{E}_k\textup{Tr}C^m.
+\end{align*}
+\end{proof}
+
+\section{Lower Moments of Block Circulant Anticommutators}
+
+Before we move on to computing the lower moments, of the 
+anticommutator products, we simplify the computation using the 
+cyclicity of trace. 
+Let \(A\) and \(B\) be square matrices. We observe the following. 
+
+\begin{prop}[Trace Expansion for the second and the forth Moment]
+The trace of the power of the anticommutator can be simplified as follows. 
+\[
+\text{Tr}[(AB + BA)^2]\ =\ 2(\text{Tr}(ABAB) + \text{Tr}(AABB))
+\]
+\[
+\begin{aligned}
+\text{Tr}[(AB + BA)^4] \ =\ & 2 \text{Tr}(ABABABAB) + 4 \text{Tr}(ABABABBA) + 2 \text{tr}(ABBAABBA) \\
+& + 4 \text{Tr}(ABABBABA) + 4 \text{Tr}(ABBABABA)
+\end{aligned}
+\]
+\end{prop}
+\begin{proof}
+We demostrate for the second power and leave the proof for the forth 
+power as an exercise. 
+
+First, we expand \((AB + BA)^2\):
+\[
+(AB + BA)^2 \ =\  ABAB + ABBA + BAAB + BABA
+\]
+
+Using the cyclic property of the trace, \(\text{Tr}(XY) = \text{Tr}(YX)\), we have:
+\[
+\text{Tr}(ABBA) \ =\ \text{Tr}(AABB) \quad \text{and} \quad \text{Tr}(BAAB) = \text{Tr}(AABB)
+\]
+
+And thus 
+\[
+\text{Tr}[(AB + BA)^2] \ =\ 2(\text{Tr}(ABAB) + \text{Tr}(AABB))
+\]. 
+
+\end{proof}
+
+We proceed with computing the second moment of the 
+anticommutator product of an anticommutator matrix 
+and a GOE. Let $A$ be a GOE and $B$ be a $m$-circulant matrix. 
+Also, set the order of both matricies to be $N$. 
+Let $\mu_N$ denote the spectral density of the anticommutator product 
+$AB + BA$ and $\mu_N^{(k)}$ the $k$th moment. 
+Using 
+the eigenvalue trace lemma, we obtain the following. 
+
+\begin{equation}
+    \mu_N^{(k)} \ = \frac 1 {N^{k + 1}} \mathbb{E}(Tr[(AB+BA)^k])
+\end{equation}
+
+\begin{theorem}[2nd and 4th moment of GOE times Block Circulant]
+    \[
+        \mu_N^{(2)} \ =\ 2 \textAnd 
+        \mu_N^{(4)} \ =\ 10 + \frac 2 {m^2}
+    \]
+\end{theorem}
+
+\begin{proof}
+    Start with the second moment. 
+    We use the eigenvalue trace lemma along with the trace expansion 
+    for $k = 2$. Also note that the expected value is linear. 
+\begin{equation}
+    \label{eqn:secondGOEBC}
+    \mu_N^{(2)} \ = \ \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) + \frac 1 {N^3}\mathbb{E}(Tr(AABB))
+\end{equation}
+We compute each of the summands independantly. Focus on the first 
+summand, and use Wick's formula to rewrite the summand in tractable 
+form. \footnote{We adopt the notion from the free probability book}
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) \
+    =  \
+    \frac 1 {N^3} 
+    \sum_{1 \leq i_1, i_2, i_3, i_4 \leq N} 
+    \sum_{\pi \in \mathcal{P}[4]}
+    \mathbb{E}_\pi (
+        A_{i_1i_2}B_{i_2i_3}A_{i_3i_4}B_{i_4i_1}
+    )
+\end{equation}
+It is trivial that the pairings that match $A$'s with $B$'s 
+vanish, for the two matricies $A$, $B$ are assumed to be indepent. 
+Thus, the permutation $\pi$ must be 
+\[
+    \pi \ = \ (13)(24)
+\]
+and the double sum simplifies to 
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) \
+    =  \
+    \frac 1 {N^3} 
+    \sum_{1 \leq i_1, i_2, i_3, i_4 \leq N}
+    \mathbb{E} (
+        A_{i_1i_2}A_{i_3i_4}
+    )
+\mathbb{E} (
+        B_{i_2i_3}B_{i_4i_1}
+    )
+\end{equation}
+Since $A$ is a GOE and $B$ is a block circulant matrix, the indicies $i$ must 
+satisfy the following condition. 
+
+\begin{eqnarray}
+    i_1 \ = \ i_4 \textAnd i_2 \ = \ i_3 \\
+    i_2 - i_3 \ \equiv \ i_4 - i_1 \mod N \\
+    i_2 \ \equiv \ i_1 \mod m
+\end{eqnarray}
+
+Notice that the choice of $i_1, i_2$ determines both $i_3, i_4$. Hence, 
+there are a maximum $N^2$ sequences of $i$'s where the expected value 
+is nonvanishing. So as $N \rightarrow \infty$, 
+
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(ABAB)) \
+    =  \ 0
+\end{equation}
+
+Repeat the procedure for $ABAB$. 
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(AABB)) \
+    =  \
+    \frac 1 {N^3} 
+    \sum_{1 \leq i_1, i_2, i_3, i_4 \leq N}
+    \mathbb{E} (
+        A_{i_1i_2}A_{i_2i_3}
+    )
+\mathbb{E} (
+        B_{i_3i_4}B_{i_4i_1}
+    )
+\end{equation}
+For the expected value to be nonvanishing, the sequence $i$ must satisfy 
+\begin{eqnarray}
+    i_1 \ = \ i_3 \textAnd i_2 \ \  \textrm{free} \\
+    i_3 - i_4 \ \equiv \ i_1 - i_4 \mod N \\
+    i_3 \ \equiv \ i_1 \mod m
+\end{eqnarray}
+The conditions simplify to $i_1 = i_3$ and other variables are free. 
+Thus, there are $N^3$ sequences of $i$ where the expected value is 
+nonvanishing. In the limit $N\rightarrow \infty$, 
+\begin{equation}
+    \frac 1 {N^{3}} \mathbb{E}(Tr(AABB)) \
+    =  \ 1
+\end{equation}
+
+Finally, from (\ref{eqn:secondGOEBC}), 
+\[
+    \mu_N^{(2)} \ = \ 2 (0 + 1) \ = \ 2
+\]
+
+As for the forth moment, we notice that there are five summands in the 
+trace expansion. However, by a degree of freedom argument, the pairings 
+which have a crossings of $A$'s vanish. Hence, we deduce 
+\begin{equation}
+    \label{eqn:forthGOEBC}
+    \mu_N^{(4)} \ = \ \frac 2 {N^{5}} \mathbb{E}(Tr(ABBAABBA)) + \frac 4 {N^5}\mathbb{E}(Tr(ABABBABA))
+\end{equation}
+
+Focus on the first summand. Use Wick's formula and rewrite as the following. 
+
+\begin{equation}
+    \begin{split}
+\frac{2}{N^5} \sum_{1 \leq i_1, \dots,  i_8 \leq N} 
+\sum_{\pi \in \mathcal{P}[8]} \mathbb{E}_\pi \left( A_{i_1i_2} B_{i_2i_3} B_{i_3i_4} A_{i_4i_5} A_{i_5i_6} B_{i_6i_7} B_{i_7i_8} A_{i_8i_1} \right)
+    \end{split}
+\end{equation}
+
+
+
+With some brute-force condition checking, it possible to verify that 
+any pairings that have a crossing with $A$'s do not contribute to the sum. 
+So, the following two pairings have zero contribution as $N\rightarrow \infty$
+\begin{eqnarray}
+    (15)(23)(48)(67) \\ 
+    (14)(27)(36)(58)
+\end{eqnarray}
+The first permutation has a crossing $(15)(48)$ where both transposition 
+pair two $A$'s. For the first permutation, the crossing is $(14)(27)$ and 
+the first transposition pairs two $A$'s while the second pairs two $B$'s. 
+
+Note that the crossings between pairings of $B$'s do contribute to the sum. 
+To demonstrate the fact, we compute the contribution of the pairing 
+\[
+    \pi \ = \ (18)(26)(37)(45)
+\] which is 
+\begin{equation}
+    \begin{split}
+\frac{2}{N^5} \sum_{1 \leq i_1, \dots,  i_8 \leq N} 
+\mathbb{E} \left( A_{i_1i_2} A_{i_8i_1}\right)
+\mathbb{E}
+\left(B_{i_2i_3} B_{i_6i_7}\right) 
+\mathbb{E}
+\left(B_{i_3i_4} B_{i_7i_8}  \right)
+\mathbb{E}
+\left(
+A_{i_4i_5} A_{i_5i_6}  
+\right)
+    \end{split}
+\end{equation}
+We wish to count the number of finite sequences $i$ of length 
+8 that satisfies the conditions below. 
+\begin{eqnarray}
+i_2 \ = \ i_8 \\
+i_2 - i_3 \ \equiv \ i_7 - i_6 \mod N\\ 
+i_3 - i_4 \ \equiv \ i_8 - i_7 \mod N\\
+i_4 \ = \ i_6 \\ 
+i_2 \ \equiv \ i_7, i_3 \ \equiv \ i_6 \mod m \\ 
+i_3 \ \equiv \ i_8, i_4 \ \equiv \ i_7 \mod m
+\end{eqnarray}
+
+Determine the residue of $i$'s by mod $m$ first. Notice that $i_1, i_5$ 
+are free to be any value mod $m$, and all other values must be congruent 
+to each other mod $m$. As for the value $\lfloor i/m\rfloor$, we determine that t
+here are five degrees of freedom where the $i's$ split into the following 
+equivalence classes. 
+\[
+\{
+    i_2, i_8\}, \{i_4, i_6\}, \{i_3\}, \{i_5\}, \{i_1\}
+\]
+The index $i_7$ is determined by the conditions. 
+Thus, there are 3 degrees of freedom to choose $i \mod m$ and 
+5 degrees of freedom for $\lfloor i/m \rfloor$. The total contribution 
+in the limit is 
+\[
+    \frac 1 {N^5}m^3 \left(
+        \frac N m
+    \right)^5 = \frac 1 {m^2}
+\]  
+
+If there are no crossings in the pairings, the contribution equals exactly one. 
+Thus, by (\ref{eqn:forthGOEBC}), we write 
+\[
+    \mu_N^{(4)} \ = \ 2 \left(3 + \frac 1{m^2}\right) + 4(1) \ = \ 10 + \frac 2 {m^2}
+\]
+
+\end{proof}
+
+\begin{theorem}[2nd moment of Block Circulant times Block Circulant]
+    \[
+        \mu_N^{(2)} \ =\ 2 + \frac 2 {m^2} 
+    \]
+\end{theorem}
+
+The proof is similar to the case of GOE times Block Circulant. 
+
+
+\section{Combinatorial Preliminaries}
+
+\begin{defn}[Special Words]
+A \textit{special word} of length \(2k\) is composed of \(k\) blocks, where each block is one of \(\{XX, ZX, XZ\}\). The characteristic of a special word \(w\), denoted by \(\chi(w)\), is the number of blocks \(XX\) used in the word.
+
+For example, when \(k = 3\),
+\[
+XX \, ZX \, XZ
+\]
+is an example of a special word of length 6 with characteristic 1.
+\end{defn}
+
+\begin{defn}[Set of Special Words]
+\(\Eta_{n, k}\) is defined as the set of all special words of length \(2n\) with characteristic \(k\).
+
+For example, if \(n = 2\) and \(k = 1\), then
+\[
+\Eta_{2, 1} = \{\text{XX ZX}, \, \text{XX XZ}, \, \text{ZX XX}, \, \text{XZ XX}\}.
+\]
+\end{defn}
+
+\begin{defn}[Valid Pairings]
+A \textit{valid pairing} is a partition of the indices of the word into pairs such that each pair contains the same type of letter.
+
+For example, for the word \(XXZZ\), a valid pairing is \(\{\{1, 2\}, \{3, 4\}\}\).
+\end{defn}
+
+\begin{defn}[Non-Crossing Pairings]
+A \textit{non-crossing pairing} is a valid pairing where for any two pairs \(\{i, k\}\) and \(\{j, l\}\), it is not the case that \(i < j < k < l\).
+
+For example, for the word \(XXZZ\), the pairing \(\{\{1, 2\}, \{3, 4\}\}\) is non-crossing, while the pairing \(\{\{1, 3\}, \{2, 4\}\}\) is crossing because \(1 < 2 < 3 < 4\).
+\end{defn}
+
+\begin{defn}[Pairing number of a property $n, k$]
+    Call \(\nu_{n, k}\) to be the pairing number of the property $n, k$
+    \footnote{Technically, would be accurate to say the the Pairing number 
+    of the words with property $n, k$, but the word is clearly implied by the context}
+\(\nu_{n, k}\) is defined as the number of valid, non-crossing pairings for all special words in \(\Eta_{n, k}\). To compute \(\nu_{n, k}\):
+
+\begin{enumerate}[(i)]
+    \item Consider all special words in \(\Eta_{n, k}\).
+    \item For each word, count the number of valid, non-crossing pairings of the indices.
+    \item Sum these counts for all words in \(\Eta_{n, k}\).
+\end{enumerate}
+
+Mathematically, \(\nu_{n, k}\) is given by:
+\[
+\nu_{n, k} = \sum_{w \in \Eta_{n, k}} \phi(w)
+\]
+Where $\phi(w)$ counts valid, non-crossing pairings of $w$. 
+For example, if \(n = 2\) and \(k = 0\):
+\[
+\Eta_{2, 0} = \{\text{ZX ZX}, \, \text{ZX XZ}, \, \text{XZ ZX}, \, \text{XZ XZ}\}
+\]
+\[
+\begin{aligned}
+&\text{For } \text{ZX ZX}, \text{ no valid non-crossing pairings.} \\
+&\text{For } \text{ZX XZ}, \text{ valid non-crossing pairing: } \{\{1, 4\}, \{2, 3\}\}. \\
+&\text{For } \text{XZ ZX}, \text{ valid non-crossing pairing: } \{\{1, 4\}, \{2, 3\}\}. \\
+&\text{For } \text{XZ XZ}, \text{ no valid non-crossing pairings. } \{\{1, 3\}, \{2, 4\}\}. \\
+\end{aligned}
+\]
+Therefore, \(\nu_{2, 0} = 1 + 1 = 2\).
+\end{defn}
+
+
+\section{Counting Valid Pairings by $\sigma$-recurrences}
+
+In this section, we provide a method to compute Pairing numbers 
+with a property $n, k$. We introduce an additional quantity to the property 
+of the word, $s$, that denotes the number of $XX$ blocks at the beginning 
+of the word. 
+
+\begin{defn}
+    Define the pairing number of the property $n, s, k$ as the following. 
+    \[
+\sigma_{n, s, k} = \sum_{w \in \Eta_{n, s, k}} \phi(w)
+\]. 
+$\Eta_{n, s, k}$ denotes the set of all words composed of $n$ blocks that have at least
+$s$ $XX$ blocks in the beginning of the word, and $k$ blocks of $XY$, $YX$. 
+\end{defn}
+
+\begin{theorem}[\(\sigma_{n, s, k}\)]
+The auxiliary sequence \(\sigma_{n, s, k}\) is defined with the following initial conditions. 
+\begin{enumerate}
+    \item \(\sigma_{n, s, k} = 0\) if \(s + k > n\)
+    \item \(\sigma_{n, s, 0} = C_n\), where \(C_n\) is the \(n\)-th Catalan number, \(C_n = \frac{1}{n + 1} \binom{2n}{n}\)
+    \item \(\sigma_{n, s, 2k + 1} = 0\)
+    \item \(\sigma_{n, s, -k} = 0\)
+\end{enumerate}
+
+The recurrence relation for \(\sigma_{n, s, 2k}\) is given by:
+\begin{equation}
+\sigma_{n, s, 2k} = 
+\sum_{p = s + 1}^{n} 
+\sum_{q = p + 1}^{n}
+\sum_{r = 0}^{2k}
+\left[
+\sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
++ 
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+\right]
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+    Initial conditions 1, 3, 4 trivially follows from the nature of 
+    valid pairings. $s + k \leq n$ in any block. Also, if there are 
+    $2k + 1$ blocks of the type $XY, YX$, the number of $Y$'s in the 
+    word is odd, and hence there exists no valid pairing. Clearly, 
+    the number of $XY, YX$ blocks cannot be negative. 
+
+    Consider initial condition 2. If $k = 0$, then the word is entirely 
+    composed of $XX$ blocks, so the number of non-crossing pairngs can 
+    be easily counted by the Catalan numbers. This concludes the proof 
+    for the four initial conditions. 
+
+    We move on to prove the recurrence relation. Let $p$ be the 
+    first occurence of any block that has a $Y$ and $q$ the block in which 
+    the $Y$ in the $p$th block matches to. For example, if $(n, s, k) = (5, 1, 2)$, 
+    here is an example word with the pairing with $p = 3, q = 5$. 
+
+    \newcommand{\red}[1]{\color{red} {#1} \color{black}}
+
+    \[
+    W \ = \
+    XX \, XX \, X\red{Y} \, XX \, \red{Y}X
+    \]
+
+    Note that the pairing between the $Y$ blocks divide into two types. 
+    Type 1 pairing is $XY \, YX$ and Type 2 paring is $YX \, XY$ both in order. 
+    Pairing the two $Y$'s split the word into two sub-words, the word 
+    outside the $YY$ block and thw word between the $YY$ block. So for the previous example, 
+
+    \[
+        W_1 \ = \ XX \, XX \, XX \textAnd W_2 \ = \  XX
+    \]
+    where $W_1$ is outside the $Y$ pairing and $W_2$ is between the $Y$ pairings. 
+
+    For pairing Type 1, the value of $s$ increases by 1 after the splitting for 
+    the outer word. For pairing Type 2, the value of $s$ increases from zero to 1 
+    after the split. The inner word and the outer word can be considered 
+    independent. The important obsevation to deduce the latter fact is to observe 
+    that the pairing number is equivalent for the following two blocks. 
+    \[
+    X \, [\textnormal{Some Blocks}] \, X
+    \]
+ \[
+    XX \, [\textnormal{Some Blocks}]
+    \]
+
+    With these fact in mind, we count the contribution of 
+    Type 1 and Type 2 matchings for fixed $p, q$. 
+    For Type 1, the contribution is 
+    \[
+    \sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
+    \]
+    For Type 2, the contribution is 
+    \[
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+    \]
+    This proves the recursive relation 
+\[
+\sigma_{n, s, 2k} = 
+\sum_{p = s + 1}^{n} 
+\sum_{q = p + 1}^{n}
+\sum_{r = 0}^{2k}
+\left[
+\sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
++ 
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+\right]
+\]. 
+\end{proof}
+
+\begin{remark}[Relation to \(\nu_{n, k}\)]
+\(\nu_{n, k}\) is related to \(\sigma_{n, s, k}\) by the following:
+\[
+\nu_{n, k} = \sigma_{n, 0, n - k}
+\]
+This means that to compute \(\nu_{n, k}\), we compute \(\sigma_{n, 0, n - k}\) 
+using the above initial conditions and recurrence relation. 
+\end{remark}
+
+\begin{remark}[Case where $X$'s are allowed to cross]
+    When computing the moments for GOE anticommutated 
+    with Palindromic Topelitz, we can modify the initial condition as 
+    \[
+        \sigma_{n, s, 0} \ = \ (2n - 1)!!
+    \]
+    to obtain the Pairing Number appropriate for this case. 
+\end{remark}
+
+
+\section{Auxiliary Sequences and Recurrence Relations}
+
+%====Prelims=====
+%The modular restrictions
+
+\begin{definition} [Equivalence relation $\approx$ and $\simeq$]
+
+    $(i, j) \approx (i', j')$ if and only if 
+    \begin{equation}
+        i \ = \ j' \textAnd j \ = \ i'
+    \end{equation}
+
+    Also, 
+$(i, j) \simeq (i', j')$ if and only if 
+    \begin{eqnarray}
+        i - j \ \equiv \ j' - i \mod N 
+    \\
+       i \ \equiv \ j' \textAnd j \ \equiv \ i' \mod m
+    \end{eqnarray}
+    The value of $N, m$ are implied from context. 
+\end{definition}
+
+\begin{definition}[Product Words]
+A \textit{product word} of length \(2k\) is composed of \(k\) blocks, where each block is one of \(\{AB, BA\}\). 
+We denote the set of all product words of length $2k$ as 
+$\PW(2k)$.
+
+
+For example, when \(k = 3\),
+\[
+W \ = \ AB \, BA \, AB \, BA \in \PW(8)
+\]
+is an example of a product word of length 6. To 
+refer to the specific index of the word, use the superscript. 
+For example, $W^3 \ =\ B$. 
+
+\end{definition}
+
+\begin{definition}[Combining pairings]
+    Suppose we are given $W \in PW(4k)$ and two pairings 
+    $\pi, \delta \in \mathcal{P}[2k]$. We denote the 
+    combined pairing of $\pi, \delta$ with respect 
+    to the product word $W$ as 
+    \[
+        \pi *_W \delta
+    \]
+    where the combined pairing denotes an element in $\mathcal{P}[4k]$ 
+    where the composition between $A$'s are specified by $\pi$ and 
+    composition between $B$'s are specified by $\delta$. 
+
+    For example if 
+    \[
+    \pi \ = \ (1 2) (3 4) \textAnd 
+    \delta \ = \ (12) (34)
+    \]
+    the combined pairing is 
+    \[
+    \pi *_W \delta \ = \ (1 4)(2 3)(5 8)(67)
+    \]
+\end{definition}
+    
+
+%====For GOE x BC====
+
+We wish to compute $\mu_N^{(2k)}$, the $2k^{th}$ moment of 
+the anticommutator product of ensemble $A$ which is a GOE 
+and ensemble $B$ which is a m-block circulant matrix, 
+where both $A, B$ are of order $N$. It is straightforward to 
+verify the following. 
+
+\begin{prop}[Even moment as product words]
+    \label{thm:baseForm}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W\in \PW(2k)}
+        \sum_{1 \leq i_1 , \dots, i_{4k} \leq N}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}  
+        \mathbb{E}_{(\pi*_W\delta)}\left(
+        \prod_{l = 1}^{4k} W^{l}_{i_l i_{l + 1}}
+        \right) \mathbb{1}_{(\pi*_W\delta)}
+    \end{equation}
+\end{prop}
+
+\begin{theorem}[GOE times Block Circulant]
+    \label{thm: GOEBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+\end{theorem}
+\footnote{
+    $\gamma_n$ denotes a permutation of the cannonical set $[n]$ 
+    where $\gamma_n(x) = x + 1 \mod n$. 
+}
+
+\begin{theorem}[Block Circulant times Block Circulant]
+    \label{thm:BCBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in  \mathcal P[2k]}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+    \end{equation}
+\end{theorem}
+
+To prove these two theorems, we need to establish 
+the following propositions. 
+
+\begin{prop} [Rules for pairing] \label{thm:pairingRule}
+    For a pairing of each valid configuration, each of the compositions 
+    must match $A$'s to $A$'s and $B$'s to $B$'s. Moreover, 
+    the equality relation among the indicies are confirmed once the 
+    two matricies are matched. That is, 
+    if $A_{i_s, i_{s + 1}}$ is matched with 
+    $A_{i_t, i_{t + 1}}$, then 
+    \begin{equation}
+        (i_s, i_{s + 1}) \ \approx \ (i_t, i_{t + 1})
+    \end{equation}. Also, 
+    if $B_{i_s, i_{s + 1}}$ is matched with 
+    $B_{i_t, i_{t + 1}}$, then 
+    \begin{equation}
+        (i_s, i_{s + 1}) \ \simeq \  (i_t, i_{t + 1})
+    \end{equation}
+\end{prop}
+
+\begin{proof}
+    Introduce the signed variable $\epsilon_j$. Adding 
+    up the signed difference allows us to find 
+    that if any one of the signs are nonzero, the 
+    degree of freedom reduces. 
+\end{proof}
+
+\begin{prop} [GOE pairing rules]
+    Let $A$ be the GOE ensemble in the anticommutator. 
+    A  of $A$ must not cross with any other 
+    compositions. The compositions between Block 
+    Circulant matricies can match, and the crossings 
+    do not reduce the degree of freedom. 
+\end{prop}
+\begin{proof}
+    The compositions of $A$'s in each pairing slices 
+    the entire word. For example, consider the product word 
+    \[
+        W \ = \ ABBABAAB
+    \]
+    where the pairing is given as 
+    \[
+        \pi \ = \ (1 4)(2 3)(5 8) (6 7)
+    \]
+    The composition $(14)$ slices the word into 
+    \[
+        W_1 \ = \ BB 
+        \textAnd 
+        W_2' \ = \ BAAB 
+    \]
+    where each word is extracted from between ($W_1$) and 
+    outside ($W_2$) the composition $W^1 = W^4 = A$. Call 
+    this composition of $A$'s as the slicing composition.
+    Furthermore, the slicing composition $(58)$ slices $W_2'$ 
+    into another word. 
+    \[
+        W_2 \ = \ BB
+    \]
+
+    The observation has two implications. The first implication 
+    is that any transposition that crosses with the slicing 
+    composition reduces a degree of freedom. Hence, crossings 
+    with slicing composition, which can be any transposition between $A$'s, 
+    result in a vanishing contribution. 
+
+    The second implication is that any pairing where the 
+    slicing compositions do not cross with other compositions 
+    always have a positive nonzero contribution. After reducing the entire 
+    product word according to all its slicing compositions, we 
+    we are left with finite number of sub-words that are comprised solely 
+    of $B$'s. For the word $W$, the remaining words are $W_1, W_2$. 
+
+    Composition between $B$'s lose one degree of freedom, regardless of 
+    crossings. So these always have a contribution.
+\end{proof}
+
+Finally, we present a proof of theorem \ref{thm: GOEBC}.
+\begin{proof} 
+    From proposition \ref{thm:baseForm}, we recognize that 
+    it suffices to count the number of integer sequences 
+    $i_1, \dots, i_{4k}$ that satisfy the pairing restrictions. 
+    Fix a pairing $\pi$ that pairs all the GOE $A$'s and a
+    pairing $\delta$  that pairs the Block Circulnat $B$'s. 
+    From 
+    We first configure the modular residue of $i$'s mod $m$. 
+    Clearly, by proposition \ref{thm:pairingRule}, the number of such configurations are \footnote{More details to be added 
+    from BC paper and FP paper. $\#(\pi)$ denotes the number of orbits of the permutation $\pi$} 
+    \[
+    m^{
+        \# ((\pi *_W \delta)\circ \gamma_{2k})
+    }
+    \]
+    Move on to 
+    choose the value of $\lfloor i / m \rfloor$. 
+    We know that as long as the slicing compositions of $A$ do 
+    not cross with other compositions, the degree of freedom 
+    is not reduced. Otherwise, the contribution is can be ignored 
+    at the limit $N \rightarrow \infty$. Thus, the ways to configure 
+$\lfloor i / m \rfloor$ is 
+\begin{equation}
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+\end{equation}
+where $\mathbb{1}_{(\pi*_w\delta)}$ is defined to be $1$ if and only if 
+the pairing $(\pi*_w\delta)$ is non-crossing in the sense of proposition 
+\ref{thm:pairingRule} and zero otherwise. 
+
+The variance of all the random variables involved in the matricies are 
+fixed to be $1$. Thus, from proposition \ref{thm:baseForm}, we obtain 
+\label{thm: GOEBC}
+    \begin{equation}
+        \mu_N^{(2k)} \ = \ 
+        \sum_{W \in \PW(2k)}
+        \sum_{\pi \in \mathcal P[2k]}  
+        \sum_{\delta \in \NC(2k)}   
+        m^{
+            \#((\pi *_W \delta) \circ \gamma_{2k} )
+        }
+        \left(
+            \frac 1 m
+        \right)^{2k + 1}
+        \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+\end{proof}
+
+%A pairings must be Non-Crossings
+%Pairings must match in opposite directions
+%powers of m and (N/m)'s
+
+%====For BC x BC====
+%present result
+
+\begin{remark}
+    Though topology, we can rewrite the moment as
+    \begin{equation}
+        \sum_{W, \pi, \delta} m^{-2g} \mathbb{1}_{(\pi*_w\delta)}
+    \end{equation}
+    where $g$ is the minimum genus of the graph correlated to 
+    $((\pi *_W \delta) \circ \gamma_{2k} )$. 
+\end{remark}
+
+\begin{theorem}[6, 8, 10th moment of GOE times Block Circulant]
+    
+\begin{table}[h!]
+\centering
+\caption{Spectral Density of GOE times Block Circulant}
+\renewcommand{\arraystretch}{1.5} % Increase row height
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{7cm}|}
+\hline
+\textbf{Moment} & \textbf{Value} \\
+\hline
+2nd moment & $2$ \\
+\hline
+4th moment & $10 + \frac{2}{m^2}$ \\
+\hline
+6th moment & $66 + \frac{38}{m^2}$ \\
+\hline
+8th moment & $498 + \frac{544}{m^2} + \frac{54}{m^4}$ \\
+\hline
+10th moment & $4066 + \frac{7000}{m^2} + \frac{2086}{m^4}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{Normalized Spectral Density of GOE times Block Circulant}
+\renewcommand{\arraystretch}{1.5} % Increase row height
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{10cm}|}
+\hline
+\textbf{Moment} & \textbf{Value} \\
+\hline
+Normalized 4th moment & $$\frac{5}{2} + \frac{1}{2m^2}$$ \\
+\hline
+Normalized 6th moment & $$\frac{33}{4} + \frac{19}{4m^2}$$ \\
+\hline
+Normalized 8th moment & $$\frac{249}{8} + \frac{34}{m^2} + \frac{27}{8m^4}$$ \\
+\hline
+Normalized 10th moment & $$\frac{2033}{16} + \frac{875}{4m^2} + \frac{1043}{16m^4}$$ \\
+\hline
+\end{tabular}
+\end{table}
+
+% Second Table: Normalized Spectral Density of Block Circulant times Block Circulant
+\begin{table}[h!]
+\centering
+\caption{Normalized Spectral Density of Block Circulant times Block Circulant}
+\renewcommand{\arraystretch}{1.5} % Increase row height
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{10cm}|}
+\hline
+\textbf{Moment} & \textbf{Value} \\
+\hline
+Normalized 4th moment & $$ \frac{10m^4 + 86m^2 + 48}{4m^4 + 8m^2 + 4}$$ \\
+\hline
+Normalized 6th moment & $$\frac{66m^6 + 1890m^4 + 9084m^2 + 3360}{8m^6 + 24m^4 + 24m^2 + 8}$$ \\
+\hline
+Normalized 8th moment & $$ \frac{498m^8 + 33236m^6 + 529634m^4 + 1759064m^2 + 499968}{16m^8 + 64m^6 + 96m^4 + 64m^2 + 16}$$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\end{theorem}
+
+
+
+
+\begin{definition}[\(\sigma_{n, s, k}\)]
+The auxiliary sequence \(\sigma_{n, s, k}\) is defined with the following initial conditions. 
+\begin{enumerate}
+    \item \(\sigma_{n, s, k} = 0\) if \(s + k > n\)
+    \item \(\sigma_{n, s, 0} = (2n - 1)!!\), where \(C_n\) is the \(n\)-th Catalan number, \(C_n = \frac{1}{n + 1} \binom{2n}{n}\)
+    \item \(\sigma_{n, s, 2k + 1} = 0\)
+    \item \(\sigma_{n, s, -k} = 0\)
+\end{enumerate}
+
+\section{Anticommutator products involving Block Circulant Matricies}
+
+The recurrence relation for \(\sigma_{n, s, 2k}\) is given by:
+\[
+\sigma_{n, s, 2k} = 
+\sum_{p = s + 1}^{n} 
+\sum_{q = p + 1}^{n}
+\sum_{r = 0}^{2k}
+\left[
+\sigma_{n - q + p, p, r} \cdot \sigma_{q - p - 1, 0, 2k - 2 - r}
++ 
+\sigma_{n - q + p - 1, p - 1, r} \cdot \sigma_{q - p, 1, 2k - 2 - r}
+\right]
+\]
+\end{definition}
+
+\begin{theorem}[Moments of GOE times PT]
+Let $\mu^{(k)}_N$ be the $k$th moment of the spectral density of 
+the anticommutator $AB + BA$ where $A$ is a GOE and $B$ is 
+a palindromic topelitz matrix. Then, we obtain the following formula. 
+\[
+    \mu^{(k)}_N = \sigma_{N, 0, N}
+\]
+\end{theorem}
+
+\section{Convergence of the Anticommuted Ensembles}
+
+
+\begin{defn}[Dependency of Pairings]
+    Let $\mathcal{P}_2[n \cdot 2k]$ to denote the set of all pairings of the cannonical set 
+    $[n\cdot 2k]$. Consider $\pi \in \mathcal{P}_2[n\cdot 2k]$. Partition the set 
+    $[n\cdot 2k]$ into $n$ blocks, namely 
+    \begin{eqnarray*}
+    B_1 \ = \ \{1, 2, \dots, 2k\} \\ 
+    B_2 \ = \ \{2k +1 , 2k +2, \dots, 4k\} \\
+    \vdots \\
+    B_n \ = \ \{(n - 1)2k +1 , (n - 1)2k +2, \dots, n\cdot 2k\} \\ 
+    \end{eqnarray*}
+    A block $B_i$ is called to be dependent, if the image of $B_i$ 
+    under the paring $\pi$ is not a subset of $B_i$. The dependency 
+    of the pairing is the number of dependent blocks of a pairing. 
+
+    For example, the pairing $\pi \in \mathcal{P}[8]$ 
+    defined as 
+    \[
+    \pi \ = \ (12)(34)(58)(67)
+    \]
+    has two dependent blocks, namely $B_3, B_4$. Hence, 
+    its dependency is 2. 
+\end{defn}
+
+From the works of Hammond and Miller, we employ the fourth moment 
+method. With slight modification of the normalization coefficient, 
+we establish the following. 
+
+\begin{theorem}[Fourth Moment Method for Convergence]
+    If, for any positive integer $m$
+    \begin{equation}\label{eqn:ForthMom}
+        \E \left[
+            \frac 1 {N^{4m + 4}}
+            \big|
+            \Tr(AB + BA)^m - \E[\Tr(AB + BA)^m]
+            \big|^4
+        \right]
+         \ = \ O\left(
+                \frac 1 {N^2}
+            \right)
+    \end{equation}
+    then spectral density of the anticommutator product converges 
+    almost surely. 
+\end{theorem}
+
+We bound the lefthand side of (\ref{eqn:ForthMom}) appropriately. In order 
+to do this, we first expand out the forth power by the binomial 
+expansion. For convinience, introduce the 
+following shorthand. 
+\[
+    M_j \ = \ \E\left[(\Tr(AB + BA)^m)^j\right]
+\] 
+
+\begin{prop}
+    The lefthand side of (\ref{eqn:ForthMom}) can be rewritten as 
+    \begin{equation} \label{eqn:binomial}
+        \frac 1 {N^{4m + 4}}
+        \left(
+            M_{4} -4 M_{3} M_1 + 6 M_{2} M_1^2 -3 M_1^4
+        \right)
+    \end{equation}
+\end{prop}
+\begin{prop}
+    Define $D_j$ to be the contribution from the summands of the trace 
+    expansion that involves pairings of maximum dependency. In symbols, 
+    \begin{equation}
+        D_j \ = \
+        \sum_{W \in PW(j\cdot 2m)} 
+        \sum_{a_1, a_2, \dots, a_j}
+        \sum_{
+            \substack{
+            \pi \in \mathcal{P}_2[j \cdot 2k]\\
+            \pi \textnormal{ dependency j}
+            }
+        }
+\E_\pi[W_{a_1s}W_{a_2s}\cdots W_{a_js}]
+    \end{equation}
+    \footnote{The subscript $s$ is an abuse of notation. See page 14 of 
+    Hammond and Miller.}
+    where $a_1, a_2, \dots, a_j$ are finite sequences of $2m$ integers 
+    between $1$ and $N$. 
+    $M_j$ can be rewritten as a sum involving pairings of different 
+    dependencies. Namely, 
+    \begin{eqnarray} \label{eqn:MjExpansions}
+        M_2 \ = \ D_2 + M_1^2 \nonumber \\
+        M_3 \ = \ D_3 + 3M_1D_2 + M_1^3 \nonumber \\
+        M_4 \ = \ D_4 + 3D_2^2 + 6 D_2 M_1^2 + 4D_3M_1 + M_1^4 
+    \end{eqnarray}
+\end{prop}
+
+\begin{proof}
+    We show that the proposition must hold for $j = 2$, for the simplicity of 
+    notation. For higher values of $j$, the proof is similar up to a slight modifictation, 
+    and we provide a verbal reasoning without the symbolic manipulation.
+    We start with the principal definition of $M_2$. 
+
+    \begin{equation}
+         M_2 \ = \ \E\left[(\Tr(AB + BA)^m)^2\right] 
+         \ = \ 
+            \sum_{W \in PW(2m)} \sum_{V \in PW(2m)}
+            \E\left[\Tr(W)\Tr(V)\right]
+    \end{equation}
+
+    Introducing two finite sequences $a, b$ of $2m$ integers 
+    between $1$ and $N$, we can further expand this equation. 
+    For convinience, set $a_{2m + 1} = a_{2m}$ and \newline $b_{2m + 1} = b_{2m}$. 
+    
+
+    \begin{equation}
+        M_2 \ =\ 
+\sum_{W \in PW(2m)} \sum_{V \in PW(2m)}
+        \sum_{a, b}
+        \E\left[ W_{a_1a_2} W_{a_2a_3} \cdots W_{a_{2m}a_1}
+            V_{b_1b_2} V_{b_2b_3} \cdots V_{b_{2m}b_1}
+        \right]
+    \end{equation}
+
+For $W, V$ iterates through the set of all product words of length $2m$, 
+We can consider the product $WV$ to iterate through all the product words 
+of length $2 \cdot 2m$. Furthermore, all the random variables are Gaussian. 
+Hence, we can use Wick's formula. We progress to the following equation. 
+
+\begin{equation}
+    M_2 \ = \ 
+    \sum_{W \in \PW(4m)} \sum_{a, b} \sum_{\pi \in \mathcal{P}[4m]} 
+    \E_\pi\left[
+        \prod_{i = 1}^{2m} 
+            W^{(i)}_{a_ia_{i + 1}}
+        \prod_{i = 1}^{2m}
+W^{(i + 2m)}_{b_ib_{i + 1}}
+    \right] 
+\end{equation}
+
+Finally, split the sum of involving the pairings with respect to 
+the dependency. For $j = 2$, $\mathcal{P}[4m]$ can either have a 
+dependency of two or zero. 
+
+
+\begin{eqnarray}
+    \begin{split}
+    M_2 \ = \ 
+    \sum_{W \in \PW(4m)} \sum_{a, b} \sum_{\substack{\pi \in \mathcal{P}[4m]\\
+    \pi \textnormal{ dependency 0}
+    }} 
+    \E_\pi\left[
+        \prod_{i = 1}^{2m} 
+            W^{(i)}_{a_ia_{i + 1}}
+        \prod_{i = 1}^{2m}
+W^{(i + 2m)}_{b_ib_{i + 1}}
+    \right] \\
+    + 
+\sum_{W \in \PW(4m)} \sum_{a, b} \sum_{\substack{\pi \in \mathcal{P}[4m]\\
+    \pi \textnormal{ dependency 2}
+}} 
+    \E_\pi\left[
+        \prod_{i = 1}^{2m} 
+            W^{(i)}_{a_ia_{i + 1}}
+        \prod_{i = 1}^{2m}
+W^{(i + 2m)}_{b_ib_{i + 1}}
+    \right] 
+    \end{split} \\ 
+    \ = \ M_1^2 + D_2
+\end{eqnarray}
+The last equality follows from the nature of the paired expectations. 
+\footnote{Refer to Mingo and Speicher CH1} If the pairing $\pi$ has zero dependency, it 
+The pairied expectation of $\pi$ can be considered as products of 
+the paired expectation of two independent blocks. The second summand 
+is the principal definition of $D_2$
+
+From the case of $j = 2$, we observe that the decomposition of $M_j$ 
+is determined by the property of the pairings $\pi \in \mathcal P[j\cdot 2m]$. 
+For $j = 3$, each pairings can be categorized as dependency 3 (completely dependent) 
+dependency 2 (one independent block with two blocks depending on each other)
+or dependency zero (all blocks independent). Upon inspection of the ways 
+the blocks can be paired to each other, we conclude that there are 
+only one configuration for complete dependence or independence. 
+If the dependency is 2, choosing an independent block decides 
+the other two dependent blocks, so there are 3 ways such pairings can occur. 
+
+A similar argument can be carried out to the $j = 4$ case. 
+
+\end{proof}
+
+\begin{lemma}\label{thm:Dependencies}
+    If 
+    \begin{equation}\label{eqn:simpleForthMom}
+        \frac 1 {N^{4m + 4}} (3D_2^2 + D_4) \ = \ O\left(
+            \frac 1 {N^2}
+        \right)
+    \end{equation}
+    then the spectral density of the anticommutator product converges almost surely. 
+\end{lemma}
+
+\begin{proof}
+    Plug in equation (\ref{eqn:MjExpansions}) to equation (\ref{eqn:binomial}). 
+    Simple algebra proves the result. 
+\end{proof}
+
+\begin{theorem}\label{thm:PTPTcvg}
+    Suppose $A, B$ are random matricies drawn from Topelitz 
+    ensembles. Then, equation (\ref{eqn:ForthMom}) indeed holds and 
+    the spectral density converges almost surely. 
+\end{theorem}
+
+\begin{proof}
+    It suffices to show 
+    \begin{equation}
+        D_2 \ = \ O(N^{2m + 1})
+        \textAnd 
+        D_4 \ = \ O(N^{4m + 1})
+    \end{equation}
+    Start with proving the first inequality. To compute $D_2$, we must consider 
+    two finite sequences $a, b$. 
+    Recall that the paired 
+    expectation $\E_\pi$ is a product of the expected values in the form of 
+    \begin{equation}
+        \E[W_{i_si_{s + 1}}^{(s)} W_{i_{\pi(s)}i_{\pi(s) + 1}}^{(\pi(s))}] 
+    \end{equation}
+    where the sequence $i$ is either $a$ or $b$. 
+    The modular restriction of the Topelitz ensenble dictates 
+    that this term is $1$ if and only if 
+    \begin{equation}
+        i_s - i_{s + 1} \equiv i_{\pi(s)} - i_{\pi(s) + 1} \mod N
+    \end{equation}
+    and vanishes to zero otherwise. The anticommutator structure 
+    imposes an additional restriction that the letter $W^{(s)}$ and 
+    $W^{(\pi(s))}$ must both be $A$ or both be $B$'s in order for the expected 
+    value to not vanish. 
+
+    We wish to overcount the number of pairings that produces 
+    a nonvanishing expectation. In order to do this, we choose 
+    all the modular differences of $a, b$. Using the difference 
+    notation, we note that there are $2m$ copies of $\Delta a$ 
+    and $2m$ copies of $\Delta b$ to be chosen. By the nature 
+    of the pairing, we observe that choosing one of the 
+    differences decides another paired difference. We also have 
+    the following restriction. 
+
+    \begin{eqnarray} \label{eqn:ModRestr}
+        \sum_{i = 1}^{2m} \Delta a_i \ = \ a_{2m + 1} - a_1 \ =\ 0 \nonumber \\
+        \sum_{i = 1}^{2m} \Delta b_i \ = \ b_{2m + 1} - a_1 \ =\ 0 
+    \end{eqnarray}
+
+    The two equations takes away one degree of freedom from the original 
+    $2m$ degrees of freedom from to choose the paired differences. The 
+    fact that pairing $\pi$ is dependant accounts for the fact 
+    that condition (\ref{eqn:ModRestr}) cannot be naturally met without losing a degree of freedom. 
+    This is because the pairedness of the differences imply  
+      \begin{eqnarray}
+        \sum_{i = 1}^{2m} \Delta a_i+ \sum_{i = 1}^{2m} \Delta b_i \ =\ 0 
+    \end{eqnarray}
+
+    Finally, choosing $a_1, b_1$ determines both sequences $a, b$, and 
+    this adds two degrees of freedom. Thus, there are $2m -1 + 2 = 2m + 1$ 
+    degrees of freedom to choose $D_2$ and we conclude 
+    \begin{equation}
+        D_2 \ = \ O(N^{2m + 1})
+    \end{equation}
+
+    Similarly, for $D_4$, we lose three degrees of freedom by the dependence 
+    for the four sequences, and recieve four degrees of freedom by the 
+    choice of $a_1, b_2, c_1, d_1$, where the four sequence $a, b, c, d$ 
+    show up in the sum index of $D_4$. The total degree of freedom is 
+    $4m - 3 + 4 = 4m + 1$ which leads to the bound 
+    \begin{equation}
+        D_4 \ = \ O(N^{4m + 1})
+    \end{equation}
+
+\end{proof}
+
+\begin{cor}
+    Suppose $A, B$ are random matricies drawn either drawn from GOE, 
+    Palindromic Toeplitz, or Block Circulant ensembles. Then, equation (\ref{eqn:ForthMom}) indeed holds and 
+    the spectral density converges almost surely. 
+\end{cor}
+
+\begin{proof}
+    The derivation of lemma \ref{thm:Dependencies} 
+    does not involve the structure of individual matrix ensembles.
+    All the three ensembles listed in the corollary have either 
+    equal or more strict modular restrictions for the paired expectations 
+    to be nonvanishing, and therefore the value of $D_2, D_4$ are strictly 
+    larger for the case of the anticommutator of different products 
+    other than Topelitz anticommuted with Topelitz. Therefore the bounds in 
+    theorem \ref{thm:PTPTcvg} carries out directly. 
+\end{proof}
+
+
+
+
+
+\end{document}
+
+
+\
+
+
+\begin{thebibliography}{9}
+\bibitem{split}
+Burkhardt, Paula, et al. "Random matrix ensembles with split limiting behavior." Random Matrices: Theory and Applications 7.03 (2018): 1850006.
+\end{thebibliography}
+
+\end{document}

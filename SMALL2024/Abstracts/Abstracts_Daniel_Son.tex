@@ -1,0 +1,175 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{List of Abstracts that I have worked on for SMALL 2024}
+
+    \large
+    Daniel Son
+\end{center}
+
+\section{Random Matrix Theory}
+
+
+We introduce the anticommutator operator $\{\cdot, \cdot\}$, where $\{A_N,B_N\} = A_NB_N + B_NA_N$, to various real symmetric random matrix ensembles, including the Gaussian orthogonal ensemble (GOE), the real symmetric palindromic Toeplitz ensemble (PTE), the $k$-checkerboard ensemble, and the real symmetric block circulant ensemble (BCE). By using classic combinatorial techniques related to the non-crossing and free-matching properties of the cyclic product, respectively of the GOE and PTE, we obtain recursive formulae for the moments of the limiting spectral distribution of $\{\textup{GOE, GOE}\}$, $\{\textup{PTE, PTE}\}$, $\{\textup{GOE, PTE}\}$ and the bulk moments of $\{\textup{GOE, }k\textup{-checkerboard}\}$ and $\{k\textup{-checkerboard, }j\textup{-checkerboard}\}$. For the anticommutator of the BCE matrices with other ensembles the combinatorics is more complicated so we develop a genus expansion formulae for these cases. For $\{\textup{GOE, }k\textup{-checkerboard}\}$ and $\{k\textup{-checkerboard, }j\textup{-checkerboard}\}$, we observe vastly different blip behaviors: while $\{\textup{GOE, }k\textup{-checkerboard}\}$ has two blips each containing $k$ eigenvalues near $\pm\frac{N^{3/2}}{k}$, $\{k\textup{-checkerboard, }j\textup{-checkerboard}\}$ has one largest eigenvalue near $\frac{2N^2}{jk}$, two intermediary blips each containing $k-1$ eigenvalues near $\pm \frac{1}{k}\sqrt{1-\frac{1}{j}}N^{3/2}$ and two intermediary blips each containing $j-1$ eigenvalues near $\pm\frac{1}{j}\sqrt{1-\frac{1}{k}}N^{3/2}$. We prove that both blips of $\{\textup{GOE, }k\textup{-checkerboard}\}$ converge to the $k\times k$ GOE up to a constant factor and the largest blip of $\{k\textup{-checkerboard, }j\textup{-checkerboard}\}$ converges to some distribution dependent on $k$ and $j$. After developing an appropriate weight function, we highlight the combinatorial difficulties of finding the moments of each intermediary blip due to inability to separate out the contribution from other blips. Using the moments we can use traditional methods to show almost-sure convergence for the bulk in all of these cases as well as the largest blip in all cases.
+
+\section{Predator Prey Model}
+
+
+We introduce a new predator-prey model based 
+the Lotka-Voltera model. Extensive study has been conducted 
+on stability on the simple model which 
+considers an homogenous population. For example, Merdan \cite{MeD09, Mer10}carries 
+out a stability analysis by computing the Jacobian and 
+drawing from methods of differential calculus and Zhou \cite{ZhL05} studies different types of Allee effects and 
+the corresponding stability. 
+
+We replace the population evolution constants 
+with a Leslie matrix, taking account of multiple age groups. 
+Replacing the constant coefficients to 
+Leslie matrices motivates the study of dominant eigenvalues 
+which can be conducted using techniques in Complex Analysis. 
+Using the theory of dominating eigenvalues, we provide a bound 
+for maximum predation rate for population survival in a long term. 
+We also discuss the competitive model and prove the 
+last species standing theorem, which describes the unlikelihood 
+of stable equilibrium between two competitive species. 
+
+
+
+\section{Martrix Recurrences}
+
+Motivated by the rich properties and various applications of recurrence relations, we consider the extension of traditional recurrence relations to matrices, where we use matrix multiplication and the Kronecker product to construct matrix sequences. We provide a sharp condition, which when satisfied, guarantees that any fixed-depth matrix recurrence relation defined over a product (with respect to matrix multiplication) will converge to the zero matrix. We also show that the same statement applies to matrix recurrence relations defined over a Kronecker product. Lastly, we show that the dual of this condition, which remains sharp, guarantees the divergence of matrix recurrence relations defined over a consecutive Kronecker product. These results completely determine the stability of nontrivial fixed-depth complex-valued recurrence relations defined over a consecutive product.
+
+\section{Zechendorf Games}
+Zeckendorf proved a rather remarkable fact that every positive integer can be written as a decomposition of non-adjacent Fibonacci numbers, starting with $F_1 = 1$ and $F_2 = 2$. Baird-Smith, Epstein, Flint, and Miller converted the process of decomposing an integer into its Zeckendorf decomposition into a game using the moves of $F_i + F_{i-1} = F_{i+1}$ and $2F_i = F_{i+1} + F_{i-2}$, where $F_i$ is the $i$th Fibonacci number. Players take turns applying these moves, with the starting decomposition entirely composed of $n$ 1s. Baird-Smith, Epstein, Flint, and Miller showed that for $n \neq 2$, Player 2 has a winning strategy, though the proof is non-constructive.
+
+We expand on this by investigating ''black hole" variants of this game. This variation is played with any $n$ but solely on small Fibonacci values, with any pieces on higher values being locked out in a ''black hole" and therefore removed from play. This gives rise to interesting counter-play strategies as well as fascinating behavior related to modular arithmetic. We also examine a ''pre-game" in which players take turns placing down pieces on the outermost columns. We develop constructive solutions depending on the value of $n$ for Black Hole games on $F_3$ and $F_4$.
+
+
+
+\end{document}

@@ -1,0 +1,213 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Title}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+\section{Abstract}
+This paper presents some useful linear algebra tools 
+when analyzing migration in terms of matricies. 
+For simplicity, we assume the Leslie matricies 
+of each population are either identical or a constant 
+multiple of each other. Given a positive fertility rate, 
+the leslie matrix is always invertible. All terms that 
+show up in the difference equations are a memeber of the 
+algebra formed by the leslie matrix, and they commute. 
+
+We first present a cyclic migration model, then 
+present some lemmas that simplify the computation. 
+
+\section{The N-Migration Model}
+We consider $N$ populations of the same species, 
+each denoted by $p_1, p_2, \dots, p_N$. Each 
+population $p_i$ has an influx from $p_{i - 1}$ 
+and an outflux to $p_{i + 1}$. For convinience, we denote 
+$p_0 = p_N$. Each population grows by a Leslie growth, and 
+there is a constant infulx of population $M$ coming from some 
+unknown source. 
+
+\begin{definition}
+    Define a square matrix $J$ of 
+    order $N$ as follows. 
+    \[
+    (J)_{ij} \ := \ 
+    \begin{cases}
+        1 & i = j \\ 
+        -1 & j - i = 1 \mod n
+    \end{cases}
+    \]
+    For example, if the degree of the matrix is 4, 
+    \[
+    J = \begin{bmatrix}
+        1 & -1 & 0 & 0\\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & -1 \\ 
+        -1 & 0 & 0 & 1
+    \end{bmatrix}
+    \]
+\end{definition}
+
+
+The population obeys the following difference equation. 
+
+\[
+\vec P^{(t)} = 
+k^t J^t \vec P + \frac 
+{(kJ)^t - I}{kJ - I} \vec M 
+\]
+
+\section{Linear Algebra Tools}
+\begin{theorem}[Power of matrix $J$]
+    Given $p < N $, we can explicitly compute each entry of $J^p$. 
+    \[
+    (J^p)_{ij} \ = \ (-1)^t \binom p t 
+    \]
+    The value $t$ is defined as 
+        \[
+        t \ = \ j - i \mod n
+    \]
+\end{theorem}
+
+\begin{theorem}{Inverse of $J - kI$}
+    Each entry of $(J - kI)^{-1}$ can be computed as a fraction 
+    of binomial sums. 
+    \[
+    (J - kI)^{-1}_{ij} \ = \ 
+    -\frac{
+        \sum_{i = 0}^{t} \binom{t}{i}(-k)^i
+    }{
+        \sum_{i = 1}^{n} \binom{n}{i}(-k)^i
+    } \ = \
+    \frac {-(1 - k)^t} {1 - (1 - k)^n }
+    \] 
+\end{theorem}
+
+\end{document}

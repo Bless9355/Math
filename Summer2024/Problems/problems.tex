@@ -1,0 +1,245 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+    \newline
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\EE}{\mathbb{E}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{ex}{Example}
+\newtheorem{conj}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\textnormal{ch}}
+\newcommand{\tr}{\textnormal{tr}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Notes as of Aug 22}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+\section{Free Probability}
+We have proved two theorems regarding the expected trace of GOE's
+
+\new{Theorem 7}{Even moments of the GOE are Catalan Numbers}
+\begin{eqnarray}
+    \EE[\tr(X^n)] \ = \ c_n \ = \  \begin{cases}
+        0 & 2 \nmid k \\ 
+        C_{k/2} & 2 | k
+    \end{cases}
+\end{eqnarray}
+
+\new{Theorem 10}{Product of the centered moments converge to zero}
+Suppose $X_1, X_2, \dots, X_m$ are independent $N$-by-$N$ GOEs. As 
+$N \rightarrow \infty$, the following value converges to zero. 
+
+\begin{eqnarray}
+    \EE \left[
+        \tr\left(
+            X_1^{r_1} - c_{r_1}
+        \right)\cdots 
+\left(
+            X_m^{r_m} - c_{r_m}
+        \right)
+    \right] \ = \ 0
+\end{eqnarray}
+
+We can generalize the concept of expected trace. Let $\varphi$ 
+denote the expected trace in an abstract sense. We call the function 
+to be a \textbf{state function} under two additional conditions. 
+\begin{eqnarray}
+    \varphi(1) \ = \ 1 \nonumber \\
+    \varphi(a* a) \ \geq a \hspace{5mm} \forall a \in \mathcal{A} 
+\end{eqnarray}
+
+The second condition is necessary to make $\mathcal A$ a $*-$algebra. 
+
+Motivated by the space of all random matricies, we define a probability 
+space $(\mathcal A, \varphi)$ where $\mathcal A$ is some unital algebra. 
+The state function links the algebra element to some complex number. 
+
+A $*-$ probability space $(\mathcal A, \varphi)$ is \textbf{faithful} 
+if 
+\begin{equation}
+    \varphi(x*x) = 0 \ \textnormal{iff} \ x = 0 
+\end{equation}
+ity space $(\mathcal A, \varphi)$ is \textbf{non-degenerate} 
+if 
+\begin{eqnarray}
+    \varphi(yx) = 0 \ \forall y \in \mathcal A \ \rightarrow \ x = 0\nonumber\\
+    \varphi(xy) = 0 \ \forall y \in \mathcal A \ \rightarrow \ x = 0 
+\end{eqnarray}
+Also, by the means of induction, it is possible to deduce the following. 
+
+\vspace{3mm}
+\new{Proposition 13}{Recovering the global state from local states}
+Suppose $\mathcal A_1, \mathcal A_2, \dots, \mathcal A_m$ are 
+free subalgebras of a $*-$probability space $\mathcal A$. The local 
+state functions $\varphi|_{\mathcal A_i}$ for $1 \leq i \leq m$ determines 
+the global state function $\varphi$
+
+\section{Putnam Problems}
+\new{1991B6}{Hyperbolic sine inequality}
+Let $a, b$ be positive numbers. Find the largest $c$, in terms of $a, b$ that 
+satisfies the inequality
+\begin{equation}
+    a^x b^{1-x} \ \leq a \frac {
+        \sinh(ux)
+    } {\sinh(u)}
+    + b \frac{
+        \sinh(u (1-x))
+    }{\sinh(u)}
+\end{equation}
+
+Apply the substitution $v:=e^u$ and $r:= a/b$. Then, guess an appropriate 
+value of $c$ where the inequality turns to an equality. Afterwards, show that 
+any value of $c$ greater than the guessed value has a $x$ that bears 
+a witness to the failiture of the inequality. 
+
+\new{1991B3}{Using the Postage Stamp Theorem}
+Given $a, b \in \mathbb Z_{pos}$, we know that for any equation 
+\begin{equation}
+    ax + by \ = \ s
+\end{equation}
+where $\textnormal{gcd}(a, b) = 1$, there exists some $N > 0$ where 
+there always exists a solution for the equation for any $s \geq N$. 
+We can prove this by considering the residues of the set 
+\begin{equation}
+    \{0, a, 2a, \dots, (b-1) a\}
+\end{equation}
+which must be a compete set of residues mod b. 
+
+\new{1991B2} {Cauchy's Lemma}
+If the function $f:\RR \rightarrow \RR$ is an additive continuous automorphism of 
+the reals, that is for all $a, b \in \RR$ 
+\begin{equation}
+    f(a + b) \ =\ f(a) + f(b)
+\end{equation}
+$f(x)$ must be in the form of 
+\begin{equation}
+    f(x) \ = \ cx
+\end{equation}
+\begin{proof}
+Applying the additive automorphism, it is easy to verify that this must be 
+true for all the rationals. Thus, the function $f(x) - cx$ must vanish 
+at all the rationals, and by continuity, at all the reals. 
+\end{proof}
+
+\end{document}
