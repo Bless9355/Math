@@ -1,0 +1,230 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{siunitx}
+\usepackage{tikz}
+
+
+
+
+
+
+\numberwithin{equation}{section}
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\deriv}[2]{
+\frac {d {#1} } {d {#2}}
+}
+
+\newcommand{\pderiv}[2]{
+\frac {\partial {#1} } {\partial {#2}}
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Gamma Ray Emission}
+
+    \large
+    Daniel Son
+\end{center}
+
+
+\section{Pair Anhilation Data Analysis}
+The data was collected by the MCA overnight, and Professor Doret 
+handed over the .spe files containing the data. For each count, 
+the corresponding voltage was retrieved by the calibration data 
+and the following formula. 
+\[
+\#1 + \#2 \times (\text{Bin\#} - 1) + \#3 \times (\text{Bin\#} - 1)^2
+\]
+The calibration constants \(\#1\), \(\#2\), and \(\#3\) are given as follows:
+\[
+\#1 = 4.942828 \times 10^{1}, \quad \#2 = 2.629989 \times 10^{0}, \quad \#3 = 5.826260 \times 10^{-4}
+\]
+
+%Insert data here
+
+If all the coincidece detection indeed comes from pair anhilation of
+electron and positrons, the 
+emission spectrum must be centered at $511\rm keV$, which is the rest 
+energy of the electron. Our observations indicate a peak at $511\rm keV$, 
+and we validate that the detection comes from pair anhilation.  
+
+
+
+\section{Compton Scattering Analysis}
+
+\subsection{Extacting the Linear Relation}
+
+We wish to use the collected data to confirm Compton scattering, i.e.,
+\[
+\lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta)
+\]
+where \( f_i = 662 \, \text{keV} \).
+
+We can deduce 
+the frequency of the incident and exiting photon by the equation 
+$E = hf$. Furthermore,  
+we can deduce \( \lambda \) and \( \lambda' \) from this information.
+
+\[
+c = \lambda f \Rightarrow \lambda_i = \frac{c}{f_i} \quad \text{and} \quad \lambda_o = \frac{c}{f_o}
+\]
+
+Therefore,
+
+\[
+\Delta \lambda = \left( \frac{1}{f_i} - \frac{1}{f_o} \right) = \frac{h}{m_e c} (1 - \cos \theta)
+\]
+
+Let \( E_e = m_e c^2 \) be the rest energy of the electron.
+
+\[
+\left( \frac{1}{h f_i} - \frac{1}{h f_o} \right) = \frac{1}{E_e} (1 - \cos \theta)
+\textOr
+\left( \frac{1}{E_i} - \frac{1}{E_o} \right) = \frac{1}{E_e} (1 - \cos \theta)
+\]
+
+From the collected data, we can compute the two quantities 
+inside the parantheses for a linear fit. Also, there is an uncertainty in the measured frequency \( f_o \). To do a linear regression analysis, we must convert the uncertainty of \( f_o \) to that of \( \frac{1}{f_i} - \frac{1}{f_o} \).
+
+The uncertainty of a compound variable is computed by the weighted RMS of the uncertainties. In our case,
+
+\[
+\Delta \left( \frac{1}{E_i} - \frac{1}{E_o} \right) = \sqrt{\left( \Delta E_o \right)^2 \left( \frac{1}{E_o^2} \right)^2} = \frac{\Delta E_o}{E_o^2}
+\]
+
+\subsection{Slope Prediction}
+
+The slope of the plot $1/E_i - 1/E_0$ verses $1 - \cos(\theta)$ is expected to be 
+
+\[
+\frac{1/E_i - 1/E_o}{1 - \cos \theta} \ = \ \frac 1 {m_e c^2} \ = \ \frac 1 {511keV} \ = \ = \boxed{1.96 \cdot 10^{-3} \rm keV^{-1}}
+\]
+
+\subsection{Data Analysis}
+The observed slope of the fit is 
+$-2.14 \cdot 10^-3 \rm kev^{-1}$, which is close to the theoretical slope. 
+Moreover, the $p$-value is in the order of $-7$, which indicates that 
+the relation is likely linear. 
+
+\end{document}

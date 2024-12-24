@@ -1,0 +1,18 @@
+\contentsline {section}{\tocsection {}{1}{Introduction}}{2}{section.1}%
+\contentsline {section}{\tocsection {}{2}{Single Species Population}}{4}{section.2}%
+\contentsline {subsection}{\tocsubsection {}{2.1}{Definition of Simple Leslie Matrices and the Lotka-Euler Equation}}{4}{subsection.2.1}%
+\contentsline {section}{\tocsection {}{3}{The Leslie Predator-Prey Model}}{7}{section.3}%
+\contentsline {subsection}{\tocsubsection {}{3.1}{The Classic Lotka-Volterra Predator-Prey Model}}{7}{subsection.3.1}%
+\contentsline {subsection}{\tocsubsection {}{3.2}{The Predator-Prey Model with Leslie Matrices}}{7}{subsection.3.2}%
+\contentsline {subsection}{\tocsubsection {}{3.3}{Real-Valued Predator-Prey Model with Scalar $L$}}{9}{subsection.3.3}%
+\contentsline {subsection}{\tocsubsection {}{3.4}{The Complex-Valued Leslie Predator-Prey Model with $L_a \ = \ \rho L_b$}}{11}{subsection.3.4}%
+\contentsline {section}{\tocsection {}{4}{The Competitive Model}}{11}{section.4}%
+\contentsline {subsection}{\tocsubsection {}{4.1}{Last Species Standing}}{12}{subsection.4.1}%
+\contentsline {section}{\tocsection {}{5}{Applications of the Competitive Model: Limitation of Resources and Machine Learning}}{13}{section.5}%
+\contentsline {subsection}{\tocsubsection {}{5.1}{Adjusting for Limited Resources}}{13}{subsection.5.1}%
+\contentsline {subsection}{\tocsubsection {}{5.2}{Competitive Coexsistence and Machine Learning}}{14}{subsection.5.2}%
+\contentsline {section}{\tocsection {}{6}{Generalised Framework: Quantum Operators}}{16}{section.6}%
+\contentsline {subsection}{\tocsubsection {}{6.1}{Motivation}}{16}{subsection.6.1}%
+\contentsline {subsection}{\tocsubsection {}{6.2}{Hermitian of the Leslie Matrix}}{17}{subsection.6.2}%
+\contentsline {section}{\tocsection {Appendix}{A}{Roots of $\textnormal {ch}_N(z)$}}{18}{appendix.A}%
+\contentsline {section}{\tocsection {Appendix}{}{References}}{20}{section*.7}%

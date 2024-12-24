@@ -1,0 +1,704 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+
+\numberwithin{equation}{section}
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\deriv}[2]{
+\frac {d {#1} } {d {#2}}
+}
+
+\newcommand{\pderiv}[2]{
+\frac {\partial {#1} } {\partial {#2}}
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{question}{Question}
+
+\numberwithin{theorem}{section}
+\numberwithin{proposition}{section}
+\numberwithin{lemma}{section}
+\numberwithin{corollary}{section}
+\numberwithin{remark}{section}
+\numberwithin{definition}{section}
+\numberwithin{example}{section}
+\numberwithin{conjecture}{section}
+\numberwithin{question}{section}
+
+
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Fixed Point Theorems of Banach and Brouwer}
+
+    \large
+    Daniel Son
+\end{center}
+
+\begin{abstract}
+    Given a topological space $X$ and a mapping $f:X\rightarrow X$, 
+    a fixed point is defined to be a point such that $f(x) = x$. 
+    Fixed points are likely to exist for most functions. In this paper, 
+    we present two such conditions on $f$ that guarantees a fixed point, 
+    using the concept of contraction and retraction. 
+\end{abstract}
+
+\section{Banach's Fixed Point Theorem}
+\subsection{Preliminaries: Metric Spaces and Banach Spaces}
+In order to understand the fixed point theorems, we present 
+some preliminaries. 
+
+\begin{definition}[Metric Spaces]
+    A space $(X, d)$ is called a metric space if $X$ is a set, 
+    and $d:X\times X \rightarrow \mathbb R_{\geq 0}$ is a function that satisfies 
+    the following properties. For all $x, y, z \in X$,  
+    \begin{itemize}
+        \item $d(x, y) = 0$ if and only if $x = y$. 
+        \item $d(x, y) = d(y, x)$
+        \item $d(x, z) \leq d(x, y) + d(y, z) \ $\rm {(Triangle Inequality)}
+    \end{itemize}
+    Also, we call a metric space to be complete if all 
+    Cauchy Sequences in the spaces necessarily converge. 
+\end{definition}
+
+The metric $d(x, y)$ endows a distance in an abstract space $X$ which 
+is a set. Examples of metric spaces include $\mathbb{R}, \mathbb{R}^n$ 
+equipped with the Eucledian metric. 
+
+In applications to physics, an important complete metric space is a Banach 
+Space. We define a norm of a vector and the Banach Space below. 
+
+\begin{definition}[Norm and Normed Space]
+    Let $V$ be a vector space, and $\|\cdot\|:V\rightarrow \mathbb R_{\geq 0}$ 
+    a function that maps a vector to a nonnegative real number. The function 
+    is a norm if the following conditions hold. 
+    \begin{itemize}
+        \item $\|x\| = 0$ if and only if $x = 0$ \rm{(Positive Definite)}
+        \item $\|\alpha x\| = |\alpha| \|x\|$ \rm{(Homogeneity)}
+        \item $\|x\| + \|y\| \geq \|x + y\|$ \rm{(Triangle Inequality)}
+    \end{itemize}
+    If $V$ is endowed with a metric $d:V\times V \rightarrow \mathbb R_{\geq 0}$ 
+    defined as 
+    \begin{align}
+        d(x, y) \ = \ \|x-y\|
+    \end{align}
+    then $V$ is called a normed vector space. 
+\end{definition}
+
+\begin{definition}[Banach Space] 
+    A normed vector space $V$ is called a Banach Space if $(V, \|\cdot\|)$ is 
+    a complete metric space. 
+\end{definition}
+
+In fact, it is possible to show normed spaces are necessarily metric spaces. We 
+present a brief proof. 
+\begin{proposition}
+    Normed spaces are metric spaces. 
+\end{proposition}
+\begin{proof}
+    We verify that the metric defined by the norm indeed satisfies 
+    the three conditions of the metric space. $d(x, y) = 0$ if 
+    and only if $\|x - y\| = 0$ if and only if $x - y = 0$ or $x = y$. 
+    Also, \begin{align}
+        d(x, y) \ = \ \|x - y\| \ = \ \|y - x\||-1| \ = \ d(y, x)
+    \end{align} where the second equality is achieved by homogeneity. 
+    Finally, the triangle equality can be established as follows. 
+    \begin{align}
+        d(x, y) + d(y, z) \ \geq \|x - y\| + \|y - z\| \geq \|x - z\| = d(x, z)
+    \end{align}
+\end{proof}
+
+\subsection{Proof of Banach's FPT}
+
+\begin{definition}[Contraction]
+    Let $(X, d)$ be a complete metric space, and $T:M \subset X \rightarrow X$ 
+    be a mapping from a closed subset $M$ to $M$. $T $ is called a contraction 
+    if there exists a real number $k \in (0, 1)$ that satisfies the following. 
+    \begin{align}
+        d(Tx, Ty) \ \leq \ kd(x, y) \ \ \forall x, y \in M
+    \end{align}
+\end{definition}
+
+The Banach's fixed point theorem\footnote{Contraction Mapping Theorem 
+, or CMT in short, is a different name for Banach's fixed point theorem} guarantees a unique existance of 
+a unique fixed point of $T$ and convergence under consecutive 
+iterations of $T$, given that $T$ is a contraction. 
+
+\begin{theorem}[Contraction Mapping Theorem]
+    Let $(X, d)$ be a complete metric space and $T:M \subset X \rightarrow M$ 
+    be a contraction where $M$ is a closed subset. Then, 
+    \begin{itemize}
+        \item the equation $Tx = x$ has a unique solution, i.e. there is a unique fixed point;
+        \item the sequence $(x_n)$ defined iteratively as $x_{n + 1} = Tx_n$ converges for every $x_0 \in M$. 
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    We show that the iterative sequence is Cauchy. The completeness of 
+    the space $X$ will guarantee that the sequence converges. Moreover, 
+    since the subset $M \subset X$ is closed, it must be the case that 
+    the converging point, namely $\bar x$, must be within $M$. Arguing 
+    by a way of contradiction, we show that $\bar x$ is a unique fixed point. 
+
+    Choose any $\epsilon > 0 $. For two entries $x_n $ and $x_{n + m}$, 
+    we show that large enough $n$ can always guarantee that the distance 
+    between the two points can be less than $\epsilon$. By induction, 
+    it is straightforward to verify 
+    \begin{align}
+        d(x_{n + 1}, x_n) \ \leq \ k^n d(x_1, x_0)
+    \end{align}
+    and by invoking the triangle inequality, we obtain 
+    \begin{align}
+        d(x_{n + m}, x_n) & \leq \ \left(\sum_{j = 0}^{m - 1} k^j\right) k^n d(x_1, x_0) \\
+        & = \ \frac{1 - k^m}{1 - k} k^n d(x_1, x_0) \\ 
+        & \leq \ \frac {d(x_1, x_0)} {1 - k} k^n \leq \epsilon
+    \end{align}
+    The last inequality is attained by an arbitrarily large choice of $n$, since 
+    $k \in (0, 1)$. 
+    
+    Let $\bar x$ be the point of convergence, and assume for a contradiction 
+    that this point is not a fixed point, i.e. $Tx \neq x$. Since 
+    $X$ is a metric space, $d(x, Tx) > 0$ necessarily. However, by the 
+    triangle inequality, we observe the following. 
+    \begin{align}
+        d(x_n, \bar x) + d(x_n, x_{n + 1}) + d(x_{n + 1}, T\bar x) \ \geq d(\bar x, T\bar x) \nonumber \\  
+        d(x_n, \bar x) + d(x_n, x_{n + 1}) + d(Tx_{n}, T\bar x) \ \geq d(\bar x, T\bar x) \nonumber \\  
+        (k + 1) d(x_n, \bar x) + d(x_n, x_{n + 1}) \ \geq \ d(\bar x, T\bar x)
+    \end{align}
+    The LHS of the final inequality converges to zero by the Cauchyness and 
+    convergence of sequence $(x)_n$. However, the RHS is a fixed positive real number, which is 
+    a contradiction. 
+
+    It remains to deonstrate uniqueness. Suppose, on the contrary, that 
+    there exists two unique fixed points $a, b \in M$, such that 
+    \begin{align}
+        Ta \ =\ a \textAnd Tb \ =\ b.
+    \end{align}
+    Since $T$ is a contraction, $d(Ta, Tb)$ is strictly less than $d(a, b)$. However, 
+    the two quantities describe distance between the same pair of points, and must be 
+    equal, a contradiction. 
+\end{proof}
+
+
+\section{Brouwer's Fixed Point Theorem}
+
+\subsection{Preliminaries: Lagrangians and Mollifiers}
+
+We will use the concept of Lagrangians to prove Brouwer's version of 
+the FPT. In order to proceed, we need to understand the method of 
+by-parts integration in higher dimensions. 
+
+\begin{theorem} [By-parts in higher dimensions]
+    Suppose $\Omega \subset \mathbb R^n$ is a smooth domain, i.e. the 
+    boundary is continuously differentiable. Define a test function 
+    $\phi: \overline \Omega \rightarrow \mathbb R^m$ that vanishes 
+    around the boundary, i.e. $\forall x \in \partial \Omega$, 
+        $\phi(x) \ = \ 0$. For any set of smooth functions $\{F_{ij}:\Omega\rightarrow \mathbb R 
+        | 1 \leq i \leq m , 1 \leq j \leq n\}$, 
+        \begin{align}
+            \int_\Omega \sum_{j = 1}^n \sum_{i = 1}^m F_{ij} \partial_i \phi_i dx \ = \ 
+            - \int_{\Omega} \sum_{j = 1}^n 
+                \sum_{i = 1}^m \partial_j\left(F_{ij}
+            \right)\phi_i dx
+        \end{align}
+\end{theorem}
+
+\begin{proof}
+    The regular by-parts formula is derived by the boundary conditions 
+    in $\mathbb R$. The divergence theorem simplifies a volume integral 
+    into a surface integral over the boundary. 
+    Define a vector field $G:\Omega \rightarrow \mathbb R^n$ as follows. 
+    \begin{align}
+        G(x) \ := \ \sum_{i = 1}^m F_{ij}(x) \phi_i (x)
+    \end{align}
+    The divergence of $G(x)$ over the domain $\Omega$ must equal to the surface integral. 
+    \begin{align}
+        \int_{\Omega}\nabla \cdot G(x) dx \ = \ \int_{\partial \Omega} G(x) \cdot \nu dx
+    \end{align}
+    Here, $\nu$ is the normal vector at the point $x$ on the boundary. Since 
+    the test function vanishes at the boundary, the entirety of $G(x)$ vanishes 
+    at the boundary. Therefore
+    \begin{align}
+        \int_{\Omega} \nabla \cdot G(x) dx \ = \ 0.
+    \end{align}
+    Compute the $j$th partial of $G(x)$. 
+    \begin{align}
+        \partial_j G(x) \ = \ \sum_{i = 1}^m \partial_j\left(F_{ij}(x)\right)\phi_i(x) + \sum_{i = 1}^m F_{ij}(x) \partial_j \phi_i(x) 
+    \end{align}
+    Add up the $j$th partials and to obtain the vanishing divergence integral. 
+    The integrals can be split into two parts, which yields the following. 
+    \begin{align}
+        \int_{\Omega} \sum_{j = 1}^n \sum_{i = 1}^m F_{ij}(x) \partial_j \phi_i (x)dx 
+ \ = \ -
+ \int_{\Omega} \sum_{j = 1}^n \sum_{i = 1}^m \partial_j (F_{ij}(x)) \phi_i(x)dx
+    \end{align}
+\end{proof}
+
+
+\begin{definition}[Energy Functional]
+    Let $u:\Omega \subset \mathbb R^n \rightarrow \mathbb R^m$ be a 
+    smooth input function defined over a smooth domain $\Omega$. The Larangian 
+    is defined as a functional that takes $x \in \Omega$, the function 
+    $u(x)$, and the Jacobian matrix $\nabla u(x)$, i.e. $L:\mathbb R^n 
+    \times \mathbb R^{m \times n} \times \Omega$. We define the energy functional 
+    as the following integral. 
+    \begin{align}
+        I(u) \ := \ 
+        \int_{\Omega} L(\nabla u(x), u(x), x) dx,
+    \end{align}
+    For simplicity of notation, denote $z_j$ to be the $j$th entry 
+    of $x \in \Omega$ and $p_{ij}$ as the $i$th row of the $j$th colomn 
+    of the Jacobian matrix $\nabla u(x)$
+\end{definition}
+
+%Derive EL eqn
+\begin{theorem}[Euler-Lagrange Equation]
+    Let $u:\Omega \rightarrow \mathbb R^m$ be a minimizer or a maximizer 
+    of the energy functional with a fixed boundary condition. That is, 
+    $u(x)$ agrees with the boundary function $g: \partial\Omega \rightarrow \mathbb R^m$ 
+    over the domain $\partial \Omega$. 
+    Then, $u(x)$ must satisfy the following equations for all $i \in [m]$. 
+    \begin{align}
+        L_{z_i}(\nabla u, u, x)  \ = \ \sum_{j = 1}^n \partial_j\left(L_{p_{i,j}}(\nabla u, u, x)\right)
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    Take a test function $\phi: \overline\Omega \rightarrow \mathbb R^m$ that will simulate 
+    the perturbations. The test function must satisfy 
+    \begin{enumerate}
+        \item $\phi(x) = 0$  $\forall x \in \partial \Omega$, the test function vanishes at the boundary; 
+        \item $\text{supp}(\phi) \subset \Omega \setminus \partial \Omega$, the test function has a support strictly included in the interior of $\Omega$; 
+        \item $\phi \in C^\infty(\overline\Omega)^m$, the test function is smooth. 
+    \end{enumerate}
+    Perturb the energy functional by $\epsilon > 0$. 
+    \begin{align}
+        \mathcal I(\epsilon) \ := \ I(u + \epsilon \phi)
+    \end{align}
+    If the function $u$ indeed maximize energy, then the derivative of 
+    energy with respect to $\epsilon$ must be zero, regardless of the choice 
+    of the test function $\phi$. Therefore $\deriv{}{\epsilon}\mathcal I(\epsilon)\bigg|_{\epsilon = 0} = 0$, 
+    and we compute this derivative as a sum of partial derivatives. 
+    \begin{align}
+        \deriv{}{\epsilon}\mathcal I(\epsilon) \bigg|_{\epsilon = 0} = \ 
+        \begin{split}
+        \int_\Omega \sum_{j = 1}^n \sum_{i = 1}^m L_{p_{ij}}(\nabla u(x) + \epsilon \nabla \phi(x) , 
+        u(x) + \epsilon \phi(x), x) \partial_j \phi_i dx\bigg|_{\epsilon = 0} \\ 
+        + \int_{\Omega} \sum_{i = 1}^m L_{z_j}(\nabla u(x) + \epsilon \nabla \phi(x) , 
+        u(x) + \epsilon \phi(x), x) \phi_i dx \bigg|_{\epsilon = 0}
+        \end{split} \nonumber \\ \label{eqn:statCdn}
+         = \  \begin{split}
+        \int_\Omega \sum_{j = 1}^n \sum_{i = 1}^m L_{p_{ij}}(\nabla u(x) , 
+        u(x), x) \partial_j \phi_i dx 
+        + \int_{\Omega} \sum_{i = 1}^m L_{z_i}(\nabla u(x)  , 
+        u(x) , x) \phi_i dx
+        \end{split}
+    \end{align}
+    Invoke the by-parts formula by setting $F_{ij} = L_{p_{ij}}(\nabla u(x), u(x), x)$. 
+    \begin{align}
+        \int_{\Omega} \sum_{j = 1}^n \sum_{i = 1}^m 
+        L_{p_{i, j}} (\nabla u(x), u(x), x) \partial_j \phi_i dx
+        \ = \ -\int_{\Omega} \sum_{j = 1}^n \sum_{i = 1}^m \partial_j 
+        \left[
+            L_{p_{i, j}}(\nabla u(x), u(x), x) 
+        \right]\phi_i dx
+    \end{align}
+    Equate the expression obtained from \eqref{eqn:statCdn} to zero. 
+    Interchange the order of the finite double sum. 
+    \begin{align}
+        \int_{\Omega} \sum_{i = 1}^m \sum_{j = 1}^n \partial_j 
+        \left[
+            L_{p_{i, j}}(\nabla u(x), u(x), x) 
+        \right]\phi_i dx 
+        \ = \ 
+        \int_{\Omega} \sum_{i = 1}^m L_{z_i}(\nabla u(x)  , 
+        u(x) , x) \phi_i dx
+    \end{align}
+    The equality holds for any test function $\phi$. Therefore, it 
+    must be the case that the coefficints of each $\phi_i$ in the integrand 
+    must agree for all $i \in m$. Thus, 
+    \begin{align}
+        \sum_{j = 1}^n \partial_j \left[
+            L_{p_{i, j}}(\nabla u(x), u(x), x)
+        \right] \ = \ L_{z_i} (\nabla u(x), u(x), x)
+    \end{align}
+\end{proof}
+
+    In practice, $x$ is usually set to be time. With this analogy in 
+    mind, the result reads that the partial of the Lagrangian 
+    with respect to a generalized coordinate equals to 
+    the time-divergence of the gradient of the Lagrangian 
+    over the velocities associated 
+    with the given coordinate. \footnote{
+        Of course, in reality, time is one dimensional. The analogy of 
+        $x$ as time serves as a nice mneonic, assuming that $x$ is 
+        a multi-dimensional time quantity. 
+    }
+    Also, such functions $u(x)$ that satisfy the Euler Lagrange equations 
+    are called \textbf{stationary points}. 
+%Null Lagrangians are uniuely determined by boundary
+\begin{definition}[Null Lagrangians]
+    If every smooth function defined over the domain $\Omega$ 
+    is a stationary point, then we call $L$ to be a Null Lagrangian. 
+\end{definition}
+
+\begin{theorem}[Energies of a Null Lagrangian are determined by the boundary values]
+    Let $u, v: \overline \Omega \rightarrow \mathbb R^m$ be two stationary 
+    points that agree on the boundary, i.e. $u(x) = v(x) \forall x \in \partial \Omega$. 
+    Then, $I(u) = I(v)$. 
+\end{theorem}
+\begin{proof}
+    The crux of the argument is to consider the function $u(x) - v(x)$ like a test 
+    function, and invoke the by-parts formula as shown in the proof of the 
+    Euler Lagrange Equations. 
+    
+    Suppose $u(x)$ and $v(x)$ agree on the boundary of $\Omega$. Define 
+    \begin{align}
+        \mathcal{I} (\tau) \ = \ I(\tau u(x) +(1 - \tau) v(x)).
+    \end{align}
+    Take the derivative of $\mathcal I$ with respect to $\tau$ and 
+    invoke the by-parts formula for higher dimensions. 
+
+    \begin{align}
+        \mathcal I '(\tau) \ = \ 
+        \begin{split}
+        \int_\Omega 
+        \sum_{j = 1}^n \sum_{i = 1}^m L_{p_{i, j}} (\tau \nabla u +
+        (1- \tau) \nabla v, \tau u + (1- \tau) v, x) (\partial_ju_i - \partial_j v_i)dx \\ 
+        \\ + 
+        \int_{\Omega} \sum_{i=1}^m L_{z_i} (\tau \nabla u + (1 - \tau) \nabla v, 
+        \tau u + (1-\tau) v, x) (u_i - v_i) dx
+        \end{split} 
+         \\ = \ \begin{split}
+            \int_\Omega \sum_{i = 1}^m\left(
+                -\sum_{j = 1}^n\partial_j L_{p_{i, j}} + L_{z_i}
+            \right)dx
+         \end{split} \ = \ 0
+    \end{align}
+    The last equality follows since $\tau u(x) + (1 - \tau)v(x)$ 
+    satisfies the boundary conditions, and $L$ is a null Lagrangian, 
+    which implies that the Euler-Lagrange equation holds for any function 
+    including $\tau u(x) + (1 - \tau)v(x)$. 
+
+    Consequently, $\mathcal I(0) = \mathcal I(1)$ or $I(u) = I(v)$ 
+    as desired. 
+\end{proof}
+
+Without proof, we present a result that will be used to prove 
+Brouwer's FPT. The proof of this theorem is by linear algebra. 
+
+\begin{proposition} [Determinants are Null Lagrangians]
+    Suppose the variation $u$ is defined as $u:\Omega \subset \RR^n \rightarrow \RR^n$ 
+    such that the jacobian matrix $\nabla u$ is a square matrix. Then, 
+    the Lagrangian 
+    \begin{align}
+        L(\nabla(u), u, x) \ := \ \det(\nabla u)
+    \end{align}
+    is a Null-Lagrangian. 
+\end{proposition}
+
+Moreover, we present a special function in order to approximate 
+continuous functions to a smooth function. 
+
+\begin{definition} [Mollifiers]
+    Let $\phi:B_1(0) \subseteq \RR^n \rightarrow \RR$ be a function defined as 
+    \begin{align}
+        \phi(x) \ := \ 
+        C \exp\left(
+            \frac 1 {|x|^2 - 1}
+        \right)
+    \end{align}. 
+    The function $\phi$ is called a standard mollifier, and the 
+    constant $C$ is adjusted such that the function integrates to 1 over 
+    the n-ball of radius 1. i.e. 
+    \begin{align}
+        \int_{B_1(0)} \phi(x) dx \ = \ 1
+    \end{align}
+    Also, $\phi_\epsilon$ is defined as 
+    \begin{align}
+        \phi_\epsilon(x) \ = \ \frac 1 {\epsilon^n} f\left(
+            \frac 1 \epsilon
+        \right).
+    \end{align}
+\end{definition}
+    The Mollifier can be considered as a concentrated point mass at the origin 
+    in $\RR^n$. The one dimensional mollifier is the delta function. Just 
+    like the delta function, the mollifier satisfies the shifting property. 
+
+    \begin{proposition} [Shifting property of the mollifier]
+        Define the convolution of a mollifier with some function $f:\RR^n \rightarrow \RR$
+         as 
+        \begin{align}
+            f_\epsilon(x) \ := \ [f * \phi_\epsilon](x) \ := \ 
+            \int_{\RR^n} f(y) \phi_\epsilon(x - y) dy
+        \end{align}
+        If $f$ is uniformly continuous, then as $\epsilon \rightarrow 0$, 
+        $f_\epsilon(x)$ converges uniformly to $f(x)$.  
+    \end{proposition}
+
+    \begin{proof}
+        We wish to bound the following quantity for arbitrary $x \in \RR^n$. 
+        \begin{align}
+            |f_\epsilon(x) - f(x)| \ = \ 
+            \left|
+            \int_{\RR^n} f(y) \phi_\epsilon(x - y) dy - f(x)\int_{\RR^n} \phi_\epsilon(y) dy
+            \right|
+        \end{align}
+        Relabel the arguments of the first integral, and absorb $f(x)$ 
+        under the integral sign for the second integral. 
+        \begin{align} \label{eqn:mollifierInt}
+            = \ \int_{\RR^n} f(x - y) \phi_\epsilon(y) dy - \int_{\RR^n} f(x) \phi_\epsilon(y) dy 
+            \ = \ \int_{\RR^n} |f(x - y) - f(x)|\phi_\epsilon(y) dy
+        \end{align}
+        The support of the mollifier is an epsilon ball centerd at the origin. 
+        Invoking uniform continuity of $f$, we can claim that for all $y\in \RR^n$ 
+        such that $|y| < \epsilon$, given any $\delta > 0$,  
+        \begin{align}
+            |f(x - y) - f(x)| \ < \ \delta.
+        \end{align}
+        Use this to bound the last expression in \eqref{eqn:mollifierInt}. 
+        \begin{align}
+            |f_\epsilon(x) - f(x)| \ = \ 
+        \max_{y \in B_\epsilon(0)} |f(x - y) - f(x)| 
+        \int_{B_\epsilon(0)} \phi_\epsilon(y) dy \ < \  \delta
+        \end{align}
+        We conclude that $f_\epsilon(x) \rightarrow f(x)$ uniformly. 
+    \end{proof}
+
+    \subsection{Proof of Brouwer's FPT}
+
+    Finally, we have collected all the ingredients to prove Brouwer's 
+    Fixed Point Theorem. We first define a retraction, and prove the 
+    retraction principle which states that there cannot exist a 
+    retraction from a closed ball to its boundary. In the last lecture, 
+    we showed that the retraction principle implies Brouwer's FPT. 
+    We prove the retraction principle and leave the proof of Brouwer's FPT as 
+    an exercise. \footnote{Consider the ray from $x$ to $f(x)$ and 
+    take the intersection with the boundary to obtain a continuous function. }
+    
+    \begin{definition}[Retraction]
+        Consider two topological spaces $A, B$ where $A \subseteq B$ and 
+        the topology of $A$ is the subset topology induced by $B$. A continuous 
+        function $f:B \rightarrow A$ is called a retraction if 
+        $f|_A \ = \ Id_A$, i.e. for every $x \in A$, $f(x) = x$. 
+    \end{definition}
+
+    For example, given spaces $R_{discrete}$ and $Z_{discrete}$, the 
+    floor function $f(x) \ = \ \lfloor x \rfloor$ is a retraction. Any 
+    function between the two spaces are continuous which demonstrates 
+    that $f$ is continuous, and the floor function is preserved at the integer 
+    points. 
+    \begin{lemma}[Retraction Principle]
+        Let $B := \overline B_1(0) \in \RR^n$ be a closed ball in 
+        the euclidian space $\RR^n$. The closed ball does not 
+        admit a retraction to its boundary, i.e. a continuous function 
+        $f:B \rightarrow \partial B$ such that $f(x) = x$ at $x \in \partial B$ 
+        does not exist. 
+    \end{lemma}
+
+    \begin{proof}
+        Assume such a function $f$ exists. First, we decuce a contradiction 
+        under the condition that $f$ is smooth. Secondly, we approximate 
+        an arbitrary continuous function to a smooth function using the mollifier. 
+        Invoking our result from the first part proves the theorem. 
+
+        \underline{Part I}. Let $f$ be smooth. We evaluate the energy 
+        functional over the determinant Lagrangian. Since $f:B\rightarrow \RR^n$
+         and $Id:B\rightarrow \RR^n$ agrees at the boundary, the energy 
+         functional must agree. 
+         \begin{align}\label{eqn:nonzeero}
+            \int_B \det(\nabla f) dx \ = \ \int_B\det(\text{Id}_n) dx \ = \ 
+            \int_B dx \ > \ 0
+         \end{align}
+        Since $f$ is a retraction to the boundary, the image of any $x \in B$ 
+        must have a norm of $x$. i.e.
+        \begin{align}
+            f(x) \cdot f(x) \ = \ 1.
+        \end{align}
+        Apply a total derivative both sides. By the chain rule, 
+        \begin{align}
+            2 Df(x) \cdot f(x) \ = \ 0 \textOr \nabla f(x)^\intercal f(x) \ = \ 0
+        \end{align}
+        \footnote{The second expression can be verified by componentwise expansion. }
+        This implies that the Jacobian matrix $\nabla f$ has a zero eigenvalue, 
+        hence a vanishing determinant. Therefore, the integral in \eqref{eqn:nonzero} 
+        must be zero, a contracition. 
+
+        \underline{Part II}. Let $f$ be continuous but not necessarily smooth. 
+        Extend $f(x)$ to be defined over the entirety of $\RR^n$ by letting 
+        $f(x) = x$ for $x \in \RR^n \setminus B$. Note that the extended 
+        function is uniformly continuous, since the identity is uniformly continuous 
+        and continuous functions defined over compact intervals are continuous. 
+        Define a new function 
+        \begin{align}
+            \tilde f(x) \ = \ \frac{[f*\phi_\epsilon](2x) }{
+                \left|[f*\phi_\epsilon](2x)\right|}
+        \end{align}
+        which for small enough $\epsilon$ is a smooth retraction to the boundary. 
+        By part 1, such functions cannot exist
+
+    \end{proof}
+
+
+    \begin{theorem}[Brouwer's Fixed Point Theorem]
+        Denote a closed ball in $\RR^n$ as $B:= B_1(0)$. 
+        Suppose $f:B\rightarrow B$ is a continuous mapping. There 
+        must exist a fixed point $x \in B$ such that $f(x) = x$. 
+    \end{theorem}
+
+    \begin{remark} 
+        In fact Brouwer's FPT implies the retraction principle, and 
+        therefore the two statements are equivalent. To prove this, assume 
+        that there exists a retraction $r(x)$ and consider the fixed point 
+        of $(x - r(x))/2$. By considering the norm of the new function, the 
+        fixed point must lie in the boundary. However, at the boundary, the 
+        new function evaluates identically to zero, which is a contradiction. 
+    \end{remark}
+
+
+\begin{thebibliography}{9}
+
+\bibitem{hunter}
+Hunter, J. 
+\newblock \emph{Linear Systems and Eigenvalues}.
+\newblock Chapter 5. Retrieved from \url{https://www.math.ucdavis.edu/~hunter/book/ch5.pdf}
+
+\bibitem{belk}
+Belk, J.
+\newblock \emph{Banach Spaces: Measure Theory Notes}.
+\newblock Retrieved from \url{https://e.math.cornell.edu/people/belk/measuretheory/BanachSpaces.pdf}
+
+\bibitem{oxfordnotes}
+Department of Mathematics, University of Oxford.
+\newblock \emph{Lecture Notes 2022}.
+\newblock Retrieved from \url{https://courses.maths.ox.ac.uk/pluginfile.php/22783/mod_resource/content/1/lecture-notes-2022.pdf}
+
+\bibitem{terek}
+Terek, Ivo.
+\newblock \emph{Introduction to Lorentz Geometry: Curves and Surfaces}.
+\newblock Springer, 2021.
+
+\end{thebibliography}
+
+
+
+\end{document}

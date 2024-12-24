@@ -1,0 +1,274 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+
+
+\numberwithin{equation}{section}
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\deriv}[2]{
+\frac {d {#1} } {d {#2}}
+}
+
+\newcommand{\pderiv}[2]{
+\frac {\partial {#1} } {\partial {#2}}
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{Title}
+
+    \large
+    Benevolent Tomato
+\end{center}
+
+
+
+
+
+\begin{theorem}
+    The characteristic polynomial $\ch(z)$ always has a real root. 
+\end{theorem}
+
+\begin{theorem}
+    If $f \ \geq \ 1/N$, then $\ch(z)$ has a unique positive, real 
+    root that has a magnitude strictly greater than any of the other 
+    complex roots. 
+\end{theorem}
+
+\begin{proof}
+    Consider the polynomial 
+    \begin{align}
+        h(z) \ := \ (z - 1) \ch_N(z) \ = \ z^{N + 1} - (f+1) z^N + f
+    \end{align}
+    which has a simpler algebraic expression. 
+    We split the 
+    polynomial $h(x)$ into two summands, and invoke Rouche's Theorem (\cite{SS03} p91). 
+    Let $C_{1 + \epsilon}$ be a circular contour centered at the origin 
+    with radius $1 + \epsilon$ for arbitrarily small $\epsilon$. 
+    Write 
+    \begin{align}
+        h(z) \ = \ (z^{N + 1} + f) + (1 + f)z^N 
+    \end{align}
+    and Taylor expand the two summands at $z = 1$. 
+    \begin{align}
+        (z^{N + 1} + f) &\ = \ 1 + f + (N + 1) \epsilon \\ 
+        z^N(1 + f) &\ = \ (1 + N \epsilon)  (1 + f) \ = \ 1 + f + N(1 + f)\epsilon
+    \end{align}
+    By assumption, $f \ \geq \ 1/N$, which implies $(N + 1) \ \leq \ N(1 + f)$. 
+    The modullus of the two terms along the contour can be compared 
+    as follows. 
+    \begin{align}
+        \left|z^{N + 1} + f\right| \ \leq \ \left|(1 + f)z^N\right|
+    \end{align}
+    By Rouche's theorem, $h(z)$ has the same number of roots as the 
+    term that has a larger modullus in the countour $C_{1 + \epsilon}$, which is the 
+    summand $(1-f)z^N$. It is trivial to see that this summand has $N$ 
+    roots inside the countour, and by fundamental theorem of algebra, 
+    $h(z)$ has $N + 1$ roots. 
+
+    We know that $\ch_N(z)$ is positive somewhere in the interval $[1, \infty)$. 
+    We consider the following:
+    \begin{equation}
+        \ch_N(1) \ =\  1 - fN \ \leq \ 0.  
+    \end{equation}
+    By the Intermediate Value Theorem, we conclude that the one root outside 
+    the unit circle is a positive real value. 
+\end{proof}
+
+\begin{theorem}
+    If $f \ < \ 1/N$, then all the roots of $\ch_N(z)$ have 
+    a modullus strictly less than $1$. 
+\end{theorem}
+
+\begin{proof}
+    It suffices to show that 
+    \begin{equation}
+        \widetilde h(z) \ = \ h (1/z) z^{N + 1} \ = \ fz^{N + 1} - (f+1)z+1
+    \end{equation} has exactly one root within the unit circle which 
+    comes from multiplying \newline $(z - 1)$. Again, consider the countour 
+    $C_{1+\epsilon}$ and split $\widetilde h (z)$ into two summands. 
+    \begin{align}
+        \widetilde h(z) \ = \ (f z^{N + 1} + 1) - (f + 1)z
+    \end{align}
+    Taylor expand the two summands at $z \ = \ 1$, and notice that under the condition 
+    $f \ < \ 1/N$, the second summand has a larger modullus along the 
+    contour $C_{1 + \epsilon}$. 
+    \begin{align}
+        fz^{N + 1} + 1 & \ = \ f(1 + (N + 1)\epsilon) + 1  \\ 
+        (f + 1)z & \ = \ (f + 1) (1 + \epsilon)
+    \end{align} 
+    Clearly, the second summand has one root inside the contour $C_{1 + \epsilon}$, 
+    which originates from $(z - 1)$. By Rouche's theorem, $\widetilde h(z)$ 
+    has exactly one root inside the unit circle, i.e. $z = 1$, and all 
+    other roots have a modullus greater than 1. Consequently, $\ch_N(z) \ = \ h(z)/(z + 1)$ 
+    has all of its roots strictly inside the unit circle.  
+\end{proof}
+
+\begin{theorem}[Bounds for the dominant eigenvalue]\label{thm:Bound}
+
+ Given that $f \ \geq \ 1/N$, the dominant eigenvalue of $L_f$ of order 
+ $N$ is given by 
+ \begin{equation}
+ 1 + f - \frac 1 {N} \ \leq\ \lambda_{\max} \ < \ 1 + f.
+ \end{equation}
+\end{theorem}
+
+\begin{proof}
+    The upper bound is trivial:
+    \begin{equation}
+        \ch_N(1+f) \ = \ f \ >\  0.
+    \end{equation}
+    We have $\ch_N(0) \ = \  -f \ < \  0$, and thus by the Intermediate Value Theorem the maximum root is 
+    bounded. 
+
+    To obtain the lower bound, we write $f \ =  \ 1/N + \epsilon$ for 
+    some $\epsilon \ \geq \  0$. With some algebra listed below
+    % \textcolor{red}{\textit{(Miller commented to include this algebra in the appendix; we should do this and cite/refer to it here?)}}
+    , we compute $\ch_N(z)$ at the claimed lower 
+    bound. If we show that this value is less than zero, the dominating root must be greater than the purported lower bound. We find
+    \begin{equation}
+        \ch_N\left(
+            1 + f - \frac 1 N
+        \right)  \ = \ -
+        \left(
+            1 + f - \frac 1 N
+        \right)^N \left[
+            \frac {1} {fN - 1}
+        \right]
+        + \frac {fN} {fN - 1}.
+    \end{equation}
+    We wish to bound this value by zero. It suffices to show 
+    \begin{equation}
+        fN - \left(
+            1 + f - \frac 1 N
+        \right)^N \ \leq\ 0,
+    \end{equation}
+    which, using the $\epsilon$ substitution, converts to
+    \begin{equation}
+        1 + N\epsilon - (1 + \epsilon)^N \ \geq \ 0.
+    \end{equation}
+    Expanding the power term by the binomial theorem, we see that inequality indeed holds. 
+\end{proof}
+
+
+\end{document}

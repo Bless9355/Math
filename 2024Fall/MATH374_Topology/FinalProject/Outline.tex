@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{ wasysym }
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+
+\numberwithin{equation}{section}
+\newcommand{\new}[2]{
+    \vspace{2mm}
+    \noindent
+    \textbf{
+    \underline{#1}}
+    \textit{{#2}}
+    \
+}
+
+\def\<{{\langle}}
+\def\>{{\rangle}}
+
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+
+
+\newcommand{\textOr}{
+    {
+        \hspace{5mm}
+        \textrm{or}
+        \hspace{5mm}
+    }
+}
+
+\newcommand{\textAnd}{
+    {
+        \hspace{5mm}
+        \textrm{and}
+        \hspace{5mm}
+    }
+}
+
+
+\newcommand{\textWhere}{
+    {
+        \hspace{5mm}
+        \textrm{where}
+        \hspace{5mm}
+    }
+}
+
+
+
+\newcommand{\Ixp}[1]{
+    {
+        e^{i{#1}}
+    }
+}
+
+
+
+\newcommand{\halfFigure}[1]{
+\begin{center}
+\includegraphics[width = .5\linewidth]{{#1}}
+\end{center}
+}
+
+\newcommand{\fullFigure}[1]{
+\begin{center}
+\includegraphics[width = .9\linewidth]{{#1}}
+\end{center}
+}
+
+\def\twobytwoMat(#1, #2, #3, #4){
+    {
+        \begin{bmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{bmatrix}
+    }
+}
+
+\def\twobyoneMat(#1, #2){
+    {
+        \begin{bmatrix}
+            {#1}\\
+            {#2}
+        \end{bmatrix}
+    }
+}
+
+\def\twobytwoDet(#1, #2, #3, #4){
+    {
+        \begin{vmatrix}
+            {#1} & {#2}\\
+            {#3} & {#4}
+        \end{vmatrix}
+    }
+}
+
+
+\newcommand{\deriv}[2]{
+\frac {d {#1} } {d {#2}}
+}
+
+\newcommand{\pderiv}[2]{
+\frac {\partial {#1} } {\partial {#2}}
+}
+
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Zpos}{\mathbb{Z}_{pos}}
+\newcommand{\NN}{\mathbb{N}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{question}{Question}
+
+\newcommand{\ch}{\text{ch}}
+
+\begin{document}
+\begin{center}
+    \Large
+    \textbf{MATH 374 Final Project Outline}
+
+    \large
+    Daniel Son
+\end{center}
+
+The final project will be about the topic of \textbf{Fixed Point Theory and its applications to PDEs}. An important 
+theorem of the theory is the Cauchy-Peano Theorem which guarantees a solutions for differential equation in the form of 
+\begin{align}
+    \dot y(t) \ = \ f(y, t) \textAnd y(t_0) = y_0
+\end{align}
+for minimal conditions over the function $f$. Upon a precursory research, 
+it is possible to solve physical problems such as the obstacle problem 
+or the bending rod problem using fixed point methods. I intend to give 
+a vague justification of the theorem and apply the theorem to demonstrate 
+the Euler Lagrange equations. Finally, using the developed methods, 
+I will solve the two toy models presented above. 
+
+\section*{References}
+
+\begin{enumerate}
+    \item University of Oxford. \emph{Fixed Point Theory Course Materials}. Available at: \url{https://courses.maths.ox.ac.uk/course/view.php?id=170}. Accessed November 24, 2024.
+    \item Agarwal, R. P., Meehan, M., \& O’Regan, D. (2001). \emph{Contractions}. In \emph{Fixed Point Theory and Applications} (pp. 1–11). Cambridge Tracts in Mathematics. Cambridge University Press.
+    \item Albert, J. (2019). \emph{Physical Applications of Fixed Point Methods in Differential Equations}. University of Chicago. Available at: \url{https://math.uchicago.edu/~may/REU2019/REUPapers/Albert.pdf}. Accessed November 24, 2024.
+\end{enumerate}
+
+
+\end{document}
